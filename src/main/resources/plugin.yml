@@ -47,6 +47,9 @@ permissions:
   exylialobby.visibility.staff:
     description: Players with this permission are always seen, whatever others chose in the visibility module.
     default: false
+  exylialobby.selector:
+    description: Open the server and lobby selectors and use server NPCs and portals.
+    default: true
   exylialobby.spawn:
     description: Use /spawn.
     default: true

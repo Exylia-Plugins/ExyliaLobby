@@ -7,6 +7,7 @@ import net.exylia.exyliaLobby.module.movement.MovementModule;
 import net.exylia.exyliaLobby.module.onboarding.OnboardingModule;
 import net.exylia.exyliaLobby.module.protection.ProtectionModule;
 import net.exylia.exyliaLobby.module.spawn.SpawnModule;
+import net.exylia.exyliaLobby.module.selector.SelectorModule;
 import net.exylia.exyliaLobby.module.state.StateModule;
 import net.exylia.exyliaLobby.module.visibility.VisibilityModule;
 import org.jetbrains.annotations.NotNull;
@@ -33,7 +34,8 @@ public final class Modules {
                 new OnboardingModule(context),
                 new HotbarModule(context),
                 new MovementModule(context),
-                new VisibilityModule(context)
+                new VisibilityModule(context),
+                new SelectorModule(context)
         );
     }
 }
