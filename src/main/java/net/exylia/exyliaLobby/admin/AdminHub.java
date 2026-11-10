@@ -176,7 +176,7 @@ public final class AdminHub {
 
     private void toggle(Player viewer, String id) {
         module(id).ifPresent(module -> {
-            ModuleSwitches.toggle(lobby, viewer, module, () -> menus.update(viewer, MODULES, Map.of()));
+            ModuleSwitches.toggle(lobby, viewer, module, null, () -> menus.update(viewer, MODULES, Map.of()));
         });
     }
 }

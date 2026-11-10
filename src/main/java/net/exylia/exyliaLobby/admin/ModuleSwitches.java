@@ -8,13 +8,15 @@ import net.exylia.exyliaLobby.module.LobbyModule;
 import net.exylia.lib.config.ConfigMenus;
 import net.exylia.lib.module.ModuleToggle;
 import net.exylia.lib.text.Text;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.stream.Collectors;
 
 /** Switching a module live and opening its settings: the two clicks of a module card. */
-final class ModuleSwitches {
+public final class ModuleSwitches {
 
     private ModuleSwitches() {
     }
@@ -23,8 +25,9 @@ final class ModuleSwitches {
      * Switches a module on the global thread (where the module registry is driven), writes the switch asked for to
      * config.yml so the next start agrees, tells the admin and redraws their screen.
      */
-    static void toggle(@NotNull ExyliaLobby lobby, @NotNull Player viewer, @NotNull LobbyModule module, @NotNull Runnable redraw) {
-        boolean on = !module.isEnabled();
+    public static void toggle(@NotNull ExyliaLobby lobby, @NotNull CommandSender viewer, @NotNull LobbyModule module,
+                              @Nullable Boolean wanted, @NotNull Runnable redraw) {
+        boolean on = wanted != null ? wanted : !module.isEnabled();
         lobby.getTasks().run(() -> {
             ModuleToggle result = lobby.getModules().setEnabled(module.getId(), on);
             if (result.succeeded()) {
