@@ -93,7 +93,7 @@ items:
 
   modes-sprint-seconds:
     slot: 15
-    material: HOURGLASS
+    material: CLOCK
     name: "{letters}Parkour {letters_black}▸ <gradient:{primary}:{secondary_light}>Duración del sprint</gradient>"
     lore:
       - "{letters_black}Ajuste de Parkour"
