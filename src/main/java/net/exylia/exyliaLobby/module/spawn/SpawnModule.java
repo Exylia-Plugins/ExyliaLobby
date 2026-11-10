@@ -185,7 +185,7 @@ public final class SpawnModule extends LobbyModule {
     // ======================== commands ========================
 
     @Override
-    protected List<Object> commandHandlers() {
+    protected List<Object> commands() {
         return command(settings.get().command(), new SpawnCommand(this));
     }
 

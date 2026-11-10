@@ -85,6 +85,22 @@ public abstract class LobbyModule extends PluginModule {
         return command(context.config().get().adminCommand(), handler);
     }
 
+    /**
+     * The module's Lamp handlers. Registered once at start for every module, running or not (a module switched on
+     * later needs its commands), and refused while the module is off. Never touch what {@link #start} builds here:
+     * resolve it when the command runs.
+     */
+    protected @NotNull List<Object> commands() {
+        return List.of();
+    }
+
+    @Override
+    protected final @NotNull List<Object> commandHandlers() {
+        // An off module never loaded its files, and its labels live there; registerConfigs is safe to repeat.
+        if (!isEnabled()) registerConfigs();
+        return commands();
+    }
+
     /** Whether the player is in the lobby now. */
     protected final boolean inLobby(@NotNull Player player) {
         return context.areas().contains(player);

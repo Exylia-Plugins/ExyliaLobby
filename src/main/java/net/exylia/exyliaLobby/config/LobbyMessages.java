@@ -33,6 +33,8 @@ public record LobbyMessages(
             @Comment("Sent after a module was switched from the Modules screen")
             String switchedOn,
             String switchedOff,
+            @Comment("Sent when a module cannot start because %required% is off or missing")
+            String blockedBy,
             @Comment("The module could not start; the console says why")
             String failed,
             @Comment("Turning this one off also turns these off. %modules% lists them.")
@@ -42,6 +44,7 @@ public record LobbyMessages(
             this("{success}{icon:on} On", "{error}{icon:off} Off", "{warning}{icon:warning} Needs %required%",
                     "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}Module {highlight}%module%{letters} is now {success}on{letters}.",
                     "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}Module {highlight}%module%{letters} is now {error}off{letters}.",
+                    "ENTITY_VILLAGER_NO %prefix% {letters}Module {highlight}%module%{letters} needs {warning}%required%{letters} first.",
                     "ENTITY_VILLAGER_NO %prefix% {error}Module {highlight}%module%{error} could not start. See the console.",
                     "{letters_black}Also turns off: %modules%");
         }

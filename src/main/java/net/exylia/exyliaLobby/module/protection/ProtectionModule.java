@@ -119,7 +119,7 @@ public final class ProtectionModule extends LobbyModule {
     }
 
     @Override
-    protected List<Object> commandHandlers() {
+    protected List<Object> commands() {
         return adminCommand(new BuildCommand(this));
     }
 

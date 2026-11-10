@@ -26,6 +26,9 @@ import revxrsal.commands.Lamp;
 import revxrsal.commands.bukkit.BukkitLamp;
 import revxrsal.commands.bukkit.actor.BukkitCommandActor;
 import revxrsal.commands.orphan.Orphans;
+import revxrsal.commands.command.CommandActor;
+import revxrsal.commands.exception.SendableException;
+import net.exylia.lib.text.Text;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -78,9 +81,21 @@ public final class ExyliaLobby {
 
         hub.load();
 
-        lamp = BukkitLamp.builder(plugin).build();
+        lamp = BukkitLamp.builder(plugin)
+                .commandCondition(command -> modules.offModuleOf(command.command().function().method())
+                        .ifPresent(id -> {
+                            Text.from(plugin, messages.get().moduleOff())
+                                    .withFormatted("module", names.get().of(id).name())
+                                    .send(command.actor().sender());
+                            throw new SendableException() {
+                                @Override
+                                public void sendTo(@NotNull CommandActor actor) {
+                                }
+                            };
+                        }))
+                .build();
         lamp.register(Orphans.path(config.get().adminCommand().toArray(String[]::new)).handler(new AdminCommand(this)));
-        for (Object handler : modules.commandHandlers()) lamp.register(handler);
+        for (Object handler : modules.allCommandHandlers()) lamp.register(handler);
 
         modules.loadOnlinePlayers(plugin.getServer().getOnlinePlayers());
         areas.start();

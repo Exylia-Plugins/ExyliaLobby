@@ -61,7 +61,7 @@ public final class ChatModule extends LobbyModule implements Listener {
     }
 
     @Override
-    protected List<Object> commandHandlers() {
+    protected List<Object> commands() {
         return adminCommand(new ChatCommand(this));
     }
 
