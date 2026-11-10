@@ -56,14 +56,7 @@ final class ParkourScreens {
     }
 
     private void load(String id) {
-        File file = Languages.file(module.ctx().plugin(), "menus/" + id + ".yml");
-        try {
-            YamlConfiguration yaml = new YamlConfiguration();
-            yaml.load(file);
-            Menus.of(module.ctx().plugin()).load(id, yaml);
-        } catch (IOException | InvalidConfigurationException failure) {
-            module.ctx().debug().error("The " + id + " menu could not be read. Fix " + file.getPath() + " and reload.", failure);
-        }
+        module.ctx().hub().menu(id);
     }
 
     void clear() {
