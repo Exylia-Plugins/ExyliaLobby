@@ -1,0 +1,52 @@
+name: ExyliaLobby
+version: '${version}'
+main: net.exylia.exyliaLobby.ExyliaLobbyPlugin
+api-version: '1.21'
+authors: [ DiGround ]
+website: https://github.com/Exylia-Plugins/ExyliaLobby
+description: A complete, modular lobby - hotbar, movement, server selector, parkour, lobby PvP and gadgets.
+
+# Kept up to date by ExyliaLib from this repository's GitHub releases.
+exylia-updates: Exylia-Plugins/ExyliaLobby
+# The oldest ExyliaLib this build runs on; ExyliaLib holds back an update that needs a newer one.
+exylia-lib: '${exyliaLibVersion}'
+
+folia-supported: true
+
+softdepend:
+  # Required, but soft so this plugin still starts without it: it then says where to get ExyliaLib
+  # and stays off until it is installed.
+  - ExyliaLib
+  - PlaceholderAPI
+  - PacketEvents
+  - WorldGuard
+  - ExyliaJourney
+
+permissions:
+  exylialobby.admin:
+    description: Every staff command and screen of ExyliaLobby.
+    default: op
+    children:
+      exylialobby.build: true
+  exylialobby.build:
+    description: Build, break and use everything inside lobby areas.
+    default: op
+
+libraries:
+  # The same list ExyliaLib declares, in the same order and the same versions.
+  # The server's library loader fetches each one once and shares it, so a plugin
+  # naming a driver it never opens itself costs nothing, while a plugin missing
+  # one that ExyliaLib later needs is a server that starts and then cannot write.
+  # Aligned on purpose: two lists that drift are how a MariaDB server ended up
+  # being sent MySQL 8 syntax.
+  - 'io.github.revxrsal:lamp.common:4.0.0-rc.17'
+  - 'io.github.revxrsal:lamp.bukkit:4.0.0-rc.17'
+  - 'com.github.ben-manes.caffeine:caffeine:3.2.4'
+  - 'com.zaxxer:HikariCP:5.1.0'
+  - 'com.h2database:h2:2.2.224'
+  - 'com.mysql:mysql-connector-j:8.4.0'
+  - 'org.mariadb.jdbc:mariadb-java-client:3.4.1'
+  - 'org.postgresql:postgresql:42.7.4'
+  - 'org.mongodb:mongodb-driver-sync:4.11.1'
+  - 'redis.clients:jedis:5.1.0'
+  - 'org.apache.commons:commons-pool2:2.12.0'

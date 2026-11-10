@@ -1,0 +1,21 @@
+package net.exylia.exyliaLobby.module;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+
+/**
+ * Every module, in the order they start (and the reverse order they stop and hand players back).
+ *
+ * <p>A module that needs another one comes after it. One line per module: add yours here.
+ */
+public final class Modules {
+
+    private Modules() {
+    }
+
+    public static @NotNull List<LobbyModule> all(@NotNull LobbyContext context) {
+        return List.of(
+        );
+    }
+}

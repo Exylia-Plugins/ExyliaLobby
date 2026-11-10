@@ -1,0 +1,88 @@
+menu-version: 1
+# DO NOT EDIT — REGENERATED ON EVERY STARTUP.
+#
+# /lobbyadmin: the staff hub of ExyliaLobby.
+
+title: '{primary}&lLOBBY {letters_black}» {highlight}Admin'
+size: 27
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: NETHER_STAR
+    name: "<gradient:{primary}:{secondary_light}>ExyliaLobby</gradient>"
+    lore:
+      - "{letters_black}Lobby administration"
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {success}{icon:on} {letters}Modules on{letters_black}: {success}%modules_on%{letters_black}/{info}%modules_total%"
+      - "  {letters_black}· {info}{icon:heart} {letters}In the lobby{letters_black}: {info}%lobby_players%"
+
+  modules:
+    slot: 11
+    material: COMMAND_BLOCK
+    name: "{letters}Lobby {letters_black}▸ <gradient:{primary}:{secondary_light}>Modules</gradient>"
+    lore:
+      - "{letters_black}Setup section"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Switch each part of the lobby"
+      - " {letters}on or off, {highlight}live{letters}."
+      - ""
+      - "{primary}{icon:click} Click to open"
+      - "{letters_black}Every module with its state."
+    actions:
+      - 'exylialobby:admin_modules'
+
+  areas:
+    slot: 12
+    material: FILLED_MAP
+    name: "{letters}Lobby {letters_black}▸ <gradient:{primary}:{secondary_light}>Areas</gradient>"
+    lore:
+      - "{letters_black}Setup section"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}The worlds and boxes where"
+      - " {letters}the lobby rules apply."
+      - ""
+      - "{primary}{icon:click} Click to open"
+      - "{letters_black}Add a world or select a box."
+    actions:
+      - 'exylialobby:admin_areas'
+
+  settings:
+    slot: 14
+    material: COMPARATOR
+    name: "{letters}Lobby {letters_black}▸ <gradient:{primary}:{secondary_light}>&lSETTINGS</gradient>"
+    lore:
+      - "{letters_black}Configuration"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Every setting of every module"
+      - " {letters}without editing its {highlight}files{letters}."
+      - ""
+      - "{primary}{icon:click} Click to open"
+      - "{letters_black}Settings of each file."
+    actions:
+      - 'exylialobby:admin_settings'
+
+  reload:
+    slot: 15
+    material: CLOCK
+    name: "{letters}Lobby {letters_black}▸ <gradient:{primary}:{secondary_light}>Reload</gradient>"
+    lore:
+      - "{letters_black}Maintenance"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Reads every file again after"
+      - " {letters}you edited it by hand."
+      - ""
+      - "{primary}{icon:click} Click to reload"
+      - "{letters_black}Problems are listed in chat."
+    actions:
+      - 'exylialobby:admin_reload'
