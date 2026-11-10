@@ -130,7 +130,7 @@ public final class GadgetsModule extends LobbyModule {
 
     private void reserve() {
         if (reservation != null) reservation.run();
-        reservation = context.module(HotbarModule.ID, HotbarModule.class).map(hotbar -> hotbar.reserve(slot())).orElse(null);
+        reservation = context.registered(HotbarModule.ID, HotbarModule.class).map(hotbar -> hotbar.reserve(slot())).orElse(null);
     }
 
     private boolean inLobby(Location at) {

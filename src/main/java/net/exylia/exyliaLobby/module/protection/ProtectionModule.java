@@ -72,7 +72,8 @@ public final class ProtectionModule extends LobbyModule {
      * Lets a hit between two players through the protection, for a lobby PvP module.
      *
      * <p>Called as {@code (attacker, victim)} on the thread of the damage event, for hits inside the lobby only;
-     * any registered predicate answering {@code true} lets that hit land. Keep it cheap.
+     * any registered predicate answering {@code true} lets that hit land. Keep it cheap. Kept while this module is
+     * off, so register through {@code context.registered} to survive it being switched on later.
      *
      * @return a handle that removes the predicate again
      */

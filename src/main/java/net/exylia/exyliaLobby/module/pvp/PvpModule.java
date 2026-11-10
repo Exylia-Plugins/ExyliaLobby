@@ -161,7 +161,7 @@ public final class PvpModule extends LobbyModule implements Busy {
         screens = new AdminScreens(context, ID, this::click);
         screens.register();
         listen(new PvpListener(this));
-        context.module(ProtectionModule.ID, ProtectionModule.class).ifPresent(protection ->
+        context.registered(ProtectionModule.ID, ProtectionModule.class).ifPresent(protection ->
                 damageHook = protection.allowDamage(this::canHit));
         locationHook = Respawns.of(plugin()).location(EventPriority.HIGH, ctx -> dead.contains(ctx.player().getUniqueId())
                 ? respawnAt(ctx.player()) : null);
@@ -199,7 +199,7 @@ public final class PvpModule extends LobbyModule implements Busy {
         if (afterHook != null) afterHook.cancel();
         if (damageHook != null) damageHook.run();
         damageHook = null;
-        context.module(HologramsModule.ID, HologramsModule.class).ifPresent(holograms -> holograms.remove(BOARD));
+        context.registered(HologramsModule.ID, HologramsModule.class).ifPresent(holograms -> holograms.remove(BOARD));
         if (regions != null) regions.replaceAll(List.of());
         screens.clear();
         countdowns.values().forEach(c -> {
@@ -720,7 +720,7 @@ public final class PvpModule extends LobbyModule implements Busy {
     }
 
     private void buildBoard() {
-        context.module(HologramsModule.ID, HologramsModule.class).ifPresent(holograms -> {
+        context.registered(HologramsModule.ID, HologramsModule.class).ifPresent(holograms -> {
             holograms.remove(BOARD);
             PvpSettings.Point point = settings.get().board();
             World world = point.set() ? Bukkit.getWorld(point.world()) : null;
