@@ -821,23 +821,30 @@ public final class PvpModule extends LobbyModule implements Busy {
 
     // ======================== admin ========================
 
-    void setRespawn(Player admin) {
-        Location at = admin.getLocation();
-        settings.update(current -> new PvpSettings(current.topCommand(), current.permission(), current.equipSeconds(),
-                current.unequipSeconds(), current.tagSeconds(), current.swordSlot(), current.swordMaterial(), current.quitCounts(),
-                current.kit(), point(at), current.topRefreshSeconds(), current.boardRows(), current.board(),
-                current.streakRewards(), current.zones(), current.repeatKillWindow()));
-        send(admin, messages.get().spawnSet(), Values.of());
+    void setRespawn(Player admin, Runnable back) {
+        admin.closeInventory();
+        setup(admin, back).spawn(messages.get().wizardRespawn(), at -> {
+            settings.update(current -> new PvpSettings(current.topCommand(), current.permission(), current.equipSeconds(),
+                    current.unequipSeconds(), current.tagSeconds(), current.swordSlot(), current.swordMaterial(), current.quitCounts(),
+                    current.kit(), point(at), current.topRefreshSeconds(), current.boardRows(), current.board(),
+                    current.streakRewards(), current.zones(), current.repeatKillWindow()));
+            send(admin, messages.get().spawnSet(), Values.of());
+            if (back != null) back.run();
+        });
     }
 
-    void setBoard(Player admin) {
-        Location at = admin.getLocation().add(0, 1.6, 0);
-        settings.update(current -> new PvpSettings(current.topCommand(), current.permission(), current.equipSeconds(),
-                current.unequipSeconds(), current.tagSeconds(), current.swordSlot(), current.swordMaterial(), current.quitCounts(),
-                current.kit(), current.respawn(), current.topRefreshSeconds(), current.boardRows(), point(at),
-                current.streakRewards(), current.zones(), current.repeatKillWindow()));
-        buildBoard();
-        send(admin, messages.get().boardSet(), Values.of());
+    void setBoard(Player admin, Runnable back) {
+        admin.closeInventory();
+        setup(admin, back).block(messages.get().wizardBoard(), block -> {
+            Location at = block.clone().add(0.5, 2, 0.5);
+            settings.update(current -> new PvpSettings(current.topCommand(), current.permission(), current.equipSeconds(),
+                    current.unequipSeconds(), current.tagSeconds(), current.swordSlot(), current.swordMaterial(), current.quitCounts(),
+                    current.kit(), current.respawn(), current.topRefreshSeconds(), current.boardRows(), point(at),
+                    current.streakRewards(), current.zones(), current.repeatKillWindow()));
+            buildBoard();
+            send(admin, messages.get().boardSet(), Values.of());
+            if (back != null) back.run();
+        });
     }
 
     private static PvpSettings.Point point(Location at) {
@@ -856,8 +863,8 @@ public final class PvpModule extends LobbyModule implements Busy {
         screens.open(viewer, back, "Modules", text.listTitle(), text.listKind(), List.of(
                 new AdminScreens.Add("IRON_SWORD", text.addZoneTitle(), text.addZoneText(), text.addZoneClick(), text.addZoneNext(),
                         this::addZone),
-                new AdminScreens.Add("PLAYER_HEAD", text.addHereTitle(), text.addHereText(), text.addHereClick(), text.addHereNext(),
-                        this::addAround)),
+                new AdminScreens.Add("RED_BED", text.addRespawnTitle(), text.addRespawnText(), text.addRespawnClick(),
+                        text.addRespawnNext(), admin -> setRespawn(admin, () -> openAdmin(admin, back)))),
                 this::rows);
     }
 
@@ -893,27 +900,14 @@ public final class PvpModule extends LobbyModule implements Busy {
     }
 
     private void addZone(Player admin) {
-        PvpMessages text = messages.get();
         admin.closeInventory();
-        PluginMessages.of(plugin()).send(admin, text.selectZone(), Values.of());
         Runnable reopen = () -> openAdmin(admin, back);
-        regions.beginSelection(admin).result().whenComplete((result, error) -> context.tasks().runAtEntity(admin, () -> {
-            if (error != null || result == null) {
-                reopen.run();
-                return;
-            }
+        setup(admin, reopen).area(messages.get().wizardZone(), result -> {
             var a = result.first();
             var b = result.second();
             put(admin, new PvpSettings.Zone(result.world().fallbackName(), a.x(), a.y(), a.z(), b.x(), b.y(), b.z()));
             reopen.run();
-        }));
-    }
-
-    private void addAround(Player admin) {
-        Location at = admin.getLocation();
-        put(admin, new PvpSettings.Zone(at.getWorld().getName(), at.getBlockX() - 6, at.getBlockY() - 1, at.getBlockZ() - 6,
-                at.getBlockX() + 6, at.getBlockY() + 6, at.getBlockZ() + 6));
-        screens.update(admin);
+        });
     }
 
     private void put(Player admin, PvpSettings.Zone zone) {

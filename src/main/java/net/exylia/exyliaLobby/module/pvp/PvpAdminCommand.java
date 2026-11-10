@@ -18,12 +18,12 @@ final class PvpAdminCommand implements OrphanCommand {
     @Subcommand("pvp setspawn")
     @CommandPermission(Permissions.ADMIN)
     public void setSpawn(Player player) {
-        module.setRespawn(player);
+        module.setRespawn(player, null);
     }
 
     @Subcommand("pvp setboard")
     @CommandPermission(Permissions.ADMIN)
     public void setBoard(Player player) {
-        module.setBoard(player);
+        module.setBoard(player, null);
     }
 }
