@@ -16,7 +16,10 @@ import revxrsal.commands.orphan.Orphans;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.UnaryOperator;
 
 /**
@@ -38,6 +41,9 @@ public abstract class LobbyModule extends PluginModule {
 
     protected final LobbyContext context;
     private final List<Listener> listeners = new ArrayList<>();
+    /** Players still waiting for {@link #leave} after a switch-off, and the end of that switch-off. */
+    private final Set<UUID> handingBack = ConcurrentHashMap.newKeySet();
+    private volatile CompletableFuture<Void> stopped = CompletableFuture.completedFuture(null);
 
     protected LobbyModule(@NotNull String id, @NotNull LobbyContext context) {
         super(id);
@@ -140,13 +146,18 @@ public abstract class LobbyModule extends PluginModule {
 
     /** Called by the core for a crossing; never call it yourself. */
     public final void crossing(@NotNull Player player, boolean entered, @NotNull AreaCause cause) {
-        if (!isEnabled()) return;
+        if (!isEnabled()) {
+            // Switched off, but this player had not been handed back yet: leaving (a quit) is the last chance.
+            if (!entered) handBack(player);
+            return;
+        }
         if (entered) enter(player, cause);
         else leave(player, cause);
     }
 
     @Override
     protected final void onEnable() {
+        if (!stopped.isDone()) throw new IllegalStateException("Module " + getId() + " is still handing players back");
         start();
         for (UUID id : context.areas().players()) {
             Player player = Bukkit.getPlayer(id);
@@ -156,17 +167,79 @@ public abstract class LobbyModule extends PluginModule {
         }
     }
 
+    /**
+     * Gives everyone inside their state back, then stops. A player on another thread (Folia, a live switch from the
+     * global thread) gets {@link #leave} on their own thread, and {@link #stop} waits for all of them, since it
+     * clears the very state {@code leave} gives back.
+     */
     @Override
     protected final void onDisable() {
+        if (!stopped.isDone()) return; // an enable refused while a switch-off was still pending
+        List<CompletableFuture<Void>> waits = new ArrayList<>();
         for (UUID id : context.areas().players()) {
             Player player = Bukkit.getPlayer(id);
             if (player == null) continue;
-            if (context.stopping() || context.tasks().isOwnedBy(player)) safeLeave(player);
-            else context.tasks().runAtEntity(player, () -> safeLeave(player));
+            if (context.stopping() || context.tasks().isOwnedBy(player)) {
+                safeLeave(player);
+                continue;
+            }
+            handingBack.add(id);
+            CompletableFuture<Void> done = new CompletableFuture<>();
+            waits.add(done);
+            context.tasks().runAtEntity(player, () -> {
+                handBack(player);
+                done.complete(null);
+            }, () -> {
+                // ponytail: removed before their turn, after their quit crossing already handed them back (or never
+                // reached it); a removed player is not touched.
+                handingBack.remove(id);
+                done.complete(null);
+            });
         }
-        listeners.forEach(HandlerList::unregisterAll);
-        listeners.clear();
-        stop();
+        CompletableFuture<Void> pending = new CompletableFuture<>();
+        stopped = pending;
+        if (waits.isEmpty()) {
+            finish(pending);
+            return;
+        }
+        CompletableFuture.allOf(waits.toArray(CompletableFuture[]::new))
+                .whenComplete((ignored, failure) -> context.tasks().run(() -> finish(pending)));
+    }
+
+    /**
+     * Completes once a switch-off has handed every player back and {@link #stop} ran. Switching the module on
+     * before that is refused, so wait for it.
+     */
+    public final @NotNull CompletableFuture<Void> handedBack() {
+        return stopped;
+    }
+
+    /** At shutdown: hands back whoever is still waiting, here and now, and stops. Called by the core. */
+    public final void finishPendingStop() {
+        CompletableFuture<Void> pending = stopped;
+        if (pending.isDone()) return;
+        for (UUID id : List.copyOf(handingBack)) {
+            Player player = Bukkit.getPlayer(id);
+            if (player != null) handBack(player);
+        }
+        finish(pending);
+    }
+
+    private void handBack(Player player) {
+        if (handingBack.remove(player.getUniqueId())) safeLeave(player);
+    }
+
+    private synchronized void finish(CompletableFuture<Void> pending) {
+        if (pending.isDone()) return;
+        try {
+            listeners.forEach(HandlerList::unregisterAll);
+            listeners.clear();
+            stop();
+        } catch (RuntimeException failed) {
+            context.debug().error("Module " + getId() + " failed to stop cleanly", failed);
+        } finally {
+            pending.complete(null);
+        }
     }
 
     private void safeLeave(@Nullable Player player) {
@@ -181,7 +254,7 @@ public abstract class LobbyModule extends PluginModule {
     /** Builds the module's services; settings and messages are already loaded. */
     protected abstract void start();
 
-    /** Stops what {@link #start} built. Players inside already got {@link #leave}. */
+    /** Stops what {@link #start} built. Players inside already got {@link #leave}, each on their own thread. */
     protected void stop() {
     }
 }

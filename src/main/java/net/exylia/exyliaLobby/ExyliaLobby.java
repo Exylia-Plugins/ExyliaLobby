@@ -120,6 +120,8 @@ public final class ExyliaLobby {
 
     public void shutdown() {
         stopping = true;
+        // A module switched off a moment ago may still be waiting on players' threads, which run no more.
+        registered.forEach(LobbyModule::finishPendingStop);
         if (areas != null) areas.stop();
         if (modules != null) modules.disableAll();
         if (lamp != null) lamp.unregisterAllCommands();
