@@ -1,0 +1,294 @@
+# DO NOT EDIT — REGENERATED ON EVERY STARTUP.
+#
+# Settings an admin tunes, one card per module. Everything else stays in the files.
+
+title: "{primary}&lLOBBY {letters_black}» {highlight}Ayarlar"
+size: 36
+type: SIMPLE
+
+open_sounds:
+  - "minecraft:block.ender_chest.open|1.0|1.4"
+click_sounds:
+  - "minecraft:block.note_block.hat|1.0|1.0"
+close_sounds:
+  - "minecraft:block.barrel.close|1.0|0.7"
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: COMPARATOR
+    name: "<gradient:{primary}:{secondary_light}>Ayarlar</gradient>"
+    lore:
+      - "{letters_black}Lobby ayarları"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Oyunda değiştirmeye değer ayarlar,"
+      - " {letters}modüllere göre. Gerisi"
+      - " {letters}dosyalarda kalır."
+
+  spawn:
+    slot: 10
+    material: RESPAWN_ANCHOR
+    name: "{letters}Ayarlar {letters_black}▸ <gradient:{primary}:{secondary_light}>Doğuş noktası</gradient>"
+    lore:
+      - "{letters_black}Ayar sayfası"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Girişte kimin spawn'a gideceği"
+      - " {letters}ve "
+      - " {letters}spawn bekleme süresi."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Modül{letters_black}: %spawn_state%"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Girişte{letters_black}: %spawn_on_join%"
+      - "  {letters_black}· {info}{icon:clock} {letters}Bekleme{letters_black}: %spawn_warmup%"
+      - ""
+      - "{primary}{icon:click} Açmak için tıkla"
+      - "{letters_black}Her ayar açıklamalı."
+    actions:
+      - "exylialobby:settings_page spawn"
+
+  state:
+    slot: 11
+    material: ARMOR_STAND
+    name: "{letters}Ayarlar {letters_black}▸ <gradient:{primary}:{secondary_light}>Durum</gradient>"
+    lore:
+      - "{letters_black}Ayar sayfası"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Lobide oyun modu, can, uçuş,"
+      - " {letters}saat ve hava."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Modül{letters_black}: %state_state%"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Oyun modu{letters_black}: %state_game_mode%"
+      - "  {letters_black}· {info}{icon:clock} {letters}Saat{letters_black}: %state_time%"
+      - ""
+      - "{primary}{icon:click} Açmak için tıkla"
+      - "{letters_black}Her ayar açıklamalı."
+    actions:
+      - "exylialobby:settings_page state"
+
+  protection:
+    slot: 12
+    material: SHIELD
+    name: "{letters}Ayarlar {letters_black}▸ <gradient:{primary}:{secondary_light}>Koruma</gradient>"
+    lore:
+      - "{letters_black}Ayar sayfası"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Lobinin kimler için hangi"
+      - " {letters}eylemleri iptal ettiği."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Modül{letters_black}: %protection_state%"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Blok kırma{letters_black}: %protection_block_break%"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Blok koyma{letters_black}: %protection_block_place%"
+      - ""
+      - "{primary}{icon:click} Açmak için tıkla"
+      - "{letters_black}Her ayar açıklamalı."
+    actions:
+      - "exylialobby:settings_page protection"
+
+  join:
+    slot: 14
+    material: OAK_SIGN
+    name: "{letters}Ayarlar {letters_black}▸ <gradient:{primary}:{secondary_light}>Giriş mesajları</gradient>"
+    lore:
+      - "{letters_black}Ayar sayfası"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Kimin ele alındığı ve"
+      - " {letters}karşılamanın gecikmesi."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Modül{letters_black}: %join_state%"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Yalnızca lobide{letters_black}: %join_only_in_lobby%"
+      - "  {letters_black}· {info}{icon:clock} {letters}Karşılama gecikmesi{letters_black}: %join_welcome_delay%"
+      - ""
+      - "{primary}{icon:click} Açmak için tıkla"
+      - "{letters_black}Her ayar açıklamalı."
+    actions:
+      - "exylialobby:settings_page join"
+
+  chat:
+    slot: 15
+    material: WRITABLE_BOOK
+    name: "{letters}Ayarlar {letters_black}▸ <gradient:{primary}:{secondary_light}>Sohbet</gradient>"
+    lore:
+      - "{letters_black}Ayar sayfası"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Başlangıçtaki sohbet kilidi"
+      - " {letters}ve yavaş mod."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Modül{letters_black}: %chat_state%"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Başlangıçta kilitli{letters_black}: %chat_locked_at_start%"
+      - "  {letters_black}· {info}{icon:clock} {letters}Yavaş mod{letters_black}: %chat_slow_mode_seconds%"
+      - ""
+      - "{primary}{icon:click} Açmak için tıkla"
+      - "{letters_black}Her ayar açıklamalı."
+    actions:
+      - "exylialobby:settings_page chat"
+
+  onboarding:
+    slot: 16
+    material: FILLED_MAP
+    name: "{letters}Ayarlar {letters_black}▸ <gradient:{primary}:{secondary_light}>Karşılama turu</gradient>"
+    lore:
+      - "{letters_black}Ayar sayfası"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Turun ve kimler için başladığı."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Modül{letters_black}: %onboarding_state%"
+      - "  {letters_black}· {info}{icon:book} {letters}Tur{letters_black}: %onboarding_journey%"
+      - "  {letters_black}· {info}{icon:clock} {letters}Gecikme{letters_black}: %onboarding_delay%"
+      - ""
+      - "{primary}{icon:click} Açmak için tıkla"
+      - "{letters_black}Her ayar açıklamalı."
+    actions:
+      - "exylialobby:settings_page onboarding"
+
+  movement:
+    slot: 19
+    material: RABBIT_FOOT
+    name: "{letters}Ayarlar {letters_black}▸ <gradient:{primary}:{secondary_light}>Hareket</gradient>"
+    lore:
+      - "{letters_black}Ayar sayfası"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Çift zıplama anahtarı"
+      - " {letters}ve bekleme süresi."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Modül{letters_black}: %movement_state%"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Çift zıplama{letters_black}: %movement_double_jump_enabled%"
+      - "  {letters_black}· {info}{icon:clock} {letters}Bekleme süresi{letters_black}: %movement_double_jump_cooldown%"
+      - ""
+      - "{primary}{icon:click} Açmak için tıkla"
+      - "{letters_black}Her ayar açıklamalı."
+    actions:
+      - "exylialobby:settings_page movement"
+
+  visibility:
+    slot: 20
+    material: ENDER_EYE
+    name: "{letters}Ayarlar {letters_black}▸ <gradient:{primary}:{secondary_light}>Görünürlük</gradient>"
+    lore:
+      - "{letters_black}Ayar sayfası"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Yeni oyuncuların gördüğü ve"
+      - " {letters}geçişin ne kadar hızlı olduğu."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Modül{letters_black}: %visibility_state%"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Varsayılan{letters_black}: %visibility_default_mode%"
+      - "  {letters_black}· {info}{icon:clock} {letters}Bekleme süresi{letters_black}: %visibility_cooldown%"
+      - ""
+      - "{primary}{icon:click} Açmak için tıkla"
+      - "{letters_black}Her ayar açıklamalı."
+    actions:
+      - "exylialobby:settings_page visibility"
+
+  pvp:
+    slot: 21
+    material: DIAMOND_SWORD
+    name: "{letters}Ayarlar {letters_black}▸ <gradient:{primary}:{secondary_light}>Lobi PvP</gradient>"
+    lore:
+      - "{letters_black}Ayar sayfası"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Kuşanma süresi ve vuruştan sonraki"
+      - " {letters}savaş etiketi."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Modül{letters_black}: %pvp_state%"
+      - "  {letters_black}· {info}{icon:clock} {letters}Kuşanma{letters_black}: %pvp_equip_seconds%"
+      - "  {letters_black}· {info}{icon:clock} {letters}Savaş etiketi{letters_black}: %pvp_tag_seconds%"
+      - ""
+      - "{primary}{icon:click} Açmak için tıkla"
+      - "{letters_black}Her ayar açıklamalı."
+    actions:
+      - "exylialobby:settings_page pvp"
+
+  gadgets:
+    slot: 23
+    material: FISHING_ROD
+    name: "{letters}Ayarlar {letters_black}▸ <gradient:{primary}:{secondary_light}>Gadget'lar</gradient>"
+    lore:
+      - "{letters_black}Ayar sayfası"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Ne kadar uzaktan görüldükleri"
+      - " {letters}ve kanca beklemesi."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Modül{letters_black}: %gadgets_state%"
+      - "  {letters_black}· {info}{icon:hopper} {letters}Görüş yarıçapı{letters_black}: %gadgets_view_radius%"
+      - "  {letters_black}· {info}{icon:clock} {letters}Kanca{letters_black}: %gadgets_gadgets_grapple_cooldown%"
+      - ""
+      - "{primary}{icon:click} Açmak için tıkla"
+      - "{letters_black}Her ayar açıklamalı."
+    actions:
+      - "exylialobby:settings_page gadgets"
+
+  parkour:
+    slot: 24
+    material: LEATHER_BOOTS
+    name: "{letters}Ayarlar {letters_black}▸ <gradient:{primary}:{secondary_light}>Parkur</gradient>"
+    lore:
+      - "{letters_black}Ayar sayfası"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Sonsuz modlar ve sprint"
+      - " {letters}süresi."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Modül{letters_black}: %parkour_state%"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Sonsuz{letters_black}: %parkour_modes_endless%"
+      - "  {letters_black}· {info}{icon:clock} {letters}Sprint{letters_black}: %parkour_modes_sprint_seconds%"
+      - ""
+      - "{primary}{icon:click} Açmak için tıkla"
+      - "{letters_black}Her ayar açıklamalı."
+    actions:
+      - "exylialobby:settings_page parkour"
+
+  hud:
+    slot: 25
+    material: NAME_TAG
+    name: "{letters}Ayarlar {letters_black}▸ <gradient:{primary}:{secondary_light}>HUD</gradient>"
+    lore:
+      - "{letters_black}Ayar sayfası"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Ekranın hangi parçalarının"
+      - " {letters}gösterildiği."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Modül{letters_black}: %hud_state%"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Yan panel{letters_black}: %hud_sidebar_enabled%"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Boss çubukları{letters_black}: %hud_boss_bars_enabled%"
+      - ""
+      - "{primary}{icon:click} Açmak için tıkla"
+      - "{letters_black}Her ayar açıklamalı."
+    actions:
+      - "exylialobby:settings_page hud"
+
+  back:
+    slot: 31
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Geri {letters_black}▸ <gradient:{error}:{error_light}>Lobi yönetimi</gradient>"
+    lore:
+      - "{error}{icon:click} Geri dönmek için tıkla"
+    actions:
+      - "exylialobby:admin_hub"

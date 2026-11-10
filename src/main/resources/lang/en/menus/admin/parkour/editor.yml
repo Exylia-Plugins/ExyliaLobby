@@ -1,4 +1,4 @@
-menu-version: 2
+menu-version: 3
 # DO NOT EDIT — REGENERATED ON EVERY STARTUP.
 #
 # One parkour course: where it starts, passes and ends, and how it is judged.
@@ -100,7 +100,7 @@ items:
       - 'exylialobby:parkour_edit kill %course_id%'
 
   medals:
-    slot: 20
+    slot: 21
     material: GOLD_INGOT
     name: "{letters}Course {letters_black}▸ <gradient:{primary}:{secondary_light}>Medals</gradient>"
     lore:
@@ -119,7 +119,7 @@ items:
       - 'exylialobby:parkour_edit medals %course_id%'
 
   difficulty:
-    slot: 21
+    slot: 22
     material: NETHER_STAR
     name: "{letters}Course {letters_black}▸ <gradient:{primary}:{secondary_light}>Difficulty</gradient>"
     lore:
@@ -136,27 +136,8 @@ items:
     actions:
       - 'exylialobby:parkour_edit difficulty %course_id%'
 
-  rewards:
-    slot: 23
-    material: CHEST
-    name: "{letters}Course {letters_black}▸ <gradient:{primary}:{secondary_light}>Rewards</gradient>"
-    lore:
-      - "{letters_black}Course setting"
-      - ""
-      - "{primary}✎ Information"
-      - " {letters}First-finish and repeat rewards,"
-      - " {letters}minimum time and limits."
-      - ""
-      - "{primary}✦ Status"
-      - "  {letters_black}· {info}{icon:book} {letters}Edited in the courses file"
-      - ""
-      - "{primary}{icon:click} Click to open"
-      - "{letters_black}Pick this course there."
-    actions:
-      - 'exylialobby:parkour_edit rewards %course_id%'
-
   enabled:
-    slot: 24
+    slot: 23
     material: LEVER
     name: "{letters}Course {letters_black}▸ <gradient:{primary}:{secondary_light}>Enabled</gradient>"
     lore:

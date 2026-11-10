@@ -1,0 +1,310 @@
+# DO NOT EDIT — REGENERATED ON EVERY STARTUP.
+#
+# The protection settings an admin tunes. Everything else is in
+# modules/protection/config.yml.
+
+title: "{primary}&lНАСТРОЙКИ {letters_black}» {highlight}Защита"
+size: 36
+type: SIMPLE
+
+open_sounds:
+  - "minecraft:block.ender_chest.open|1.0|1.4"
+click_sounds:
+  - "minecraft:block.note_block.hat|1.0|1.0"
+close_sounds:
+  - "minecraft:block.barrel.close|1.0|0.7"
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: SHIELD
+    name: "<gradient:{primary}:{secondary_light}>Защита</gradient>"
+    lore:
+      - "{letters_black}Настройки: Защита"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Правила защиты лобби. Строители"
+      - " {letters}в билд-режиме их обходят."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Модуль{letters_black}: %protection_state%"
+
+  block-break:
+    slot: 10
+    material: IRON_PICKAXE
+    name: "{letters}Защита {letters_black}▸ <gradient:{primary}:{secondary_light}>Ломание блоков</gradient>"
+    lore:
+      - "{letters_black}Настройка: Защита"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Отменяет ломание блоков и"
+      - " {letters}набор жидкостей."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Включено{letters_black}: %protection_block_break%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %protection_block_break_default%"
+      - ""
+      - "%protection_block_break_click%"
+    actions:
+      - "exylialobby:setting protection block-break"
+
+  block-place:
+    slot: 11
+    material: GRASS_BLOCK
+    name: "{letters}Защита {letters_black}▸ <gradient:{primary}:{secondary_light}>Установка блоков</gradient>"
+    lore:
+      - "{letters_black}Настройка: Защита"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Отменяет установку блоков,"
+      - " {letters}вёдер и картин."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Включено{letters_black}: %protection_block_place%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %protection_block_place_default%"
+      - ""
+      - "%protection_block_place_click%"
+    actions:
+      - "exylialobby:setting protection block-place"
+
+  containers:
+    slot: 12
+    material: CHEST
+    name: "{letters}Защита {letters_black}▸ <gradient:{primary}:{secondary_light}>Контейнеры</gradient>"
+    lore:
+      - "{letters_black}Настройка: Защита"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Отменяет открытие сундуков,"
+      - " {letters}печей, наковален и т. п."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Включено{letters_black}: %protection_containers%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %protection_containers_default%"
+      - ""
+      - "%protection_containers_click%"
+    actions:
+      - "exylialobby:setting protection containers"
+
+  doors:
+    slot: 13
+    material: OAK_DOOR
+    name: "{letters}Защита {letters_black}▸ <gradient:{primary}:{secondary_light}>Двери</gradient>"
+    lore:
+      - "{letters_black}Настройка: Защита"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Отменяет использование дверей,"
+      - " {letters}люков и калиток."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Включено{letters_black}: %protection_doors%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %protection_doors_default%"
+      - ""
+      - "%protection_doors_click%"
+    actions:
+      - "exylialobby:setting protection doors"
+
+  buttons-and-levers:
+    slot: 14
+    material: STONE_BUTTON
+    name: "{letters}Защита {letters_black}▸ <gradient:{primary}:{secondary_light}>Кнопки и рычаги</gradient>"
+    lore:
+      - "{letters_black}Настройка: Защита"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Отменяет нажатие кнопок и"
+      - " {letters}рычагов."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Включено{letters_black}: %protection_buttons_and_levers%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %protection_buttons_and_levers_default%"
+      - ""
+      - "%protection_buttons_and_levers_click%"
+    actions:
+      - "exylialobby:setting protection buttons-and-levers"
+
+  pressure-plates:
+    slot: 15
+    material: STONE_PRESSURE_PLATE
+    name: "{letters}Защита {letters_black}▸ <gradient:{primary}:{secondary_light}>Нажимные плиты</gradient>"
+    lore:
+      - "{letters_black}Настройка: Защита"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Отменяет наступание на плиты"
+      - " {letters}и растяжки."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Включено{letters_black}: %protection_pressure_plates%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %protection_pressure_plates_default%"
+      - ""
+      - "%protection_pressure_plates_click%"
+    actions:
+      - "exylialobby:setting protection pressure-plates"
+
+  frames:
+    slot: 16
+    material: ITEM_FRAME
+    name: "{letters}Защита {letters_black}▸ <gradient:{primary}:{secondary_light}>Рамки</gradient>"
+    lore:
+      - "{letters_black}Настройка: Защита"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Отменяет поворот, изъятие и"
+      - " {letters}ломание рамок и картин."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Включено{letters_black}: %protection_frames%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %protection_frames_default%"
+      - ""
+      - "%protection_frames_click%"
+    actions:
+      - "exylialobby:setting protection frames"
+
+  armor-stands:
+    slot: 19
+    material: ARMOR_STAND
+    name: "{letters}Защита {letters_black}▸ <gradient:{primary}:{secondary_light}>Стойки для брони</gradient>"
+    lore:
+      - "{letters_black}Настройка: Защита"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Отменяет перемещение,"
+      - " {letters}экипировку и позы стоек."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Включено{letters_black}: %protection_armor_stands%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %protection_armor_stands_default%"
+      - ""
+      - "%protection_armor_stands_click%"
+    actions:
+      - "exylialobby:setting protection armor-stands"
+
+  drop-items:
+    slot: 20
+    material: DROPPER
+    name: "{letters}Защита {letters_black}▸ <gradient:{primary}:{secondary_light}>Выбрасывание предметов</gradient>"
+    lore:
+      - "{letters_black}Настройка: Защита"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Отменяет выбрасывание. После"
+      - " {letters}смерти инвентарь остаётся."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Включено{letters_black}: %protection_drop_items%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %protection_drop_items_default%"
+      - ""
+      - "%protection_drop_items_click%"
+    actions:
+      - "exylialobby:setting protection drop-items"
+
+  pickup-items:
+    slot: 21
+    material: HOPPER
+    name: "{letters}Защита {letters_black}▸ <gradient:{primary}:{secondary_light}>Подбор предметов</gradient>"
+    lore:
+      - "{letters_black}Настройка: Защита"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Отменяет подбор предметов."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Включено{letters_black}: %protection_pickup_items%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %protection_pickup_items_default%"
+      - ""
+      - "%protection_pickup_items_click%"
+    actions:
+      - "exylialobby:setting protection pickup-items"
+
+  protect-entities:
+    slot: 22
+    material: SADDLE
+    name: "{letters}Защита {letters_black}▸ <gradient:{primary}:{secondary_light}>Сущности</gradient>"
+    lore:
+      - "{letters_black}Настройка: Защита"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Отменяет удары по стойкам,"
+      - " {letters}животным и другим мобам."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Включено{letters_black}: %protection_protect_entities%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %protection_protect_entities_default%"
+      - ""
+      - "%protection_protect_entities_click%"
+    actions:
+      - "exylialobby:setting protection protect-entities"
+
+  mob-spawning:
+    slot: 23
+    material: ZOMBIE_HEAD
+    name: "{letters}Защита {letters_black}▸ <gradient:{primary}:{secondary_light}>Появление мобов</gradient>"
+    lore:
+      - "{letters_black}Настройка: Защита"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Отменяет монстров и животных,"
+      - " {letters}появляющихся сами."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Включено{letters_black}: %protection_mob_spawning%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %protection_mob_spawning_default%"
+      - ""
+      - "%protection_mob_spawning_click%"
+    actions:
+      - "exylialobby:setting protection mob-spawning"
+
+  explosions:
+    slot: 24
+    material: TNT
+    name: "{letters}Защита {letters_black}▸ <gradient:{primary}:{secondary_light}>Взрывы</gradient>"
+    lore:
+      - "{letters_black}Настройка: Защита"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Отменяет взрывы: без разрушений"
+      - " {letters}и урона."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Включено{letters_black}: %protection_explosions%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %protection_explosions_default%"
+      - ""
+      - "%protection_explosions_click%"
+    actions:
+      - "exylialobby:setting protection explosions"
+
+  hide-death-messages:
+    slot: 25
+    material: SKELETON_SKULL
+    name: "{letters}Защита {letters_black}▸ <gradient:{primary}:{secondary_light}>Скрыть сообщения о смерти</gradient>"
+    lore:
+      - "{letters_black}Настройка: Защита"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Скрывает сообщение о смерти"
+      - " {letters}тех, кто умер здесь."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Включено{letters_black}: %protection_hide_death_messages%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %protection_hide_death_messages_default%"
+      - ""
+      - "%protection_hide_death_messages_click%"
+    actions:
+      - "exylialobby:setting protection hide-death-messages"
+
+  back:
+    slot: 31
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Назад {letters_black}▸ <gradient:{error}:{error_light}>Настройки</gradient>"
+    lore:
+      - "{error}{icon:click} Нажми, чтобы вернуться"
+    actions:
+      - "exylialobby:settings_hub"

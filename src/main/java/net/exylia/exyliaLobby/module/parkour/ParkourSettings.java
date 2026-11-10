@@ -3,6 +3,7 @@ package net.exylia.exyliaLobby.module.parkour;
 import net.exylia.exyliaLobby.module.parkour.endless.SegmentType;
 import net.exylia.exyliaLobby.module.parkour.endless.Tuning;
 import net.exylia.lib.config.Comment;
+import net.exylia.lib.config.Menu;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -31,6 +32,7 @@ public record ParkourSettings(
         boolean runItems,
 
         @Comment("Course runs fall back to their last checkpoint this many blocks under their lowest point. 0 never.")
+        @Menu.Range(min = 0, max = 256, step = 2)
         int courseFallDepth,
 
         @Comment("What ends a run, or is refused while running.")
@@ -66,6 +68,7 @@ public record ParkourSettings(
             @Comment("Daily: the same path for every player today, with its own board.")
             boolean daily,
             @Comment("How long a sprint lasts.")
+            @Menu.Unit("s") @Menu.Range(min = 5, max = 600, step = 5)
             int sprintSeconds) {
         public Modes() {
             this(true, true, true, 60);
@@ -93,6 +96,7 @@ public record ParkourSettings(
             Map<String, List<Object>> milestoneRewards,
             @Comment("How often each milestone reward can be earned again, per mode: ALL (once ever), MONTHLY,")
             @Comment("WEEKLY or DAILY. The daily mode always pays once a day, since its path is the same all day.")
+            @Menu.Choices(value = {"ALL", "MONTHLY", "WEEKLY", "DAILY"})
             String milestonePeriod,
             @Comment("How the path is built.")
             PathTuning tuning) {

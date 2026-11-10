@@ -1,0 +1,197 @@
+# DO NOT EDIT — REGENERATED ON EVERY STARTUP.
+#
+# The gadgets settings an admin tunes. Everything else is in
+# modules/gadgets/config.yml.
+
+title: "{primary}&lAYARLAR {letters_black}» {highlight}Gadget'lar"
+size: 36
+type: SIMPLE
+
+open_sounds:
+  - "minecraft:block.ender_chest.open|1.0|1.4"
+click_sounds:
+  - "minecraft:block.note_block.hat|1.0|1.0"
+close_sounds:
+  - "minecraft:block.barrel.close|1.0|0.7"
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: FISHING_ROD
+    name: "<gradient:{primary}:{secondary_light}>Gadget'lar</gradient>"
+    lore:
+      - "{letters_black}Gadget'lar ayarları"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Oyuncuların kuşandığı oyuncaklar."
+      - " {letters}Her bekleme saniye cinsindendir."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Modül{letters_black}: %gadgets_state%"
+
+  view-radius:
+    slot: 11
+    material: SPYGLASS
+    name: "{letters}Gadget'lar {letters_black}▸ <gradient:{primary}:{secondary_light}>Görüş yarıçapı</gradient>"
+    lore:
+      - "{letters_black}Gadget'lar ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Bu mesafedeki oyuncular boya"
+      - " {letters}ve trambolinleri görür."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:hopper} {letters}Blok{letters_black}: %gadgets_view_radius%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %gadgets_view_radius_default%"
+      - ""
+      - "%gadgets_view_radius_click%"
+    actions:
+      - "exylialobby:setting gadgets view-radius"
+
+  gadgets-grapple-cooldown:
+    slot: 12
+    material: FISHING_ROD
+    name: "{letters}Gadget'lar {letters_black}▸ <gradient:{primary}:{secondary_light}>Kanca bekleme süresi</gradient>"
+    lore:
+      - "{letters_black}Gadget'lar ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}İki kullanım arası saniye."
+      - " {letters}Ondalık olabilir."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:clock} {letters}Bekle{letters_black}: %gadgets_gadgets_grapple_cooldown%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %gadgets_gadgets_grapple_cooldown_default%"
+      - ""
+      - "%gadgets_gadgets_grapple_cooldown_click%"
+    actions:
+      - "exylialobby:setting gadgets gadgets.grapple.cooldown"
+
+  gadgets-ender-cooldown:
+    slot: 14
+    material: ENDER_PEARL
+    name: "{letters}Gadget'lar {letters_black}▸ <gradient:{primary}:{secondary_light}>Ender binişi bekleme süresi</gradient>"
+    lore:
+      - "{letters_black}Gadget'lar ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}İki kullanım arası saniye."
+      - " {letters}Ondalık olabilir."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:clock} {letters}Bekle{letters_black}: %gadgets_gadgets_ender_cooldown%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %gadgets_gadgets_ender_cooldown_default%"
+      - ""
+      - "%gadgets_gadgets_ender_cooldown_click%"
+    actions:
+      - "exylialobby:setting gadgets gadgets.ender.cooldown"
+
+  gadgets-paint-cooldown:
+    slot: 15
+    material: BRUSH
+    name: "{letters}Gadget'lar {letters_black}▸ <gradient:{primary}:{secondary_light}>Boya bekleme süresi</gradient>"
+    lore:
+      - "{letters_black}Gadget'lar ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}İki kullanım arası saniye."
+      - " {letters}Ondalık olabilir."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:clock} {letters}Bekle{letters_black}: %gadgets_gadgets_paint_cooldown%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %gadgets_gadgets_paint_cooldown_default%"
+      - ""
+      - "%gadgets_gadgets_paint_cooldown_click%"
+    actions:
+      - "exylialobby:setting gadgets gadgets.paint.cooldown"
+
+  gadgets-knockback-cooldown:
+    slot: 20
+    material: STICK
+    name: "{letters}Gadget'lar {letters_black}▸ <gradient:{primary}:{secondary_light}>İtme bekleme süresi</gradient>"
+    lore:
+      - "{letters_black}Gadget'lar ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}İki kullanım arası saniye."
+      - " {letters}Ondalık olabilir."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:clock} {letters}Bekle{letters_black}: %gadgets_gadgets_knockback_cooldown%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %gadgets_gadgets_knockback_cooldown_default%"
+      - ""
+      - "%gadgets_gadgets_knockback_cooldown_click%"
+    actions:
+      - "exylialobby:setting gadgets gadgets.knockback.cooldown"
+
+  gadgets-leap-cooldown:
+    slot: 21
+    material: FEATHER
+    name: "{letters}Gadget'lar {letters_black}▸ <gradient:{primary}:{secondary_light}>Atılma bekleme süresi</gradient>"
+    lore:
+      - "{letters_black}Gadget'lar ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}İki kullanım arası saniye."
+      - " {letters}Ondalık olabilir."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:clock} {letters}Bekle{letters_black}: %gadgets_gadgets_leap_cooldown%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %gadgets_gadgets_leap_cooldown_default%"
+      - ""
+      - "%gadgets_gadgets_leap_cooldown_click%"
+    actions:
+      - "exylialobby:setting gadgets gadgets.leap.cooldown"
+
+  gadgets-snowball-cooldown:
+    slot: 23
+    material: SNOWBALL
+    name: "{letters}Gadget'lar {letters_black}▸ <gradient:{primary}:{secondary_light}>Kartopu bekleme süresi</gradient>"
+    lore:
+      - "{letters_black}Gadget'lar ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}İki kullanım arası saniye."
+      - " {letters}Ondalık olabilir."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:clock} {letters}Bekle{letters_black}: %gadgets_gadgets_snowball_cooldown%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %gadgets_gadgets_snowball_cooldown_default%"
+      - ""
+      - "%gadgets_gadgets_snowball_cooldown_click%"
+    actions:
+      - "exylialobby:setting gadgets gadgets.snowball.cooldown"
+
+  gadgets-trampoline-cooldown:
+    slot: 24
+    material: SLIME_BALL
+    name: "{letters}Gadget'lar {letters_black}▸ <gradient:{primary}:{secondary_light}>Trambolin bekleme süresi</gradient>"
+    lore:
+      - "{letters_black}Gadget'lar ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}İki kullanım arası saniye."
+      - " {letters}Ondalık olabilir."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:clock} {letters}Bekle{letters_black}: %gadgets_gadgets_trampoline_cooldown%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %gadgets_gadgets_trampoline_cooldown_default%"
+      - ""
+      - "%gadgets_gadgets_trampoline_cooldown_click%"
+    actions:
+      - "exylialobby:setting gadgets gadgets.trampoline.cooldown"
+
+  back:
+    slot: 31
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Geri {letters_black}▸ <gradient:{error}:{error_light}>Ayarlar</gradient>"
+    lore:
+      - "{error}{icon:click} Geri dönmek için tıkla"
+    actions:
+      - "exylialobby:settings_hub"

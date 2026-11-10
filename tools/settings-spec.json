@@ -1,0 +1,1179 @@
+{
+ "namespace": "exylialobby",
+ "menu": "admin/settings",
+ "title": "LOBBY",
+ "back": {
+  "label": "Lobby admin",
+  "action": "exylialobby:admin_hub"
+ },
+ "hub": {
+  "about": [
+   "The settings worth changing in",
+   "game, grouped by module. The",
+   "rest stays in the files."
+  ]
+ },
+ "pages": [
+  {
+   "id": "spawn",
+   "title": "Spawn",
+   "context": "Spawn",
+   "icon": "RESPAWN_ANCHOR",
+   "module": true,
+   "comment": [
+    "The spawn settings an admin tunes. Everything else is in",
+    "modules/spawn/config.yml."
+   ],
+   "about": [
+    "Where players appear and when",
+    "they are sent back to spawn."
+   ],
+   "hub": {
+    "about": [
+     "Who is sent to spawn on join",
+     "and the /spawn countdown."
+    ],
+    "stats": [
+     [
+      "redstone",
+      "On join",
+      "on-join"
+     ],
+     [
+      "clock",
+      "Warmup",
+      "warmup"
+     ]
+    ]
+   },
+   "cards": [
+    [
+     "on-join",
+     "On join",
+     "OAK_DOOR",
+     "redstone",
+     "Mode",
+     [
+      "Who is sent to spawn when they",
+      "join inside the lobby."
+     ]
+    ],
+    [
+     "warmup",
+     "Warmup",
+     "CLOCK",
+     "clock",
+     "Wait",
+     [
+      "Seconds standing still before",
+      "/spawn works. {highlight}0 {letters}is instant."
+     ]
+    ],
+    [
+     "respawn",
+     "Respawn at spawn",
+     "RED_BED",
+     "redstone",
+     "Enabled",
+     [
+      "Players who die in the lobby",
+      "respawn at spawn."
+     ]
+    ],
+    [
+     "void-return",
+     "Void return",
+     "ENDER_PEARL",
+     "redstone",
+     "Enabled",
+     [
+      "Send players back to spawn when",
+      "they fall below the height."
+     ]
+    ],
+    [
+     "void-y",
+     "Void height",
+     "BEDROCK",
+     "hopper",
+     "Height",
+     [
+      "The Y level under which a player",
+      "is sent back to spawn."
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "state",
+   "title": "State",
+   "context": "State",
+   "icon": "ARMOR_STAND",
+   "module": true,
+   "comment": [
+    "The state settings an admin tunes. Everything else is in",
+    "modules/state/config.yml."
+   ],
+   "about": [
+    "What a player is inside the lobby:",
+    "mode, health, time and weather."
+   ],
+   "hub": {
+    "about": [
+     "Game mode, health, flying, time",
+     "and weather inside the lobby."
+    ],
+    "stats": [
+     [
+      "redstone",
+      "Game mode",
+      "game-mode"
+     ],
+     [
+      "clock",
+      "Time",
+      "time"
+     ]
+    ]
+   },
+   "cards": [
+    [
+     "change-game-mode",
+     "Set game mode",
+     "LEVER",
+     "redstone",
+     "Enabled",
+     [
+      "Set the game mode of players",
+      "entering the lobby."
+     ]
+    ],
+    [
+     "game-mode",
+     "Game mode",
+     "IRON_SWORD",
+     "redstone",
+     "Mode",
+     [
+      "The game mode players have",
+      "inside the lobby."
+     ]
+    ],
+    [
+     "override-staff-modes",
+     "Include staff",
+     "GOLDEN_HELMET",
+     "redstone",
+     "Enabled",
+     [
+      "Also change players in creative",
+      "or spectator. Off leaves them."
+     ]
+    ],
+    [
+     "full-health",
+     "Full health",
+     "GOLDEN_APPLE",
+     "heart",
+     "Enabled",
+     [
+      "Heal players to full health",
+      "when they enter."
+     ]
+    ],
+    [
+     "full-hunger",
+     "Full hunger",
+     "COOKED_BEEF",
+     "redstone",
+     "Enabled",
+     [
+      "Fill the hunger bar and never",
+      "let it drop in the lobby."
+     ]
+    ],
+    [
+     "fly",
+     "Flying",
+     "FEATHER",
+     "redstone",
+     "Enabled",
+     [
+      "Let players with the fly",
+      "permission fly in the lobby."
+     ]
+    ],
+    [
+     "time",
+     "Time of day",
+     "CLOCK",
+     "clock",
+     "Ticks",
+     [
+      "Fixed time shown in the lobby.",
+      "{highlight}6000 {letters}is noon. {highlight}-1 {letters}keeps the world's."
+     ]
+    ],
+    [
+     "weather",
+     "Weather",
+     "WATER_BUCKET",
+     "redstone",
+     "Weather",
+     [
+      "Weather shown in the lobby. Off",
+      "keeps the world's weather."
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "protection",
+   "title": "Protection",
+   "context": "Protection",
+   "icon": "SHIELD",
+   "module": true,
+   "comment": [
+    "The protection settings an admin tunes. Everything else is in",
+    "modules/protection/config.yml."
+   ],
+   "about": [
+    "The rules that keep the lobby",
+    "safe. Staff in build mode skip them."
+   ],
+   "hub": {
+    "about": [
+     "Which actions the lobby cancels",
+     "for everyone but builders."
+    ],
+    "stats": [
+     [
+      "redstone",
+      "Block break",
+      "block-break"
+     ],
+     [
+      "redstone",
+      "Block place",
+      "block-place"
+     ]
+    ]
+   },
+   "cards": [
+    [
+     "block-break",
+     "Block break",
+     "IRON_PICKAXE",
+     "redstone",
+     "Enabled",
+     [
+      "Cancel breaking blocks and",
+      "picking up fluids."
+     ]
+    ],
+    [
+     "block-place",
+     "Block place",
+     "GRASS_BLOCK",
+     "redstone",
+     "Enabled",
+     [
+      "Cancel placing blocks, buckets",
+      "and paintings."
+     ]
+    ],
+    [
+     "containers",
+     "Containers",
+     "CHEST",
+     "redstone",
+     "Enabled",
+     [
+      "Cancel opening chests, furnaces,",
+      "anvils and the like."
+     ]
+    ],
+    [
+     "doors",
+     "Doors",
+     "OAK_DOOR",
+     "redstone",
+     "Enabled",
+     [
+      "Cancel using doors, trapdoors",
+      "and fence gates."
+     ]
+    ],
+    [
+     "buttons-and-levers",
+     "Buttons and levers",
+     "STONE_BUTTON",
+     "redstone",
+     "Enabled",
+     [
+      "Cancel pressing buttons and",
+      "flipping levers."
+     ]
+    ],
+    [
+     "pressure-plates",
+     "Pressure plates",
+     "STONE_PRESSURE_PLATE",
+     "redstone",
+     "Enabled",
+     [
+      "Cancel stepping on pressure",
+      "plates and tripwires."
+     ]
+    ],
+    [
+     "frames",
+     "Item frames",
+     "ITEM_FRAME",
+     "redstone",
+     "Enabled",
+     [
+      "Cancel rotating, emptying and",
+      "breaking frames and paintings."
+     ]
+    ],
+    [
+     "armor-stands",
+     "Armor stands",
+     "ARMOR_STAND",
+     "redstone",
+     "Enabled",
+     [
+      "Cancel moving, equipping and",
+      "posing armor stands."
+     ]
+    ],
+    [
+     "drop-items",
+     "Dropping items",
+     "DROPPER",
+     "redstone",
+     "Enabled",
+     [
+      "Cancel dropping items. Deaths",
+      "keep the inventory."
+     ]
+    ],
+    [
+     "pickup-items",
+     "Picking up items",
+     "HOPPER",
+     "redstone",
+     "Enabled",
+     [
+      "Cancel picking items up."
+     ]
+    ],
+    [
+     "protect-entities",
+     "Entities",
+     "SADDLE",
+     "redstone",
+     "Enabled",
+     [
+      "Cancel hitting armor stands,",
+      "animals and other mobs."
+     ]
+    ],
+    [
+     "mob-spawning",
+     "Mob spawning",
+     "ZOMBIE_HEAD",
+     "redstone",
+     "Enabled",
+     [
+      "Cancel monsters and animals that",
+      "spawn on their own."
+     ]
+    ],
+    [
+     "explosions",
+     "Explosions",
+     "TNT",
+     "redstone",
+     "Enabled",
+     [
+      "Cancel explosions: no blocks",
+      "destroyed and no damage."
+     ]
+    ],
+    [
+     "hide-death-messages",
+     "Hide death messages",
+     "SKELETON_SKULL",
+     "redstone",
+     "Enabled",
+     [
+      "Hide the vanilla death message",
+      "of players who die here."
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "join",
+   "title": "Join messages",
+   "context": "Join",
+   "icon": "OAK_SIGN",
+   "module": true,
+   "comment": [
+    "The join messages settings an admin tunes. Everything else is in",
+    "modules/join/config.yml."
+   ],
+   "about": [
+    "Who sees which join and leave",
+    "message, and when."
+   ],
+   "hub": {
+    "about": [
+     "Who is handled and how long the",
+     "welcome waits."
+    ],
+    "stats": [
+     [
+      "redstone",
+      "Only in lobby",
+      "only-in-lobby"
+     ],
+     [
+      "clock",
+      "Welcome delay",
+      "welcome-delay"
+     ]
+    ]
+   },
+   "cards": [
+    [
+     "only-in-lobby",
+     "Only in lobby",
+     "COMPASS",
+     "redstone",
+     "Enabled",
+     [
+      "Only handle players who join or",
+      "quit while in the lobby."
+     ]
+    ],
+    [
+     "hide-vanilla-messages",
+     "Hide vanilla",
+     "BARRIER",
+     "redstone",
+     "Enabled",
+     [
+      "Hide the vanilla join and quit",
+      "lines when none applies."
+     ]
+    ],
+    [
+     "welcome-delay",
+     "Welcome delay",
+     "CLOCK",
+     "clock",
+     "Delay",
+     [
+      "Time after joining before the",
+      "title, sound and MOTD appear."
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "chat",
+   "title": "Chat",
+   "context": "Chat",
+   "icon": "WRITABLE_BOOK",
+   "module": true,
+   "comment": [
+    "The chat settings an admin tunes. Everything else is in",
+    "modules/chat/config.yml."
+   ],
+   "about": [
+    "Chat control inside the lobby:",
+    "lock, slow mode and clearing."
+   ],
+   "hub": {
+    "about": [
+     "The chat lock at start and the",
+     "slow mode."
+    ],
+    "stats": [
+     [
+      "redstone",
+      "Locked at start",
+      "locked-at-start"
+     ],
+     [
+      "clock",
+      "Slow mode",
+      "slow-mode-seconds"
+     ]
+    ]
+   },
+   "cards": [
+    [
+     "locked-at-start",
+     "Locked at start",
+     "IRON_DOOR",
+     "redstone",
+     "Enabled",
+     [
+      "Start with the chat locked. A",
+      "restart goes back to this."
+     ]
+    ],
+    [
+     "slow-mode-seconds",
+     "Slow mode",
+     "COBWEB",
+     "clock",
+     "Delay",
+     [
+      "Seconds between two messages of",
+      "a player. {highlight}0 {letters}is off."
+     ]
+    ],
+    [
+     "clear-lines",
+     "Clear lines",
+     "PAPER",
+     "book",
+     "Lines",
+     [
+      "How many blank lines the clear",
+      "chat command sends."
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "onboarding",
+   "title": "Onboarding",
+   "context": "Onboarding",
+   "icon": "FILLED_MAP",
+   "module": true,
+   "comment": [
+    "The onboarding settings an admin tunes. Everything else is in",
+    "modules/onboarding/config.yml."
+   ],
+   "about": [
+    "How first-join players are handed",
+    "to ExyliaJourney."
+   ],
+   "hub": {
+    "about": [
+     "The journey and who it starts for."
+    ],
+    "stats": [
+     [
+      "book",
+      "Journey",
+      "journey"
+     ],
+     [
+      "clock",
+      "Delay",
+      "delay"
+     ]
+    ]
+   },
+   "cards": [
+    [
+     "journey",
+     "Journey",
+     "WRITTEN_BOOK",
+     "book",
+     "Journey",
+     [
+      "The id of the ExyliaJourney",
+      "journey that welcomes players."
+     ]
+    ],
+    [
+     "first-join-only",
+     "First join only",
+     "LIME_BED",
+     "redstone",
+     "Enabled",
+     [
+      "Only players joining for the",
+      "first time. Off hands everyone."
+     ]
+    ],
+    [
+     "delay",
+     "Delay",
+     "CLOCK",
+     "clock",
+     "Delay",
+     [
+      "Time after joining before the",
+      "journey starts."
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "movement",
+   "title": "Movement",
+   "context": "Movement",
+   "icon": "RABBIT_FOOT",
+   "module": true,
+   "comment": [
+    "The movement settings an admin tunes. Everything else is in",
+    "modules/movement/config.yml."
+   ],
+   "about": [
+    "Double jump: how far it throws",
+    "and how often."
+   ],
+   "hub": {
+    "about": [
+     "The double jump switch and its",
+     "cooldown."
+    ],
+    "stats": [
+     [
+      "redstone",
+      "Double jump",
+      "double-jump.enabled"
+     ],
+     [
+      "clock",
+      "Cooldown",
+      "double-jump.cooldown"
+     ]
+    ]
+   },
+   "cards": [
+    [
+     "double-jump.enabled",
+     "Double jump",
+     "FEATHER",
+     "redstone",
+     "Enabled",
+     [
+      "Press jump again in the air to",
+      "jump a second time."
+     ]
+    ],
+    [
+     "double-jump.forward",
+     "Forward push",
+     "ARROW",
+     "hopper",
+     "Push",
+     [
+      "Horizontal push, in the",
+      "direction the player looks."
+     ]
+    ],
+    [
+     "double-jump.vertical",
+     "Upward push",
+     "SLIME_BALL",
+     "hopper",
+     "Push",
+     [
+      "How high the second jump",
+      "throws the player."
+     ]
+    ],
+    [
+     "double-jump.cooldown",
+     "Cooldown",
+     "CLOCK",
+     "clock",
+     "Wait",
+     [
+      "Time before the same player can",
+      "double jump again."
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "visibility",
+   "title": "Visibility",
+   "context": "Visibility",
+   "icon": "ENDER_EYE",
+   "module": true,
+   "comment": [
+    "The visibility settings an admin tunes. Everything else is in",
+    "modules/visibility/config.yml."
+   ],
+   "about": [
+    "Who a player sees in the lobby."
+   ],
+   "hub": {
+    "about": [
+     "What new players see and how",
+     "fast they can switch."
+    ],
+    "stats": [
+     [
+      "redstone",
+      "Default",
+      "default-mode"
+     ],
+     [
+      "clock",
+      "Cooldown",
+      "cooldown"
+     ]
+    ]
+   },
+   "cards": [
+    [
+     "default-mode",
+     "Default view",
+     "ENDER_EYE",
+     "redstone",
+     "Mode",
+     [
+      "What a player who never chose",
+      "sees: everyone, friends or nobody."
+     ]
+    ],
+    [
+     "cooldown",
+     "Switch cooldown",
+     "CLOCK",
+     "clock",
+     "Wait",
+     [
+      "Time a player must wait between",
+      "two switches."
+     ]
+    ],
+    [
+     "clan-friends",
+     "Clanmates are friends",
+     "SHIELD",
+     "redstone",
+     "Enabled",
+     [
+      "Count clanmates as friends when",
+      "a clan plugin is installed."
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "pvp",
+   "title": "Lobby PvP",
+   "context": "PvP",
+   "icon": "DIAMOND_SWORD",
+   "module": true,
+   "comment": [
+    "The lobby pvp settings an admin tunes. Everything else is in",
+    "modules/pvp/config.yml."
+   ],
+   "about": [
+    "How the lobby PvP plays:",
+    "equip time and combat tag."
+   ],
+   "hub": {
+    "about": [
+     "The equip time and the combat",
+     "tag after a hit."
+    ],
+    "stats": [
+     [
+      "clock",
+      "Equip",
+      "equip-seconds"
+     ],
+     [
+      "clock",
+      "Combat tag",
+      "tag-seconds"
+     ]
+    ]
+   },
+   "cards": [
+    [
+     "equip-seconds",
+     "Equip time",
+     "IRON_SWORD",
+     "clock",
+     "Wait",
+     [
+      "Seconds holding the sword before",
+      "the kit goes on."
+     ]
+    ],
+    [
+     "unequip-seconds",
+     "Unequip time",
+     "LEATHER_CHESTPLATE",
+     "clock",
+     "Wait",
+     [
+      "Seconds off the sword before",
+      "the kit comes off."
+     ]
+    ],
+    [
+     "tag-seconds",
+     "Combat tag",
+     "BLAZE_POWDER",
+     "clock",
+     "Tag",
+     [
+      "Seconds in combat after a hit,",
+      "given or taken."
+     ]
+    ],
+    [
+     "quit-counts",
+     "Quitting counts",
+     "SKELETON_SKULL",
+     "redstone",
+     "Enabled",
+     [
+      "Quitting in combat counts as a",
+      "death for the quitter."
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "gadgets",
+   "title": "Gadgets",
+   "context": "Gadgets",
+   "icon": "FISHING_ROD",
+   "module": true,
+   "comment": [
+    "The gadgets settings an admin tunes. Everything else is in",
+    "modules/gadgets/config.yml."
+   ],
+   "about": [
+    "The toys players equip. Each",
+    "cooldown is in seconds."
+   ],
+   "hub": {
+    "about": [
+     "How far gadgets are seen and",
+     "the grapple cooldown."
+    ],
+    "stats": [
+     [
+      "hopper",
+      "View radius",
+      "view-radius"
+     ],
+     [
+      "clock",
+      "Grapple",
+      "gadgets.grapple.cooldown"
+     ]
+    ]
+   },
+   "cards": [
+    [
+     "view-radius",
+     "View radius",
+     "SPYGLASS",
+     "hopper",
+     "Blocks",
+     [
+      "Players within this many blocks",
+      "see paint and trampolines."
+     ]
+    ],
+    [
+     "gadgets.grapple.cooldown",
+     "Grapple cooldown",
+     "FISHING_ROD",
+     "clock",
+     "Wait",
+     [
+      "Seconds between two uses.",
+      "Decimals allowed."
+     ]
+    ],
+    [
+     "gadgets.ender.cooldown",
+     "Ender ride cooldown",
+     "ENDER_PEARL",
+     "clock",
+     "Wait",
+     [
+      "Seconds between two uses.",
+      "Decimals allowed."
+     ]
+    ],
+    [
+     "gadgets.paint.cooldown",
+     "Paint cooldown",
+     "BRUSH",
+     "clock",
+     "Wait",
+     [
+      "Seconds between two uses.",
+      "Decimals allowed."
+     ]
+    ],
+    [
+     "gadgets.knockback.cooldown",
+     "Knockback cooldown",
+     "STICK",
+     "clock",
+     "Wait",
+     [
+      "Seconds between two uses.",
+      "Decimals allowed."
+     ]
+    ],
+    [
+     "gadgets.leap.cooldown",
+     "Leap cooldown",
+     "FEATHER",
+     "clock",
+     "Wait",
+     [
+      "Seconds between two uses.",
+      "Decimals allowed."
+     ]
+    ],
+    [
+     "gadgets.snowball.cooldown",
+     "Snowball cooldown",
+     "SNOWBALL",
+     "clock",
+     "Wait",
+     [
+      "Seconds between two uses.",
+      "Decimals allowed."
+     ]
+    ],
+    [
+     "gadgets.trampoline.cooldown",
+     "Trampoline cooldown",
+     "SLIME_BALL",
+     "clock",
+     "Wait",
+     [
+      "Seconds between two uses.",
+      "Decimals allowed."
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "parkour",
+   "title": "Parkour",
+   "context": "Parkour",
+   "icon": "LEATHER_BOOTS",
+   "module": true,
+   "comment": [
+    "The parkour settings an admin tunes. Everything else is in",
+    "modules/parkour/config.yml."
+   ],
+   "about": [
+    "Endless modes and what runners",
+    "can use during a run."
+   ],
+   "hub": {
+    "about": [
+     "The endless modes and the sprint",
+     "length."
+    ],
+    "stats": [
+     [
+      "redstone",
+      "Endless",
+      "modes.endless"
+     ],
+     [
+      "clock",
+      "Sprint",
+      "modes.sprint-seconds"
+     ]
+    ]
+   },
+   "cards": [
+    [
+     "modes.endless",
+     "Endless mode",
+     "GOLD_BLOCK",
+     "redstone",
+     "Enabled",
+     [
+      "Score is how many jumps you",
+      "make before falling."
+     ]
+    ],
+    [
+     "modes.sprint",
+     "Sprint mode",
+     "CLOCK",
+     "redstone",
+     "Enabled",
+     [
+      "As many jumps as you can before",
+      "the clock runs out."
+     ]
+    ],
+    [
+     "modes.daily",
+     "Daily mode",
+     "SUNFLOWER",
+     "redstone",
+     "Enabled",
+     [
+      "The same path for every player",
+      "today, with its own board."
+     ]
+    ],
+    [
+     "modes.sprint-seconds",
+     "Sprint length",
+     "HOURGLASS",
+     "clock",
+     "Length",
+     [
+      "How long a sprint lasts."
+     ]
+    ],
+    [
+     "endless.milestone-period",
+     "Milestone rewards",
+     "CHEST",
+     "clock",
+     "Period",
+     [
+      "How often a milestone reward",
+      "can be earned again."
+     ]
+    ],
+    [
+     "hide-runners",
+     "Hide runners",
+     "GLASS",
+     "redstone",
+     "Enabled",
+     [
+      "Hide players from everyone else",
+      "while they run."
+     ]
+    ],
+    [
+     "run-items",
+     "Run items",
+     "COMPASS",
+     "redstone",
+     "Enabled",
+     [
+      "Give runners the checkpoint,",
+      "restart and leave items."
+     ]
+    ],
+    [
+     "course-fall-depth",
+     "Fall depth",
+     "FEATHER",
+     "hopper",
+     "Blocks",
+     [
+      "Blocks under a course's lowest",
+      "point before a fall. {highlight}0 {letters}never."
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "hud",
+   "title": "HUD",
+   "context": "HUD",
+   "icon": "NAME_TAG",
+   "module": true,
+   "comment": [
+    "The hud settings an admin tunes. Everything else is in",
+    "modules/hud/config.yml."
+   ],
+   "about": [
+    "What players see on screen in",
+    "the lobby."
+   ],
+   "hub": {
+    "about": [
+     "Which screen parts are shown."
+    ],
+    "stats": [
+     [
+      "redstone",
+      "Sidebar",
+      "sidebar.enabled"
+     ],
+     [
+      "redstone",
+      "Boss bars",
+      "boss-bars.enabled"
+     ]
+    ]
+   },
+   "cards": [
+    [
+     "sidebar.enabled",
+     "Sidebar",
+     "OAK_SIGN",
+     "redstone",
+     "Enabled",
+     [
+      "Show the sidebar in the lobby."
+     ]
+    ],
+    [
+     "tab.enabled",
+     "Player list",
+     "PAPER",
+     "redstone",
+     "Enabled",
+     [
+      "Show a header and footer on",
+      "the player list."
+     ]
+    ],
+    [
+     "boss-bars.enabled",
+     "Boss bars",
+     "DRAGON_HEAD",
+     "redstone",
+     "Enabled",
+     [
+      "Show boss bars that take turns",
+      "at the top of the screen."
+     ]
+    ],
+    [
+     "announcements.enabled",
+     "Announcements",
+     "BELL",
+     "redstone",
+     "Enabled",
+     [
+      "Send announcements in chat on",
+      "a timer."
+     ]
+    ],
+    [
+     "announcements.interval",
+     "Announcement gap",
+     "CLOCK",
+     "clock",
+     "Every",
+     [
+      "Time between two announcements."
+     ]
+    ]
+   ]
+  }
+ ]
+}

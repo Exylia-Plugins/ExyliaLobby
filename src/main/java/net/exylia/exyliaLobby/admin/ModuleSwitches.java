@@ -1,11 +1,9 @@
 package net.exylia.exyliaLobby.admin;
 
 import net.exylia.exyliaLobby.ExyliaLobby;
-import net.exylia.exyliaLobby.Permissions;
 import net.exylia.exyliaLobby.config.LobbyConfig;
 import net.exylia.exyliaLobby.config.LobbyMessages;
 import net.exylia.exyliaLobby.module.LobbyModule;
-import net.exylia.lib.config.ConfigMenus;
 import net.exylia.lib.module.ModuleToggle;
 import net.exylia.lib.text.PluginMessages;
 import net.exylia.lib.text.Values;
@@ -16,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.stream.Collectors;
 
-/** Switching a module live and opening its settings: the two clicks of a module card. */
+/** Switching a module live: the left click of a module card. */
 public final class ModuleSwitches {
 
     private ModuleSwitches() {
@@ -53,11 +51,5 @@ public final class ModuleSwitches {
                     "module", lobby.getNames().get().of(module.getId()).name()).put("required", missing));
             redraw.run();
         });
-    }
-
-    static void openSettings(@NotNull ExyliaLobby lobby, @NotNull Player viewer, @NotNull LobbyModule module,
-                             @NotNull Runnable back) {
-        ConfigMenus.of(lobby.getPlugin()).permission(Permissions.ADMIN).back(player -> back.run())
-                .file(module.settingsPath()).open(viewer);
     }
 }

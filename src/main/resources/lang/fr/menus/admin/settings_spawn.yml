@@ -1,0 +1,141 @@
+# DO NOT EDIT — REGENERATED ON EVERY STARTUP.
+#
+# The spawn settings an admin tunes. Everything else is in
+# modules/spawn/config.yml.
+
+title: "{primary}&lPARAMÈTRES {letters_black}» {highlight}Apparition"
+size: 27
+type: SIMPLE
+
+open_sounds:
+  - "minecraft:block.ender_chest.open|1.0|1.4"
+click_sounds:
+  - "minecraft:block.note_block.hat|1.0|1.0"
+close_sounds:
+  - "minecraft:block.barrel.close|1.0|0.7"
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: RESPAWN_ANCHOR
+    name: "<gradient:{primary}:{secondary_light}>Apparition</gradient>"
+    lore:
+      - "{letters_black}Réglages de Apparition"
+      - ""
+      - "{primary}✎ Informations"
+      - " {letters}Où les joueurs apparaissent et quand"
+      - " {letters}ils sont renvoyés au spawn."
+      - ""
+      - "{primary}✦ Statut"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Module{letters_black}: %spawn_state%"
+
+  on-join:
+    slot: 11
+    material: OAK_DOOR
+    name: "{letters}Apparition {letters_black}▸ <gradient:{primary}:{secondary_light}>À la connexion</gradient>"
+    lore:
+      - "{letters_black}Réglage de Apparition"
+      - ""
+      - "{primary}✎ Informations"
+      - " {letters}Qui est envoyé au spawn en se"
+      - " {letters}connectant dans le lobby."
+      - ""
+      - "{primary}✦ Statut"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Mode{letters_black}: %spawn_on_join%"
+      - "  {letters_black}· {info}{icon:book} {letters}Par défaut{letters_black}: %spawn_on_join_default%"
+      - ""
+      - "%spawn_on_join_click%"
+    actions:
+      - "exylialobby:setting spawn on-join"
+
+  warmup:
+    slot: 12
+    material: CLOCK
+    name: "{letters}Apparition {letters_black}▸ <gradient:{primary}:{secondary_light}>Délai</gradient>"
+    lore:
+      - "{letters_black}Réglage de Apparition"
+      - ""
+      - "{primary}✎ Informations"
+      - " {letters}Secondes immobile avant que"
+      - " {letters}"
+      - " {letters}spawn agisse. {highlight}0 {letters}est immédiat."
+      - ""
+      - "{primary}✦ Statut"
+      - "  {letters_black}· {info}{icon:clock} {letters}Attente{letters_black}: %spawn_warmup%"
+      - "  {letters_black}· {info}{icon:book} {letters}Par défaut{letters_black}: %spawn_warmup_default%"
+      - ""
+      - "%spawn_warmup_click%"
+    actions:
+      - "exylialobby:setting spawn warmup"
+
+  respawn:
+    slot: 13
+    material: RED_BED
+    name: "{letters}Apparition {letters_black}▸ <gradient:{primary}:{secondary_light}>Réapparaître au spawn</gradient>"
+    lore:
+      - "{letters_black}Réglage de Apparition"
+      - ""
+      - "{primary}✎ Informations"
+      - " {letters}Qui meurt dans le lobby"
+      - " {letters}réapparaît au spawn."
+      - ""
+      - "{primary}✦ Statut"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Activé{letters_black}: %spawn_respawn%"
+      - "  {letters_black}· {info}{icon:book} {letters}Par défaut{letters_black}: %spawn_respawn_default%"
+      - ""
+      - "%spawn_respawn_click%"
+    actions:
+      - "exylialobby:setting spawn respawn"
+
+  void-return:
+    slot: 14
+    material: ENDER_PEARL
+    name: "{letters}Apparition {letters_black}▸ <gradient:{primary}:{secondary_light}>Retour du vide</gradient>"
+    lore:
+      - "{letters_black}Réglage de Apparition"
+      - ""
+      - "{primary}✎ Informations"
+      - " {letters}Renvoie au spawn qui tombe"
+      - " {letters}sous la hauteur définie."
+      - ""
+      - "{primary}✦ Statut"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Activé{letters_black}: %spawn_void_return%"
+      - "  {letters_black}· {info}{icon:book} {letters}Par défaut{letters_black}: %spawn_void_return_default%"
+      - ""
+      - "%spawn_void_return_click%"
+    actions:
+      - "exylialobby:setting spawn void-return"
+
+  void-y:
+    slot: 15
+    material: BEDROCK
+    name: "{letters}Apparition {letters_black}▸ <gradient:{primary}:{secondary_light}>Hauteur du vide</gradient>"
+    lore:
+      - "{letters_black}Réglage de Apparition"
+      - ""
+      - "{primary}✎ Informations"
+      - " {letters}Le niveau Y sous lequel un joueur"
+      - " {letters}retourne au spawn."
+      - ""
+      - "{primary}✦ Statut"
+      - "  {letters_black}· {info}{icon:hopper} {letters}Hauteur{letters_black}: %spawn_void_y%"
+      - "  {letters_black}· {info}{icon:book} {letters}Par défaut{letters_black}: %spawn_void_y_default%"
+      - ""
+      - "%spawn_void_y_click%"
+    actions:
+      - "exylialobby:setting spawn void-y"
+
+  back:
+    slot: 22
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Retour {letters_black}▸ <gradient:{error}:{error_light}>Paramètres</gradient>"
+    lore:
+      - "{error}{icon:click} Clique pour revenir"
+    actions:
+      - "exylialobby:settings_hub"

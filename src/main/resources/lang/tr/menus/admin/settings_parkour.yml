@@ -1,0 +1,196 @@
+# DO NOT EDIT — REGENERATED ON EVERY STARTUP.
+#
+# The parkour settings an admin tunes. Everything else is in
+# modules/parkour/config.yml.
+
+title: "{primary}&lAYARLAR {letters_black}» {highlight}Parkur"
+size: 36
+type: SIMPLE
+
+open_sounds:
+  - "minecraft:block.ender_chest.open|1.0|1.4"
+click_sounds:
+  - "minecraft:block.note_block.hat|1.0|1.0"
+close_sounds:
+  - "minecraft:block.barrel.close|1.0|0.7"
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: LEATHER_BOOTS
+    name: "<gradient:{primary}:{secondary_light}>Parkur</gradient>"
+    lore:
+      - "{letters_black}Parkur ayarları"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Sonsuz modlar ve koşucuların"
+      - " {letters}koşu sırasında kullanabilecekleri."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Modül{letters_black}: %parkour_state%"
+
+  modes-endless:
+    slot: 11
+    material: GOLD_BLOCK
+    name: "{letters}Parkur {letters_black}▸ <gradient:{primary}:{secondary_light}>Sonsuz mod</gradient>"
+    lore:
+      - "{letters_black}Parkur ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Skor, düşmeden önce yaptığın"
+      - " {letters}zıplama sayısıdır."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %parkour_modes_endless%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %parkour_modes_endless_default%"
+      - ""
+      - "%parkour_modes_endless_click%"
+    actions:
+      - "exylialobby:setting parkour modes.endless"
+
+  modes-sprint:
+    slot: 12
+    material: CLOCK
+    name: "{letters}Parkur {letters_black}▸ <gradient:{primary}:{secondary_light}>Sprint modu</gradient>"
+    lore:
+      - "{letters_black}Parkur ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Süre dolmadan önce yapabildiğin"
+      - " {letters}kadar zıpla."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %parkour_modes_sprint%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %parkour_modes_sprint_default%"
+      - ""
+      - "%parkour_modes_sprint_click%"
+    actions:
+      - "exylialobby:setting parkour modes.sprint"
+
+  modes-daily:
+    slot: 14
+    material: SUNFLOWER
+    name: "{letters}Parkur {letters_black}▸ <gradient:{primary}:{secondary_light}>Günlük mod</gradient>"
+    lore:
+      - "{letters_black}Parkur ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Bugün herkes için aynı yol,"
+      - " {letters}kendi sıralamasıyla."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %parkour_modes_daily%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %parkour_modes_daily_default%"
+      - ""
+      - "%parkour_modes_daily_click%"
+    actions:
+      - "exylialobby:setting parkour modes.daily"
+
+  modes-sprint-seconds:
+    slot: 15
+    material: HOURGLASS
+    name: "{letters}Parkur {letters_black}▸ <gradient:{primary}:{secondary_light}>Sprint süresi</gradient>"
+    lore:
+      - "{letters_black}Parkur ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Bir sprintin ne kadar sürdüğü."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:clock} {letters}Süre{letters_black}: %parkour_modes_sprint_seconds%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %parkour_modes_sprint_seconds_default%"
+      - ""
+      - "%parkour_modes_sprint_seconds_click%"
+    actions:
+      - "exylialobby:setting parkour modes.sprint-seconds"
+
+  endless-milestone-period:
+    slot: 20
+    material: CHEST
+    name: "{letters}Parkur {letters_black}▸ <gradient:{primary}:{secondary_light}>Kilometre taşı ödülleri</gradient>"
+    lore:
+      - "{letters_black}Parkur ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Bir kilometre taşı ödülünün"
+      - " {letters}ne sıklıkla tekrar kazanılacağı."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:clock} {letters}Dönem{letters_black}: %parkour_endless_milestone_period%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %parkour_endless_milestone_period_default%"
+      - ""
+      - "%parkour_endless_milestone_period_click%"
+    actions:
+      - "exylialobby:setting parkour endless.milestone-period"
+
+  hide-runners:
+    slot: 21
+    material: GLASS
+    name: "{letters}Parkur {letters_black}▸ <gradient:{primary}:{secondary_light}>Koşucuları gizle</gradient>"
+    lore:
+      - "{letters_black}Parkur ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Koşarken oyuncuları"
+      - " {letters}diğerlerinden gizler."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %parkour_hide_runners%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %parkour_hide_runners_default%"
+      - ""
+      - "%parkour_hide_runners_click%"
+    actions:
+      - "exylialobby:setting parkour hide-runners"
+
+  run-items:
+    slot: 23
+    material: COMPASS
+    name: "{letters}Parkur {letters_black}▸ <gradient:{primary}:{secondary_light}>Koşu eşyaları</gradient>"
+    lore:
+      - "{letters_black}Parkur ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Koşuculara kontrol noktası, yeniden"
+      - " {letters}başlat ve çıkış eşyaları verir."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %parkour_run_items%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %parkour_run_items_default%"
+      - ""
+      - "%parkour_run_items_click%"
+    actions:
+      - "exylialobby:setting parkour run-items"
+
+  course-fall-depth:
+    slot: 24
+    material: FEATHER
+    name: "{letters}Parkur {letters_black}▸ <gradient:{primary}:{secondary_light}>Düşme derinliği</gradient>"
+    lore:
+      - "{letters_black}Parkur ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Parkurun en alçak noktasının altında"
+      - " {letters}düşmeden önceki blok. {highlight}0 {letters}asla."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:hopper} {letters}Blok{letters_black}: %parkour_course_fall_depth%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %parkour_course_fall_depth_default%"
+      - ""
+      - "%parkour_course_fall_depth_click%"
+    actions:
+      - "exylialobby:setting parkour course-fall-depth"
+
+  back:
+    slot: 31
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Geri {letters_black}▸ <gradient:{error}:{error_light}>Ayarlar</gradient>"
+    lore:
+      - "{error}{icon:click} Geri dönmek için tıkla"
+    actions:
+      - "exylialobby:settings_hub"

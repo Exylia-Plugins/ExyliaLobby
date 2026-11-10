@@ -1,0 +1,102 @@
+# DO NOT EDIT — REGENERATED ON EVERY STARTUP.
+#
+# The onboarding settings an admin tunes. Everything else is in
+# modules/onboarding/config.yml.
+
+title: "{primary}&lAYARLAR {letters_black}» {highlight}Karşılama turu"
+size: 27
+type: SIMPLE
+
+open_sounds:
+  - "minecraft:block.ender_chest.open|1.0|1.4"
+click_sounds:
+  - "minecraft:block.note_block.hat|1.0|1.0"
+close_sounds:
+  - "minecraft:block.barrel.close|1.0|0.7"
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: FILLED_MAP
+    name: "<gradient:{primary}:{secondary_light}>Karşılama turu</gradient>"
+    lore:
+      - "{letters_black}Karşılama turu ayarları"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Yeni oyuncuların ExyliaJourney'e"
+      - " {letters}nasıl devredildiği."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Modül{letters_black}: %onboarding_state%"
+
+  journey:
+    slot: 12
+    material: WRITTEN_BOOK
+    name: "{letters}Karşılama turu {letters_black}▸ <gradient:{primary}:{secondary_light}>Tur</gradient>"
+    lore:
+      - "{letters_black}Karşılama turu ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Oyuncuları karşılayan"
+      - " {letters}ExyliaJourney turunun kimliği."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:book} {letters}Tur{letters_black}: %onboarding_journey%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %onboarding_journey_default%"
+      - ""
+      - "%onboarding_journey_click%"
+    actions:
+      - "exylialobby:setting onboarding journey"
+
+  first-join-only:
+    slot: 13
+    material: LIME_BED
+    name: "{letters}Karşılama turu {letters_black}▸ <gradient:{primary}:{secondary_light}>Yalnızca ilk giriş</gradient>"
+    lore:
+      - "{letters_black}Karşılama turu ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Yalnızca ilk kez girenlere."
+      - " {letters}Kapalıysa herkese."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %onboarding_first_join_only%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %onboarding_first_join_only_default%"
+      - ""
+      - "%onboarding_first_join_only_click%"
+    actions:
+      - "exylialobby:setting onboarding first-join-only"
+
+  delay:
+    slot: 14
+    material: CLOCK
+    name: "{letters}Karşılama turu {letters_black}▸ <gradient:{primary}:{secondary_light}>Gecikme</gradient>"
+    lore:
+      - "{letters_black}Karşılama turu ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Girişten sonra turun"
+      - " {letters}başlamasına kadar süre."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:clock} {letters}Gecikme{letters_black}: %onboarding_delay%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %onboarding_delay_default%"
+      - ""
+      - "%onboarding_delay_click%"
+    actions:
+      - "exylialobby:setting onboarding delay"
+
+  back:
+    slot: 22
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Geri {letters_black}▸ <gradient:{error}:{error_light}>Ayarlar</gradient>"
+    lore:
+      - "{error}{icon:click} Geri dönmek için tıkla"
+    actions:
+      - "exylialobby:settings_hub"

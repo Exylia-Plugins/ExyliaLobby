@@ -1,6 +1,7 @@
 package net.exylia.exyliaLobby.module.gadgets;
 
 import net.exylia.lib.config.Comment;
+import net.exylia.lib.config.Menu;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -15,6 +16,7 @@ public record GadgetsSettings(
         int slot,
 
         @Comment("Players within this many blocks see paint and trampolines.")
+        @Menu.Range(min = 1, max = 128, step = 4)
         int viewRadius,
 
         @Comment("The blocks the paint blaster colours with, one picked per shot.")
@@ -42,6 +44,15 @@ public record GadgetsSettings(
         public Gadget() {
             this(true, "", 1.0, "STICK", 1.0, 0);
         }
+    }
+
+    /** A copy with one gadget's cooldown changed; an unknown gadget leaves it as it is. */
+    public GadgetsSettings withCooldown(String id, double cooldown) {
+        Gadget found = gadgets.get(id);
+        if (found == null) return this;
+        Map<String, Gadget> copy = new LinkedHashMap<>(gadgets);
+        copy.put(id, new Gadget(found.enabled(), found.permission(), cooldown, found.material(), found.power(), found.seconds()));
+        return new GadgetsSettings(command, slot, viewRadius, paintColors, copy);
     }
 
     private static Map<String, Gadget> defaults() {

@@ -1,0 +1,196 @@
+# DO NOT EDIT — REGENERATED ON EVERY STARTUP.
+#
+# The parkour settings an admin tunes. Everything else is in
+# modules/parkour/config.yml.
+
+title: "{primary}&lНАСТРОЙКИ {letters_black}» {highlight}Паркур"
+size: 36
+type: SIMPLE
+
+open_sounds:
+  - "minecraft:block.ender_chest.open|1.0|1.4"
+click_sounds:
+  - "minecraft:block.note_block.hat|1.0|1.0"
+close_sounds:
+  - "minecraft:block.barrel.close|1.0|0.7"
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: LEATHER_BOOTS
+    name: "<gradient:{primary}:{secondary_light}>Паркур</gradient>"
+    lore:
+      - "{letters_black}Настройки: Паркур"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Бесконечные режимы и что доступно"
+      - " {letters}бегунам во время забега."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Модуль{letters_black}: %parkour_state%"
+
+  modes-endless:
+    slot: 11
+    material: GOLD_BLOCK
+    name: "{letters}Паркур {letters_black}▸ <gradient:{primary}:{secondary_light}>Бесконечный режим</gradient>"
+    lore:
+      - "{letters_black}Настройка: Паркур"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Счёт — число прыжков до"
+      - " {letters}падения."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Включено{letters_black}: %parkour_modes_endless%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %parkour_modes_endless_default%"
+      - ""
+      - "%parkour_modes_endless_click%"
+    actions:
+      - "exylialobby:setting parkour modes.endless"
+
+  modes-sprint:
+    slot: 12
+    material: CLOCK
+    name: "{letters}Паркур {letters_black}▸ <gradient:{primary}:{secondary_light}>Режим спринта</gradient>"
+    lore:
+      - "{letters_black}Настройка: Паркур"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Столько прыжков, сколько успеешь,"
+      - " {letters}пока не истечёт время."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Включено{letters_black}: %parkour_modes_sprint%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %parkour_modes_sprint_default%"
+      - ""
+      - "%parkour_modes_sprint_click%"
+    actions:
+      - "exylialobby:setting parkour modes.sprint"
+
+  modes-daily:
+    slot: 14
+    material: SUNFLOWER
+    name: "{letters}Паркур {letters_black}▸ <gradient:{primary}:{secondary_light}>Ежедневный режим</gradient>"
+    lore:
+      - "{letters_black}Настройка: Паркур"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Один путь для всех сегодня,"
+      - " {letters}со своей таблицей."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Включено{letters_black}: %parkour_modes_daily%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %parkour_modes_daily_default%"
+      - ""
+      - "%parkour_modes_daily_click%"
+    actions:
+      - "exylialobby:setting parkour modes.daily"
+
+  modes-sprint-seconds:
+    slot: 15
+    material: HOURGLASS
+    name: "{letters}Паркур {letters_black}▸ <gradient:{primary}:{secondary_light}>Длина спринта</gradient>"
+    lore:
+      - "{letters_black}Настройка: Паркур"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Сколько длится спринт."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:clock} {letters}Длина{letters_black}: %parkour_modes_sprint_seconds%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %parkour_modes_sprint_seconds_default%"
+      - ""
+      - "%parkour_modes_sprint_seconds_click%"
+    actions:
+      - "exylialobby:setting parkour modes.sprint-seconds"
+
+  endless-milestone-period:
+    slot: 20
+    material: CHEST
+    name: "{letters}Паркур {letters_black}▸ <gradient:{primary}:{secondary_light}>Награды за рубежи</gradient>"
+    lore:
+      - "{letters_black}Настройка: Паркур"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Как часто можно снова получить"
+      - " {letters}награду за рубеж."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:clock} {letters}Период{letters_black}: %parkour_endless_milestone_period%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %parkour_endless_milestone_period_default%"
+      - ""
+      - "%parkour_endless_milestone_period_click%"
+    actions:
+      - "exylialobby:setting parkour endless.milestone-period"
+
+  hide-runners:
+    slot: 21
+    material: GLASS
+    name: "{letters}Паркур {letters_black}▸ <gradient:{primary}:{secondary_light}>Скрывать бегунов</gradient>"
+    lore:
+      - "{letters_black}Настройка: Паркур"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Скрывает игроков от остальных"
+      - " {letters}во время забега."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Включено{letters_black}: %parkour_hide_runners%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %parkour_hide_runners_default%"
+      - ""
+      - "%parkour_hide_runners_click%"
+    actions:
+      - "exylialobby:setting parkour hide-runners"
+
+  run-items:
+    slot: 23
+    material: COMPASS
+    name: "{letters}Паркур {letters_black}▸ <gradient:{primary}:{secondary_light}>Предметы забега</gradient>"
+    lore:
+      - "{letters_black}Настройка: Паркур"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Выдаёт бегунам предметы чекпоинта,"
+      - " {letters}перезапуска и выхода."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Включено{letters_black}: %parkour_run_items%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %parkour_run_items_default%"
+      - ""
+      - "%parkour_run_items_click%"
+    actions:
+      - "exylialobby:setting parkour run-items"
+
+  course-fall-depth:
+    slot: 24
+    material: FEATHER
+    name: "{letters}Паркур {letters_black}▸ <gradient:{primary}:{secondary_light}>Глубина падения</gradient>"
+    lore:
+      - "{letters_black}Настройка: Паркур"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Блоков ниже низшей точки трассы"
+      - " {letters}до падения. {highlight}0 {letters}— никогда."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:hopper} {letters}Блоки{letters_black}: %parkour_course_fall_depth%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %parkour_course_fall_depth_default%"
+      - ""
+      - "%parkour_course_fall_depth_click%"
+    actions:
+      - "exylialobby:setting parkour course-fall-depth"
+
+  back:
+    slot: 31
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Назад {letters_black}▸ <gradient:{error}:{error_light}>Настройки</gradient>"
+    lore:
+      - "{error}{icon:click} Нажми, чтобы вернуться"
+    actions:
+      - "exylialobby:settings_hub"

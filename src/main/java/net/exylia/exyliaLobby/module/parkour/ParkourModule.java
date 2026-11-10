@@ -201,10 +201,6 @@ public final class ParkourModule extends LobbyModule implements Busy {
         return themes;
     }
 
-    ConfigFile<ParkourSettings> settingsFile() {
-        return settings;
-    }
-
     /** The shown name of a course, its id when unknown. */
     String courseName(String id) {
         ParkourCourses.Course course = courses.get().courses().get(id);

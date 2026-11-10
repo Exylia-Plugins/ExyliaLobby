@@ -1,0 +1,101 @@
+# DO NOT EDIT — REGENERATED ON EVERY STARTUP.
+#
+# The visibility settings an admin tunes. Everything else is in
+# modules/visibility/config.yml.
+
+title: "{primary}&lAJUSTES {letters_black}» {highlight}Visibilidad"
+size: 27
+type: SIMPLE
+
+open_sounds:
+  - "minecraft:block.ender_chest.open|1.0|1.4"
+click_sounds:
+  - "minecraft:block.note_block.hat|1.0|1.0"
+close_sounds:
+  - "minecraft:block.barrel.close|1.0|0.7"
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: ENDER_EYE
+    name: "<gradient:{primary}:{secondary_light}>Visibilidad</gradient>"
+    lore:
+      - "{letters_black}Ajustes de Visibilidad"
+      - ""
+      - "{primary}✎ Información"
+      - " {letters}A quién ve un jugador en el lobby."
+      - ""
+      - "{primary}✦ Estado"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Módulo{letters_black}: %visibility_state%"
+
+  default-mode:
+    slot: 12
+    material: ENDER_EYE
+    name: "{letters}Visibilidad {letters_black}▸ <gradient:{primary}:{secondary_light}>Vista predeterminada</gradient>"
+    lore:
+      - "{letters_black}Ajuste de Visibilidad"
+      - ""
+      - "{primary}✎ Información"
+      - " {letters}Qué ve quien nunca eligió:"
+      - " {letters}todos, amigos o nadie."
+      - ""
+      - "{primary}✦ Estado"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Modo{letters_black}: %visibility_default_mode%"
+      - "  {letters_black}· {info}{icon:book} {letters}Predeterminado{letters_black}: %visibility_default_mode_default%"
+      - ""
+      - "%visibility_default_mode_click%"
+    actions:
+      - "exylialobby:setting visibility default-mode"
+
+  cooldown:
+    slot: 13
+    material: CLOCK
+    name: "{letters}Visibilidad {letters_black}▸ <gradient:{primary}:{secondary_light}>Espera entre cambios</gradient>"
+    lore:
+      - "{letters_black}Ajuste de Visibilidad"
+      - ""
+      - "{primary}✎ Información"
+      - " {letters}Tiempo que debe esperar un jugador"
+      - " {letters}entre dos cambios."
+      - ""
+      - "{primary}✦ Estado"
+      - "  {letters_black}· {info}{icon:clock} {letters}Espera{letters_black}: %visibility_cooldown%"
+      - "  {letters_black}· {info}{icon:book} {letters}Predeterminado{letters_black}: %visibility_cooldown_default%"
+      - ""
+      - "%visibility_cooldown_click%"
+    actions:
+      - "exylialobby:setting visibility cooldown"
+
+  clan-friends:
+    slot: 14
+    material: SHIELD
+    name: "{letters}Visibilidad {letters_black}▸ <gradient:{primary}:{secondary_light}>Compañeros de clan son amigos</gradient>"
+    lore:
+      - "{letters_black}Ajuste de Visibilidad"
+      - ""
+      - "{primary}✎ Información"
+      - " {letters}Cuenta a los del clan como amigos"
+      - " {letters}si hay un plugin de clanes."
+      - ""
+      - "{primary}✦ Estado"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Activado{letters_black}: %visibility_clan_friends%"
+      - "  {letters_black}· {info}{icon:book} {letters}Predeterminado{letters_black}: %visibility_clan_friends_default%"
+      - ""
+      - "%visibility_clan_friends_click%"
+    actions:
+      - "exylialobby:setting visibility clan-friends"
+
+  back:
+    slot: 22
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Atrás {letters_black}▸ <gradient:{error}:{error_light}>Ajustes</gradient>"
+    lore:
+      - "{error}{icon:click} Clic para volver"
+    actions:
+      - "exylialobby:settings_hub"

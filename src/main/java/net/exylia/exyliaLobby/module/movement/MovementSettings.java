@@ -1,6 +1,7 @@
 package net.exylia.exyliaLobby.module.movement;
 
 import net.exylia.lib.config.Comment;
+import net.exylia.lib.config.Menu;
 import net.exylia.lib.effect.EffectConfig;
 
 import java.time.Duration;
@@ -23,8 +24,10 @@ public record MovementSettings(
             @Comment("Turn the double jump on.")
             boolean enabled,
             @Comment("Horizontal push, in the direction the player looks.")
+            @Menu.Range(min = 0, max = 5, step = 0.1)
             double forward,
             @Comment("Upward push.")
+            @Menu.Range(min = 0, max = 5, step = 0.1)
             double vertical,
             @Comment("Time before the same player can double jump again (re-armed on landing).")
             Duration cooldown,

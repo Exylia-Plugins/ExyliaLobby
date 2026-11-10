@@ -1,0 +1,310 @@
+# DO NOT EDIT — REGENERATED ON EVERY STARTUP.
+#
+# The protection settings an admin tunes. Everything else is in
+# modules/protection/config.yml.
+
+title: "{primary}&lAYARLAR {letters_black}» {highlight}Koruma"
+size: 36
+type: SIMPLE
+
+open_sounds:
+  - "minecraft:block.ender_chest.open|1.0|1.4"
+click_sounds:
+  - "minecraft:block.note_block.hat|1.0|1.0"
+close_sounds:
+  - "minecraft:block.barrel.close|1.0|0.7"
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: SHIELD
+    name: "<gradient:{primary}:{secondary_light}>Koruma</gradient>"
+    lore:
+      - "{letters_black}Koruma ayarları"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Lobiyi güvende tutan kurallar."
+      - " {letters}İnşa modundaki yetkililer atlar."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Modül{letters_black}: %protection_state%"
+
+  block-break:
+    slot: 10
+    material: IRON_PICKAXE
+    name: "{letters}Koruma {letters_black}▸ <gradient:{primary}:{secondary_light}>Blok kırma</gradient>"
+    lore:
+      - "{letters_black}Koruma ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Blok kırmayı ve sıvı"
+      - " {letters}almayı iptal eder."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %protection_block_break%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %protection_block_break_default%"
+      - ""
+      - "%protection_block_break_click%"
+    actions:
+      - "exylialobby:setting protection block-break"
+
+  block-place:
+    slot: 11
+    material: GRASS_BLOCK
+    name: "{letters}Koruma {letters_black}▸ <gradient:{primary}:{secondary_light}>Blok koyma</gradient>"
+    lore:
+      - "{letters_black}Koruma ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Blok, kova ve tablo"
+      - " {letters}koymayı iptal eder."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %protection_block_place%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %protection_block_place_default%"
+      - ""
+      - "%protection_block_place_click%"
+    actions:
+      - "exylialobby:setting protection block-place"
+
+  containers:
+    slot: 12
+    material: CHEST
+    name: "{letters}Koruma {letters_black}▸ <gradient:{primary}:{secondary_light}>Kaplar</gradient>"
+    lore:
+      - "{letters_black}Koruma ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Sandık, fırın, örs ve benzerlerini"
+      - " {letters}açmayı iptal eder."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %protection_containers%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %protection_containers_default%"
+      - ""
+      - "%protection_containers_click%"
+    actions:
+      - "exylialobby:setting protection containers"
+
+  doors:
+    slot: 13
+    material: OAK_DOOR
+    name: "{letters}Koruma {letters_black}▸ <gradient:{primary}:{secondary_light}>Kapılar</gradient>"
+    lore:
+      - "{letters_black}Koruma ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Kapı, tuzak kapısı ve çit"
+      - " {letters}kapısı kullanımını iptal eder."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %protection_doors%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %protection_doors_default%"
+      - ""
+      - "%protection_doors_click%"
+    actions:
+      - "exylialobby:setting protection doors"
+
+  buttons-and-levers:
+    slot: 14
+    material: STONE_BUTTON
+    name: "{letters}Koruma {letters_black}▸ <gradient:{primary}:{secondary_light}>Düğmeler ve levyeler</gradient>"
+    lore:
+      - "{letters_black}Koruma ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Düğmelere basmayı ve"
+      - " {letters}levyeleri çevirmeyi iptal eder."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %protection_buttons_and_levers%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %protection_buttons_and_levers_default%"
+      - ""
+      - "%protection_buttons_and_levers_click%"
+    actions:
+      - "exylialobby:setting protection buttons-and-levers"
+
+  pressure-plates:
+    slot: 15
+    material: STONE_PRESSURE_PLATE
+    name: "{letters}Koruma {letters_black}▸ <gradient:{primary}:{secondary_light}>Basınç plakaları</gradient>"
+    lore:
+      - "{letters_black}Koruma ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Basınç plakalarına ve tuzak"
+      - " {letters}iplerine basmayı iptal eder."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %protection_pressure_plates%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %protection_pressure_plates_default%"
+      - ""
+      - "%protection_pressure_plates_click%"
+    actions:
+      - "exylialobby:setting protection pressure-plates"
+
+  frames:
+    slot: 16
+    material: ITEM_FRAME
+    name: "{letters}Koruma {letters_black}▸ <gradient:{primary}:{secondary_light}>Çerçeveler</gradient>"
+    lore:
+      - "{letters_black}Koruma ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Çerçeve ve tabloları döndürmeyi,"
+      - " {letters}boşaltmayı, kırmayı iptal eder."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %protection_frames%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %protection_frames_default%"
+      - ""
+      - "%protection_frames_click%"
+    actions:
+      - "exylialobby:setting protection frames"
+
+  armor-stands:
+    slot: 19
+    material: ARMOR_STAND
+    name: "{letters}Koruma {letters_black}▸ <gradient:{primary}:{secondary_light}>Zırh askıları</gradient>"
+    lore:
+      - "{letters_black}Koruma ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Zırh askılarını taşımayı,"
+      - " {letters}giydirmeyi iptal eder."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %protection_armor_stands%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %protection_armor_stands_default%"
+      - ""
+      - "%protection_armor_stands_click%"
+    actions:
+      - "exylialobby:setting protection armor-stands"
+
+  drop-items:
+    slot: 20
+    material: DROPPER
+    name: "{letters}Koruma {letters_black}▸ <gradient:{primary}:{secondary_light}>Eşya bırakma</gradient>"
+    lore:
+      - "{letters_black}Koruma ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Eşya bırakmayı iptal eder."
+      - " {letters}Ölenler envanterini korur."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %protection_drop_items%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %protection_drop_items_default%"
+      - ""
+      - "%protection_drop_items_click%"
+    actions:
+      - "exylialobby:setting protection drop-items"
+
+  pickup-items:
+    slot: 21
+    material: HOPPER
+    name: "{letters}Koruma {letters_black}▸ <gradient:{primary}:{secondary_light}>Eşya alma</gradient>"
+    lore:
+      - "{letters_black}Koruma ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Eşya almayı iptal eder."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %protection_pickup_items%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %protection_pickup_items_default%"
+      - ""
+      - "%protection_pickup_items_click%"
+    actions:
+      - "exylialobby:setting protection pickup-items"
+
+  protect-entities:
+    slot: 22
+    material: SADDLE
+    name: "{letters}Koruma {letters_black}▸ <gradient:{primary}:{secondary_light}>Varlıklar</gradient>"
+    lore:
+      - "{letters_black}Koruma ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Zırh askılarına, hayvanlara"
+      - " {letters}ve mob'lara vurmayı iptal eder."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %protection_protect_entities%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %protection_protect_entities_default%"
+      - ""
+      - "%protection_protect_entities_click%"
+    actions:
+      - "exylialobby:setting protection protect-entities"
+
+  mob-spawning:
+    slot: 23
+    material: ZOMBIE_HEAD
+    name: "{letters}Koruma {letters_black}▸ <gradient:{primary}:{secondary_light}>Mob doğması</gradient>"
+    lore:
+      - "{letters_black}Koruma ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Kendiliğinden doğan canavar"
+      - " {letters}ve hayvanları iptal eder."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %protection_mob_spawning%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %protection_mob_spawning_default%"
+      - ""
+      - "%protection_mob_spawning_click%"
+    actions:
+      - "exylialobby:setting protection mob-spawning"
+
+  explosions:
+    slot: 24
+    material: TNT
+    name: "{letters}Koruma {letters_black}▸ <gradient:{primary}:{secondary_light}>Patlamalar</gradient>"
+    lore:
+      - "{letters_black}Koruma ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Patlamaları iptal eder: blok"
+      - " {letters}yıkımı ve hasar olmaz."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %protection_explosions%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %protection_explosions_default%"
+      - ""
+      - "%protection_explosions_click%"
+    actions:
+      - "exylialobby:setting protection explosions"
+
+  hide-death-messages:
+    slot: 25
+    material: SKELETON_SKULL
+    name: "{letters}Koruma {letters_black}▸ <gradient:{primary}:{secondary_light}>Ölüm mesajlarını gizle</gradient>"
+    lore:
+      - "{letters_black}Koruma ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Burada ölenlerin ölüm"
+      - " {letters}mesajını gizler."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %protection_hide_death_messages%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %protection_hide_death_messages_default%"
+      - ""
+      - "%protection_hide_death_messages_click%"
+    actions:
+      - "exylialobby:setting protection hide-death-messages"
+
+  back:
+    slot: 31
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Geri {letters_black}▸ <gradient:{error}:{error_light}>Ayarlar</gradient>"
+    lore:
+      - "{error}{icon:click} Geri dönmek için tıkla"
+    actions:
+      - "exylialobby:settings_hub"

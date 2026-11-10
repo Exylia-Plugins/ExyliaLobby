@@ -36,7 +36,7 @@ import java.util.function.UnaryOperator;
  * <p>What every module gets from here:
  * <ul>
  *   <li>{@link #settings} and {@link #messages}: its record files, {@code modules/<id>/config.yml} and
- *   {@code lang/<language>/modules/<id>/messages.yml}, both editable in game through ConfigMenus.</li>
+ *   {@code lang/<language>/modules/<id>/messages.yml}, its settings are edited in game from the Settings screens.</li>
  *   <li>{@link #listen}: listeners removed again when the module stops.</li>
  *   <li>{@link #enter} and {@link #leave}: called on the player's own thread whenever they cross into or out of
  *   the lobby, and also for everyone already inside when the module is switched on ({@link AreaCause#MODULE})
@@ -73,7 +73,16 @@ public abstract class LobbyModule extends PluginModule {
 
     protected final <T extends Record> @NotNull ConfigFile<T> settings(@NotNull Class<T> schema,
                                                                        @NotNull UnaryOperator<Configs.Builder<T>> layout) {
-        return layout.apply(config(settingsPath(), schema)).load();
+        ConfigFile<T> loaded = layout.apply(config(settingsPath(), schema)).load();
+        settingsFile = loaded;
+        return loaded;
+    }
+
+    private volatile ConfigFile<?> settingsFile;
+
+    /** This module's loaded settings file, for the settings screens; null before it starts. */
+    public final @Nullable ConfigFile<?> settingsFile() {
+        return settingsFile;
     }
 
     protected final <T extends Record> @NotNull ConfigFile<T> messages(@NotNull Class<T> schema) {

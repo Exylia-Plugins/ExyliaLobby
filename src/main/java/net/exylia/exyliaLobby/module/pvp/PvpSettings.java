@@ -1,6 +1,7 @@
 package net.exylia.exyliaLobby.module.pvp;
 
 import net.exylia.lib.config.Comment;
+import net.exylia.lib.config.Menu;
 
 import java.time.Duration;
 import java.util.LinkedHashMap;
@@ -16,12 +17,15 @@ public record PvpSettings(
         String permission,
 
         @Comment("Seconds a player holds the sword before the kit goes on. Decimals allowed; 0 is at once.")
+        @Menu.Unit("s") @Menu.Range(min = 0, max = 30, step = 0.5)
         double equipSeconds,
 
         @Comment("Seconds a player stays off the sword before the kit comes off. Decimals allowed; 0 is at once.")
+        @Menu.Unit("s") @Menu.Range(min = 0, max = 30, step = 0.5)
         double unequipSeconds,
 
         @Comment("Seconds a player stays in combat after a hit, given or taken. Nobody can put the sword away meanwhile.")
+        @Menu.Unit("s") @Menu.Range(min = 0, max = 300)
         int tagSeconds,
 
         @Comment("The hotbar slot (0-8) of the sword when the hotbar module is off. With it on, its swordSlot is used.")

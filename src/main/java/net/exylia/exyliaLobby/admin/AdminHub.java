@@ -9,7 +9,6 @@ import net.exylia.exyliaLobby.module.spawn.SpawnModule;
 import net.exylia.lib.action.ActionResult;
 import net.exylia.lib.action.Actions;
 import net.exylia.lib.action.PluginActions;
-import net.exylia.lib.config.ConfigMenus;
 import net.exylia.lib.config.Languages;
 import net.exylia.lib.text.Text;
 import net.exylia.lib.ui.Menus;
@@ -41,11 +40,13 @@ public final class AdminHub {
 
     private final ExyliaLobby lobby;
     private final PluginMenus menus;
+    private final SettingsMenus settings;
     private final List<String> extra = new ArrayList<>();
 
     public AdminHub(@NotNull ExyliaLobby lobby) {
         this.lobby = lobby;
         this.menus = Menus.of(lobby.getPlugin());
+        this.settings = new SettingsMenus(lobby, menus, this);
         registerActions();
     }
 
@@ -65,6 +66,7 @@ public final class AdminHub {
     public void load() {
         Languages.replace(lobby.getPlugin(), AdminHub.class, DIRECTORY);
         for (String id : MENUS) load(id);
+        for (String id : SettingsMenus.menuIds()) load(id);
         for (String id : extra) load(id);
         ready = true;
     }
@@ -124,9 +126,10 @@ public final class AdminHub {
             return ActionResult.success();
         });
         actions.registerSync("admin_settings", Permissions.ADMIN, (action, args) -> {
-            ConfigMenus.of(lobby.getPlugin()).permission(Permissions.ADMIN).back(this::open).open(action.player());
+            settings.openHub(action.player());
             return ActionResult.success();
         });
+        settings.register(actions, Permissions.ADMIN);
         actions.registerSync("admin_reload", Permissions.ADMIN, (action, args) -> {
             reload(action.player());
             return ActionResult.success();
@@ -169,8 +172,17 @@ public final class AdminHub {
                 module.openAdmin(viewer, () -> openModules(viewer));
                 return;
             }
-            ModuleSwitches.openSettings(lobby, viewer, module, () -> openModules(viewer));
+            openSettings(viewer, module.getId());
         });
+    }
+
+    /** The settings page of a module, or the settings hub for a module with none. */
+    public void openSettings(@NotNull Player viewer, @NotNull String moduleId) {
+        if (SettingsMenus.hasPage(moduleId)) {
+            settings.openPage(viewer, moduleId);
+        } else {
+            settings.openHub(viewer);
+        }
     }
 
     private void toggle(Player viewer, String id) {

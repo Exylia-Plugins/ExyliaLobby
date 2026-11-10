@@ -1,0 +1,121 @@
+# DO NOT EDIT — REGENERATED ON EVERY STARTUP.
+#
+# The movement settings an admin tunes. Everything else is in
+# modules/movement/config.yml.
+
+title: "{primary}&lSETTINGS {letters_black}» {highlight}Movement"
+size: 27
+type: SIMPLE
+
+open_sounds:
+  - "minecraft:block.ender_chest.open|1.0|1.4"
+click_sounds:
+  - "minecraft:block.note_block.hat|1.0|1.0"
+close_sounds:
+  - "minecraft:block.barrel.close|1.0|0.7"
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: RABBIT_FOOT
+    name: "<gradient:{primary}:{secondary_light}>Movement</gradient>"
+    lore:
+      - "{letters_black}Movement settings"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Double jump: how far it throws"
+      - " {letters}and how often."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Module{letters_black}: %movement_state%"
+
+  double-jump-enabled:
+    slot: 11
+    material: FEATHER
+    name: "{letters}Movement {letters_black}▸ <gradient:{primary}:{secondary_light}>Double jump</gradient>"
+    lore:
+      - "{letters_black}Movement setting"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Press jump again in the air to"
+      - " {letters}jump a second time."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Enabled{letters_black}: %movement_double_jump_enabled%"
+      - "  {letters_black}· {info}{icon:book} {letters}Default{letters_black}: %movement_double_jump_enabled_default%"
+      - ""
+      - "%movement_double_jump_enabled_click%"
+    actions:
+      - "exylialobby:setting movement double-jump.enabled"
+
+  double-jump-forward:
+    slot: 12
+    material: ARROW
+    name: "{letters}Movement {letters_black}▸ <gradient:{primary}:{secondary_light}>Forward push</gradient>"
+    lore:
+      - "{letters_black}Movement setting"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Horizontal push, in the"
+      - " {letters}direction the player looks."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:hopper} {letters}Push{letters_black}: %movement_double_jump_forward%"
+      - "  {letters_black}· {info}{icon:book} {letters}Default{letters_black}: %movement_double_jump_forward_default%"
+      - ""
+      - "%movement_double_jump_forward_click%"
+    actions:
+      - "exylialobby:setting movement double-jump.forward"
+
+  double-jump-vertical:
+    slot: 14
+    material: SLIME_BALL
+    name: "{letters}Movement {letters_black}▸ <gradient:{primary}:{secondary_light}>Upward push</gradient>"
+    lore:
+      - "{letters_black}Movement setting"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}How high the second jump"
+      - " {letters}throws the player."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:hopper} {letters}Push{letters_black}: %movement_double_jump_vertical%"
+      - "  {letters_black}· {info}{icon:book} {letters}Default{letters_black}: %movement_double_jump_vertical_default%"
+      - ""
+      - "%movement_double_jump_vertical_click%"
+    actions:
+      - "exylialobby:setting movement double-jump.vertical"
+
+  double-jump-cooldown:
+    slot: 15
+    material: CLOCK
+    name: "{letters}Movement {letters_black}▸ <gradient:{primary}:{secondary_light}>Cooldown</gradient>"
+    lore:
+      - "{letters_black}Movement setting"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Time before the same player can"
+      - " {letters}double jump again."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:clock} {letters}Wait{letters_black}: %movement_double_jump_cooldown%"
+      - "  {letters_black}· {info}{icon:book} {letters}Default{letters_black}: %movement_double_jump_cooldown_default%"
+      - ""
+      - "%movement_double_jump_cooldown_click%"
+    actions:
+      - "exylialobby:setting movement double-jump.cooldown"
+
+  back:
+    slot: 22
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Back {letters_black}▸ <gradient:{error}:{error_light}>Settings</gradient>"
+    lore:
+      - "{error}{icon:click} Click to go back"
+    actions:
+      - "exylialobby:settings_hub"

@@ -1,0 +1,102 @@
+# DO NOT EDIT — REGENERATED ON EVERY STARTUP.
+#
+# The chat settings an admin tunes. Everything else is in
+# modules/chat/config.yml.
+
+title: "{primary}&lНАСТРОЙКИ {letters_black}» {highlight}Чат"
+size: 27
+type: SIMPLE
+
+open_sounds:
+  - "minecraft:block.ender_chest.open|1.0|1.4"
+click_sounds:
+  - "minecraft:block.note_block.hat|1.0|1.0"
+close_sounds:
+  - "minecraft:block.barrel.close|1.0|0.7"
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: WRITABLE_BOOK
+    name: "<gradient:{primary}:{secondary_light}>Чат</gradient>"
+    lore:
+      - "{letters_black}Настройки: Чат"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Управление чатом в лобби:"
+      - " {letters}блокировка, замедление, очистка."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Модуль{letters_black}: %chat_state%"
+
+  locked-at-start:
+    slot: 12
+    material: IRON_DOOR
+    name: "{letters}Чат {letters_black}▸ <gradient:{primary}:{secondary_light}>Заблокирован на старте</gradient>"
+    lore:
+      - "{letters_black}Настройка: Чат"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Чат заблокирован при запуске."
+      - " {letters}Перезапуск возвращает это."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Включено{letters_black}: %chat_locked_at_start%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %chat_locked_at_start_default%"
+      - ""
+      - "%chat_locked_at_start_click%"
+    actions:
+      - "exylialobby:setting chat locked-at-start"
+
+  slow-mode-seconds:
+    slot: 13
+    material: COBWEB
+    name: "{letters}Чат {letters_black}▸ <gradient:{primary}:{secondary_light}>Замедление</gradient>"
+    lore:
+      - "{letters_black}Настройка: Чат"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Секунды между сообщениями игрока."
+      - " {letters}{highlight}0 {letters}— выключено."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:clock} {letters}Задержка{letters_black}: %chat_slow_mode_seconds%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %chat_slow_mode_seconds_default%"
+      - ""
+      - "%chat_slow_mode_seconds_click%"
+    actions:
+      - "exylialobby:setting chat slow-mode-seconds"
+
+  clear-lines:
+    slot: 14
+    material: PAPER
+    name: "{letters}Чат {letters_black}▸ <gradient:{primary}:{secondary_light}>Строки очистки</gradient>"
+    lore:
+      - "{letters_black}Настройка: Чат"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Сколько пустых строк шлёт"
+      - " {letters}команда очистки чата."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:book} {letters}Строки{letters_black}: %chat_clear_lines%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %chat_clear_lines_default%"
+      - ""
+      - "%chat_clear_lines_click%"
+    actions:
+      - "exylialobby:setting chat clear-lines"
+
+  back:
+    slot: 22
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Назад {letters_black}▸ <gradient:{error}:{error_light}>Настройки</gradient>"
+    lore:
+      - "{error}{icon:click} Нажми, чтобы вернуться"
+    actions:
+      - "exylialobby:settings_hub"

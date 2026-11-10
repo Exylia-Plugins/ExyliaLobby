@@ -1,4 +1,4 @@
-menu-version: 1
+menu-version: 2
 # DÜZENLEME — HER AÇILIŞTA YENİDEN OLUŞTURULUR.
 #
 # Tek bir parkur: nerede başlar, geçer ve biter, nasıl değerlendirilir.
@@ -100,7 +100,7 @@ items:
       - 'exylialobby:parkour_edit kill %course_id%'
 
   medals:
-    slot: 20
+    slot: 21
     material: GOLD_INGOT
     name: "{letters}Parkur {letters_black}▸ <gradient:{primary}:{secondary_light}>Madalyalar</gradient>"
     lore:
@@ -119,7 +119,7 @@ items:
       - 'exylialobby:parkour_edit medals %course_id%'
 
   difficulty:
-    slot: 21
+    slot: 22
     material: NETHER_STAR
     name: "{letters}Parkur {letters_black}▸ <gradient:{primary}:{secondary_light}>Zorluk</gradient>"
     lore:
@@ -136,27 +136,8 @@ items:
     actions:
       - 'exylialobby:parkour_edit difficulty %course_id%'
 
-  rewards:
-    slot: 23
-    material: CHEST
-    name: "{letters}Parkur {letters_black}▸ <gradient:{primary}:{secondary_light}>Ödüller</gradient>"
-    lore:
-      - "{letters_black}Parkur ayarı"
-      - ""
-      - "{primary}✎ Bilgi"
-      - " {letters}İlk bitiriş ve tekrar ödülleri,"
-      - " {letters}asgari süre ve sınırlar."
-      - ""
-      - "{primary}✦ Durum"
-      - "  {letters_black}· {info}{icon:book} {letters}Parkurlar dosyasında düzenlenir"
-      - ""
-      - "{primary}{icon:click} Açmak için tıkla"
-      - "{letters_black}Orada bu parkuru seç."
-    actions:
-      - 'exylialobby:parkour_edit rewards %course_id%'
-
   enabled:
-    slot: 24
+    slot: 23
     material: LEVER
     name: "{letters}Parkur {letters_black}▸ <gradient:{primary}:{secondary_light}>Etkin</gradient>"
     lore:

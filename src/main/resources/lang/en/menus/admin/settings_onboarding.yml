@@ -1,0 +1,102 @@
+# DO NOT EDIT — REGENERATED ON EVERY STARTUP.
+#
+# The onboarding settings an admin tunes. Everything else is in
+# modules/onboarding/config.yml.
+
+title: "{primary}&lSETTINGS {letters_black}» {highlight}Onboarding"
+size: 27
+type: SIMPLE
+
+open_sounds:
+  - "minecraft:block.ender_chest.open|1.0|1.4"
+click_sounds:
+  - "minecraft:block.note_block.hat|1.0|1.0"
+close_sounds:
+  - "minecraft:block.barrel.close|1.0|0.7"
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: FILLED_MAP
+    name: "<gradient:{primary}:{secondary_light}>Onboarding</gradient>"
+    lore:
+      - "{letters_black}Onboarding settings"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}How first-join players are handed"
+      - " {letters}to ExyliaJourney."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Module{letters_black}: %onboarding_state%"
+
+  journey:
+    slot: 12
+    material: WRITTEN_BOOK
+    name: "{letters}Onboarding {letters_black}▸ <gradient:{primary}:{secondary_light}>Journey</gradient>"
+    lore:
+      - "{letters_black}Onboarding setting"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}The id of the ExyliaJourney"
+      - " {letters}journey that welcomes players."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:book} {letters}Journey{letters_black}: %onboarding_journey%"
+      - "  {letters_black}· {info}{icon:book} {letters}Default{letters_black}: %onboarding_journey_default%"
+      - ""
+      - "%onboarding_journey_click%"
+    actions:
+      - "exylialobby:setting onboarding journey"
+
+  first-join-only:
+    slot: 13
+    material: LIME_BED
+    name: "{letters}Onboarding {letters_black}▸ <gradient:{primary}:{secondary_light}>First join only</gradient>"
+    lore:
+      - "{letters_black}Onboarding setting"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Only players joining for the"
+      - " {letters}first time. Off hands everyone."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Enabled{letters_black}: %onboarding_first_join_only%"
+      - "  {letters_black}· {info}{icon:book} {letters}Default{letters_black}: %onboarding_first_join_only_default%"
+      - ""
+      - "%onboarding_first_join_only_click%"
+    actions:
+      - "exylialobby:setting onboarding first-join-only"
+
+  delay:
+    slot: 14
+    material: CLOCK
+    name: "{letters}Onboarding {letters_black}▸ <gradient:{primary}:{secondary_light}>Delay</gradient>"
+    lore:
+      - "{letters_black}Onboarding setting"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Time after joining before the"
+      - " {letters}journey starts."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:clock} {letters}Delay{letters_black}: %onboarding_delay%"
+      - "  {letters_black}· {info}{icon:book} {letters}Default{letters_black}: %onboarding_delay_default%"
+      - ""
+      - "%onboarding_delay_click%"
+    actions:
+      - "exylialobby:setting onboarding delay"
+
+  back:
+    slot: 22
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Back {letters_black}▸ <gradient:{error}:{error_light}>Settings</gradient>"
+    lore:
+      - "{error}{icon:click} Click to go back"
+    actions:
+      - "exylialobby:settings_hub"

@@ -1,6 +1,7 @@
 package net.exylia.exyliaLobby.module.chat;
 
 import net.exylia.lib.config.Comment;
+import net.exylia.lib.config.Menu;
 
 /** {@code modules/chat/config.yml}: chat control inside the lobby. No formatting: keep your chat plugin for that. */
 public record ChatSettings(
@@ -11,9 +12,11 @@ public record ChatSettings(
         boolean lockedAtStart,
 
         @Comment("Seconds between two messages of one player. 0 is off. /lobbyadmin chat slow <seconds> changes it live.")
+        @Menu.Unit("s") @Menu.Range(min = 0, max = 3600)
         int slowModeSeconds,
 
         @Comment("How many blank lines /lobbyadmin chat clear sends.")
+        @Menu.Range(min = 1, max = 500, step = 10)
         int clearLines) {
 
     public ChatSettings() {

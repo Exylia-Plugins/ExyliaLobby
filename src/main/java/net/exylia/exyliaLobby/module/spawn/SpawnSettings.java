@@ -1,6 +1,7 @@
 package net.exylia.exyliaLobby.module.spawn;
 
 import net.exylia.lib.config.Comment;
+import net.exylia.lib.config.Menu;
 
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ public record SpawnSettings(
         JoinMode onJoin,
 
         @Comment("Seconds standing still before /spawn teleports. 0 teleports at once.")
+        @Menu.Range(min = 0, max = 30, step = 0.5)
         double warmup,
 
         @Comment("Players who die inside the lobby respawn at spawn instead of their bed.")
@@ -23,6 +25,7 @@ public record SpawnSettings(
         boolean voidReturn,
 
         @Comment("The height (Y) under which a player in the lobby is sent back. Keep it under the lowest floor.")
+        @Menu.Range(min = -2048, max = 320, step = 10)
         int voidY,
 
         @Comment("Spawn points, set in game from /lobbyadmin → Spawn. The key is the world; a player gets the point")

@@ -1,0 +1,197 @@
+# DO NOT EDIT — REGENERATED ON EVERY STARTUP.
+#
+# The state settings an admin tunes. Everything else is in
+# modules/state/config.yml.
+
+title: "{primary}&lAJUSTES {letters_black}» {highlight}Estado"
+size: 36
+type: SIMPLE
+
+open_sounds:
+  - "minecraft:block.ender_chest.open|1.0|1.4"
+click_sounds:
+  - "minecraft:block.note_block.hat|1.0|1.0"
+close_sounds:
+  - "minecraft:block.barrel.close|1.0|0.7"
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: ARMOR_STAND
+    name: "<gradient:{primary}:{secondary_light}>Estado</gradient>"
+    lore:
+      - "{letters_black}Ajustes de Estado"
+      - ""
+      - "{primary}✎ Informação"
+      - " {letters}O que um jogador é no lobby:"
+      - " {letters}modo, vida, hora e clima."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Módulo{letters_black}: %state_state%"
+
+  change-game-mode:
+    slot: 11
+    material: LEVER
+    name: "{letters}Estado {letters_black}▸ <gradient:{primary}:{secondary_light}>Definir modo de jogo</gradient>"
+    lore:
+      - "{letters_black}Ajuste de Estado"
+      - ""
+      - "{primary}✎ Informação"
+      - " {letters}Muda o modo de jogo de quem"
+      - " {letters}entra no lobby."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Ativado{letters_black}: %state_change_game_mode%"
+      - "  {letters_black}· {info}{icon:book} {letters}Padrão{letters_black}: %state_change_game_mode_default%"
+      - ""
+      - "%state_change_game_mode_click%"
+    actions:
+      - "exylialobby:setting state change-game-mode"
+
+  game-mode:
+    slot: 12
+    material: IRON_SWORD
+    name: "{letters}Estado {letters_black}▸ <gradient:{primary}:{secondary_light}>Modo de jogo</gradient>"
+    lore:
+      - "{letters_black}Ajuste de Estado"
+      - ""
+      - "{primary}✎ Informação"
+      - " {letters}O modo de jogo dos jogadores"
+      - " {letters}dentro do lobby."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Modo{letters_black}: %state_game_mode%"
+      - "  {letters_black}· {info}{icon:book} {letters}Padrão{letters_black}: %state_game_mode_default%"
+      - ""
+      - "%state_game_mode_click%"
+    actions:
+      - "exylialobby:setting state game-mode"
+
+  override-staff-modes:
+    slot: 14
+    material: GOLDEN_HELMET
+    name: "{letters}Estado {letters_black}▸ <gradient:{primary}:{secondary_light}>Incluir a staff</gradient>"
+    lore:
+      - "{letters_black}Ajuste de Estado"
+      - ""
+      - "{primary}✎ Informação"
+      - " {letters}Muda também quem está em criativo"
+      - " {letters}ou espectador. Desativado não."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Ativado{letters_black}: %state_override_staff_modes%"
+      - "  {letters_black}· {info}{icon:book} {letters}Padrão{letters_black}: %state_override_staff_modes_default%"
+      - ""
+      - "%state_override_staff_modes_click%"
+    actions:
+      - "exylialobby:setting state override-staff-modes"
+
+  full-health:
+    slot: 15
+    material: GOLDEN_APPLE
+    name: "{letters}Estado {letters_black}▸ <gradient:{primary}:{secondary_light}>Vida cheia</gradient>"
+    lore:
+      - "{letters_black}Ajuste de Estado"
+      - ""
+      - "{primary}✎ Informação"
+      - " {letters}Cura os jogadores por completo"
+      - " {letters}quando entram."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:heart} {letters}Ativado{letters_black}: %state_full_health%"
+      - "  {letters_black}· {info}{icon:book} {letters}Padrão{letters_black}: %state_full_health_default%"
+      - ""
+      - "%state_full_health_click%"
+    actions:
+      - "exylialobby:setting state full-health"
+
+  full-hunger:
+    slot: 20
+    material: COOKED_BEEF
+    name: "{letters}Estado {letters_black}▸ <gradient:{primary}:{secondary_light}>Fome cheia</gradient>"
+    lore:
+      - "{letters_black}Ajuste de Estado"
+      - ""
+      - "{primary}✎ Informação"
+      - " {letters}Enche a fome e não a deixa"
+      - " {letters}baixar no lobby."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Ativado{letters_black}: %state_full_hunger%"
+      - "  {letters_black}· {info}{icon:book} {letters}Padrão{letters_black}: %state_full_hunger_default%"
+      - ""
+      - "%state_full_hunger_click%"
+    actions:
+      - "exylialobby:setting state full-hunger"
+
+  fly:
+    slot: 21
+    material: FEATHER
+    name: "{letters}Estado {letters_black}▸ <gradient:{primary}:{secondary_light}>Voo</gradient>"
+    lore:
+      - "{letters_black}Ajuste de Estado"
+      - ""
+      - "{primary}✎ Informação"
+      - " {letters}Quem tem a permissão de voo"
+      - " {letters}pode voar no lobby."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Ativado{letters_black}: %state_fly%"
+      - "  {letters_black}· {info}{icon:book} {letters}Padrão{letters_black}: %state_fly_default%"
+      - ""
+      - "%state_fly_click%"
+    actions:
+      - "exylialobby:setting state fly"
+
+  time:
+    slot: 23
+    material: CLOCK
+    name: "{letters}Estado {letters_black}▸ <gradient:{primary}:{secondary_light}>Hora do dia</gradient>"
+    lore:
+      - "{letters_black}Ajuste de Estado"
+      - ""
+      - "{primary}✎ Informação"
+      - " {letters}Hora fixa mostrada no lobby."
+      - " {letters}{highlight}6000 {letters}é meio-dia. {highlight}-1 {letters}a do mundo."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:clock} {letters}Ticks{letters_black}: %state_time%"
+      - "  {letters_black}· {info}{icon:book} {letters}Padrão{letters_black}: %state_time_default%"
+      - ""
+      - "%state_time_click%"
+    actions:
+      - "exylialobby:setting state time"
+
+  weather:
+    slot: 24
+    material: WATER_BUCKET
+    name: "{letters}Estado {letters_black}▸ <gradient:{primary}:{secondary_light}>Clima</gradient>"
+    lore:
+      - "{letters_black}Ajuste de Estado"
+      - ""
+      - "{primary}✎ Informação"
+      - " {letters}Clima mostrado no lobby. Off"
+      - " {letters}mantém o do mundo."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Clima{letters_black}: %state_weather%"
+      - "  {letters_black}· {info}{icon:book} {letters}Padrão{letters_black}: %state_weather_default%"
+      - ""
+      - "%state_weather_click%"
+    actions:
+      - "exylialobby:setting state weather"
+
+  back:
+    slot: 31
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Voltar {letters_black}▸ <gradient:{error}:{error_light}>Ajustes</gradient>"
+    lore:
+      - "{error}{icon:click} Clique para voltar"
+    actions:
+      - "exylialobby:settings_hub"

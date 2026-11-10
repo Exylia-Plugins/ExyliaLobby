@@ -1,0 +1,138 @@
+# DO NOT EDIT — REGENERATED ON EVERY STARTUP.
+#
+# The hud settings an admin tunes. Everything else is in
+# modules/hud/config.yml.
+
+title: "{primary}&lSETTINGS {letters_black}» {highlight}HUD"
+size: 27
+type: SIMPLE
+
+open_sounds:
+  - "minecraft:block.ender_chest.open|1.0|1.4"
+click_sounds:
+  - "minecraft:block.note_block.hat|1.0|1.0"
+close_sounds:
+  - "minecraft:block.barrel.close|1.0|0.7"
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: NAME_TAG
+    name: "<gradient:{primary}:{secondary_light}>HUD</gradient>"
+    lore:
+      - "{letters_black}HUD settings"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}What players see on screen in"
+      - " {letters}the lobby."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Module{letters_black}: %hud_state%"
+
+  sidebar-enabled:
+    slot: 11
+    material: OAK_SIGN
+    name: "{letters}HUD {letters_black}▸ <gradient:{primary}:{secondary_light}>Sidebar</gradient>"
+    lore:
+      - "{letters_black}HUD setting"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Show the sidebar in the lobby."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Enabled{letters_black}: %hud_sidebar_enabled%"
+      - "  {letters_black}· {info}{icon:book} {letters}Default{letters_black}: %hud_sidebar_enabled_default%"
+      - ""
+      - "%hud_sidebar_enabled_click%"
+    actions:
+      - "exylialobby:setting hud sidebar.enabled"
+
+  tab-enabled:
+    slot: 12
+    material: PAPER
+    name: "{letters}HUD {letters_black}▸ <gradient:{primary}:{secondary_light}>Player list</gradient>"
+    lore:
+      - "{letters_black}HUD setting"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Show a header and footer on"
+      - " {letters}the player list."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Enabled{letters_black}: %hud_tab_enabled%"
+      - "  {letters_black}· {info}{icon:book} {letters}Default{letters_black}: %hud_tab_enabled_default%"
+      - ""
+      - "%hud_tab_enabled_click%"
+    actions:
+      - "exylialobby:setting hud tab.enabled"
+
+  boss-bars-enabled:
+    slot: 13
+    material: DRAGON_HEAD
+    name: "{letters}HUD {letters_black}▸ <gradient:{primary}:{secondary_light}>Boss bars</gradient>"
+    lore:
+      - "{letters_black}HUD setting"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Show boss bars that take turns"
+      - " {letters}at the top of the screen."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Enabled{letters_black}: %hud_boss_bars_enabled%"
+      - "  {letters_black}· {info}{icon:book} {letters}Default{letters_black}: %hud_boss_bars_enabled_default%"
+      - ""
+      - "%hud_boss_bars_enabled_click%"
+    actions:
+      - "exylialobby:setting hud boss-bars.enabled"
+
+  announcements-enabled:
+    slot: 14
+    material: BELL
+    name: "{letters}HUD {letters_black}▸ <gradient:{primary}:{secondary_light}>Announcements</gradient>"
+    lore:
+      - "{letters_black}HUD setting"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Send announcements in chat on"
+      - " {letters}a timer."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Enabled{letters_black}: %hud_announcements_enabled%"
+      - "  {letters_black}· {info}{icon:book} {letters}Default{letters_black}: %hud_announcements_enabled_default%"
+      - ""
+      - "%hud_announcements_enabled_click%"
+    actions:
+      - "exylialobby:setting hud announcements.enabled"
+
+  announcements-interval:
+    slot: 15
+    material: CLOCK
+    name: "{letters}HUD {letters_black}▸ <gradient:{primary}:{secondary_light}>Announcement gap</gradient>"
+    lore:
+      - "{letters_black}HUD setting"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Time between two announcements."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:clock} {letters}Every{letters_black}: %hud_announcements_interval%"
+      - "  {letters_black}· {info}{icon:book} {letters}Default{letters_black}: %hud_announcements_interval_default%"
+      - ""
+      - "%hud_announcements_interval_click%"
+    actions:
+      - "exylialobby:setting hud announcements.interval"
+
+  back:
+    slot: 22
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Back {letters_black}▸ <gradient:{error}:{error_light}>Settings</gradient>"
+    lore:
+      - "{error}{icon:click} Click to go back"
+    actions:
+      - "exylialobby:settings_hub"

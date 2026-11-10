@@ -4,7 +4,6 @@ import net.exylia.exyliaLobby.Permissions;
 import net.exylia.exyliaLobby.module.shared.AdminScreens;
 import net.exylia.lib.action.ActionResult;
 import net.exylia.lib.action.PluginActions;
-import net.exylia.lib.config.ConfigMenus;
 import net.exylia.lib.input.Inputs;
 import net.exylia.lib.text.Values;
 import net.exylia.lib.ui.Menus;
@@ -97,8 +96,7 @@ final class ParkourAdminScreens {
     }
 
     private void settings(Player admin, Runnable reopen) {
-        ConfigMenus.of(module.ctx().plugin()).permission(Permissions.ADMIN).back(player -> reopen.run())
-                .file(module.settingsPath()).open(admin);
+        module.ctx().hub().openSettings(admin, module.getId());
     }
 
     // ======================== courses ========================
@@ -208,11 +206,6 @@ final class ParkourAdminScreens {
                 openCourses(admin);
                 return;
             }
-            case "rewards" -> {
-                ConfigMenus.of(module.ctx().plugin()).permission(Permissions.ADMIN).back(player -> reopen.run())
-                        .file("modules/parkour/courses").open(admin);
-                return;
-            }
             case "difficulty" -> {
                 difficulty(admin, id, reopen);
                 return;
@@ -302,8 +295,6 @@ final class ParkourAdminScreens {
     void openThemes(Player admin) {
         ParkourMessages.Staff t = module.text().staff();
         themes.open(admin, () -> hub(admin), t.back(), t.titleThemes(), t.kindTheme(), List.of(
-                button("PAINTING", t.editThemes(), player -> ConfigMenus.of(module.ctx().plugin())
-                        .permission(Permissions.ADMIN).back(back -> openThemes(player)).file("modules/parkour/themes").open(player)),
                 button("LIME_DYE", t.enableThemes(), player -> {
                     module.enableAllThemes();
                     themes.update(player);

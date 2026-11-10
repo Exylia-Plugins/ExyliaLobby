@@ -1,0 +1,102 @@
+# DO NOT EDIT — REGENERATED ON EVERY STARTUP.
+#
+# The onboarding settings an admin tunes. Everything else is in
+# modules/onboarding/config.yml.
+
+title: "{primary}&lPARAMÈTRES {letters_black}» {highlight}Intégration"
+size: 27
+type: SIMPLE
+
+open_sounds:
+  - "minecraft:block.ender_chest.open|1.0|1.4"
+click_sounds:
+  - "minecraft:block.note_block.hat|1.0|1.0"
+close_sounds:
+  - "minecraft:block.barrel.close|1.0|0.7"
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: FILLED_MAP
+    name: "<gradient:{primary}:{secondary_light}>Intégration</gradient>"
+    lore:
+      - "{letters_black}Réglages de Intégration"
+      - ""
+      - "{primary}✎ Informations"
+      - " {letters}Comment les nouveaux joueurs sont"
+      - " {letters}confiés à ExyliaJourney."
+      - ""
+      - "{primary}✦ Statut"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Module{letters_black}: %onboarding_state%"
+
+  journey:
+    slot: 12
+    material: WRITTEN_BOOK
+    name: "{letters}Intégration {letters_black}▸ <gradient:{primary}:{secondary_light}>Parcours</gradient>"
+    lore:
+      - "{letters_black}Réglage de Intégration"
+      - ""
+      - "{primary}✎ Informations"
+      - " {letters}L'id du parcours ExyliaJourney"
+      - " {letters}qui accueille les joueurs."
+      - ""
+      - "{primary}✦ Statut"
+      - "  {letters_black}· {info}{icon:book} {letters}Parcours{letters_black}: %onboarding_journey%"
+      - "  {letters_black}· {info}{icon:book} {letters}Par défaut{letters_black}: %onboarding_journey_default%"
+      - ""
+      - "%onboarding_journey_click%"
+    actions:
+      - "exylialobby:setting onboarding journey"
+
+  first-join-only:
+    slot: 13
+    material: LIME_BED
+    name: "{letters}Intégration {letters_black}▸ <gradient:{primary}:{secondary_light}>Seulement 1re connexion</gradient>"
+    lore:
+      - "{letters_black}Réglage de Intégration"
+      - ""
+      - "{primary}✎ Informations"
+      - " {letters}Seulement à la première connexion."
+      - " {letters}Désactivé : tout le monde."
+      - ""
+      - "{primary}✦ Statut"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Activé{letters_black}: %onboarding_first_join_only%"
+      - "  {letters_black}· {info}{icon:book} {letters}Par défaut{letters_black}: %onboarding_first_join_only_default%"
+      - ""
+      - "%onboarding_first_join_only_click%"
+    actions:
+      - "exylialobby:setting onboarding first-join-only"
+
+  delay:
+    slot: 14
+    material: CLOCK
+    name: "{letters}Intégration {letters_black}▸ <gradient:{primary}:{secondary_light}>Délai</gradient>"
+    lore:
+      - "{letters_black}Réglage de Intégration"
+      - ""
+      - "{primary}✎ Informations"
+      - " {letters}Temps après la connexion avant"
+      - " {letters}le début du parcours."
+      - ""
+      - "{primary}✦ Statut"
+      - "  {letters_black}· {info}{icon:clock} {letters}Délai{letters_black}: %onboarding_delay%"
+      - "  {letters_black}· {info}{icon:book} {letters}Par défaut{letters_black}: %onboarding_delay_default%"
+      - ""
+      - "%onboarding_delay_click%"
+    actions:
+      - "exylialobby:setting onboarding delay"
+
+  back:
+    slot: 22
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Retour {letters_black}▸ <gradient:{error}:{error_light}>Paramètres</gradient>"
+    lore:
+      - "{error}{icon:click} Clique pour revenir"
+    actions:
+      - "exylialobby:settings_hub"

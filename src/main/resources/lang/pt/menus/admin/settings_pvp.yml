@@ -1,0 +1,121 @@
+# DO NOT EDIT — REGENERATED ON EVERY STARTUP.
+#
+# The lobby pvp settings an admin tunes. Everything else is in
+# modules/pvp/config.yml.
+
+title: "{primary}&lAJUSTES {letters_black}» {highlight}PvP do lobby"
+size: 27
+type: SIMPLE
+
+open_sounds:
+  - "minecraft:block.ender_chest.open|1.0|1.4"
+click_sounds:
+  - "minecraft:block.note_block.hat|1.0|1.0"
+close_sounds:
+  - "minecraft:block.barrel.close|1.0|0.7"
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: DIAMOND_SWORD
+    name: "<gradient:{primary}:{secondary_light}>PvP do lobby</gradient>"
+    lore:
+      - "{letters_black}Ajustes de PvP"
+      - ""
+      - "{primary}✎ Informação"
+      - " {letters}Como funciona o PvP do lobby:"
+      - " {letters}equipar e marca de combate."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Módulo{letters_black}: %pvp_state%"
+
+  equip-seconds:
+    slot: 11
+    material: IRON_SWORD
+    name: "{letters}PvP {letters_black}▸ <gradient:{primary}:{secondary_light}>Tempo de equipar</gradient>"
+    lore:
+      - "{letters_black}Ajuste de PvP"
+      - ""
+      - "{primary}✎ Informação"
+      - " {letters}Segundos com a espada na mão"
+      - " {letters}antes de vestir o kit."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:clock} {letters}Espera{letters_black}: %pvp_equip_seconds%"
+      - "  {letters_black}· {info}{icon:book} {letters}Padrão{letters_black}: %pvp_equip_seconds_default%"
+      - ""
+      - "%pvp_equip_seconds_click%"
+    actions:
+      - "exylialobby:setting pvp equip-seconds"
+
+  unequip-seconds:
+    slot: 12
+    material: LEATHER_CHESTPLATE
+    name: "{letters}PvP {letters_black}▸ <gradient:{primary}:{secondary_light}>Tempo de desequipar</gradient>"
+    lore:
+      - "{letters_black}Ajuste de PvP"
+      - ""
+      - "{primary}✎ Informação"
+      - " {letters}Segundos sem a espada antes"
+      - " {letters}de tirar o kit."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:clock} {letters}Espera{letters_black}: %pvp_unequip_seconds%"
+      - "  {letters_black}· {info}{icon:book} {letters}Padrão{letters_black}: %pvp_unequip_seconds_default%"
+      - ""
+      - "%pvp_unequip_seconds_click%"
+    actions:
+      - "exylialobby:setting pvp unequip-seconds"
+
+  tag-seconds:
+    slot: 14
+    material: BLAZE_POWDER
+    name: "{letters}PvP {letters_black}▸ <gradient:{primary}:{secondary_light}>Marca de combate</gradient>"
+    lore:
+      - "{letters_black}Ajuste de PvP"
+      - ""
+      - "{primary}✎ Informação"
+      - " {letters}Segundos em combate após um"
+      - " {letters}golpe, dado ou recebido."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:clock} {letters}Marca{letters_black}: %pvp_tag_seconds%"
+      - "  {letters_black}· {info}{icon:book} {letters}Padrão{letters_black}: %pvp_tag_seconds_default%"
+      - ""
+      - "%pvp_tag_seconds_click%"
+    actions:
+      - "exylialobby:setting pvp tag-seconds"
+
+  quit-counts:
+    slot: 15
+    material: SKELETON_SKULL
+    name: "{letters}PvP {letters_black}▸ <gradient:{primary}:{secondary_light}>Sair conta</gradient>"
+    lore:
+      - "{letters_black}Ajuste de PvP"
+      - ""
+      - "{primary}✎ Informação"
+      - " {letters}Sair em combate conta como"
+      - " {letters}morte para quem sai."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Ativado{letters_black}: %pvp_quit_counts%"
+      - "  {letters_black}· {info}{icon:book} {letters}Padrão{letters_black}: %pvp_quit_counts_default%"
+      - ""
+      - "%pvp_quit_counts_click%"
+    actions:
+      - "exylialobby:setting pvp quit-counts"
+
+  back:
+    slot: 22
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Voltar {letters_black}▸ <gradient:{error}:{error_light}>Ajustes</gradient>"
+    lore:
+      - "{error}{icon:click} Clique para voltar"
+    actions:
+      - "exylialobby:settings_hub"

@@ -1,0 +1,102 @@
+# DO NOT EDIT — REGENERATED ON EVERY STARTUP.
+#
+# The join messages settings an admin tunes. Everything else is in
+# modules/join/config.yml.
+
+title: "{primary}&lAYARLAR {letters_black}» {highlight}Giriş mesajları"
+size: 27
+type: SIMPLE
+
+open_sounds:
+  - "minecraft:block.ender_chest.open|1.0|1.4"
+click_sounds:
+  - "minecraft:block.note_block.hat|1.0|1.0"
+close_sounds:
+  - "minecraft:block.barrel.close|1.0|0.7"
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: OAK_SIGN
+    name: "<gradient:{primary}:{secondary_light}>Giriş mesajları</gradient>"
+    lore:
+      - "{letters_black}Giriş ayarları"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Kimin hangi giriş ve çıkış"
+      - " {letters}mesajını gördüğü ve ne zaman."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Modül{letters_black}: %join_state%"
+
+  only-in-lobby:
+    slot: 12
+    material: COMPASS
+    name: "{letters}Giriş {letters_black}▸ <gradient:{primary}:{secondary_light}>Yalnızca lobide</gradient>"
+    lore:
+      - "{letters_black}Giriş ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Yalnızca lobideyken girenleri"
+      - " {letters}ve çıkanları ele alır."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %join_only_in_lobby%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %join_only_in_lobby_default%"
+      - ""
+      - "%join_only_in_lobby_click%"
+    actions:
+      - "exylialobby:setting join only-in-lobby"
+
+  hide-vanilla-messages:
+    slot: 13
+    material: BARRIER
+    name: "{letters}Giriş {letters_black}▸ <gradient:{primary}:{secondary_light}>Vanilla'yı gizle</gradient>"
+    lore:
+      - "{letters_black}Giriş ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Başka mesaj yoksa vanilla giriş"
+      - " {letters}ve çıkış satırlarını gizler."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %join_hide_vanilla_messages%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %join_hide_vanilla_messages_default%"
+      - ""
+      - "%join_hide_vanilla_messages_click%"
+    actions:
+      - "exylialobby:setting join hide-vanilla-messages"
+
+  welcome-delay:
+    slot: 14
+    material: CLOCK
+    name: "{letters}Giriş {letters_black}▸ <gradient:{primary}:{secondary_light}>Karşılama gecikmesi</gradient>"
+    lore:
+      - "{letters_black}Giriş ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Girişten sonra başlık, ses"
+      - " {letters}ve MOTD'den önceki süre."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:clock} {letters}Gecikme{letters_black}: %join_welcome_delay%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %join_welcome_delay_default%"
+      - ""
+      - "%join_welcome_delay_click%"
+    actions:
+      - "exylialobby:setting join welcome-delay"
+
+  back:
+    slot: 22
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Geri {letters_black}▸ <gradient:{error}:{error_light}>Ayarlar</gradient>"
+    lore:
+      - "{error}{icon:click} Geri dönmek için tıkla"
+    actions:
+      - "exylialobby:settings_hub"

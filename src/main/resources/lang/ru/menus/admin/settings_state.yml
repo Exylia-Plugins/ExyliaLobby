@@ -1,0 +1,197 @@
+# DO NOT EDIT — REGENERATED ON EVERY STARTUP.
+#
+# The state settings an admin tunes. Everything else is in
+# modules/state/config.yml.
+
+title: "{primary}&lНАСТРОЙКИ {letters_black}» {highlight}Состояние"
+size: 36
+type: SIMPLE
+
+open_sounds:
+  - "minecraft:block.ender_chest.open|1.0|1.4"
+click_sounds:
+  - "minecraft:block.note_block.hat|1.0|1.0"
+close_sounds:
+  - "minecraft:block.barrel.close|1.0|0.7"
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: ARMOR_STAND
+    name: "<gradient:{primary}:{secondary_light}>Состояние</gradient>"
+    lore:
+      - "{letters_black}Настройки: Состояние"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Каким игрок бывает в лобби:"
+      - " {letters}режим, здоровье, время, погода."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Модуль{letters_black}: %state_state%"
+
+  change-game-mode:
+    slot: 11
+    material: LEVER
+    name: "{letters}Состояние {letters_black}▸ <gradient:{primary}:{secondary_light}>Задавать режим</gradient>"
+    lore:
+      - "{letters_black}Настройка: Состояние"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Меняет режим игры тех,"
+      - " {letters}кто входит в лобби."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Включено{letters_black}: %state_change_game_mode%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %state_change_game_mode_default%"
+      - ""
+      - "%state_change_game_mode_click%"
+    actions:
+      - "exylialobby:setting state change-game-mode"
+
+  game-mode:
+    slot: 12
+    material: IRON_SWORD
+    name: "{letters}Состояние {letters_black}▸ <gradient:{primary}:{secondary_light}>Режим игры</gradient>"
+    lore:
+      - "{letters_black}Настройка: Состояние"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Режим игры игроков"
+      - " {letters}внутри лобби."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Режим{letters_black}: %state_game_mode%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %state_game_mode_default%"
+      - ""
+      - "%state_game_mode_click%"
+    actions:
+      - "exylialobby:setting state game-mode"
+
+  override-staff-modes:
+    slot: 14
+    material: GOLDEN_HELMET
+    name: "{letters}Состояние {letters_black}▸ <gradient:{primary}:{secondary_light}>Включая персонал</gradient>"
+    lore:
+      - "{letters_black}Настройка: Состояние"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Меняет и тех, кто в творческом"
+      - " {letters}или наблюдателе. Выкл. — нет."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Включено{letters_black}: %state_override_staff_modes%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %state_override_staff_modes_default%"
+      - ""
+      - "%state_override_staff_modes_click%"
+    actions:
+      - "exylialobby:setting state override-staff-modes"
+
+  full-health:
+    slot: 15
+    material: GOLDEN_APPLE
+    name: "{letters}Состояние {letters_black}▸ <gradient:{primary}:{secondary_light}>Полное здоровье</gradient>"
+    lore:
+      - "{letters_black}Настройка: Состояние"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Полностью лечит игроков"
+      - " {letters}при входе."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:heart} {letters}Включено{letters_black}: %state_full_health%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %state_full_health_default%"
+      - ""
+      - "%state_full_health_click%"
+    actions:
+      - "exylialobby:setting state full-health"
+
+  full-hunger:
+    slot: 20
+    material: COOKED_BEEF
+    name: "{letters}Состояние {letters_black}▸ <gradient:{primary}:{secondary_light}>Полная сытость</gradient>"
+    lore:
+      - "{letters_black}Настройка: Состояние"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Заполняет голод и не даёт"
+      - " {letters}ему падать в лобби."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Включено{letters_black}: %state_full_hunger%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %state_full_hunger_default%"
+      - ""
+      - "%state_full_hunger_click%"
+    actions:
+      - "exylialobby:setting state full-hunger"
+
+  fly:
+    slot: 21
+    material: FEATHER
+    name: "{letters}Состояние {letters_black}▸ <gradient:{primary}:{secondary_light}>Полёт</gradient>"
+    lore:
+      - "{letters_black}Настройка: Состояние"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Игроки с правом полёта"
+      - " {letters}могут летать в лобби."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Включено{letters_black}: %state_fly%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %state_fly_default%"
+      - ""
+      - "%state_fly_click%"
+    actions:
+      - "exylialobby:setting state fly"
+
+  time:
+    slot: 23
+    material: CLOCK
+    name: "{letters}Состояние {letters_black}▸ <gradient:{primary}:{secondary_light}>Время суток</gradient>"
+    lore:
+      - "{letters_black}Настройка: Состояние"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Фиксированное время в лобби."
+      - " {letters}{highlight}6000 {letters}— полдень. {highlight}-1 {letters}— как в мире."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:clock} {letters}Тики{letters_black}: %state_time%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %state_time_default%"
+      - ""
+      - "%state_time_click%"
+    actions:
+      - "exylialobby:setting state time"
+
+  weather:
+    slot: 24
+    material: WATER_BUCKET
+    name: "{letters}Состояние {letters_black}▸ <gradient:{primary}:{secondary_light}>Погода</gradient>"
+    lore:
+      - "{letters_black}Настройка: Состояние"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Погода в лобби. Off"
+      - " {letters}оставляет погоду мира."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Погода{letters_black}: %state_weather%"
+      - "  {letters_black}· {info}{icon:book} {letters}По умолчанию{letters_black}: %state_weather_default%"
+      - ""
+      - "%state_weather_click%"
+    actions:
+      - "exylialobby:setting state weather"
+
+  back:
+    slot: 31
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Назад {letters_black}▸ <gradient:{error}:{error_light}>Настройки</gradient>"
+    lore:
+      - "{error}{icon:click} Нажми, чтобы вернуться"
+    actions:
+      - "exylialobby:settings_hub"

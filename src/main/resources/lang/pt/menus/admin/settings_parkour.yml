@@ -1,0 +1,196 @@
+# DO NOT EDIT — REGENERATED ON EVERY STARTUP.
+#
+# The parkour settings an admin tunes. Everything else is in
+# modules/parkour/config.yml.
+
+title: "{primary}&lAJUSTES {letters_black}» {highlight}Parkour"
+size: 36
+type: SIMPLE
+
+open_sounds:
+  - "minecraft:block.ender_chest.open|1.0|1.4"
+click_sounds:
+  - "minecraft:block.note_block.hat|1.0|1.0"
+close_sounds:
+  - "minecraft:block.barrel.close|1.0|0.7"
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: LEATHER_BOOTS
+    name: "<gradient:{primary}:{secondary_light}>Parkour</gradient>"
+    lore:
+      - "{letters_black}Ajustes de Parkour"
+      - ""
+      - "{primary}✎ Informação"
+      - " {letters}Modos infinitos e o que os"
+      - " {letters}corredores podem usar na corrida."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Módulo{letters_black}: %parkour_state%"
+
+  modes-endless:
+    slot: 11
+    material: GOLD_BLOCK
+    name: "{letters}Parkour {letters_black}▸ <gradient:{primary}:{secondary_light}>Modo infinito</gradient>"
+    lore:
+      - "{letters_black}Ajuste de Parkour"
+      - ""
+      - "{primary}✎ Informação"
+      - " {letters}A pontuação são os pulos que"
+      - " {letters}dás antes de cair."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Ativado{letters_black}: %parkour_modes_endless%"
+      - "  {letters_black}· {info}{icon:book} {letters}Padrão{letters_black}: %parkour_modes_endless_default%"
+      - ""
+      - "%parkour_modes_endless_click%"
+    actions:
+      - "exylialobby:setting parkour modes.endless"
+
+  modes-sprint:
+    slot: 12
+    material: CLOCK
+    name: "{letters}Parkour {letters_black}▸ <gradient:{primary}:{secondary_light}>Modo sprint</gradient>"
+    lore:
+      - "{letters_black}Ajuste de Parkour"
+      - ""
+      - "{primary}✎ Informação"
+      - " {letters}Quantos pulos puderes antes"
+      - " {letters}de o relógio acabar."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Ativado{letters_black}: %parkour_modes_sprint%"
+      - "  {letters_black}· {info}{icon:book} {letters}Padrão{letters_black}: %parkour_modes_sprint_default%"
+      - ""
+      - "%parkour_modes_sprint_click%"
+    actions:
+      - "exylialobby:setting parkour modes.sprint"
+
+  modes-daily:
+    slot: 14
+    material: SUNFLOWER
+    name: "{letters}Parkour {letters_black}▸ <gradient:{primary}:{secondary_light}>Modo diário</gradient>"
+    lore:
+      - "{letters_black}Ajuste de Parkour"
+      - ""
+      - "{primary}✎ Informação"
+      - " {letters}O mesmo caminho para todos hoje,"
+      - " {letters}com o seu próprio ranking."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Ativado{letters_black}: %parkour_modes_daily%"
+      - "  {letters_black}· {info}{icon:book} {letters}Padrão{letters_black}: %parkour_modes_daily_default%"
+      - ""
+      - "%parkour_modes_daily_click%"
+    actions:
+      - "exylialobby:setting parkour modes.daily"
+
+  modes-sprint-seconds:
+    slot: 15
+    material: HOURGLASS
+    name: "{letters}Parkour {letters_black}▸ <gradient:{primary}:{secondary_light}>Duração do sprint</gradient>"
+    lore:
+      - "{letters_black}Ajuste de Parkour"
+      - ""
+      - "{primary}✎ Informação"
+      - " {letters}Quanto dura um sprint."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:clock} {letters}Duração{letters_black}: %parkour_modes_sprint_seconds%"
+      - "  {letters_black}· {info}{icon:book} {letters}Padrão{letters_black}: %parkour_modes_sprint_seconds_default%"
+      - ""
+      - "%parkour_modes_sprint_seconds_click%"
+    actions:
+      - "exylialobby:setting parkour modes.sprint-seconds"
+
+  endless-milestone-period:
+    slot: 20
+    material: CHEST
+    name: "{letters}Parkour {letters_black}▸ <gradient:{primary}:{secondary_light}>Recompensas de marcos</gradient>"
+    lore:
+      - "{letters_black}Ajuste de Parkour"
+      - ""
+      - "{primary}✎ Informação"
+      - " {letters}Com que frequência se pode ganhar"
+      - " {letters}de novo uma recompensa de marco."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:clock} {letters}Período{letters_black}: %parkour_endless_milestone_period%"
+      - "  {letters_black}· {info}{icon:book} {letters}Padrão{letters_black}: %parkour_endless_milestone_period_default%"
+      - ""
+      - "%parkour_endless_milestone_period_click%"
+    actions:
+      - "exylialobby:setting parkour endless.milestone-period"
+
+  hide-runners:
+    slot: 21
+    material: GLASS
+    name: "{letters}Parkour {letters_black}▸ <gradient:{primary}:{secondary_light}>Ocultar corredores</gradient>"
+    lore:
+      - "{letters_black}Ajuste de Parkour"
+      - ""
+      - "{primary}✎ Informação"
+      - " {letters}Oculta os jogadores dos"
+      - " {letters}outros enquanto correm."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Ativado{letters_black}: %parkour_hide_runners%"
+      - "  {letters_black}· {info}{icon:book} {letters}Padrão{letters_black}: %parkour_hide_runners_default%"
+      - ""
+      - "%parkour_hide_runners_click%"
+    actions:
+      - "exylialobby:setting parkour hide-runners"
+
+  run-items:
+    slot: 23
+    material: COMPASS
+    name: "{letters}Parkour {letters_black}▸ <gradient:{primary}:{secondary_light}>Itens de corrida</gradient>"
+    lore:
+      - "{letters_black}Ajuste de Parkour"
+      - ""
+      - "{primary}✎ Informação"
+      - " {letters}Dá aos corredores os itens de"
+      - " {letters}checkpoint, reinício e saída."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Ativado{letters_black}: %parkour_run_items%"
+      - "  {letters_black}· {info}{icon:book} {letters}Padrão{letters_black}: %parkour_run_items_default%"
+      - ""
+      - "%parkour_run_items_click%"
+    actions:
+      - "exylialobby:setting parkour run-items"
+
+  course-fall-depth:
+    slot: 24
+    material: FEATHER
+    name: "{letters}Parkour {letters_black}▸ <gradient:{primary}:{secondary_light}>Profundidade de queda</gradient>"
+    lore:
+      - "{letters_black}Ajuste de Parkour"
+      - ""
+      - "{primary}✎ Informação"
+      - " {letters}Blocos abaixo do ponto mais baixo"
+      - " {letters}do percurso para cair. {highlight}0 {letters}nunca."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:hopper} {letters}Blocos{letters_black}: %parkour_course_fall_depth%"
+      - "  {letters_black}· {info}{icon:book} {letters}Padrão{letters_black}: %parkour_course_fall_depth_default%"
+      - ""
+      - "%parkour_course_fall_depth_click%"
+    actions:
+      - "exylialobby:setting parkour course-fall-depth"
+
+  back:
+    slot: 31
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Voltar {letters_black}▸ <gradient:{error}:{error_light}>Ajustes</gradient>"
+    lore:
+      - "{error}{icon:click} Clique para voltar"
+    actions:
+      - "exylialobby:settings_hub"

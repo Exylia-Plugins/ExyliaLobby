@@ -1,0 +1,197 @@
+# DO NOT EDIT — REGENERATED ON EVERY STARTUP.
+#
+# The state settings an admin tunes. Everything else is in
+# modules/state/config.yml.
+
+title: "{primary}&lAYARLAR {letters_black}» {highlight}Durum"
+size: 36
+type: SIMPLE
+
+open_sounds:
+  - "minecraft:block.ender_chest.open|1.0|1.4"
+click_sounds:
+  - "minecraft:block.note_block.hat|1.0|1.0"
+close_sounds:
+  - "minecraft:block.barrel.close|1.0|0.7"
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: ARMOR_STAND
+    name: "<gradient:{primary}:{secondary_light}>Durum</gradient>"
+    lore:
+      - "{letters_black}Durum ayarları"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Oyuncunun lobideki hâli:"
+      - " {letters}mod, can, saat ve hava."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Modül{letters_black}: %state_state%"
+
+  change-game-mode:
+    slot: 11
+    material: LEVER
+    name: "{letters}Durum {letters_black}▸ <gradient:{primary}:{secondary_light}>Oyun modunu ayarla</gradient>"
+    lore:
+      - "{letters_black}Durum ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Lobiye girenlerin oyun modunu"
+      - " {letters}değiştirir."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %state_change_game_mode%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %state_change_game_mode_default%"
+      - ""
+      - "%state_change_game_mode_click%"
+    actions:
+      - "exylialobby:setting state change-game-mode"
+
+  game-mode:
+    slot: 12
+    material: IRON_SWORD
+    name: "{letters}Durum {letters_black}▸ <gradient:{primary}:{secondary_light}>Oyun modu</gradient>"
+    lore:
+      - "{letters_black}Durum ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Oyuncuların lobideki"
+      - " {letters}oyun modu."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Mod{letters_black}: %state_game_mode%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %state_game_mode_default%"
+      - ""
+      - "%state_game_mode_click%"
+    actions:
+      - "exylialobby:setting state game-mode"
+
+  override-staff-modes:
+    slot: 14
+    material: GOLDEN_HELMET
+    name: "{letters}Durum {letters_black}▸ <gradient:{primary}:{secondary_light}>Yetkilileri dahil et</gradient>"
+    lore:
+      - "{letters_black}Durum ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Yaratıcı veya izleyicideki"
+      - " {letters}oyuncuları da değiştirir."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %state_override_staff_modes%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %state_override_staff_modes_default%"
+      - ""
+      - "%state_override_staff_modes_click%"
+    actions:
+      - "exylialobby:setting state override-staff-modes"
+
+  full-health:
+    slot: 15
+    material: GOLDEN_APPLE
+    name: "{letters}Durum {letters_black}▸ <gradient:{primary}:{secondary_light}>Tam can</gradient>"
+    lore:
+      - "{letters_black}Durum ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Girişte oyuncuları"
+      - " {letters}tamamen iyileştirir."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:heart} {letters}Açık{letters_black}: %state_full_health%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %state_full_health_default%"
+      - ""
+      - "%state_full_health_click%"
+    actions:
+      - "exylialobby:setting state full-health"
+
+  full-hunger:
+    slot: 20
+    material: COOKED_BEEF
+    name: "{letters}Durum {letters_black}▸ <gradient:{primary}:{secondary_light}>Tam tokluk</gradient>"
+    lore:
+      - "{letters_black}Durum ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Açlığı doldurur ve lobide"
+      - " {letters}düşmesine izin vermez."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %state_full_hunger%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %state_full_hunger_default%"
+      - ""
+      - "%state_full_hunger_click%"
+    actions:
+      - "exylialobby:setting state full-hunger"
+
+  fly:
+    slot: 21
+    material: FEATHER
+    name: "{letters}Durum {letters_black}▸ <gradient:{primary}:{secondary_light}>Uçuş</gradient>"
+    lore:
+      - "{letters_black}Durum ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Uçuş izni olanlar lobide"
+      - " {letters}uçabilir."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %state_fly%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %state_fly_default%"
+      - ""
+      - "%state_fly_click%"
+    actions:
+      - "exylialobby:setting state fly"
+
+  time:
+    slot: 23
+    material: CLOCK
+    name: "{letters}Durum {letters_black}▸ <gradient:{primary}:{secondary_light}>Günün saati</gradient>"
+    lore:
+      - "{letters_black}Durum ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Lobide gösterilen sabit saat."
+      - " {letters}{highlight}6000 {letters}öğle. {highlight}-1 {letters}dünyanınkini korur."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:clock} {letters}Tick{letters_black}: %state_time%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %state_time_default%"
+      - ""
+      - "%state_time_click%"
+    actions:
+      - "exylialobby:setting state time"
+
+  weather:
+    slot: 24
+    material: WATER_BUCKET
+    name: "{letters}Durum {letters_black}▸ <gradient:{primary}:{secondary_light}>Hava</gradient>"
+    lore:
+      - "{letters_black}Durum ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Lobide gösterilen hava. Kapalı"
+      - " {letters}dünyanınkini korur."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Hava{letters_black}: %state_weather%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %state_weather_default%"
+      - ""
+      - "%state_weather_click%"
+    actions:
+      - "exylialobby:setting state weather"
+
+  back:
+    slot: 31
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Geri {letters_black}▸ <gradient:{error}:{error_light}>Ayarlar</gradient>"
+    lore:
+      - "{error}{icon:click} Geri dönmek için tıkla"
+    actions:
+      - "exylialobby:settings_hub"

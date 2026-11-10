@@ -1,0 +1,138 @@
+# DO NOT EDIT — REGENERATED ON EVERY STARTUP.
+#
+# The hud settings an admin tunes. Everything else is in
+# modules/hud/config.yml.
+
+title: "{primary}&lAYARLAR {letters_black}» {highlight}HUD"
+size: 27
+type: SIMPLE
+
+open_sounds:
+  - "minecraft:block.ender_chest.open|1.0|1.4"
+click_sounds:
+  - "minecraft:block.note_block.hat|1.0|1.0"
+close_sounds:
+  - "minecraft:block.barrel.close|1.0|0.7"
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: NAME_TAG
+    name: "<gradient:{primary}:{secondary_light}>HUD</gradient>"
+    lore:
+      - "{letters_black}HUD ayarları"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Oyuncuların lobide ekranda"
+      - " {letters}gördükleri."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Modül{letters_black}: %hud_state%"
+
+  sidebar-enabled:
+    slot: 11
+    material: OAK_SIGN
+    name: "{letters}HUD {letters_black}▸ <gradient:{primary}:{secondary_light}>Yan panel</gradient>"
+    lore:
+      - "{letters_black}HUD ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Lobide yan paneli gösterir."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %hud_sidebar_enabled%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %hud_sidebar_enabled_default%"
+      - ""
+      - "%hud_sidebar_enabled_click%"
+    actions:
+      - "exylialobby:setting hud sidebar.enabled"
+
+  tab-enabled:
+    slot: 12
+    material: PAPER
+    name: "{letters}HUD {letters_black}▸ <gradient:{primary}:{secondary_light}>Oyuncu listesi</gradient>"
+    lore:
+      - "{letters_black}HUD ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Oyuncu listesinde üst ve"
+      - " {letters}alt bilgi gösterir."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %hud_tab_enabled%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %hud_tab_enabled_default%"
+      - ""
+      - "%hud_tab_enabled_click%"
+    actions:
+      - "exylialobby:setting hud tab.enabled"
+
+  boss-bars-enabled:
+    slot: 13
+    material: DRAGON_HEAD
+    name: "{letters}HUD {letters_black}▸ <gradient:{primary}:{secondary_light}>Boss çubukları</gradient>"
+    lore:
+      - "{letters_black}HUD ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Ekranın üstünde sırayla dönen"
+      - " {letters}boss çubukları gösterir."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %hud_boss_bars_enabled%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %hud_boss_bars_enabled_default%"
+      - ""
+      - "%hud_boss_bars_enabled_click%"
+    actions:
+      - "exylialobby:setting hud boss-bars.enabled"
+
+  announcements-enabled:
+    slot: 14
+    material: BELL
+    name: "{letters}HUD {letters_black}▸ <gradient:{primary}:{secondary_light}>Duyurular</gradient>"
+    lore:
+      - "{letters_black}HUD ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Sohbete zamanlayıcıyla"
+      - " {letters}duyuru gönderir."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %hud_announcements_enabled%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %hud_announcements_enabled_default%"
+      - ""
+      - "%hud_announcements_enabled_click%"
+    actions:
+      - "exylialobby:setting hud announcements.enabled"
+
+  announcements-interval:
+    slot: 15
+    material: CLOCK
+    name: "{letters}HUD {letters_black}▸ <gradient:{primary}:{secondary_light}>Duyuru aralığı</gradient>"
+    lore:
+      - "{letters_black}HUD ayarı"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}İki duyuru arası süre."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:clock} {letters}Her{letters_black}: %hud_announcements_interval%"
+      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %hud_announcements_interval_default%"
+      - ""
+      - "%hud_announcements_interval_click%"
+    actions:
+      - "exylialobby:setting hud announcements.interval"
+
+  back:
+    slot: 22
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Geri {letters_black}▸ <gradient:{error}:{error_light}>Ayarlar</gradient>"
+    lore:
+      - "{error}{icon:click} Geri dönmek için tıkla"
+    actions:
+      - "exylialobby:settings_hub"
