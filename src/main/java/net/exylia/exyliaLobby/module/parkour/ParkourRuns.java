@@ -432,6 +432,21 @@ final class ParkourRuns implements Listener {
         });
     }
 
+    /** Pays a milestone's rewards unless the runner was already paid it this period. Player's thread. */
+    void milestone(EndlessRun run, int score, List<Object> rewards) {
+        Player player = run.player;
+        Board board = new Board(run.mode.id(), settings.get().endless().milestoneEvery());
+        data.claimMilestone(player.getUniqueId(), board, score).whenComplete((unpaid, failed) -> {
+            if (failed != null) {
+                context.debug().error("Could not check the parkour milestone " + score + " of " + player.getName(), failed);
+                return;
+            }
+            if (unpaid) onPlayer(player, () -> {
+                if (player.isOnline()) reward(player, rewards, "endless.milestone-rewards." + score);
+            });
+        });
+    }
+
     /** The first label of the player command, for the retry button. */
     private String label() {
         List<String> labels = settings.get().command();

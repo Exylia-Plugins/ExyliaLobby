@@ -172,7 +172,7 @@ final class EndlessRun extends Run {
                 milestone = true;
                 runs.title(player, text.milestoneTitle(), text.milestoneSubtitle(), values().put("score", at));
                 List<Object> rewards = rules().milestoneRewards().get(String.valueOf(at));
-                if (rewards != null) runs.reward(player, rewards, "endless.milestone-rewards." + at);
+                if (rewards != null) runs.milestone(this, at, rewards);
             }
         }
         if (milestone) {

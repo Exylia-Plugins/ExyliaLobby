@@ -158,6 +158,29 @@ final class ParkourData {
         });
     }
 
+    /**
+     * Marks a milestone of a board paid for the player, once per period of the board: milestones are claimed in
+     * rising order within a run, so the row keeps the highest one paid.
+     *
+     * @return whether it was still unpaid; fails when the player's rows cannot be read
+     */
+    CompletableFuture<Boolean> claimMilestone(UUID player, Board board, int score) {
+        return load(player).thenApply(mine -> {
+            String key = "milestone|" + board.key(clock.get());
+            boolean[] claimed = {false};
+            ParkourStat row = mine.stats().compute(key, (k, paid) -> {
+                if (paid != null && paid.completions() >= score) return paid;
+                claimed[0] = true;
+                return new ParkourStat(ParkourStat.id(player, k), player, k, score);
+            });
+            if (claimed[0]) stats.save(row).exceptionally(failed -> {
+                debug.error("Could not save the parkour milestone " + key + " of " + player, failed);
+                return null;
+            });
+            return claimed[0];
+        });
+    }
+
     /** Wipes the player's bests on a course, every period. */
     CompletableFuture<Void> reset(UUID player, String course) {
         return load(player).thenCompose(mine -> {

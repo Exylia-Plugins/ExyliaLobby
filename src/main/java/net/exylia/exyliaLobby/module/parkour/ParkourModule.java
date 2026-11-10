@@ -411,7 +411,7 @@ public final class ParkourModule extends LobbyModule implements Busy {
                     map.remove(name);
                     ParkourSettings.Endless e = current.endless();
                     return current.withEndless(new ParkourSettings.Endless(map, e.ahead(), e.behind(), e.themeEvery(),
-                            e.milestones(), e.fallDepth(), e.bestMarker(), e.milestoneRewards(), e.tuning()));
+                            e.milestones(), e.fallDepth(), e.bestMarker(), e.milestoneRewards(), e.milestonePeriod(), e.tuning()));
                 });
                 send(admin, messages.get().screens().areaDeleted(), Values.of("area", name));
             }
@@ -536,7 +536,7 @@ public final class ParkourModule extends LobbyModule implements Busy {
                         map.put(name, area);
                         ParkourSettings.Endless e = current.endless();
                         return new ParkourSettings(current.command(), current.modes(), new ParkourSettings.Endless(map, e.ahead(),
-                                e.behind(), e.themeEvery(), e.milestones(), e.fallDepth(), e.bestMarker(), e.milestoneRewards(),
+                                e.behind(), e.themeEvery(), e.milestones(), e.fallDepth(), e.bestMarker(), e.milestoneRewards(), e.milestonePeriod(),
                                 e.tuning()), current.hideRunners(), current.checkpointBeacon(), current.runItems(),
                                 current.courseFallDepth(), current.antiCheat(), current.tops(), current.periods(),
                                 current.sounds(), current.boards());
