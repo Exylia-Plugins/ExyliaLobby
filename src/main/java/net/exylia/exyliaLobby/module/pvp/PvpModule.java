@@ -515,7 +515,7 @@ public final class PvpModule extends LobbyModule implements Busy {
                     context.module(HotbarModule.ID, HotbarModule.class).ifPresent(hotbar -> hotbar.show(player));
                 } else {
                     strip(player);
-                    context.module(StateModule.ID, StateModule.class).ifPresent(state -> state.reapplyMode(player));
+                    context.module(StateModule.ID, StateModule.class).ifPresent(state -> state.reapply(player));
                 }
             });
         });
