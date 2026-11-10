@@ -34,6 +34,22 @@ Wizards, en only:
 - en admin menus edited and menu-version raised to 2: admin/spawn/detail.yml, admin/spawn/areas.yml,
   admin/parkour/editor.yml.
 
+## Done after the wizards (cooldowns pass, en only)
+
+- Grappling hook (GadgetsModule#fished): cast anywhere (checked on PlayerFishEvent FISHING, never on the reel-in
+  click); reel-in pulls when the hook touches a block (the spot it struck, or its block and the 6 around it), open
+  air just reels in, entities are never hooked; its cooldown starts on a pull only.
+- Cooldowns are decimal: gadget `cooldown` is a double (grapple 0.8, ender 2, paint 0.3, knockback 0.5, leap 1,
+  snowball 0.5, trampoline 6); visibility 0.5s; double jump 0.4s; pads 0.5s; pvp equip/unequip 3s/3s (doubles);
+  hotbar buttons 250ms, the visibility button 0 (its module keeps the cooldown); a hotbar refusal under 300ms is silent.
+- Item 3 done: every cooldown goes through `LobbyModule#cooldowns()` (= `Cooldowns.forPlugin`), refusals through
+  `refuseCooling`/`refusalDue` (once a second per key), times through `LobbyModule.withTime` (`%time%` PRECISE,
+  `%seconds%` AUTO alias). Gadget ride/safe/bounce, visibility, selector connect, chat slow mode, pvp combat tag and
+  repeat-kill window converted.
+- Message defaults changed (text only, no keys added): GadgetsMessages.cooling, VisibilityMessages.cooling,
+  ChatMessages.slowDenied, HotbarMessages.cooling, PvpMessages.tagged, SpawnMessages.teleporting now say `%time%`
+  instead of `%seconds%s`. Translations must follow (keep `%seconds%` working; `%time%` carries its unit).
+
 ## Remaining
 
 1. Wizards: translate every key above in lang/{es,fr,pt,ru,tr}/modules/<id>/messages.yml (rename keys there too) and
@@ -50,7 +66,7 @@ Wizards, en only:
    its defaults come from the packaged `lang/<code>/<name>.yml`; existing files then see the change through
    followDefaults / `/exylialib updates` (check that DefaultsMerge handles map entries). Then ship
    lang/<code>/modules/<id>/config.yml with only the text keys for es/fr/pt/ru/tr.
-3. Cooldowns: every hand-rolled cooldown to `Cooldowns.forPlugin(plugin)`: VisibilityModule ~125-131 (`last` map),
+3. (DONE, see above) Cooldowns: every hand-rolled cooldown to `Cooldowns.forPlugin(plugin)`: VisibilityModule ~125-131 (`last` map),
    SelectorModule:79/187, ChatModule:34/86, GadgetsModule:81-83, pvp, parkour repeat rewards, spawn, hotbar
    (HotbarModule ~71 onCooldown uses Math.ceil). One cooldown per action: hotbar buttons whose module has its own
    cooldown get hotbar cooldown 0 (or the module owns it). Times via `TimeFormats`: messages take `%time%`
