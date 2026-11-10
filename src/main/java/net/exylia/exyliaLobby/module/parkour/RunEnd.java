@@ -24,7 +24,9 @@ public enum RunEnd {
     PEARL,
     VEHICLE,
     GAME_MODE,
-    TELEPORT;
+    TELEPORT,
+    /** An endless landing the server could not confirm: off the path, out of reach or too fast. */
+    UNCONFIRMED;
 
     /** Ended by something a run does not allow: nothing is recorded and the runner is told why. */
     public boolean cheat() {

@@ -336,6 +336,7 @@ final class ParkourRuns implements Listener {
             case PEARL -> reasons.pearl();
             case VEHICLE -> reasons.vehicle();
             case GAME_MODE -> reasons.gameMode();
+            case UNCONFIRMED -> reasons.unconfirmed();
             default -> reasons.teleport();
         };
     }
@@ -477,10 +478,14 @@ final class ParkourRuns implements Listener {
         }
     }
 
-    /** An endless runner stands on blocks only their client has: the server must not kick them for flying. */
+    /**
+     * An endless runner stands on blocks only their client has: the server must not kick them for flying while
+     * they are on the path. Away from it, the kick goes through.
+     */
     @EventHandler(ignoreCancelled = true)
     public void onKick(PlayerKickEvent event) {
-        if (event.getCause() == PlayerKickEvent.Cause.FLYING_PLAYER && runs.get(event.getPlayer().getUniqueId()) instanceof EndlessRun) {
+        if (event.getCause() == PlayerKickEvent.Cause.FLYING_PLAYER && runs.get(event.getPlayer().getUniqueId()) instanceof EndlessRun run
+                && run.near(event.getPlayer().getLocation())) {
             event.setCancelled(true);
         }
     }

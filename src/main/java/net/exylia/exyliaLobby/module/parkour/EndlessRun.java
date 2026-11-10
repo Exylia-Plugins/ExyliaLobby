@@ -2,6 +2,7 @@ package net.exylia.exyliaLobby.module.parkour;
 
 import net.exylia.exyliaLobby.module.parkour.endless.Cell;
 import net.exylia.exyliaLobby.module.parkour.endless.Jump;
+import net.exylia.exyliaLobby.module.parkour.endless.JumpPhysics;
 import net.exylia.exyliaLobby.module.parkour.endless.PathGenerator;
 import net.exylia.exyliaLobby.module.parkour.endless.Role;
 import net.exylia.exyliaLobby.module.parkour.endless.Window;
@@ -34,6 +35,12 @@ import java.util.Set;
 final class EndlessRun extends Run {
 
     static final String HOTBAR = "parkour-endless";
+    /**
+     * The fastest a runner may move along the path, in jumps a second, after a head start of {@link #HEAD_START}
+     * jumps. A sprint-jump chain that skips every other block stays under it; a flying client racing ahead does not.
+     */
+    private static final double JUMPS_PER_SECOND = 4.0;
+    private static final int HEAD_START = 6;
     private static final BlockFace[] FACES = {BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.NORTH};
 
     final EndlessMode mode;
@@ -51,6 +58,8 @@ final class EndlessRun extends Run {
     private final Set<Cell> drawn = new LinkedHashSet<>();
     private final Map<String, BlockData> blocks = new HashMap<>();
     private Window window;
+    /** When the run began, wall clock: movement comes from the client, so lag does not slow it. */
+    private long began;
     int current;
     int score;
 
@@ -87,6 +96,7 @@ final class EndlessRun extends Run {
 
     @Override
     void begin() {
+        began = System.currentTimeMillis();
         path.add(generator.start());
         window = Window.around(0, rules().ahead(), rules().behind());
         fill(window.last());
@@ -111,18 +121,40 @@ final class EndlessRun extends Run {
     void moved(Location from, Location to) {
         Jump standing = null;
         Jump under = null;
+        Cell on = null;
         for (Jump jump : path) {
             if (jump.index() == current) under = jump;
-            if (jump.index() > current && window.contains(jump.index()) && Window.standsOn(jump, to.getX(), to.getY(), to.getZ())) {
-                standing = jump;
-                break;
+            if (jump.index() > current && window.contains(jump.index())) {
+                on = Window.standingOn(jump, to.getX(), to.getY(), to.getZ());
+                if (on != null) {
+                    standing = jump;
+                    break;
+                }
             }
         }
-        if (standing != null) {
+        // The blocks are only on the client, so the server checks every landing it scores: feet on a drawn
+        // block, the client saying it stands, a jump that reaches from the last one, and a human pace.
+        if (standing != null && player.isOnGround()) {
+            if (under == null || !JumpPhysics.canLand(under, standing, on) || tooFast(standing)) {
+                runs.context().debug().warn("Ended the " + mode.id() + " run of " + player.getName() + ": the landing on jump "
+                        + standing.index() + " from jump " + current + " could not be confirmed");
+                runs.close(this, RunEnd.UNCONFIRMED);
+                return;
+            }
             land(standing);
             return;
         }
         if (under != null && to.getY() < under.lowestY() + 1 - rules().fallDepth()) runs.close(this, RunEnd.FELL);
+    }
+
+    private boolean tooFast(Jump next) {
+        double seconds = (System.currentTimeMillis() - began) / 1000.0;
+        return next.index() > HEAD_START + JUMPS_PER_SECOND * seconds;
+    }
+
+    /** Whether feet here are on or around the drawn path. */
+    boolean near(Location feet) {
+        return feet.getWorld() == world && Window.near(drawn, feet.getX(), feet.getY(), feet.getZ());
     }
 
     private void land(Jump jump) {

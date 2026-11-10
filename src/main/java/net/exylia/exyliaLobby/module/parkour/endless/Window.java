@@ -45,10 +45,30 @@ public record Window(int first, int last) {
      * within a player's half width of it.
      */
     public static boolean standsOn(Jump jump, double x, double y, double z) {
+        return standingOn(jump, x, y, z) != null;
+    }
+
+    /** The block of the jump feet at this position stand on (see {@link #standsOn}); null when none. */
+    public static Cell standingOn(Jump jump, double x, double y, double z) {
         for (Cell cell : jump.standable()) {
             double top = cell.y() + jump.surface().surface();
             if (Math.abs(x - (cell.x() + 0.5)) <= 0.8 && Math.abs(z - (cell.z() + 0.5)) <= 0.8
                     && y >= top - 0.2 && y <= top + 0.3) {
+                return cell;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Whether feet at this position are close enough to one of these blocks to be on the path: standing, jumping
+     * between two of them or just fallen off one. Lenient on purpose; it only decides whether the server may
+     * kick the runner for flying.
+     */
+    public static boolean near(Iterable<Cell> blocks, double x, double y, double z) {
+        for (Cell cell : blocks) {
+            if (Math.abs(x - (cell.x() + 0.5)) <= 3.5 && Math.abs(z - (cell.z() + 0.5)) <= 3.5
+                    && y >= cell.y() - 3 && y <= cell.y() + 4) {
                 return true;
             }
         }

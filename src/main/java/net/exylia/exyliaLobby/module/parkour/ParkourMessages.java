@@ -175,9 +175,10 @@ public record ParkourMessages(
 
     /** Why a run was ended, shown in {@link #cheated}. */
     public record Reasons(String flight, String elytra, String riptide, String pearl, String vehicle, String gameMode,
-                          String teleport) {
+                          String teleport, String unconfirmed) {
         public Reasons() {
-            this("flying", "gliding", "riptide", "ender pearl", "riding", "game mode changed", "teleported away");
+            this("flying", "gliding", "riptide", "ender pearl", "riding", "game mode changed", "teleported away",
+                    "a jump could not be confirmed");
         }
     }
 
