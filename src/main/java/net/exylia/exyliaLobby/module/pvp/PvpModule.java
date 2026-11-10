@@ -91,6 +91,7 @@ public final class PvpModule extends LobbyModule implements Busy {
     private PluginRegions regions;
     private AdminScreens screens;
     private NamespacedKey marker;
+    private NamespacedKey kitMarker;
     private RespawnHook locationHook;
     private RespawnHook afterHook;
     private Runnable damageHook;
@@ -154,6 +155,7 @@ public final class PvpModule extends LobbyModule implements Busy {
     @Override
     protected void start() {
         marker = new NamespacedKey(plugin(), "pvp_sword");
+        kitMarker = new NamespacedKey(plugin(), "pvp_kit");
         repo = Databases.of(plugin()).repository(PvpStat.class);
         stays = Stays.of(plugin());
         regions = Regions.of(plugin(), ID);
@@ -286,8 +288,30 @@ public final class PvpModule extends LobbyModule implements Busy {
     }
 
     boolean isSword(@Nullable ItemStack item) {
+        return marked(item, marker);
+    }
+
+    /** A piece of the fighter's kit: never leaves the fight. */
+    boolean isKit(@Nullable ItemStack item) {
+        return marked(item, kitMarker);
+    }
+
+    private static boolean marked(@Nullable ItemStack item, NamespacedKey key) {
         if (item == null || item.getType().isAir() || !item.hasItemMeta()) return false;
-        return item.getItemMeta().getPersistentDataContainer().has(marker, PersistentDataType.BYTE);
+        return item.getItemMeta().getPersistentDataContainer().has(key, PersistentDataType.BYTE);
+    }
+
+    /** Whether a click or drag moving this item is refused: the sword always, the kit while fighting. */
+    boolean locked(Player player, @Nullable ItemStack item) {
+        return isSword(item) || (fighting(player) && isKit(item));
+    }
+
+    /** Takes the sword and kit pieces out of an inventory that is not the player's (a chest that got one). */
+    void sweep(org.bukkit.inventory.Inventory inventory) {
+        for (int slot = 0; slot < inventory.getSize(); slot++) {
+            ItemStack item = inventory.getItem(slot);
+            if (isSword(item) || isKit(item)) inventory.setItem(slot, null);
+        }
     }
 
     /** Whether dropping this item is refused: the sword, or anything while in the fight. */
@@ -506,11 +530,15 @@ public final class PvpModule extends LobbyModule implements Busy {
         inventory.setBoots(piece(player, kit.boots()));
         ItemStack weapon = piece(player, kit.weapon());
         int slot = swordSlot();
-        if (weapon != null) inventory.setItem(slot, weapon);
+        if (weapon != null) Slots.place(plugin(), player, slot, weapon);
         inventory.setHeldItemSlot(slot);
         var max = player.getAttribute(net.exylia.lib.platform.Attributes.MAX_HEALTH);
         player.setHealth(max == null ? 20.0 : max.getValue());
         player.setFoodLevel(20);
+        // No lobby flight or effects in a fight. The stay's snapshot holds them and gives them back with the rest.
+        player.setFlying(false);
+        player.setAllowFlight(false);
+        for (var effect : player.getActivePotionEffects()) player.removePotionEffect(effect.getType());
     }
 
     private @Nullable ItemStack piece(Player player, String source) {
@@ -519,6 +547,7 @@ public final class PvpModule extends LobbyModule implements Busy {
         ItemMeta meta = stack.getItemMeta();
         if (meta != null) {
             meta.setUnbreakable(true);
+            meta.getPersistentDataContainer().set(kitMarker, PersistentDataType.BYTE, (byte) 1);
             stack.setItemMeta(meta);
         }
         return stack;
@@ -544,11 +573,10 @@ public final class PvpModule extends LobbyModule implements Busy {
         Slots.place(plugin(), player, swordSlot(), sword);
     }
 
+    /** Takes the sword and any kit piece left over (a crash, a missed restore) out of the player's inventory. */
     private void strip(Player player) {
-        PlayerInventory inventory = player.getInventory();
-        for (int slot = 0; slot < inventory.getSize(); slot++) {
-            if (isSword(inventory.getItem(slot))) inventory.setItem(slot, null);
-        }
+        sweep(player.getInventory());
+        if (isSword(player.getItemOnCursor()) || isKit(player.getItemOnCursor())) player.setItemOnCursor(null);
     }
 
     @Override

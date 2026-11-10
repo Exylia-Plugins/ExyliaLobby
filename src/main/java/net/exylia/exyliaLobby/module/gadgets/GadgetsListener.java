@@ -9,13 +9,16 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.ItemStack;
 
 /** The events the gadgets module reacts to; every decision lives in {@link GadgetsModule}. */
 final class GadgetsListener implements Listener {
@@ -86,6 +89,17 @@ final class GadgetsListener implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onClick(InventoryClickEvent event) {
-        if (module.gadgetOf(event.getCurrentItem()) != null || module.gadgetOf(event.getCursor()) != null) event.setCancelled(true);
+        // The number key moves the hotbar item under it, which is neither the clicked item nor the cursor.
+        ItemStack keyed = event.getHotbarButton() >= 0 ? event.getWhoClicked().getInventory().getItem(event.getHotbarButton()) : null;
+        ItemStack offHand = event.getClick() == ClickType.SWAP_OFFHAND ? event.getWhoClicked().getInventory().getItemInOffHand() : null;
+        if (module.gadgetOf(event.getCurrentItem()) != null || module.gadgetOf(event.getCursor()) != null
+                || module.gadgetOf(keyed) != null || module.gadgetOf(offHand) != null) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    public void onDrag(InventoryDragEvent event) {
+        if (module.gadgetOf(event.getOldCursor()) != null) event.setCancelled(true);
     }
 }
