@@ -151,8 +151,8 @@ public final class AdminHub {
             spawn.get().openAreas(viewer, "Admin", () -> open(viewer));
             return;
         }
-        Text.from(lobby.getPlugin(), lobby.getMessages().get().moduleOff())
-                .withFormatted("module", lobby.getNames().get().of(SpawnModule.ID).name()).send(viewer);
+        net.exylia.lib.text.PluginMessages.of(lobby.getPlugin()).send(viewer, lobby.getMessages().get().moduleOff(),
+                net.exylia.lib.text.Values.of("module", lobby.getNames().get().of(SpawnModule.ID).name()));
     }
 
     public void reload(@NotNull Player viewer) {

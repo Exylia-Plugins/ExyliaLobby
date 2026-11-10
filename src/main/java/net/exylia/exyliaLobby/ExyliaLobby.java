@@ -18,7 +18,9 @@ import net.exylia.lib.module.PluginModules;
 import net.exylia.lib.reload.Reloads;
 import net.exylia.lib.task.TaskScheduler;
 import net.exylia.lib.task.Tasks;
+import net.exylia.lib.text.PluginMessages;
 import net.exylia.lib.text.Prefixes;
+import net.exylia.lib.text.Values;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -82,17 +84,20 @@ public final class ExyliaLobby {
         hub.load();
 
         lamp = BukkitLamp.builder(plugin)
-                .commandCondition(command -> modules.offModuleOf(command.command().function().method())
-                        .ifPresent(id -> {
-                            Text.from(plugin, messages.get().moduleOff())
-                                    .withFormatted("module", names.get().of(id).name())
-                                    .send(command.actor().sender());
-                            throw new SendableException() {
-                                @Override
-                                public void sendTo(@NotNull CommandActor actor) {
-                                }
-                            };
-                        }))
+                .commandCondition(command -> {
+                    java.lang.reflect.Method method = command.command().function().method();
+                    String off = modules.offModuleOf(method).orElseGet(() -> registered.stream()
+                            .filter(module -> !module.isEnabled() && module.ownsCommand(method.getDeclaringClass()))
+                            .map(LobbyModule::getId).findFirst().orElse(null));
+                    if (off == null) return;
+                    PluginMessages.of(plugin).send(command.actor().sender(), messages.get().moduleOff(),
+                            Values.of("module", names.get().of(off).name()));
+                    throw new SendableException() {
+                        @Override
+                        public void sendTo(@NotNull CommandActor actor) {
+                        }
+                    };
+                })
                 .build();
         lamp.register(Orphans.path(config.get().adminCommand().toArray(String[]::new)).handler(new AdminCommand(this)));
         for (Object handler : modules.allCommandHandlers()) lamp.register(handler);
