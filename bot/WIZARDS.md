@@ -59,6 +59,19 @@ Wizards, en only:
   - Message keys added: PvpMessages equipTitle, equipSubtitle, kitOnTitle, kitOnSubtitle (after unequipBar);
     SpawnMessages warmupBar (after cancelled). Changed text: PvpMessages equipBar/unequipBar say `%time%` (old
     files with `%seconds%s` still read right: the countdown maps it to `%time%`).
+- Item 5 done: ProtectionModule build bar, parkour run bars (`ParkourRuns#bar`) and parkour titles go through
+  `Effects`; PvP top K/D through `Numbers.decimals(value, 2)`; AdminCommand replies through messages.
+  - Message keys added (core `lang/<code>/messages.yml`, translated file): `modules.usage`, `modules.unknown`
+    (after `modules.dependants`; `%id%`, `%modules%`).
+
+### For the translator: every key added or changed in this pass
+- Added: PvpMessages equipTitle, equipSubtitle, kitOnTitle, kitOnSubtitle; SpawnMessages warmupBar;
+  LobbyMessages modules.usage, modules.unknown.
+- Text changed to `%time%` (unit included, so drop the trailing `s`): GadgetsMessages.cooling,
+  VisibilityMessages.cooling, ChatMessages.slowDenied, HotbarMessages.cooling, PvpMessages.tagged,
+  PvpMessages.equipBar, PvpMessages.unequipBar, SpawnMessages.teleporting.
+- Settings added (no text): PvpSettings.countdownSounds, SpawnSettings.warmupSounds.
+- Nothing renamed or removed.
 
 ## Remaining
 
@@ -87,7 +100,7 @@ Wizards, en only:
    each whole second to the player (note_block.hat / ui.button.click, pitch rising), a finish sound
    (experience_orb.pickup / item.armor.equip_iron), a refusal sound on cancel, a start title/subtitle and a short
    "kit on" title. Texts in PvpMessages (+5 translations), sounds configurable in PvpSettings.
-5. Audit: hand boss bars -> Effects (PvpModule ~426-448 with its own Countdown, ProtectionModule ~104-118,
+5. (DONE, see above) Audit: hand boss bars -> Effects (PvpModule ~426-448 with its own Countdown, ProtectionModule ~104-118,
    ParkourRuns ~326-327); ParkourRuns ~606 showTitle -> `Effects.title`; PvpModule ~759 String.format K/D ->
    `Numbers.decimals(value, 2)`; command/AdminCommand.java:46,53 raw sendMessage -> messages with %prefix% (+5
    translations). parkour/Times.java: leave as is, note that TimeFormats has no millis style.
