@@ -48,6 +48,10 @@ import net.exylia.exyliaLobby.module.parkour.endless.Bounds;
 import net.exylia.exyliaLobby.module.parkour.endless.Cell;
 import net.exylia.exyliaLobby.module.parkour.endless.PathGenerator;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.security.SecureRandom;
 import java.time.Duration;
 import java.util.List;
 import java.util.Map;
@@ -84,6 +88,8 @@ final class ParkourRuns implements Listener {
     private final PluginActions actions;
     private final Hotbars hotbars;
     private final RunGuard guard = new RunGuard(this);
+    /** Mixed into the daily seed so nobody can work out a day's path before it comes. */
+    private final long dailySecret;
 
     ParkourRuns(LobbyContext context, ConfigFile<ParkourSettings> settings, ConfigFile<ParkourCourses> courses,
                 ConfigFile<ParkourThemes> themes, ConfigFile<ParkourMessages> messages, ParkourData data,
@@ -95,6 +101,7 @@ final class ParkourRuns implements Listener {
         this.messages = messages;
         this.data = data;
         this.clock = clock;
+        this.dailySecret = dailySecret(new File(context.plugin().getDataFolder(), "modules/parkour/daily-secret.txt"));
         this.actions = Actions.of(context.plugin());
         actions.registerSync(ACTION_BACK, (action, args) -> {
             back(action.player());
@@ -188,7 +195,8 @@ final class ParkourRuns implements Listener {
             send(player, text.noArea(), Values.of());
             return;
         }
-        long seed = mode == EndlessMode.DAILY ? ("daily|" + clock.get().key(PeriodClock.Period.DAILY)).hashCode()
+        long seed = mode == EndlessMode.DAILY
+                ? dailySecret ^ ("daily|" + clock.get().key(PeriodClock.Period.DAILY)).hashCode() * 0x9E3779B97F4A7C15L
                 : ThreadLocalRandom.current().nextLong();
         List<ParkourThemes.Theme> palette = themes.get().themes().values().stream().filter(ParkourThemes.Theme::enabled).toList();
         if (palette.isEmpty()) palette = List.of(new ParkourThemes.Theme());
@@ -208,6 +216,31 @@ final class ParkourRuns implements Listener {
                 });
             });
         });
+    }
+
+    /**
+     * The server's daily path secret: read from its file, or made once and written there. Lobbies of one network
+     * that should share the daily path share this file.
+     */
+    private long dailySecret(File file) {
+        try {
+            if (file.isFile()) {
+                for (String line : Files.readAllLines(file.toPath())) {
+                    if (!line.isBlank() && !line.startsWith("#")) return Long.parseLong(line.trim());
+                }
+            }
+        } catch (IOException | NumberFormatException bad) {
+            context.debug().warn("Could not read " + file + "; making a new daily parkour secret");
+        }
+        long secret = new SecureRandom().nextLong();
+        try {
+            Files.createDirectories(file.toPath().getParent());
+            Files.writeString(file.toPath(), "# Keeps the daily parkour path unknown until its day. Copy this file to every lobby\n"
+                    + "# that should share the daily path; keep it private.\n" + secret + "\n");
+        } catch (IOException failed) {
+            context.debug().error("Could not save " + file + "; the daily parkour path changes on every restart", failed);
+        }
+        return secret;
     }
 
     /** {@code x y z} → the block there; null when it is not three numbers. */
