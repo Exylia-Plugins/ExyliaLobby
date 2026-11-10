@@ -6,6 +6,7 @@ import net.exylia.exyliaLobby.area.AreaCause;
 import net.exylia.exyliaLobby.config.LobbyConfig;
 import net.exylia.exyliaLobby.module.LobbyContext;
 import net.exylia.exyliaLobby.module.LobbyModule;
+import net.exylia.exyliaLobby.module.shared.Countdown;
 import net.exylia.lib.action.ActionResult;
 import net.exylia.lib.action.PluginActions;
 import net.exylia.lib.config.ConfigFile;
@@ -200,8 +201,13 @@ public final class SpawnModule extends LobbyModule {
             return;
         }
         send(player, messages.get().teleporting(), withTime(Values.of(), warmup));
+        // The bar and its ticks follow the teleport's own warmup; the cancelled line carries the refusal sound.
+        Countdown countdown = Countdown.start(plugin(), context.tasks(), player, warmup, messages.get().warmupBar(), "BLUE",
+                settings.get().warmupSounds(), () -> {
+                });
         Teleports.of(plugin()).to(player, target.get()).warmup(warmup).cancelOnMove().cancelOnDamage()
                 .then(result -> {
+                    if (result != TeleportResult.SUCCESS) context.tasks().runAtEntity(player, countdown::stop);
                     if (result == TeleportResult.CANCELLED_ON_MOVE || result == TeleportResult.CANCELLED_ON_DAMAGE) {
                         send(player, messages.get().cancelled(), Values.of());
                     }
@@ -287,7 +293,7 @@ public final class SpawnModule extends LobbyModule {
             settings.update(current -> {
                 Map<String, SpawnSettings.Point> points = new LinkedHashMap<>(current.points());
                 points.put(in, point);
-                return new SpawnSettings(current.command(), current.onJoin(), current.warmup(), current.respawn(),
+                return new SpawnSettings(current.command(), current.onJoin(), current.warmup(), current.warmupSounds(), current.respawn(),
                         current.voidReturn(), current.voidY(), points);
             });
             send(admin, messages.get().spawnSet(), Values.of("world", in));

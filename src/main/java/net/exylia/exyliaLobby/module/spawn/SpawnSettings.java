@@ -1,5 +1,6 @@
 package net.exylia.exyliaLobby.module.spawn;
 
+import net.exylia.exyliaLobby.module.shared.Countdown;
 import net.exylia.lib.config.Comment;
 import net.exylia.lib.config.Menu;
 
@@ -18,6 +19,9 @@ public record SpawnSettings(
         @Menu.Range(min = 0, max = 30, step = 0.5)
         double warmup,
 
+        @Comment("Sounds of the warmup countdown, heard by that player only, as NAME|volume|pitch. Blank plays nothing.")
+        Countdown.Sounds warmupSounds,
+
         @Comment("Players who die inside the lobby respawn at spawn instead of their bed.")
         boolean respawn,
 
@@ -33,7 +37,7 @@ public record SpawnSettings(
         Map<String, Point> points) {
 
     public SpawnSettings() {
-        this(List.of("spawn"), JoinMode.ALWAYS, 0.0, true, true, -70, Map.of());
+        this(List.of("spawn"), JoinMode.ALWAYS, 0.0, new Countdown.Sounds(), true, true, -70, Map.of());
     }
 
     /** Whether to teleport a player who joins inside the lobby. */

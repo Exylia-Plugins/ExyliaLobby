@@ -6,9 +6,14 @@ import java.util.List;
 
 /** {@code lang/<language>/modules/pvp/messages.yml}. */
 public record PvpMessages(
-        @Comment("Boss bars while the kit goes on or off. %seconds% is the time left.")
+        @Comment("Boss bars while the kit goes on or off. %time% is the time left (2.4s).")
         String equipBar,
         String unequipBar,
+        @Comment("Titles: when the kit starts going on, and once it is on. Blank shows none.")
+        String equipTitle,
+        String equipSubtitle,
+        String kitOnTitle,
+        String kitOnSubtitle,
         @Comment("Chat lines. %time% is the combat time left (4.2s), %victim%, %killer% and %streak% name the fight.")
         String equipped,
         String unequipped,
@@ -54,8 +59,12 @@ public record PvpMessages(
         String boardSet) {
 
     public PvpMessages() {
-        this("{success}&lEQUIPPING {letters_black}» {letters}Keep holding your sword {letters_black}({info}%seconds%s{letters_black})",
-                "{error}&lSTANDING DOWN {letters_black}» {letters}Keep your sword away {letters_black}({info}%seconds%s{letters_black})",
+        this("{success}&lEQUIPPING {letters_black}» {letters}Keep holding your sword {letters_black}({info}%time%{letters_black})",
+                "{error}&lSTANDING DOWN {letters_black}» {letters}Keep your sword away {letters_black}({info}%time%{letters_black})",
+                "{success}&lPVP",
+                "{letters}Keep your sword out to fight",
+                "{success}&lFIGHT",
+                "{letters}Your kit is on",
                 "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {success}You are in the fight.{letters} Only players with their sword out can hit you.",
                 "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}You are out of the fight and your things are back.",
                 "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}You are in combat for {highlight}%time%{error}. Keep your sword out.",

@@ -10,6 +10,7 @@ import net.exylia.exyliaLobby.module.hotbar.HotbarModule;
 import net.exylia.exyliaLobby.module.protection.ProtectionModule;
 import net.exylia.exyliaLobby.module.state.StateModule;
 import net.exylia.exyliaLobby.module.shared.AdminScreens;
+import net.exylia.exyliaLobby.module.shared.Countdown;
 import net.exylia.exyliaLobby.module.shared.Slots;
 import net.exylia.exyliaLobby.module.spawn.SpawnModule;
 import net.exylia.lib.config.ConfigFile;
@@ -40,7 +41,7 @@ import net.exylia.lib.util.reward.PendingRewards;
 import net.exylia.lib.util.reward.RewardEntry;
 import net.exylia.lib.util.reward.Rewards;
 import net.exylia.lib.database.wipe.Wipes;
-import net.kyori.adventure.bossbar.BossBar;
+import net.exylia.lib.effect.Effects;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -118,21 +119,6 @@ public final class PvpModule extends LobbyModule implements Busy {
     /** A killer's cooldown per victim ({@code pvp_kill:<victim>}), for the repeat-kill window. */
     private static final String KILL = "pvp_kill:";
 
-    private static final class Countdown {
-        final boolean entering;
-        final int total;
-        int left;
-        final BossBar bar;
-        TaskHandle task;
-
-        Countdown(boolean entering, int total, BossBar bar) {
-            this.entering = entering;
-            this.total = total;
-            this.left = total;
-            this.bar = bar;
-        }
-    }
-
     public PvpModule(@NotNull LobbyContext context) {
         super(ID, context);
     }
@@ -208,9 +194,7 @@ public final class PvpModule extends LobbyModule implements Busy {
         context.registered(HologramsModule.ID, HologramsModule.class).ifPresent(holograms -> holograms.remove(BOARD));
         if (regions != null) regions.replaceAll(List.of());
         screens.clear();
-        countdowns.values().forEach(c -> {
-            if (c.task != null) c.task.cancel();
-        });
+        countdowns.values().forEach(Countdown::stop);
         countdowns.clear();
         active.clear();
         zoned.clear();
@@ -334,7 +318,7 @@ public final class PvpModule extends LobbyModule implements Busy {
         boolean onSword = slot == swordSlot();
         if (active.contains(id)) {
             if (onSword) {
-                cancelCountdown(player);
+                abortCountdown(player);
                 return false;
             }
             if (tagged(id)) {
@@ -348,7 +332,7 @@ public final class PvpModule extends LobbyModule implements Busy {
             if (!allowed(player)) return false;
             if (!countdowns.containsKey(id)) countdown(player, true);
         } else {
-            cancelCountdown(player);
+            abortCountdown(player);
         }
         return false;
     }
@@ -418,36 +402,39 @@ public final class PvpModule extends LobbyModule implements Busy {
 
     private void countdown(Player player, boolean entering) {
         PvpSettings config = settings.get();
-        int seconds = (int) Math.ceil(entering ? config.equipSeconds() : config.unequipSeconds());
+        double seconds = entering ? config.equipSeconds() : config.unequipSeconds();
         if (seconds <= 0) {
             if (entering) equip(player, false);
             else unequip(player);
             return;
         }
-        String line = entering ? messages.get().equipBar() : messages.get().unequipBar();
-        BossBar bar = BossBar.bossBar(PluginMessages.of(plugin()).text(line, Values.of("seconds", seconds)).build(), 1f,
-                entering ? BossBar.Color.GREEN : BossBar.Color.RED, BossBar.Overlay.PROGRESS);
-        player.showBossBar(bar);
-        Countdown running = new Countdown(entering, seconds, bar);
-        countdowns.put(player.getUniqueId(), running);
-        running.task = context.tasks().runAtEntityTimer(player, 20L, 20L, () -> {
-            running.left--;
-            if (running.left <= 0) {
-                cancelCountdown(player);
-                if (entering) equip(player, false);
-                else unequip(player);
-                return;
-            }
-            bar.name(PluginMessages.of(plugin()).text(line, Values.of("seconds", running.left)).build());
-            bar.progress(Math.max(0f, Math.min(1f, running.left / (float) running.total)));
-        });
+        PvpMessages text = messages.get();
+        UUID id = player.getUniqueId();
+        if (entering) title(player, text.equipTitle(), text.equipSubtitle());
+        countdowns.put(id, Countdown.start(plugin(), context.tasks(), player, seconds,
+                entering ? text.equipBar() : text.unequipBar(), entering ? "GREEN" : "RED", config.countdownSounds(), () -> {
+                    countdowns.remove(id);
+                    if (entering) equip(player, false);
+                    else unequip(player);
+                }));
     }
 
+    /** Takes a running countdown down quietly (the fight moved on: a death, a zone, the kit came off). */
     private void cancelCountdown(Player player) {
         Countdown running = countdowns.remove(player.getUniqueId());
-        if (running == null) return;
-        if (running.task != null) running.task.cancel();
-        player.hideBossBar(running.bar);
+        if (running != null) running.stop();
+    }
+
+    /** The player changed their mind mid-countdown: it stops with the cancel sound. */
+    private void abortCountdown(Player player) {
+        Countdown running = countdowns.remove(player.getUniqueId());
+        if (running != null) running.cancel();
+    }
+
+    /** A short title for this player only; a blank title and subtitle show nothing. */
+    private void title(Player player, String title, String subtitle) {
+        if (title.isBlank() && subtitle.isBlank()) return;
+        Effects.of(plugin()).title(title).subtitle(subtitle).times(0, 1.2, 0.4).show(player);
     }
 
     // ======================== kit on and off ========================
@@ -481,6 +468,7 @@ public final class PvpModule extends LobbyModule implements Busy {
                             unequip(player);
                         } else if (active.contains(id)) {
                             giveKit(player);
+                            title(player, messages.get().kitOnTitle(), messages.get().kitOnSubtitle());
                             send(player, messages.get().equipped(), Values.of());
                         }
                     });
@@ -827,7 +815,7 @@ public final class PvpModule extends LobbyModule implements Busy {
             settings.update(current -> new PvpSettings(current.topCommand(), current.permission(), current.equipSeconds(),
                     current.unequipSeconds(), current.tagSeconds(), current.swordSlot(), current.swordMaterial(), current.quitCounts(),
                     current.kit(), point(at), current.topRefreshSeconds(), current.boardRows(), current.board(),
-                    current.streakRewards(), current.zones(), current.repeatKillWindow()));
+                    current.streakRewards(), current.zones(), current.repeatKillWindow(), current.countdownSounds()));
             send(admin, messages.get().spawnSet(), Values.of());
             if (back != null) back.run();
         });
@@ -840,7 +828,7 @@ public final class PvpModule extends LobbyModule implements Busy {
             settings.update(current -> new PvpSettings(current.topCommand(), current.permission(), current.equipSeconds(),
                     current.unequipSeconds(), current.tagSeconds(), current.swordSlot(), current.swordMaterial(), current.quitCounts(),
                     current.kit(), current.respawn(), current.topRefreshSeconds(), current.boardRows(), point(at),
-                    current.streakRewards(), current.zones(), current.repeatKillWindow()));
+                    current.streakRewards(), current.zones(), current.repeatKillWindow(), current.countdownSounds()));
             buildBoard();
             send(admin, messages.get().boardSet(), Values.of());
             if (back != null) back.run();
@@ -926,7 +914,7 @@ public final class PvpModule extends LobbyModule implements Busy {
             return new PvpSettings(current.topCommand(), current.permission(), current.equipSeconds(), current.unequipSeconds(),
                     current.tagSeconds(), current.swordSlot(), current.swordMaterial(), current.quitCounts(), current.kit(),
                     current.respawn(), current.topRefreshSeconds(), current.boardRows(), current.board(), current.streakRewards(), map,
-                    current.repeatKillWindow());
+                    current.repeatKillWindow(), current.countdownSounds());
         });
         buildZones();
     }

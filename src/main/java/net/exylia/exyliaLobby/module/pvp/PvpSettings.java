@@ -1,5 +1,6 @@
 package net.exylia.exyliaLobby.module.pvp;
 
+import net.exylia.exyliaLobby.module.shared.Countdown;
 import net.exylia.lib.config.Comment;
 import net.exylia.lib.config.Menu;
 
@@ -61,11 +62,14 @@ public record PvpSettings(
 
         @Comment("Killing the same player again within this time counts no kill, no streak and no reward (their death")
         @Comment("still counts), so two accounts farm nothing. Quitting in combat never pays a streak reward either.")
-        Duration repeatKillWindow) {
+        Duration repeatKillWindow,
+
+        @Comment("Sounds of the countdown while the kit goes on or off, heard by that player only, as NAME|volume|pitch.")
+        Countdown.Sounds countdownSounds) {
 
     public PvpSettings() {
         this(List.of("pvptop"), "", 3, 3, 10, 4, "WOODEN_SWORD", true, new Kit(), new Point(), 30, 5, new Point(),
-                new LinkedHashMap<>(), new LinkedHashMap<>(), Duration.ofMinutes(5));
+                new LinkedHashMap<>(), new LinkedHashMap<>(), Duration.ofMinutes(5), new Countdown.Sounds());
     }
 
     /** The fighter's gear. */
