@@ -69,7 +69,12 @@ public record ParkourMessages(
         String checkpointAdded,
         String finishSet,
         String courseDeleted,
-        String wrongWorld) {
+        String wrongWorld,
+
+        @Comment("The label over the next checkpoint's beam. %checkpoint%/%total% the checkpoint, %distance% metres away.")
+        String beaconLabel,
+        @Comment("The items a runner holds: back to the last checkpoint, start again, leave.")
+        RunItems items) {
 
     public ParkourMessages() {
         this("%prefix% {letters}Courses: %courses%{letters}. Play one with {highlight}/%command% <course>{letters}, or {highlight}/%command% endless{letters}.",
@@ -129,7 +134,31 @@ public record ParkourMessages(
                 "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}Checkpoint {highlight}%checkpoint%{letters} of {highlight}%course%{letters} added at your feet.",
                 "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}Finish of {highlight}%course%{letters} set at your feet.",
                 "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}Course {highlight}%course%{letters} deleted.",
-                "ENTITY_VILLAGER_NO %prefix% {error}{highlight}%course%{error} is in world {highlight}%world%{error}. Stand there to edit it.");
+                "ENTITY_VILLAGER_NO %prefix% {error}{highlight}%course%{error} is in world {highlight}%world%{error}. Stand there to edit it.",
+
+                "{letters}Checkpoint {info}%checkpoint%{letters_black}/{info}%total% {letters_black}· {info}%distance% m",
+                new RunItems());
+    }
+
+    /** A run item's look: its material, name and lore. */
+    public record RunItem(String icon, String name, List<String> lore) {
+    }
+
+    public record RunItems(RunItem checkpoint, RunItem restart, RunItem leave) {
+        public RunItems() {
+            this(new RunItem("LIGHT_WEIGHTED_PRESSURE_PLATE",
+                            "{letters}Parkour {letters_black}▸ <gradient:{primary}:{secondary_light}>Checkpoint</gradient>",
+                            List.of("{letters_black}Run item", "", "{primary}{icon:click} Click to go back",
+                                    "{letters_black}To the last checkpoint you reached.")),
+                    new RunItem("CLOCK",
+                            "{letters}Parkour {letters_black}▸ <gradient:{primary}:{secondary_light}>Restart</gradient>",
+                            List.of("{letters_black}Run item", "", "{primary}{icon:click} Click to restart",
+                                    "{letters_black}A new run from the start.")),
+                    new RunItem("BARRIER",
+                            "{letters}Parkour {letters_black}▸ <gradient:{error}:{error_light}>Leave</gradient>",
+                            List.of("{letters_black}Run item", "", "{error}{icon:click} Click to leave",
+                                    "{letters_black}Ends the run; nothing is saved.")));
+        }
     }
 
     /** Why a run was ended, shown in {@link #cheated}. */

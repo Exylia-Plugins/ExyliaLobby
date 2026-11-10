@@ -6,6 +6,18 @@ Worktree: /root/Java/Exylia/ExyliaLobby-worktrees/parkour (detached, commits onl
 - [x] timing/periods pure helpers (Times, Board) + tests
 - [x] config records: ParkourSettings, ParkourCourses (catalogue, Spot, Medals), ParkourThemes, ParkourMessages + tests
 - [x] data (ParkourData: tables, caches, tops, wipes, placeholders; module calls create, register, load/forget, refreshAll on a timer)
-- [ ] runs (course, endless, sprint, daily), anti-cheat, overlay items
+- [x] runs 1/3: ParkourRuns registry + CourseRun (CourseTrack detection, splits, boss bar, beacon, run items via Hotbars, rewards, medals) + RunEnd
+- [ ] runs 2/3: anti-cheat (RunGuard)
+- [ ] runs 3/3: endless, sprint, daily (EndlessRun, fake blocks)
 - [ ] module wiring, placeholders, commands, actions, visibility
 - [ ] player menus (list, course, top) + admin menus
+
+## Runs: what the wiring step needs
+
+- Build once in `start()`: `runs = new ParkourRuns(context, settings, courses, themes, messages, data, clockSupplier)`, then `listen(runs)`.
+  It registers its own actions (`parkour_run_checkpoint|restart|leave`, namespace of `Actions.of(plugin)`), the run-item hotbar set
+  and the reward queue (QUEUE + `PendingRewards.database`) if nobody set one. `stop()`: `runs.close()`. Reload: `runs.reload()` (redraws run items).
+- `runs.isRunning(player)` for `Busy#busy` and the visibility rule; `runs.stop(player, RunEnd.LOBBY)` in `leave(...)` (QUIT is handled by its own listener).
+- `/parkour <course>`: `runs.startCourse(player, typed)` (sends its own errors). `/parkour leave`: `stop(player, RunEnd.LEFT)` (send `notRunning` when `!isRunning`).
+- Spawn void hook: `context.module("spawn", SpawnModule.class).ifPresent(s -> rescueHandle = s.rescue(100, runs::rescue))`; run the handle in `stop()`.
+- Stepping onto a course's start plate begins a run by itself (skipped when `Busy.any`).
