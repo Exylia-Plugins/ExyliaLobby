@@ -163,9 +163,9 @@ public final class HologramsModule extends LobbyModule {
         this.back = back;
         HologramsMessages text = messages.get();
         screens.open(viewer, back, "Modules", text.listTitle(), text.listKind(), List.of(
-                new AdminScreens.Add("OAK_SIGN", text.addHereTitle(), text.addHereText(), text.addHereClick(), text.addHereNext(),
+                new AdminScreens.Add("OAK_SIGN", text.addSpotTitle(), text.addSpotText(), text.addSpotClick(), text.addSpotNext(),
                         admin -> add(admin, false)),
-                new AdminScreens.Add("SPYGLASS", text.addLookTitle(), text.addLookText(), text.addLookClick(), text.addLookNext(),
+                new AdminScreens.Add("SPYGLASS", text.addBlockTitle(), text.addBlockText(), text.addBlockClick(), text.addBlockNext(),
                         admin -> add(admin, true))),
                 this::rows);
     }
@@ -202,11 +202,14 @@ public final class HologramsModule extends LobbyModule {
                         }, reopen);
             }
             case "right" -> {
-                Location at = viewer.getLocation().add(0, 1.6, 0);
-                change(id, current -> new HologramsSettings.Hologram(at.getWorld().getName(), at.getX(), at.getY(), at.getZ(),
-                        current.lines(), current.viewDistance()));
-                send(viewer, text.moved(), Values.of("name", id));
-                screens.update(viewer);
+                viewer.closeInventory();
+                setup(viewer, reopen).spawn(text.wizardSpot(), id, where -> {
+                    Location at = where.clone().add(0, 1.6, 0);
+                    change(id, current -> new HologramsSettings.Hologram(at.getWorld().getName(), at.getX(), at.getY(), at.getZ(),
+                            current.lines(), current.viewDistance()));
+                    send(viewer, text.moved(), Values.of("name", id));
+                    reopen.run();
+                });
             }
             case "shift" -> screens.confirm(viewer, Values.of("name", id).apply(text.confirmRemove()), () -> {
                 save(map -> map.remove(id));
@@ -230,19 +233,16 @@ public final class HologramsModule extends LobbyModule {
         build();
     }
 
-    private void add(Player admin, boolean looking) {
+    /** A new hologram where the admin stood, at eye height, or ({@code overBlock}) above a clicked block. */
+    private void add(Player admin, boolean overBlock) {
         HologramsMessages text = messages.get();
-        Location at;
-        if (looking) {
-            Block block = admin.getTargetBlockExact(8);
-            if (block == null) {
-                send(admin, text.noTarget(), Values.of());
-                return;
-            }
-            at = block.getLocation().add(0.5, 2, 0.5);
-        } else {
-            at = admin.getLocation().add(0, 1.6, 0);
-        }
+        Runnable reopen = () -> openAdmin(admin, back);
+        admin.closeInventory();
+        if (overBlock) setup(admin, reopen).block(text.wizardBlock(), block -> create(admin, block.clone().add(0.5, 2, 0.5), reopen));
+        else setup(admin, reopen).spawn(text.wizardSpot(), where -> create(admin, where.clone().add(0, 1.6, 0), reopen));
+    }
+
+    private void create(Player admin, Location at, Runnable reopen) {
         Map<String, HologramsSettings.Hologram> all = settings.get().holograms();
         int number = all.size() + 1;
         while (all.containsKey("board-" + number)) number++;
@@ -250,8 +250,8 @@ public final class HologramsModule extends LobbyModule {
         HologramsSettings.Hologram base = new HologramsSettings.Hologram();
         save(map -> map.put(id, new HologramsSettings.Hologram(at.getWorld().getName(), at.getX(), at.getY(), at.getZ(),
                 base.lines(), base.viewDistance())));
-        send(admin, text.added(), Values.of("name", id));
-        screens.update(admin);
+        send(admin, messages.get().added(), Values.of("name", id));
+        reopen.run();
     }
 
     private void send(Player to, String line, Values values) {
