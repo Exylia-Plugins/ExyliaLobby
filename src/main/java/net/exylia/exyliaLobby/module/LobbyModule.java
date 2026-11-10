@@ -70,6 +70,8 @@ public abstract class LobbyModule extends PluginModule {
         return layout.apply(config("modules/" + getId() + "/messages", schema).translated()).load();
     }
 
+    private final java.util.Set<Class<?>> commandTypes = java.util.concurrent.ConcurrentHashMap.newKeySet();
+
     protected final void listen(@NotNull Listener listener) {
         plugin().getServer().getPluginManager().registerEvents(listener, plugin());
         listeners.add(listener);
@@ -77,7 +79,20 @@ public abstract class LobbyModule extends PluginModule {
 
     /** A player command under the labels a module's settings name; nothing when the list is empty. */
     protected final @NotNull List<Object> command(@NotNull List<String> labels, @NotNull OrphanCommand handler) {
-        return labels.isEmpty() ? List.of() : List.of(Orphans.path(labels.toArray(String[]::new)).handler(handler));
+        if (labels.isEmpty()) return List.of();
+        commandTypes.add(handler.getClass());
+        return List.of(Orphans.path(labels.toArray(String[]::new)).handler(handler));
+    }
+
+    /**
+     * Whether a command method belongs to this module. ExyliaLib's own owner lookup only sees the Lamp wrapper of an
+     * orphan command, never the handler class inside it, so the core asks the modules itself.
+     */
+    public final boolean ownsCommand(@NotNull Class<?> declaring) {
+        for (Class<?> type = declaring; type != null; type = type.getEnclosingClass()) {
+            if (commandTypes.contains(type)) return true;
+        }
+        return false;
     }
 
     /** A subcommand group under {@code /lobbyadmin}. */
@@ -146,7 +161,7 @@ public abstract class LobbyModule extends PluginModule {
         for (UUID id : context.areas().players()) {
             Player player = Bukkit.getPlayer(id);
             if (player == null) continue;
-            if (context.stopping()) safeLeave(player);
+            if (context.stopping() || context.tasks().isOwnedBy(player)) safeLeave(player);
             else context.tasks().runAtEntity(player, () -> safeLeave(player));
         }
         listeners.forEach(HandlerList::unregisterAll);
