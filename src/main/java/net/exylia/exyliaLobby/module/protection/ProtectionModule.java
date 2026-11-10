@@ -62,6 +62,10 @@ public final class ProtectionModule extends LobbyModule {
 
     @Override
     protected void stop() {
+        for (UUID id : context.stopping() ? java.util.Set.<UUID>of() : building) {
+            Player player = org.bukkit.Bukkit.getPlayer(id);
+            if (player != null) context.tasks().runAtEntity(player, () -> context.areas().pause(player, false));
+        }
         building.clear();
         bars.clear();
     }
@@ -93,6 +97,7 @@ public final class ProtectionModule extends LobbyModule {
         ProtectionMessages text = messages.get();
         if (building.remove(player.getUniqueId())) {
             hideBar(player);
+            context.areas().pause(player, false);
             send(player, text.buildOff());
             return;
         }
@@ -101,6 +106,7 @@ public final class ProtectionModule extends LobbyModule {
             return;
         }
         building.add(player.getUniqueId());
+        context.areas().pause(player, true);
         BossBar bar = BossBar.bossBar(PluginMessages.of(plugin()).text(text.buildBar(), Values.of()).build(), 1f,
                 BossBar.Color.YELLOW, BossBar.Overlay.PROGRESS);
         bars.put(player.getUniqueId(), bar);
@@ -115,6 +121,7 @@ public final class ProtectionModule extends LobbyModule {
 
     @Override
     protected void leave(@NotNull Player player, @NotNull AreaCause cause) {
+        if (cause == AreaCause.BUILD) return;
         if (building.remove(player.getUniqueId())) hideBar(player);
     }
 

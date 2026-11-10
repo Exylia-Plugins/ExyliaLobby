@@ -55,6 +55,8 @@ public final class Areas implements Listener {
     private final ConfigFile<LobbyConfig> config;
     private final PluginRegions regions;
     private final Set<UUID> inside = ConcurrentHashMap.newKeySet();
+    /** Players the lobby leaves alone while they stand in it (build mode): every module has handed their state back. */
+    private final Set<UUID> paused = ConcurrentHashMap.newKeySet();
     private final Map<UUID, TaskHandle> polls = new ConcurrentHashMap<>();
     private final BiConsumer<Player, Change> onChange;
 
@@ -97,16 +99,33 @@ public final class Areas implements Listener {
     /** Takes everyone out (as {@link AreaCause#DISABLE}) and forgets the regions. */
     public void stop() {
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (inside.remove(player.getUniqueId())) change(player, new Change(false, AreaCause.DISABLE));
+            boolean wasPaused = paused.remove(player.getUniqueId());
+            if (inside.remove(player.getUniqueId()) && !wasPaused) change(player, new Change(false, AreaCause.DISABLE));
         }
         polls.values().forEach(TaskHandle::cancel);
         polls.clear();
         regions.replaceAll(List.of());
     }
 
-    /** Whether the player is in the lobby now. Safe from any thread. */
+    /** Whether the player is in the lobby now, and not left alone by {@link #pause}. Safe from any thread. */
     public boolean contains(@NotNull Player player) {
-        return inside.contains(player.getUniqueId());
+        return inside.contains(player.getUniqueId()) && !paused.contains(player.getUniqueId());
+    }
+
+    /**
+     * Leaves a player alone while they stay in the lobby (build mode), or takes them back. Pausing someone inside
+     * runs every module's leave ({@link AreaCause#BUILD}), so their inventory, game mode and items are their own;
+     * resuming runs enter again. A paused player crosses edges silently until resumed. Player's own thread.
+     */
+    public void pause(@NotNull Player player, boolean on) {
+        UUID id = player.getUniqueId();
+        if (on ? !paused.add(id) : !paused.remove(id)) return;
+        if (inside.contains(id)) change(player, new Change(!on, AreaCause.BUILD));
+    }
+
+    /** Whether {@link #pause} is leaving this player alone. */
+    public boolean paused(@NotNull Player player) {
+        return paused.contains(player.getUniqueId());
     }
 
     /** Whether a place is lobby. */
@@ -122,7 +141,9 @@ public final class Areas implements Listener {
 
     /** Everyone in the lobby now. */
     public @NotNull Set<UUID> players() {
-        return Set.copyOf(inside);
+        Set<UUID> now = new java.util.HashSet<>(inside);
+        now.removeAll(paused);
+        return Set.copyOf(now);
     }
 
     private void rebuild() {
@@ -180,7 +201,7 @@ public final class Areas implements Listener {
         if (now == was) return;
         if (now) inside.add(player.getUniqueId());
         else inside.remove(player.getUniqueId());
-        change(player, new Change(now, cause));
+        if (!paused.contains(player.getUniqueId())) change(player, new Change(now, cause));
     }
 
     private void change(Player player, Change change) {
@@ -221,7 +242,8 @@ public final class Areas implements Listener {
         Player player = event.getPlayer();
         TaskHandle poll = polls.remove(player.getUniqueId());
         if (poll != null) poll.cancel();
-        if (inside.remove(player.getUniqueId())) change(player, new Change(false, AreaCause.QUIT));
+        boolean wasPaused = paused.remove(player.getUniqueId());
+        if (inside.remove(player.getUniqueId()) && !wasPaused) change(player, new Change(false, AreaCause.QUIT));
     }
 
     @EventHandler

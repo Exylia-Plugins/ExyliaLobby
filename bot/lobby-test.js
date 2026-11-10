@@ -142,6 +142,10 @@ async function main() {
   i = bot.chatLog.length
   bot.chat('/lobbyadmin build'); await sleep(1200)
   result('toggle: protection on again, build works', /build mode/i.test(since(bot, i)) && !/switched off/.test(since(bot, i)), since(bot, i))
+  await sleep(800)
+  result('build mode: lobby hands the inventory back', !hotbar(bot, 0) && bot.game.gameMode !== 'adventure', `slot0 ${hotbar(bot, 0)?.name} mode ${bot.game.gameMode}`)
+  bot.chat('/lobbyadmin build'); await sleep(1500)
+  result('build mode off: lobby applies again', hotbar(bot, 0)?.name === 'compass' && bot.game.gameMode === 'adventure', `slot0 ${hotbar(bot, 0)?.name} mode ${bot.game.gameMode}`)
   bot.chat('/lobbyadmin build'); await sleep(800)
   log('inv after build off', inv(bot))
   cmd('lobbyadmin module parkour off'); await sleep(1200)

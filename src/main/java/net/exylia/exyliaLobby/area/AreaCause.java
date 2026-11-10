@@ -12,6 +12,8 @@ public enum AreaCause {
     CHANGE,
     /** A module was switched on while they were inside, so it catches up. Sent only to that module. */
     MODULE,
+    /** Build mode was switched on (leave) or off (enter) while inside: the lobby lets the admin be. */
+    BUILD,
     /** The plugin is stopping. */
     DISABLE
 }
