@@ -10,7 +10,7 @@ Every part is a module you switch on or off live from `/lobbyadmin`, and every s
 - **Server selector**: live player counts, lobby selector, server NPCs and portals.
 - **HUD**: sidebar, tab list, rotating boss bars and announcements.
 - **Lobby PvP**: hold the sword to fight players who opted in; your hotbar comes back exactly.
-- **Parkour**: courses with checkpoints, splits and a ghost of your best run, endless parkour that never repeats itself, and leaderboards shared across lobbies.
+- **Parkour**: courses with checkpoints, splits and medals, endless parkour that never repeats itself, and leaderboards shared across lobbies.
 - **Gadgets**: grappling hook, ender ride, paint blaster and more harmless toys.
 
 Requires [ExyliaLib](https://modrinth.com/plugin/exylialib). PacketEvents is recommended (hotbar overlay, player visibility, endless parkour).

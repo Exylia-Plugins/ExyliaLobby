@@ -40,7 +40,7 @@ public record LobbyConfig(
             List<String> worlds,
 
             @Comment("Boxes inside other worlds that are lobby, such as the spawn of a survival server.")
-            @Comment("Add them in game: /lobbyadmin area. Format: name: {world, min: 'x y z', max: 'x y z'}.")
+            @Comment("Add them in game: /lobbyadmin, Areas. Format: name: {world, min: 'x y z', max: 'x y z'}.")
             java.util.Map<String, Box> boxes,
 
             @Comment("WorldGuard regions that are lobby, by id, when WorldGuard is installed.")
