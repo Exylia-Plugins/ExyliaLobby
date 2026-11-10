@@ -85,7 +85,7 @@ public final class ParkourModule extends LobbyModule implements Busy {
         listen(runs.guard());
         context.visibility().add(RULE, (viewer, target) ->
                 !settings.get().hideRunners() || viewer.equals(target) || !isRunning(target));
-        context.module(SpawnModule.ID, SpawnModule.class).ifPresent(spawn -> rescueHandle = spawn.rescue(100, runs::rescue));
+        context.registered(SpawnModule.ID, SpawnModule.class).ifPresent(spawn -> rescueHandle = spawn.rescue(100, runs::rescue));
         settings.onReload(reloaded -> {
             if (!isEnabled()) return;
             clock = buildClock();
@@ -490,7 +490,7 @@ public final class ParkourModule extends LobbyModule implements Busy {
 
     private void placeBoards() {
         clearBoards();
-        context.module(HologramsModule.ID, HologramsModule.class).ifPresent(holograms ->
+        context.registered(HologramsModule.ID, HologramsModule.class).ifPresent(holograms ->
                 settings.get().boards().forEach((id, spot) -> {
                     org.bukkit.World world = org.bukkit.Bukkit.getWorld(spot.world());
                     if (world == null) return;
@@ -501,7 +501,7 @@ public final class ParkourModule extends LobbyModule implements Busy {
     }
 
     private void clearBoards() {
-        context.module(HologramsModule.ID, HologramsModule.class).ifPresent(holograms ->
+        context.registered(HologramsModule.ID, HologramsModule.class).ifPresent(holograms ->
                 boards.forEach(id -> holograms.remove(BOARD_PREFIX + id)));
         boards.clear();
     }
