@@ -19,7 +19,7 @@ public record VisibilitySettings(
         boolean clanFriends) {
 
     public VisibilitySettings() {
-        this(Mode.EVERYONE, Duration.ofSeconds(3), "exylialobby.visibility.staff", true);
+        this(Mode.EVERYONE, Duration.ofMillis(500), "exylialobby.visibility.staff", true);
     }
 
     /** What a player chose to see. */

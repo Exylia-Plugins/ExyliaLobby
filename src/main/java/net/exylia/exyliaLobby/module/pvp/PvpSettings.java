@@ -15,11 +15,11 @@ public record PvpSettings(
         @Comment("Permission needed to fight. Empty is everyone.")
         String permission,
 
-        @Comment("Seconds a player holds the sword before the kit goes on.")
-        int equipSeconds,
+        @Comment("Seconds a player holds the sword before the kit goes on. Decimals allowed; 0 is at once.")
+        double equipSeconds,
 
-        @Comment("Seconds a player stays off the sword before the kit comes off.")
-        int unequipSeconds,
+        @Comment("Seconds a player stays off the sword before the kit comes off. Decimals allowed; 0 is at once.")
+        double unequipSeconds,
 
         @Comment("Seconds a player stays in combat after a hit, given or taken. Nobody can put the sword away meanwhile.")
         int tagSeconds,
@@ -60,7 +60,7 @@ public record PvpSettings(
         Duration repeatKillWindow) {
 
     public PvpSettings() {
-        this(List.of("pvptop"), "", 5, 5, 10, 4, "WOODEN_SWORD", true, new Kit(), new Point(), 30, 5, new Point(),
+        this(List.of("pvptop"), "", 3, 3, 10, 4, "WOODEN_SWORD", true, new Kit(), new Point(), 30, 5, new Point(),
                 new LinkedHashMap<>(), new LinkedHashMap<>(), Duration.ofMinutes(5));
     }
 

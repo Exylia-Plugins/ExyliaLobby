@@ -44,7 +44,7 @@ public record HotbarSettings(
      * @param material    anything an item accepts: a material, {@code basehead-...}, {@code nexo:id}
      * @param requires    a module id (such as {@code parkour}): the button is drawn only while that module is on
      * @param permission  a permission: the button is drawn only for holders. Empty for everyone
-     * @param cooldown    time between two presses
+     * @param cooldown    time between two presses. 0 for buttons whose action keeps its own cooldown
      * @param actions     click-prefixed action lines ({@code right: exylialobby:selector_open}); no prefix is every click
      * @param commands    click-prefixed command lines ({@code right: player: parkour})
      */
@@ -60,7 +60,7 @@ public record HotbarSettings(
             List<String> commands) {
 
         public Button() {
-            this(0, "STONE", "", List.of(), "", "", Duration.ofMillis(500), List.of(), List.of());
+            this(0, "STONE", "", List.of(), "", "", Duration.ofMillis(250), List.of(), List.of());
         }
     }
 
@@ -97,10 +97,11 @@ public record HotbarSettings(
             default -> "{primary}:{secondary_light}";
         };
         String colour = "{" + tone + "}";
+        // The visibility switch keeps its own cooldown; the other buttons only guard against a double click.
         return new Button(slot, material,
                 "{letters}Lobby {letters_black}▸ <gradient:" + light + ">" + name + "</gradient>",
                 List.of("{letters_black}" + kind, "", colour + "✎ Information", " {letters}" + line1, " {letters}" + line2, "",
                         colour + "{icon:click} " + click, "{letters_black}" + next),
-                requires, "", Duration.ofMillis(500), actions, commands);
+                requires, "", requires.equals("visibility") ? Duration.ZERO : Duration.ofMillis(250), actions, commands);
     }
 }

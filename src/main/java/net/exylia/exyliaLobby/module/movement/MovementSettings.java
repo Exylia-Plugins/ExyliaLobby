@@ -34,7 +34,7 @@ public record MovementSettings(
             EffectConfig effect) {
 
         public DoubleJump() {
-            this(true, 0.9, 0.75, Duration.ofSeconds(1), "",
+            this(true, 0.9, 0.75, Duration.ofMillis(400), "",
                     new EffectConfig(new EffectConfig.Title(), new EffectConfig.ActionBar(), new EffectConfig.BossBar(),
                             new EffectConfig.Sound("ENTITY_BAT_TAKEOFF", 0.4, 1.4, "MASTER"),
                             new EffectConfig.Particle(), new EffectConfig.Firework()));
@@ -52,7 +52,7 @@ public record MovementSettings(
             Map<String, Pad> list) {
 
         public Pads() {
-            this(true, Duration.ofMillis(800),
+            this(true, Duration.ofMillis(500),
                     new EffectConfig(new EffectConfig.Title(), new EffectConfig.ActionBar(), new EffectConfig.BossBar(),
                             new EffectConfig.Sound("ENTITY_BAT_TAKEOFF", 0.4, 0.8, "MASTER"),
                             new EffectConfig.Particle(), new EffectConfig.Firework()),

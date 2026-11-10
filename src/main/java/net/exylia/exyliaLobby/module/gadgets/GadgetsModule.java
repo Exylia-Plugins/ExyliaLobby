@@ -22,6 +22,7 @@ import net.exylia.lib.text.Values;
 import net.exylia.lib.ui.Menus;
 import net.exylia.lib.ui.UiEntry;
 import net.exylia.lib.util.Cooldowns;
+import net.exylia.lib.util.TimeFormats;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -222,7 +223,7 @@ public final class GadgetsModule extends LobbyModule {
             Lore lore = Lore.of(tone).subtitle(on ? text.kindEquipped() : owned ? text.kind() : text.kindLocked())
                     .section("Information");
             for (String line : card.text()) lore.text(line);
-            lore.section("✦", "Status").stat("clock", "info", text.labelCooldown(), gadget.cooldown() + "s");
+            lore.section("✦", "Status").stat("clock", "info", text.labelCooldown(), TimeFormats.render(gadget.cooldown(), TimeFormats.Style.PRECISE));
             if (!owned) {
                 lore.stat("locked", "warning", text.labelNeeds(), gadget.permission());
                 lore.line("").note(text.lockedNote());
@@ -342,11 +343,15 @@ public final class GadgetsModule extends LobbyModule {
             send(player, text.noPermission(), values);
             return false;
         }
-        if (!Cooldowns.tryStart(player, "lobby_gadget_" + id, Duration.ofSeconds(Math.max(0, gadget.cooldown())))) {
+        if (!Cooldowns.tryStart(player, "lobby_gadget_" + id, millis(gadget.cooldown()))) {
             send(player, text.cooling(), values.put("seconds", Cooldowns.remainingWholeSeconds(player, "lobby_gadget_" + id)));
             return false;
         }
         return true;
+    }
+
+    private static Duration millis(double seconds) {
+        return Duration.ofMillis(Math.round(Math.max(0, seconds) * 1000));
     }
 
     private void keepSafe(Player player) {
@@ -445,7 +450,7 @@ public final class GadgetsModule extends LobbyModule {
                 Vector to = anchor.toVector().subtract(player.getLocation().toVector());
                 if (to.length() < 1.5) return;
                 player.setVelocity(pull(to, gadget.power()));
-                Cooldowns.start(player, "lobby_gadget_grapple", Duration.ofMillis(Math.round(Math.max(0, gadget.cooldown()) * 1000)));
+                Cooldowns.start(player, "lobby_gadget_grapple", millis(gadget.cooldown()));
                 keepSafe(player);
             }
             default -> {

@@ -416,7 +416,7 @@ public final class PvpModule extends LobbyModule implements Busy {
 
     private void countdown(Player player, boolean entering) {
         PvpSettings config = settings.get();
-        int seconds = entering ? config.equipSeconds() : config.unequipSeconds();
+        int seconds = (int) Math.ceil(entering ? config.equipSeconds() : config.unequipSeconds());
         if (seconds <= 0) {
             if (entering) equip(player, false);
             else unequip(player);
