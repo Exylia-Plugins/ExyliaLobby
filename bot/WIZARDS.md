@@ -49,6 +49,16 @@ Wizards, en only:
 - Message defaults changed (text only, no keys added): GadgetsMessages.cooling, VisibilityMessages.cooling,
   ChatMessages.slowDenied, HotbarMessages.cooling, PvpMessages.tagged, SpawnMessages.teleporting now say `%time%`
   instead of `%seconds%s`. Translations must follow (keep `%seconds%` working; `%time%` carries its unit).
+- Item 4 done: `module/shared/Countdown` (Effects boss bar counting down in decimals, redrawn every 2 ticks, a tick
+  each whole second with rising pitch, finish and cancel sounds, all to the player only). PvP equip/unequip use it
+  (stepping back on/off the sword mid-countdown plays the cancel sound; deaths, zones and leaving are silent), plus a
+  start title and a "kit on" title. /spawn warmup shows it too (the teleport keeps its own warmup; the cancelled
+  chat line carries the refusal sound). Parkour has no start countdown to convert: a course clock already waits
+  while the runner stands on the start, endless runs start on arrival.
+  - Settings added: PvpSettings.countdownSounds, SpawnSettings.warmupSounds (`Countdown.Sounds` tick/finish/cancel).
+  - Message keys added: PvpMessages equipTitle, equipSubtitle, kitOnTitle, kitOnSubtitle (after unequipBar);
+    SpawnMessages warmupBar (after cancelled). Changed text: PvpMessages equipBar/unequipBar say `%time%` (old
+    files with `%seconds%s` still read right: the countdown maps it to `%time%`).
 
 ## Remaining
 
@@ -72,7 +82,7 @@ Wizards, en only:
    cooldown get hotbar cooldown 0 (or the module owns it). Times via `TimeFormats`: messages take `%time%`
    (`TimeFormats.Style.PRECISE`: "3.3s", "1m 30s"), keep `%seconds%` as an alias (AUTO number). Throttle refusals:
    `cooldowns.tryStart(player, "refusal:" + key, Duration.ofSeconds(1))` before sending (no lib change needed).
-4. Countdowns (PvP equip/unequip boss bar, parkour start, spawn warmup, any other): `Effects.of(plugin()).bossBar`
+4. (DONE, see above) Countdowns (PvP equip/unequip boss bar, parkour start, spawn warmup, any other): `Effects.of(plugin()).bossBar`
    like HudModule:168 / EndlessRun:116, decimals through TimeFormats, progress updated every few ticks, a quiet tick
    each whole second to the player (note_block.hat / ui.button.click, pitch rising), a finish sound
    (experience_orb.pickup / item.armor.equip_iron), a refusal sound on cancel, a start title/subtitle and a short
