@@ -8,7 +8,7 @@ import java.util.Map;
 
 /** {@code lang/<language>/modules/gadgets/messages.yml}. */
 public record GadgetsMessages(
-        @Comment("Chat lines. %gadget% is the gadget's name, %seconds% the cooldown left.")
+        @Comment("Chat lines. %gadget% is the gadget's name, %time% the cooldown left (0.4s).")
         String cooling,
         String noPermission,
         String equipped,
@@ -42,7 +42,7 @@ public record GadgetsMessages(
     }
 
     public GadgetsMessages() {
-        this("[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}%gadget%{warning} is cooling down: {highlight}%seconds%s{warning}.",
+        this("[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}%gadget%{warning} is cooling down: {highlight}%time%{warning}.",
                 "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}You do not have %gadget%{error} yet.",
                 "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%gadget%{letters} is in your hotbar.",
                 "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}You put your gadget away.",

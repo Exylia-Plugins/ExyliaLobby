@@ -8,7 +8,7 @@ import java.util.List;
 public record VisibilityMessages(
         @Comment("The player switched what they see. %state% is the new mode, coloured.")
         String changed,
-        @Comment("Pressed again too soon. %seconds% is the time left.")
+        @Comment("Pressed again too soon. %time% is the time left (0.4s).")
         String cooling,
         @Comment("The mode as a coloured word, for the hotbar button and chat: %lobby_visibility_state%.")
         String stateEveryone,
@@ -27,7 +27,7 @@ public record VisibilityMessages(
 
     public VisibilityMessages() {
         this("[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}You now see: %state%{letters}.",
-                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Wait {highlight}%seconds%s{warning} before switching again.",
+                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Wait {highlight}%time%{warning} before switching again.",
                 "{success}Everyone",
                 "{info}Friends and staff",
                 "{error}Nobody",

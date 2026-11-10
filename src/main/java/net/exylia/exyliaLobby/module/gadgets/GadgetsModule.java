@@ -21,7 +21,6 @@ import net.exylia.lib.text.PluginMessages;
 import net.exylia.lib.text.Values;
 import net.exylia.lib.ui.Menus;
 import net.exylia.lib.ui.UiEntry;
-import net.exylia.lib.util.Cooldowns;
 import net.exylia.lib.util.TimeFormats;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -70,8 +69,14 @@ public final class GadgetsModule extends LobbyModule {
     public static final String ID = "gadgets";
     static final String MENU = "gadgets/list";
     private static final String KEY = "gadgets-affect-me";
-    private static final long RIDE_MS = 25_000;
-    private static final long SAFE_MS = 4_000;
+    private static final String GRAPPLE = "gadgets_grapple";
+    /** Cooldown keys that are states: hanging on to a pearl, falling without damage, just bounced by a pad. */
+    private static final String RIDE = "gadgets_riding";
+    private static final String SAFE = "gadgets_safe";
+    private static final String BOUNCED = "gadgets_bounced";
+    private static final Duration RIDE_TIME = Duration.ofSeconds(25);
+    private static final Duration SAFE_TIME = Duration.ofSeconds(4);
+    private static final Duration BOUNCE_GAP = Duration.ofMillis(400);
 
     private ConfigFile<GadgetsSettings> settings;
     private ConfigFile<GadgetsMessages> messages;
@@ -79,10 +84,6 @@ public final class GadgetsModule extends LobbyModule {
     private NamespacedKey shotKey;
     private Runnable reservation;
     private final Map<UUID, String> equipped = new ConcurrentHashMap<>();
-    /** Players hanging on to their pearl, and players who fall without taking damage, with when it ends. */
-    private final Map<UUID, Long> rides = new ConcurrentHashMap<>();
-    private final Map<UUID, Long> safe = new ConcurrentHashMap<>();
-    private final Map<UUID, Long> bounced = new ConcurrentHashMap<>();
     /** Where each player's grappling hook last struck a block, until it is reeled in. */
     private final Map<UUID, Location> anchors = new ConcurrentHashMap<>();
     private static final BlockFace[] NEIGHBOURS = {BlockFace.UP, BlockFace.DOWN, BlockFace.NORTH, BlockFace.SOUTH,
@@ -130,9 +131,6 @@ public final class GadgetsModule extends LobbyModule {
         reservation = null;
         Settings.unregister(plugin(), KEY);
         equipped.clear();
-        rides.clear();
-        safe.clear();
-        bounced.clear();
         anchors.clear();
     }
 
@@ -312,9 +310,7 @@ public final class GadgetsModule extends LobbyModule {
     protected void leave(@NotNull Player player, @NotNull AreaCause cause) {
         UUID id = player.getUniqueId();
         equipped.remove(id);
-        rides.remove(id);
-        safe.remove(id);
-        bounced.remove(id);
+        for (String key : List.of(RIDE, SAFE, BOUNCED)) cooldowns().clear(player, key);
         anchors.remove(id);
         strip(player);
     }
@@ -343,8 +339,8 @@ public final class GadgetsModule extends LobbyModule {
             send(player, text.noPermission(), values);
             return false;
         }
-        if (!Cooldowns.tryStart(player, "lobby_gadget_" + id, millis(gadget.cooldown()))) {
-            send(player, text.cooling(), values.put("seconds", Cooldowns.remainingWholeSeconds(player, "lobby_gadget_" + id)));
+        if (!cooldowns().tryStart(player, "gadgets_" + id, millis(gadget.cooldown()))) {
+            refuseCooling(player, "gadgets_" + id, text.cooling(), values);
             return false;
         }
         return true;
@@ -355,23 +351,15 @@ public final class GadgetsModule extends LobbyModule {
     }
 
     private void keepSafe(Player player) {
-        safe.put(player.getUniqueId(), System.currentTimeMillis() + SAFE_MS);
+        cooldowns().start(player, SAFE, SAFE_TIME);
     }
 
     boolean safe(Player player) {
-        Long until = safe.get(player.getUniqueId());
-        if (until == null) return false;
-        if (until > System.currentTimeMillis()) return true;
-        safe.remove(player.getUniqueId(), until);
-        return false;
+        return cooldowns().isActive(player, SAFE);
     }
 
     boolean riding(Player player) {
-        Long until = rides.get(player.getUniqueId());
-        if (until == null) return false;
-        if (until > System.currentTimeMillis()) return true;
-        rides.remove(player.getUniqueId(), until);
-        return false;
+        return cooldowns().isActive(player, RIDE);
     }
 
     // ======================== the gadgets ========================
@@ -417,8 +405,8 @@ public final class GadgetsModule extends LobbyModule {
             send(player, text.noPermission(), values);
             return false;
         }
-        if (Cooldowns.isActive(player, "lobby_gadget_grapple")) {
-            send(player, text.cooling(), values.put("seconds", Cooldowns.remainingWholeSeconds(player, "lobby_gadget_grapple")));
+        if (cooldowns().isActive(player, GRAPPLE)) {
+            refuseCooling(player, GRAPPLE, text.cooling(), values);
             return false;
         }
         return true;
@@ -450,7 +438,7 @@ public final class GadgetsModule extends LobbyModule {
                 Vector to = anchor.toVector().subtract(player.getLocation().toVector());
                 if (to.length() < 1.5) return;
                 player.setVelocity(pull(to, gadget.power()));
-                Cooldowns.start(player, "lobby_gadget_grapple", millis(gadget.cooldown()));
+                cooldowns().start(player, GRAPPLE, millis(gadget.cooldown()));
                 keepSafe(player);
             }
             default -> {
@@ -496,7 +484,7 @@ public final class GadgetsModule extends LobbyModule {
         pearl.setVelocity(player.getLocation().getDirection().multiply(gadget.power()));
         pearl.getPersistentDataContainer().set(shotKey, PersistentDataType.STRING, "ender");
         pearl.addPassenger(player);
-        rides.put(player.getUniqueId(), System.currentTimeMillis() + RIDE_MS);
+        cooldowns().start(player, RIDE, RIDE_TIME);
         keepSafe(player);
     }
 
@@ -542,7 +530,7 @@ public final class GadgetsModule extends LobbyModule {
                     if (rider instanceof Player player) {
                         keepSafe(player);
                         // Their pearl's teleport is refused only for this landing, not for a later pearl.
-                        context.tasks().runAtEntityLater(player, 10L, () -> rides.remove(player.getUniqueId()));
+                        context.tasks().runAtEntityLater(player, 10L, () -> cooldowns().clear(player, RIDE));
                     }
                 }
             }
@@ -656,10 +644,7 @@ public final class GadgetsModule extends LobbyModule {
                 double dy = near.getLocation().getY() - middle.getY();
                 if (Math.abs(near.getLocation().getX() - middle.getX()) > 1.8 || Math.abs(near.getLocation().getZ() - middle.getZ()) > 1.8
                         || dy < -0.3 || dy > 1.2 || near.getVelocity().getY() > 0.1) continue;
-                long now = System.currentTimeMillis();
-                Long last = bounced.get(near.getUniqueId());
-                if (last != null && now - last < 400) continue;
-                bounced.put(near.getUniqueId(), now);
+                if (!cooldowns().tryStart(near, BOUNCED, BOUNCE_GAP)) continue;
                 context.tasks().runAtEntity(near, () -> {
                     near.setVelocity(near.getVelocity().setY(0.9 * strength + 0.2));
                     keepSafe(near);

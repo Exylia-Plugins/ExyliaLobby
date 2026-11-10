@@ -34,6 +34,7 @@ import net.exylia.lib.text.PluginMessages;
 import net.exylia.lib.text.Values;
 import net.exylia.lib.ui.Menus;
 import net.exylia.lib.ui.UiEntry;
+import net.exylia.lib.util.CooldownScope;
 import net.exylia.lib.util.reward.OverflowPolicy;
 import net.exylia.lib.util.reward.PendingRewards;
 import net.exylia.lib.util.reward.RewardEntry;
@@ -59,6 +60,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
+import java.time.Duration;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -109,13 +111,12 @@ public final class PvpModule extends LobbyModule implements Busy {
     private final Set<UUID> dead = ConcurrentHashMap.newKeySet();
     private final Set<UUID> restoring = ConcurrentHashMap.newKeySet();
     private final Map<UUID, Countdown> countdowns = new ConcurrentHashMap<>();
-    private final Map<UUID, Tag> tags = new ConcurrentHashMap<>();
+    /** Who each fighter in combat last fought; the combat time itself is the {@link #TAG} cooldown. */
+    private final Map<UUID, UUID> opponents = new ConcurrentHashMap<>();
     private final Map<UUID, PvpStat> cache = new ConcurrentHashMap<>();
-    /** When each killer last killed each victim ("killer:victim"), for the repeat-kill window. */
-    private final Map<String, Long> lastKills = new ConcurrentHashMap<>();
-
-    private record Tag(long until, UUID opponent) {
-    }
+    private static final String TAG = "pvp_combat";
+    /** A killer's cooldown per victim ({@code pvp_kill:<victim>}), for the repeat-kill window. */
+    private static final String KILL = "pvp_kill:";
 
     private static final class Countdown {
         final boolean entering;
@@ -215,9 +216,8 @@ public final class PvpModule extends LobbyModule implements Busy {
         zoned.clear();
         dead.clear();
         restoring.clear();
-        tags.clear();
+        opponents.keySet().forEach(this::untag);
         cache.clear();
-        lastKills.clear();
     }
 
     @Override
@@ -338,7 +338,7 @@ public final class PvpModule extends LobbyModule implements Busy {
                 return false;
             }
             if (tagged(id)) {
-                send(player, messages.get().tagged(), Values.of("seconds", left(id)));
+                refuseCooling(player, TAG, messages.get().tagged(), Values.of());
                 return true;
             }
             if (!countdowns.containsKey(id)) countdown(player, false);
@@ -356,9 +356,11 @@ public final class PvpModule extends LobbyModule implements Busy {
     /** A recorded hit: both players are tagged and remember each other. */
     void hit(Player attacker, Player victim) {
         if (!canHit(attacker, victim)) return;
-        long until = System.currentTimeMillis() + settings.get().tagSeconds() * 1000L;
-        tags.put(attacker.getUniqueId(), new Tag(until, victim.getUniqueId()));
-        tags.put(victim.getUniqueId(), new Tag(until, attacker.getUniqueId()));
+        Duration tag = Duration.ofSeconds(Math.max(0, settings.get().tagSeconds()));
+        cooldowns().start(attacker, TAG, tag);
+        cooldowns().start(victim, TAG, tag);
+        opponents.put(attacker.getUniqueId(), victim.getUniqueId());
+        opponents.put(victim.getUniqueId(), attacker.getUniqueId());
     }
 
     void joined(Player player) {
@@ -388,7 +390,7 @@ public final class PvpModule extends LobbyModule implements Busy {
         zoned.remove(id);
         dead.add(id);
         cancelCountdown(victim);
-        tags.remove(id);
+        untag(id);
         record(victim, killer, false);
         // No death screen: respawn at once; the respawn hooks send them home and give their things back.
         context.tasks().runAtEntityLater(victim, 2L, () -> {
@@ -496,7 +498,7 @@ public final class PvpModule extends LobbyModule implements Busy {
         UUID id = player.getUniqueId();
         if (!active.remove(id)) return;
         zoned.remove(id);
-        tags.remove(id);
+        untag(id);
         restoring.add(id);
         cancelCountdown(player);
         send(player, messages.get().unequipped(), Values.of());
@@ -597,7 +599,7 @@ public final class PvpModule extends LobbyModule implements Busy {
         if (cause == AreaCause.QUIT && active.contains(id) && settings.get().quitCounts() && tagged(id)) {
             record(player, opponent(id), true);
         }
-        tags.remove(id);
+        untag(id);
         if (cause == AreaCause.QUIT) dead.remove(id);
         boolean wasActive = active.remove(id);
         zoned.remove(id);
@@ -609,21 +611,19 @@ public final class PvpModule extends LobbyModule implements Busy {
     // ======================== deaths and stats ========================
 
     private boolean tagged(UUID id) {
-        Tag tag = tags.get(id);
-        if (tag == null) return false;
-        if (tag.until() > System.currentTimeMillis()) return true;
-        tags.remove(id, tag);
+        if (cooldowns().isActive(id, TAG)) return true;
+        opponents.remove(id);
         return false;
     }
 
-    private long left(UUID id) {
-        Tag tag = tags.get(id);
-        return tag == null ? 0 : Math.max(1, (tag.until() - System.currentTimeMillis() + 999) / 1000);
+    private void untag(UUID id) {
+        opponents.remove(id);
+        cooldowns().clear(CooldownScope.player(id), TAG);
     }
 
     private @Nullable Player opponent(UUID id) {
-        Tag tag = tags.get(id);
-        Player other = tag == null ? null : Bukkit.getPlayer(tag.opponent());
+        UUID known = opponents.get(id);
+        Player other = known == null ? null : Bukkit.getPlayer(known);
         return other != null && active.contains(other.getUniqueId()) ? other : null;
     }
 
@@ -637,7 +637,7 @@ public final class PvpModule extends LobbyModule implements Busy {
         if (!quit) send(victim, text.victim(), Values.of("killer", killer == null ? "?" : killer.getName()));
         if (killer == null) return;
         UUID killerId = killer.getUniqueId();
-        tags.remove(killerId);
+        untag(killerId);
         if (repeated(killerId, victimId)) {
             // The same victim again within the window: no kill, no streak, no reward, so two accounts farm nothing.
             send(killer, quit ? text.quitKiller() : text.killer(), Values.of("victim", victimName).put("streak", stat(killerId).streak()));
@@ -653,11 +653,11 @@ public final class PvpModule extends LobbyModule implements Busy {
 
     /** Whether this killer already killed this victim within the repeat window; remembers this kill either way. */
     private boolean repeated(UUID killer, UUID victim) {
-        long now = System.currentTimeMillis();
-        long window = settings.get().repeatKillWindow().toMillis();
-        lastKills.values().removeIf(at -> now - at >= window);
-        Long before = lastKills.put(killer + ":" + victim, now);
-        return before != null && now - before < window;
+        CooldownScope scope = CooldownScope.player(killer);
+        boolean repeated = cooldowns().isActive(scope, KILL + victim);
+        Duration window = settings.get().repeatKillWindow();
+        if (window != null && !window.isNegative() && !window.isZero()) cooldowns().start(scope, KILL + victim, window);
+        return repeated;
     }
 
     private void change(UUID id, String name, UnaryOperator<PvpStat> edit, java.util.function.Consumer<PvpStat> done) {

@@ -70,9 +70,8 @@ public final class HotbarModule extends LobbyModule {
         hotbars = Hotbars.of(plugin(), Actions.of(plugin()))
                 .onCooldown((player, left) -> {
                     // A button's own short guard against a double click stays silent.
-                    if (left.toMillis() < 300) return;
-                    PluginMessages.of(plugin()).send(player, messages.get().cooling(),
-                            Values.of("seconds", Math.max(1, (long) Math.ceil(left.toMillis() / 1000.0))));
+                    if (left.toMillis() < 300 || !refusalDue(player, "hotbar")) return;
+                    PluginMessages.of(plugin()).send(player, messages.get().cooling(), withTime(Values.of(), left.toMillis() / 1000.0));
                 });
         settings.onReload(reloaded -> {
             if (isEnabled()) rebuild();

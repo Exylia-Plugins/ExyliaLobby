@@ -18,9 +18,9 @@ import org.bukkit.event.Listener;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-import java.util.Map;
+import java.time.Duration;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
+import net.exylia.lib.util.CooldownScope;
 
 /** Chat lock, slow mode and clear chat, for players inside the lobby only. Off by default. */
 public final class ChatModule extends LobbyModule implements Listener {
@@ -31,7 +31,7 @@ public final class ChatModule extends LobbyModule implements Listener {
     private ConfigFile<ChatMessages> messages;
     private volatile boolean locked;
     private volatile int slow;
-    private final Map<UUID, Long> last = new ConcurrentHashMap<>();
+    private static final String SLOW = "chat_slow";
 
     public ChatModule(@NotNull LobbyContext context) {
         super(ID, context);
@@ -57,7 +57,6 @@ public final class ChatModule extends LobbyModule implements Listener {
 
     @Override
     protected void stop() {
-        last.clear();
     }
 
     @Override
@@ -67,7 +66,7 @@ public final class ChatModule extends LobbyModule implements Listener {
 
     @Override
     protected void leave(@NotNull Player player, @NotNull AreaCause cause) {
-        last.remove(player.getUniqueId());
+        cooldowns().clear(player, SLOW);
     }
 
     // ======================== chat ========================
@@ -83,15 +82,12 @@ public final class ChatModule extends LobbyModule implements Listener {
         }
         int delay = slow;
         if (delay <= 0) return;
-        long now = System.currentTimeMillis();
-        Long before = last.get(player.getUniqueId());
-        if (before != null && now - before < delay * 1000L) {
+        if (!cooldowns().tryStart(player, SLOW, Duration.ofSeconds(delay))) {
             event.setCancelled(true);
-            long left = (long) Math.ceil((delay * 1000L - (now - before)) / 1000.0);
-            tell(player, messages.get().slowDenied(), Values.of("seconds", left));
-            return;
+            if (refusalDue(player, SLOW)) {
+                tell(player, messages.get().slowDenied(), withTime(Values.of(), cooldowns().remainingSeconds(player, SLOW)));
+            }
         }
-        last.put(player.getUniqueId(), now);
     }
 
     // ======================== staff ========================
@@ -103,7 +99,8 @@ public final class ChatModule extends LobbyModule implements Listener {
 
     void slow(CommandSender staff, int seconds) {
         slow = Math.max(0, seconds);
-        last.clear();
+        // The new delay counts from each player's next message.
+        for (UUID id : context.areas().players()) cooldowns().clear(CooldownScope.player(id), SLOW);
         announce(slow > 0 ? messages.get().slowOn() : messages.get().slowOff(), Values.of("seconds", slow));
     }
 

@@ -9,7 +9,7 @@ public record PvpMessages(
         @Comment("Boss bars while the kit goes on or off. %seconds% is the time left.")
         String equipBar,
         String unequipBar,
-        @Comment("Chat lines. %seconds% is the combat time left, %victim%, %killer% and %streak% name the fight.")
+        @Comment("Chat lines. %time% is the combat time left (4.2s), %victim%, %killer% and %streak% name the fight.")
         String equipped,
         String unequipped,
         String tagged,
@@ -58,7 +58,7 @@ public record PvpMessages(
                 "{error}&lSTANDING DOWN {letters_black}» {letters}Keep your sword away {letters_black}({info}%seconds%s{letters_black})",
                 "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {success}You are in the fight.{letters} Only players with their sword out can hit you.",
                 "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}You are out of the fight and your things are back.",
-                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}You are in combat for {highlight}%seconds%s{error}. Keep your sword out.",
+                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}You are in combat for {highlight}%time%{error}. Keep your sword out.",
                 "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}You cannot fight in the lobby.",
                 "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}You cannot fight while you are doing something else.",
                 "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}You killed {highlight}%victim%{letters}. Streak {accent}%streak%{letters}.",

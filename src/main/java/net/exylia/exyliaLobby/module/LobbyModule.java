@@ -4,6 +4,11 @@ import net.exylia.exyliaLobby.area.AreaCause;
 import net.exylia.lib.config.ConfigFile;
 import net.exylia.lib.config.Configs;
 import net.exylia.lib.module.PluginModule;
+import net.exylia.lib.text.PluginMessages;
+import net.exylia.lib.text.Values;
+import net.exylia.lib.util.Cooldowns;
+import net.exylia.lib.util.PluginCooldowns;
+import net.exylia.lib.util.TimeFormats;
 import net.exylia.lib.util.wizard.Setup;
 import net.exylia.lib.util.wizard.Wizards;
 import org.bukkit.Bukkit;
@@ -16,6 +21,7 @@ import org.jetbrains.annotations.Nullable;
 import revxrsal.commands.orphan.OrphanCommand;
 import revxrsal.commands.orphan.Orphans;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -45,6 +51,7 @@ public abstract class LobbyModule extends PluginModule {
     private final List<Listener> listeners = new ArrayList<>();
     /** Players still waiting for {@link #leave} after a switch-off, and the end of that switch-off. */
     private final Set<UUID> handingBack = ConcurrentHashMap.newKeySet();
+    private static final Duration REFUSAL = Duration.ofSeconds(1);
     private volatile CompletableFuture<Void> stopped = CompletableFuture.completedFuture(null);
 
     protected LobbyModule(@NotNull String id, @NotNull LobbyContext context) {
@@ -130,6 +137,37 @@ public abstract class LobbyModule extends PluginModule {
      */
     public final @NotNull Setup setup(@NotNull Player admin, @Nullable Runnable back) {
         return back == null ? Wizards.of(plugin()).setup(admin) : Wizards.of(plugin()).setup(admin, back);
+    }
+
+    /** This plugin's cooldowns. Keys start with the module id ({@code gadgets_grapple}). */
+    protected final @NotNull PluginCooldowns cooldowns() {
+        return Cooldowns.forPlugin(plugin());
+    }
+
+    /**
+     * Whether a refusal about {@code key} may be said now: at most once a second, so holding a click on something
+     * that is cooling down does not flood the chat.
+     */
+    protected final boolean refusalDue(@NotNull Player player, @NotNull String key) {
+        return cooldowns().tryStart(player, "refusal:" + key, REFUSAL);
+    }
+
+    /**
+     * Sends the "wait" line of a running cooldown, at most once a second, with {@code %time%} ("0.4s", "1m 30s")
+     * and its older spelling {@code %seconds%}.
+     */
+    protected final void refuseCooling(@NotNull Player player, @NotNull String key, @NotNull String line, @NotNull Values values) {
+        if (!refusalDue(player, key)) return;
+        PluginMessages.of(plugin()).send(player, line, withTime(values, cooldowns().remainingSeconds(player, key)));
+    }
+
+    /**
+     * Puts a length of time in {@code values}: {@code %time%} with its unit ("0.4s", "3.3s", "1m 30s") and
+     * {@code %seconds%}, the bare number older message files wrote as {@code %seconds%s}.
+     */
+    public static @NotNull Values withTime(@NotNull Values values, double seconds) {
+        return values.put("time", TimeFormats.render(seconds, TimeFormats.Style.PRECISE))
+                .put("seconds", TimeFormats.render(seconds, TimeFormats.Style.AUTO));
     }
 
     /** Whether the player is in the lobby now. */

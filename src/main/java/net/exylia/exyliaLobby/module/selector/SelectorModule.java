@@ -46,12 +46,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.time.Duration;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
@@ -68,7 +68,8 @@ public final class SelectorModule extends LobbyModule {
     public static final String PERMISSION = "exylialobby.selector";
     static final String SERVERS = "selector/servers";
     static final String LOBBIES = "selector/lobbies";
-    private static final long REPEAT_MS = 3000;
+    /** A second click on a server while the first one is still connecting is ignored. */
+    private static final Duration REPEAT = Duration.ofSeconds(3);
 
     private ConfigFile<SelectorSettings> settings;
     private ConfigFile<SelectorMessages> messages;
@@ -76,7 +77,6 @@ public final class SelectorModule extends LobbyModule {
     private PluginRegions regions;
     private final Set<String> npcIds = ConcurrentHashMap.newKeySet();
     private final Set<String> hologramIds = ConcurrentHashMap.newKeySet();
-    private final Map<UUID, Long> last = new ConcurrentHashMap<>();
     private volatile Runnable back = () -> {
     };
 
@@ -122,7 +122,6 @@ public final class SelectorModule extends LobbyModule {
         clearPlaced();
         if (regions != null) regions.replaceAll(List.of());
         screens.clear();
-        last.clear();
     }
 
     @Override
@@ -184,9 +183,7 @@ public final class SelectorModule extends LobbyModule {
             send(player, text.offline(), values);
             return;
         }
-        long now = System.currentTimeMillis();
-        Long before = last.put(player.getUniqueId(), now);
-        if (before != null && now - before < REPEAT_MS) return;
+        if (!cooldowns().tryStart(player, "selector_connect", REPEAT)) return;
         send(player, text.connecting(), values);
         // Players leave through the teleport module, which hands them to the proxy (never Player#teleport).
         Teleports.of(plugin()).toServer(player, server.server()).thenAccept(result -> {

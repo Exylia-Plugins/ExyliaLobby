@@ -6,7 +6,7 @@ import net.exylia.lib.config.Comment;
 public record SpawnMessages(
         @Comment("/spawn when no spawn point could be found")
         String noSpawn,
-        @Comment("/spawn with a warmup. %seconds% is the wait.")
+        @Comment("/spawn with a warmup. %time% is the wait (3s).")
         String teleporting,
         String cancelled,
         @Comment("An admin set the spawn of a world. %world% is its name.")
@@ -34,7 +34,7 @@ public record SpawnMessages(
 
     public SpawnMessages() {
         this("[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}No spawn is set. Ask an admin.",
-                "%prefix% {letters}Teleporting in {highlight}%seconds%s{letters}. Stand still.",
+                "%prefix% {letters}Teleporting in {highlight}%time%{letters}. Stand still.",
                 "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Teleport cancelled.",
                 "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Spawn of {highlight}%world%{letters} set where you stood.",
                 "{success}{icon:on} Set",

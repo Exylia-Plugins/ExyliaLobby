@@ -199,7 +199,7 @@ public final class SpawnModule extends LobbyModule {
             Teleports.of(plugin()).to(player, target.get()).warmup(0).start();
             return;
         }
-        send(player, messages.get().teleporting(), Values.of("seconds", (long) Math.ceil(warmup)));
+        send(player, messages.get().teleporting(), withTime(Values.of(), warmup));
         Teleports.of(plugin()).to(player, target.get()).warmup(warmup).cancelOnMove().cancelOnDamage()
                 .then(result -> {
                     if (result == TeleportResult.CANCELLED_ON_MOVE || result == TeleportResult.CANCELLED_ON_DAMAGE) {

@@ -17,9 +17,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Players choose to see everyone, friends and staff, or nobody while they are in the lobby. The choice is an
@@ -32,10 +29,10 @@ public final class VisibilityModule extends LobbyModule {
     public static final String ID = "visibility";
     static final String KEY = "mode";
     private static final String RULE = "visibility";
+    private static final String COOLDOWN = "visibility_switch";
 
     private ConfigFile<VisibilitySettings> settings;
     private ConfigFile<VisibilityMessages> messages;
-    private final Map<UUID, Long> last = new ConcurrentHashMap<>();
 
     public VisibilityModule(@NotNull LobbyContext context) {
         super(ID, context);
@@ -68,7 +65,6 @@ public final class VisibilityModule extends LobbyModule {
     protected void stop() {
         context.visibility().remove(RULE);
         Settings.unregister(plugin(), KEY);
-        last.clear();
     }
 
     private void register() {
@@ -123,16 +119,13 @@ public final class VisibilityModule extends LobbyModule {
 
     /** Moves a player to the next mode (hotbar button), honouring the cooldown. Returns the new mode, or null when too soon. */
     public VisibilitySettings.Mode cycle(@NotNull Player player) {
-        long now = System.currentTimeMillis();
-        long wait = settings.get().cooldown().toMillis() - (now - last.getOrDefault(player.getUniqueId(), 0L));
-        if (wait > 0) {
-            PluginMessages.of(plugin()).send(player, messages.get().cooling(),
-                    Values.of("seconds", (long) Math.ceil(wait / 1000.0)));
+        if (cooldowns().isActive(player, COOLDOWN)) {
+            refuseCooling(player, COOLDOWN, messages.get().cooling(), Values.of());
             return null;
         }
         VisibilitySettings.Mode next = mode(player).next();
         if (!Settings.set(player, plugin(), KEY, next.key())) return null;
-        last.put(player.getUniqueId(), now);
+        cooldowns().start(player, COOLDOWN, settings.get().cooldown());
         changed(player, next);
         return next;
     }
@@ -150,7 +143,7 @@ public final class VisibilityModule extends LobbyModule {
 
     @Override
     protected void leave(@NotNull Player player, @NotNull AreaCause cause) {
-        last.remove(player.getUniqueId());
+        cooldowns().clear(player, COOLDOWN);
         context.visibility().refresh(player);
     }
 
