@@ -8,6 +8,7 @@ import net.exylia.exyliaLobby.module.onboarding.OnboardingModule;
 import net.exylia.exyliaLobby.module.protection.ProtectionModule;
 import net.exylia.exyliaLobby.module.spawn.SpawnModule;
 import net.exylia.exyliaLobby.module.state.StateModule;
+import net.exylia.exyliaLobby.module.visibility.VisibilityModule;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -31,7 +32,8 @@ public final class Modules {
                 new ChatModule(context),
                 new OnboardingModule(context),
                 new HotbarModule(context),
-                new MovementModule(context)
+                new MovementModule(context),
+                new VisibilityModule(context)
         );
     }
 }

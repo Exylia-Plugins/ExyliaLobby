@@ -44,6 +44,9 @@ permissions:
   exylialobby.chat.bypass:
     description: Talk while the lobby chat is locked or slowed, and keep chat when it is cleared.
     default: op
+  exylialobby.visibility.staff:
+    description: Players with this permission are always seen, whatever others chose in the visibility module.
+    default: false
   exylialobby.spawn:
     description: Use /spawn.
     default: true
