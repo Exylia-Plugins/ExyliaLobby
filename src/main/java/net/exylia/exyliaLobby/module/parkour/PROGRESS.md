@@ -3,8 +3,8 @@
 Worktree: /root/Java/Exylia/ExyliaLobby-worktrees/parkour (detached, commits only, no push).
 
 - [x] endless/ pure generator (Cell, Role, Bounds, Jump, Move, SegmentType, Tuning, JumpPhysics, PathGenerator) + tests
-- [ ] timing/periods pure helpers + tests
-- [ ] config records (settings, courses catalogue, themes, messages)
+- [x] timing/periods pure helpers (Times, Board) + tests
+- [x] config records: ParkourSettings, ParkourCourses (catalogue, Spot, Medals), ParkourThemes, ParkourMessages + tests
 - [ ] data (tables, caches, tops)
 - [ ] runs (course, endless, sprint, daily), anti-cheat, overlay items
 - [ ] module wiring, placeholders, commands, actions, visibility
