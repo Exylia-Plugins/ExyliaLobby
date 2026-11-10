@@ -1,6 +1,8 @@
 package net.exylia.exyliaLobby.module;
 
+import net.exylia.exyliaLobby.module.chat.ChatModule;
 import net.exylia.exyliaLobby.module.join.JoinModule;
+import net.exylia.exyliaLobby.module.onboarding.OnboardingModule;
 import net.exylia.exyliaLobby.module.protection.ProtectionModule;
 import net.exylia.exyliaLobby.module.spawn.SpawnModule;
 import net.exylia.exyliaLobby.module.state.StateModule;
@@ -23,7 +25,9 @@ public final class Modules {
                 new SpawnModule(context),
                 new StateModule(context),
                 new ProtectionModule(context),
-                new JoinModule(context)
+                new JoinModule(context),
+                new ChatModule(context),
+                new OnboardingModule(context)
         );
     }
 }

@@ -31,6 +31,18 @@ permissions:
   exylialobby.build:
     description: Build, break and use everything inside lobby areas, once /lobbyadmin build is on.
     default: op
+  exylialobby.fly:
+    description: Fly inside the lobby while the state module allows it.
+    default: false
+  exylialobby.join.vip:
+    description: Example permission for a join message group.
+    default: false
+  exylialobby.join.silent:
+    description: Join and leave without a message or commands.
+    default: false
+  exylialobby.chat.bypass:
+    description: Talk while the lobby chat is locked or slowed, and keep chat when it is cleared.
+    default: op
   exylialobby.spawn:
     description: Use /spawn.
     default: true
