@@ -10,6 +10,7 @@ import net.exylia.exyliaLobby.module.movement.MovementModule;
 import net.exylia.exyliaLobby.module.onboarding.OnboardingModule;
 import net.exylia.exyliaLobby.module.parkour.ParkourModule;
 import net.exylia.exyliaLobby.module.protection.ProtectionModule;
+import net.exylia.exyliaLobby.module.pvp.PvpModule;
 import net.exylia.exyliaLobby.module.spawn.SpawnModule;
 import net.exylia.exyliaLobby.module.selector.SelectorModule;
 import net.exylia.exyliaLobby.module.state.StateModule;
@@ -43,7 +44,8 @@ public final class Modules {
                 new SelectorModule(context),
                 new GamesModule(context),
                 new HudModule(context),
-                new HologramsModule(context)
+                new HologramsModule(context),
+                new PvpModule(context)
         );
     }
 }

@@ -50,6 +50,9 @@ permissions:
   exylialobby.selector:
     description: Open the server and lobby selectors and use server NPCs and portals.
     default: true
+  exylialobby.pvp:
+    description: Fight in the lobby PvP (the kit and the sword).
+    default: true
   exylialobby.spawn:
     description: Use /spawn.
     default: true
