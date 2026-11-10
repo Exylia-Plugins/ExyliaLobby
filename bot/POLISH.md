@@ -7,4 +7,4 @@ Done: dump covers player screens, parkour details, staff lists with data (pad, h
 - pvp top: rank shows a dash when unranked, streak split in two lines
 - admin hub: dropped the players-in-lobby stat
 
-Left: re-run dump (lobby-dump.js paper) and read it, then lobby-test.js paper; games screen needs a game provider; ConfigMenus screens belong to the lib; period filter selected tone; gadget locked card shows permission node.
+Left: lobby-test.js paper gave 27/28 PASS with one FAIL (protection: drop refused, timing, no protection code touched); rerun blocked by another session server. Games screen needs a game provider; ConfigMenus screens belong to the lib; period filter selected tone; locked gadget card shows the permission node. Delete this file in the last commit.
