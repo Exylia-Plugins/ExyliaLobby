@@ -8,6 +8,7 @@ import net.exylia.exyliaLobby.module.LobbyModule;
 import net.exylia.exyliaLobby.module.holograms.HologramsModule;
 import net.exylia.exyliaLobby.module.hotbar.HotbarModule;
 import net.exylia.exyliaLobby.module.protection.ProtectionModule;
+import net.exylia.exyliaLobby.module.state.StateModule;
 import net.exylia.exyliaLobby.module.shared.AdminScreens;
 import net.exylia.exyliaLobby.module.spawn.SpawnModule;
 import net.exylia.lib.config.ConfigFile;
@@ -489,6 +490,7 @@ public final class PvpModule extends LobbyModule implements Busy {
                     context.module(HotbarModule.ID, HotbarModule.class).ifPresent(hotbar -> hotbar.show(player));
                 } else {
                     strip(player);
+                    context.module(StateModule.ID, StateModule.class).ifPresent(state -> state.reapplyMode(player));
                 }
             });
         });

@@ -95,7 +95,6 @@ public final class SpawnModule extends LobbyModule {
     @Override
     protected void stop() {
         if (respawnHook != null) respawnHook.cancel();
-        rescues.clear();
         rescuing.clear();
         areaBacks.clear();
         areaParents.clear();

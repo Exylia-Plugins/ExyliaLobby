@@ -38,6 +38,8 @@ public final class StateModule extends LobbyModule implements Listener {
 
     private ConfigFile<StateSettings> settings;
     private final Map<UUID, Saved> saved = new ConcurrentHashMap<>();
+    /** The mode each player got back on leaving, for a late snapshot restore that would put the lobby's one back. */
+    private final Map<UUID, GameMode> returned = new ConcurrentHashMap<>();
 
     /** What one player had before the lobby changed it; a null or false field means it was not touched. */
     private static final class Saved {
@@ -80,9 +82,16 @@ public final class StateModule extends LobbyModule implements Listener {
         listen(this);
     }
 
+    /** Puts back the mode this player had before the lobby, once something else restored a snapshot after they left. */
+    public void reapplyMode(@NotNull Player player) {
+        GameMode mode = returned.get(player.getUniqueId());
+        if (mode != null && !saved.containsKey(player.getUniqueId()) && player.getGameMode() != mode) player.setGameMode(mode);
+    }
+
     @Override
     protected void stop() {
         saved.clear();
+        returned.clear();
     }
 
     @Override
@@ -106,6 +115,7 @@ public final class StateModule extends LobbyModule implements Listener {
     @SuppressWarnings("deprecation") // Player#getMaxHealth reads the same on every supported version
     protected void enter(@NotNull Player player, @NotNull AreaCause cause) {
         if (saved.containsKey(player.getUniqueId())) return;
+        returned.remove(player.getUniqueId());
         StateSettings now = settings.get();
         Saved before = new Saved();
         saved.put(player.getUniqueId(), before);
@@ -183,7 +193,10 @@ public final class StateModule extends LobbyModule implements Listener {
         for (PotionEffectType type : before.applied) player.removePotionEffect(type);
         player.addPotionEffects(before.effects);
 
-        if (before.mode != null) player.setGameMode(before.mode);
+        if (before.mode != null) {
+            player.setGameMode(before.mode);
+            returned.put(player.getUniqueId(), before.mode);
+        }
         if (before.flyTouched) {
             player.setAllowFlight(before.allowFlight);
             player.setFlying(before.allowFlight && before.flying);

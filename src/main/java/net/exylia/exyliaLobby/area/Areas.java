@@ -135,7 +135,7 @@ public final class Areas implements Listener {
                 continue;
             }
             built.add(regions.region("world-" + name.toLowerCase(java.util.Locale.ROOT), WorldIdentity.from(world),
-                    Cuboid.blocks(-EDGE, world.getMinHeight(), -EDGE, EDGE, world.getMaxHeight(), EDGE),
+                    Cuboid.blocks(-EDGE, world.getMinHeight() - 1024, -EDGE, EDGE, world.getMaxHeight() + 1024, EDGE),
                     0, PolicySet.empty()));
         }
         for (Map.Entry<String, LobbyConfig.Box> entry : areas.boxes().entrySet()) {
@@ -184,6 +184,7 @@ public final class Areas implements Listener {
     }
 
     private void change(Player player, Change change) {
+        debug.debug(player.getName() + (change.entered() ? " entered" : " left") + " the lobby (" + change.cause() + ")");
         try {
             onChange.accept(player, change);
         } catch (RuntimeException failed) {
@@ -199,6 +200,13 @@ public final class Areas implements Listener {
     public void onRegionChange(PlayerRegionChangeEvent event) {
         if (event.entered(regions).isEmpty() && event.exited(regions).isEmpty()) return;
         recheck(event.getPlayer(), AreaCause.MOVE);
+    }
+
+    /** A teleport lands after the event, so the player is checked once they stand at the destination. */
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onTeleport(org.bukkit.event.player.PlayerTeleportEvent event) {
+        Player player = event.getPlayer();
+        tasks.runAtEntity(player, () -> recheck(player, AreaCause.MOVE));
     }
 
     @EventHandler(priority = EventPriority.LOW)

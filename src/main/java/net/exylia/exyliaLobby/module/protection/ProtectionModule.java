@@ -64,7 +64,6 @@ public final class ProtectionModule extends LobbyModule {
     protected void stop() {
         building.clear();
         bars.clear();
-        pvp.clear();
     }
 
     // ======================== public hooks ========================
