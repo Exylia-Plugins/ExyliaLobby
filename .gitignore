@@ -41,3 +41,4 @@ Thumbs.db
 # Local tooling
 .atl/
 .codegraph/
+.claude/
