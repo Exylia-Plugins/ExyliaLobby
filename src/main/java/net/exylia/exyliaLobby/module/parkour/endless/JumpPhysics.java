@@ -59,6 +59,25 @@ public final class JumpPhysics {
         return distance <= reach + EPSILON;
     }
 
+    /**
+     * Whether a runner who stood on {@code from} may land on block {@code on} of {@code to} in one jump. The next
+     * jump always: the generator built it reachable from the exit of {@code from}, wherever the runner took off.
+     * A later one (a skip) only when the physics allows it from some block of {@code from}; slime bounces and a
+     * ceiling are taken at their most generous and a long drop counts as four blocks, so a real player is never
+     * refused.
+     */
+    public static boolean canLand(Jump from, Jump to, Cell on) {
+        if (to.index() <= from.index()) return false;
+        if (to.index() == from.index() + 1) return true;
+        for (Cell off : from.standable()) {
+            if (reachable(from.surface(), Double.MAX_VALUE, false, on.x() - off.x(), on.z() - off.z(),
+                    Math.max(-4, on.y() - off.y()), to.surface())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private static double normal(double rise) {
         if (rise > JUMP_HEIGHT + EPSILON) return 0;
         if (rise > 1.0 + EPSILON) return 3.0;

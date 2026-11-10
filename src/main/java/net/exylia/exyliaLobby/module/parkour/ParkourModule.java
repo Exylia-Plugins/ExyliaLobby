@@ -134,7 +134,7 @@ public final class ParkourModule extends LobbyModule implements Busy {
     @Override
     protected void leave(@NotNull Player player, @NotNull AreaCause cause) {
         ParkourRuns current = runs; // null once the module stopped: its runs were closed then
-        if (current != null) current.stop(player, RunEnd.LOBBY);
+        if (current != null) current.stop(player, cause == AreaCause.DISABLE ? RunEnd.DISABLED : RunEnd.LOBBY);
         data.forget(player.getUniqueId());
     }
 
@@ -244,6 +244,15 @@ public final class ParkourModule extends LobbyModule implements Busy {
 
     /** Starts a mode (their ids come first) or a course. */
     void play(Player player, String typed) {
+        if (!inLobby(player)) {
+            runs.send(player, messages.get().notInLobby(), Values.of());
+            return;
+        }
+        // A runner may start another run over theirs; anything else holding them (a fight) comes first.
+        if (!runs.isRunning(player) && Busy.any(context, player)) {
+            runs.send(player, messages.get().busy(), Values.of());
+            return;
+        }
         EndlessMode.parse(typed).ifPresentOrElse(mode -> runs.startEndless(player, mode),
                 () -> runs.startCourse(player, typed));
     }
@@ -411,7 +420,7 @@ public final class ParkourModule extends LobbyModule implements Busy {
                     map.remove(name);
                     ParkourSettings.Endless e = current.endless();
                     return current.withEndless(new ParkourSettings.Endless(map, e.ahead(), e.behind(), e.themeEvery(),
-                            e.milestones(), e.fallDepth(), e.bestMarker(), e.milestoneRewards(), e.tuning()));
+                            e.milestones(), e.fallDepth(), e.bestMarker(), e.milestoneRewards(), e.milestonePeriod(), e.tuning()));
                 });
                 send(admin, messages.get().screens().areaDeleted(), Values.of("area", name));
             }
@@ -536,7 +545,7 @@ public final class ParkourModule extends LobbyModule implements Busy {
                         map.put(name, area);
                         ParkourSettings.Endless e = current.endless();
                         return new ParkourSettings(current.command(), current.modes(), new ParkourSettings.Endless(map, e.ahead(),
-                                e.behind(), e.themeEvery(), e.milestones(), e.fallDepth(), e.bestMarker(), e.milestoneRewards(),
+                                e.behind(), e.themeEvery(), e.milestones(), e.fallDepth(), e.bestMarker(), e.milestoneRewards(), e.milestonePeriod(),
                                 e.tuning()), current.hideRunners(), current.checkpointBeacon(), current.runItems(),
                                 current.courseFallDepth(), current.antiCheat(), current.tops(), current.periods(),
                                 current.sounds(), current.boards());

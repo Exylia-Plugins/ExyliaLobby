@@ -47,6 +47,28 @@ class WindowTest {
         assertTrue(Window.standsOn(next, landing.x() + 0.5, landing.y() + next.surface().surface(), landing.z() + 0.5));
     }
 
+    @Test
+    void scoredLandingsMustBeReachable() {
+        Jump from = jump(5, List.of(new Cell(0, 70, 0)));
+        Cell far = new Cell(9, 70, 0);
+        assertTrue(JumpPhysics.canLand(from, jump(6, List.of(far)), far), "the next jump was built reachable");
+        Cell skip = new Cell(4, 70, 0);
+        assertTrue(JumpPhysics.canLand(from, jump(7, List.of(skip)), skip), "a skip a sprint jump reaches");
+        assertFalse(JumpPhysics.canLand(from, jump(8, List.of(far)), far), "a skip no jump reaches");
+        Cell high = new Cell(2, 73, 0);
+        assertFalse(JumpPhysics.canLand(from, jump(7, List.of(high)), high), "three blocks up");
+        assertFalse(JumpPhysics.canLand(from, from, from.landing()), "not the jump stood on");
+    }
+
+    @Test
+    void nearThePathAllowsJumpsButNotFlyingOff() {
+        List<Cell> drawn = List.of(new Cell(0, 70, 0), new Cell(4, 70, 0));
+        assertTrue(Window.near(drawn, 2.5, 72.2, 0.5), "mid-jump between two blocks");
+        assertTrue(Window.near(drawn, 0.5, 68, 0.5), "just fallen off");
+        assertFalse(Window.near(drawn, 0.5, 80, 0.5), "high above the path");
+        assertFalse(Window.near(drawn, 12.5, 71, 0.5), "far from it");
+    }
+
     private static Jump jump(int index, List<Cell> cells) {
         List<Jump.Piece> pieces = cells.stream().map(cell -> new Jump.Piece(cell, Role.FLOOR, 0)).toList();
         return new Jump(index, cells.get(0), Role.FLOOR, 0, false, Jump.Shape.SINGLE, cells.get(0), Role.FLOOR, cells,

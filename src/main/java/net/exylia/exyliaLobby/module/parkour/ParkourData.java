@@ -74,21 +74,24 @@ final class ParkourData {
 
     // ======================== players ========================
 
-    /** Reads a player's rows once; later calls answer the same future. */
+    /**
+     * Reads a player's rows once; later calls answer the same future. A failed read fails the future (so nothing
+     * is written over rows that were never read) and is forgotten, so the next call reads again.
+     */
     CompletableFuture<Mine> load(UUID player) {
-        return players.computeIfAbsent(player, id -> rows.where("player", id).find()
+        CompletableFuture<Mine> loaded = players.computeIfAbsent(player, id -> rows.where("player", id).find()
                 .thenCombine(stats.where("player", id).find(), (found, counted) -> {
                     // ponytail: reads every period ever stored for the player; prune old period rows if this grows
                     Mine mine = new Mine(new ConcurrentHashMap<>(), new ConcurrentHashMap<>());
                     for (ParkourRecord row : found) mine.bests().put(row.board(), row);
                     for (ParkourStat row : counted) mine.stats().put(row.course(), row);
                     return mine;
-                })
-                .exceptionally(failed -> {
-                    debug.error("Could not read the parkour records of " + id, failed);
-                    players.remove(id);
-                    return new Mine(new ConcurrentHashMap<>(), new ConcurrentHashMap<>());
                 }));
+        loaded.whenComplete((mine, failed) -> {
+            if (failed == null) return;
+            if (players.remove(player, loaded)) debug.error("Could not read the parkour records of " + player, failed);
+        });
+        return loaded;
     }
 
     void forget(UUID player) {
@@ -152,6 +155,29 @@ final class ParkourData {
             ParkourRecord best = mine.bests().get(allKey);
             return refresh(changed).thenApply(done -> new Outcome(previous, best, best != previous,
                     Standings.rankIn(top(new Board(boardName, Board.Period.ALL)), player), stat.completions(), before == null));
+        });
+    }
+
+    /**
+     * Marks a milestone of a board paid for the player, once per period of the board: milestones are claimed in
+     * rising order within a run, so the row keeps the highest one paid.
+     *
+     * @return whether it was still unpaid; fails when the player's rows cannot be read
+     */
+    CompletableFuture<Boolean> claimMilestone(UUID player, Board board, int score) {
+        return load(player).thenApply(mine -> {
+            String key = "milestone|" + board.key(clock.get());
+            boolean[] claimed = {false};
+            ParkourStat row = mine.stats().compute(key, (k, paid) -> {
+                if (paid != null && paid.completions() >= score) return paid;
+                claimed[0] = true;
+                return new ParkourStat(ParkourStat.id(player, k), player, k, score);
+            });
+            if (claimed[0]) stats.save(row).exceptionally(failed -> {
+                debug.error("Could not save the parkour milestone " + key + " of " + player, failed);
+                return null;
+            });
+            return claimed[0];
         });
     }
 

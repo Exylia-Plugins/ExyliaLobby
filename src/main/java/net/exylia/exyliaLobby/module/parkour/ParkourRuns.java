@@ -48,6 +48,10 @@ import net.exylia.exyliaLobby.module.parkour.endless.Bounds;
 import net.exylia.exyliaLobby.module.parkour.endless.Cell;
 import net.exylia.exyliaLobby.module.parkour.endless.PathGenerator;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.security.SecureRandom;
 import java.time.Duration;
 import java.util.List;
 import java.util.Map;
@@ -84,6 +88,8 @@ final class ParkourRuns implements Listener {
     private final PluginActions actions;
     private final Hotbars hotbars;
     private final RunGuard guard = new RunGuard(this);
+    /** Mixed into the daily seed so nobody can work out a day's path before it comes. */
+    private final long dailySecret;
 
     ParkourRuns(LobbyContext context, ConfigFile<ParkourSettings> settings, ConfigFile<ParkourCourses> courses,
                 ConfigFile<ParkourThemes> themes, ConfigFile<ParkourMessages> messages, ParkourData data,
@@ -95,6 +101,7 @@ final class ParkourRuns implements Listener {
         this.messages = messages;
         this.data = data;
         this.clock = clock;
+        this.dailySecret = dailySecret(new File(context.plugin().getDataFolder(), "modules/parkour/daily-secret.txt"));
         this.actions = Actions.of(context.plugin());
         actions.registerSync(ACTION_BACK, (action, args) -> {
             back(action.player());
@@ -188,7 +195,8 @@ final class ParkourRuns implements Listener {
             send(player, text.noArea(), Values.of());
             return;
         }
-        long seed = mode == EndlessMode.DAILY ? ("daily|" + clock.get().key(PeriodClock.Period.DAILY)).hashCode()
+        long seed = mode == EndlessMode.DAILY
+                ? dailySecret ^ ("daily|" + clock.get().key(PeriodClock.Period.DAILY)).hashCode() * 0x9E3779B97F4A7C15L
                 : ThreadLocalRandom.current().nextLong();
         List<ParkourThemes.Theme> palette = themes.get().themes().values().stream().filter(ParkourThemes.Theme::enabled).toList();
         if (palette.isEmpty()) palette = List.of(new ParkourThemes.Theme());
@@ -208,6 +216,31 @@ final class ParkourRuns implements Listener {
                 });
             });
         });
+    }
+
+    /**
+     * The server's daily path secret: read from its file, or made once and written there. Lobbies of one network
+     * that should share the daily path share this file.
+     */
+    private long dailySecret(File file) {
+        try {
+            if (file.isFile()) {
+                for (String line : Files.readAllLines(file.toPath())) {
+                    if (!line.isBlank() && !line.startsWith("#")) return Long.parseLong(line.trim());
+                }
+            }
+        } catch (IOException | NumberFormatException bad) {
+            context.debug().warn("Could not read " + file + "; making a new daily parkour secret");
+        }
+        long secret = new SecureRandom().nextLong();
+        try {
+            Files.createDirectories(file.toPath().getParent());
+            Files.writeString(file.toPath(), "# Keeps the daily parkour path unknown until its day. Copy this file to every lobby\n"
+                    + "# that should share the daily path; keep it private.\n" + secret + "\n");
+        } catch (IOException failed) {
+            context.debug().error("Could not save " + file + "; the daily parkour path changes on every restart", failed);
+        }
+        return secret;
     }
 
     /** {@code x y z} → the block there; null when it is not three numbers. */
@@ -336,6 +369,7 @@ final class ParkourRuns implements Listener {
             case PEARL -> reasons.pearl();
             case VEHICLE -> reasons.vehicle();
             case GAME_MODE -> reasons.gameMode();
+            case UNCONFIRMED -> reasons.unconfirmed();
             default -> reasons.teleport();
         };
     }
@@ -358,6 +392,7 @@ final class ParkourRuns implements Listener {
         data.record(player, run.id, millis, splits).whenComplete((outcome, failed) -> {
             if (failed != null) {
                 context.debug().error("Could not record the parkour finish of " + player.getName() + " on " + run.id, failed);
+                notSaved(player);
                 return;
             }
             onPlayer(player, () -> finished(player, run, millis, outcome));
@@ -410,6 +445,7 @@ final class ParkourRuns implements Listener {
         data.record(player, run.mode.id(), run.score, List.of()).whenComplete((outcome, failed) -> {
             if (failed != null) {
                 context.debug().error("Could not record the parkour " + run.mode.id() + " score of " + player.getName(), failed);
+                notSaved(player);
                 return;
             }
             onPlayer(player, () -> {
@@ -418,6 +454,28 @@ final class ParkourRuns implements Listener {
                         .put("best", outcome.best().value())
                         .put("rank", outcome.rank() > 0 ? String.valueOf(outcome.rank()) : text.unranked()));
                 if (outcome.improved() && outcome.previous() != null) sound(player, settings.get().sounds().record());
+            });
+        });
+    }
+
+    /** Nothing was recorded or rewarded: tell the runner. Any thread. */
+    private void notSaved(Player player) {
+        onPlayer(player, () -> {
+            if (player.isOnline()) send(player, messages.get().notSaved(), Values.of());
+        });
+    }
+
+    /** Pays a milestone's rewards unless the runner was already paid it this period. Player's thread. */
+    void milestone(EndlessRun run, int score, List<Object> rewards) {
+        Player player = run.player;
+        Board board = new Board(run.mode.id(), settings.get().endless().milestoneEvery());
+        data.claimMilestone(player.getUniqueId(), board, score).whenComplete((unpaid, failed) -> {
+            if (failed != null) {
+                context.debug().error("Could not check the parkour milestone " + score + " of " + player.getName(), failed);
+                return;
+            }
+            if (unpaid) onPlayer(player, () -> {
+                if (player.isOnline()) reward(player, rewards, "endless.milestone-rewards." + score);
             });
         });
     }
@@ -468,10 +526,14 @@ final class ParkourRuns implements Listener {
         }
     }
 
-    /** An endless runner stands on blocks only their client has: the server must not kick them for flying. */
+    /**
+     * An endless runner stands on blocks only their client has: the server must not kick them for flying while
+     * they are on the path. Away from it, the kick goes through.
+     */
     @EventHandler(ignoreCancelled = true)
     public void onKick(PlayerKickEvent event) {
-        if (event.getCause() == PlayerKickEvent.Cause.FLYING_PLAYER && runs.get(event.getPlayer().getUniqueId()) instanceof EndlessRun) {
+        if (event.getCause() == PlayerKickEvent.Cause.FLYING_PLAYER && runs.get(event.getPlayer().getUniqueId()) instanceof EndlessRun run
+                && run.near(event.getPlayer().getLocation())) {
             event.setCancelled(true);
         }
     }

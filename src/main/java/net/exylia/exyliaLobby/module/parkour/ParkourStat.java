@@ -11,9 +11,10 @@ import java.util.UUID;
 
 /**
  * How many times a player finished a course or an endless mode; the first finish is the one that pays a reward.
+ * A {@code milestone|<board key>} row instead holds the highest endless milestone paid in that board's period.
  *
  * @param id     {@code <player>|<course or mode>}
- * @param course the board name, without a period
+ * @param course the board name, without a period, or {@code milestone|<board key>}
  */
 @Table(value = "lobby_parkour_stats", data = DataKind.PROGRESS)
 public record ParkourStat(

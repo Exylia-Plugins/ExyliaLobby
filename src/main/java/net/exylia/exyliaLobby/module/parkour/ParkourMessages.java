@@ -16,6 +16,9 @@ public record ParkourMessages(
         String notRunning,
         @Comment("Left a run with /parkour leave or the leave item")
         String left,
+        @Comment("/parkour <course or mode> away from the lobby, or while another activity (a fight) holds you")
+        String notInLobby,
+        String busy,
 
         @Comment("Course runs. %course% is its name, %time% the time so far, %checkpoint%/%total% the progress.")
         String startTitle,
@@ -40,6 +43,8 @@ public record ParkourMessages(
         String medalBronze,
         @Comment("No place on a board yet")
         String unranked,
+        @Comment("The database could not be read or written, so a finish or score was not saved")
+        String notSaved,
 
         @Comment("Endless modes. %mode% is a mode name below, %score% the jumps, %left% a sprint's time left.")
         String endlessName,
@@ -90,6 +95,8 @@ public record ParkourMessages(
                 "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Endless parkour has no area yet. Ask an admin.",
                 "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}You are not running a parkour.",
                 "%prefix% {letters}You left the parkour.",
+                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Parkour can only be started in the lobby.",
+                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Finish what you are doing before starting a parkour.",
 
                 "{primary}&l%course%",
                 "{letters}Go!",
@@ -112,6 +119,7 @@ public record ParkourMessages(
                 "{letters}Silver medal",
                 "{warning}Bronze medal",
                 "—",
+                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Your result could not be saved right now. Try again in a moment.",
 
                 "Endless",
                 "Sprint",
@@ -241,9 +249,10 @@ public record ParkourMessages(
 
     /** Why a run was ended, shown in {@link #cheated}. */
     public record Reasons(String flight, String elytra, String riptide, String pearl, String vehicle, String gameMode,
-                          String teleport) {
+                          String teleport, String unconfirmed) {
         public Reasons() {
-            this("flying", "gliding", "riptide", "ender pearl", "riding", "game mode changed", "teleported away");
+            this("flying", "gliding", "riptide", "ender pearl", "riding", "game mode changed", "teleported away",
+                    "a jump could not be confirmed");
         }
     }
 

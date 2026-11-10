@@ -91,10 +91,22 @@ public record ParkourSettings(
             String bestMarker,
             @Comment("Rewards for reaching a score in one run, by score. Same format as course rewards.")
             Map<String, List<Object>> milestoneRewards,
+            @Comment("How often each milestone reward can be earned again, per mode: ALL (once ever), MONTHLY,")
+            @Comment("WEEKLY or DAILY. The daily mode always pays once a day, since its path is the same all day.")
+            String milestonePeriod,
             @Comment("How the path is built.")
             PathTuning tuning) {
         public Endless() {
-            this(Map.of(), 3, 2, 25, List.of(25, 50, 100, 150, 200), 4, "GOLD_BLOCK", Map.of(), new PathTuning());
+            this(Map.of(), 3, 2, 25, List.of(25, 50, 100, 150, 200), 4, "GOLD_BLOCK", Map.of(), "DAILY", new PathTuning());
+        }
+
+        /** {@link #milestonePeriod} read; daily when it is not a period. */
+        Board.Period milestoneEvery() {
+            try {
+                return Board.Period.valueOf(milestonePeriod == null ? "" : milestonePeriod.trim().toUpperCase(java.util.Locale.ROOT));
+            } catch (IllegalArgumentException bad) {
+                return Board.Period.DAILY;
+            }
         }
     }
 
