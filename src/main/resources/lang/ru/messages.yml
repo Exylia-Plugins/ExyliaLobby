@@ -1,0 +1,27 @@
+# Добавляется перед чат-сообщениями плагина как %prefix%
+prefix: '{primary}&lЛОББИ {letters_black}•<reset>'
+
+# Команда или кнопка выключенного модуля. %module% — его название.
+module-off: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {letters}Модуль {highlight}%module%{letters} выключен.'
+modules:
+  # Состояние на карточке модуля
+  'on': '{success}{icon:on} Вкл'
+  'off': '{error}{icon:off} Выкл'
+  # Модуль ждёт другой, выключенный модуль. %required% — его название.
+  blocked: '{warning}{icon:warning} Нужен %required%'
+  # Отправляется после переключения модуля на экране «Модули»
+  switched-on: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Модуль {highlight}%module%{letters} теперь {success}включён{letters}.'
+  switched-off: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Модуль {highlight}%module%{letters} теперь {error}выключен{letters}.'
+  # Отправляется, если модуль не запустился: %required% выключен или отсутствует
+  blocked-by: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {letters}Модулю {highlight}%module%{letters} сначала нужен {warning}%required%{letters}.'
+  # Модуль не запустился; причину покажет консоль
+  failed: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Модуль {highlight}%module%{error} не запустился. Смотрите консоль.'
+  # Выключение этого модуля выключит и другие. %modules% — их список.
+  dependants: '{letters_black}Также выключит: %modules%'
+areas:
+  # Когда админ сохраняет область лобби по выделению
+  box-saved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Зона лобби {highlight}%area%{letters} сохранена.'
+  box-removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Зона лобби {highlight}%area%{letters} удалена.'
+  no-selection: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Сначала выделите два угла.'
+  world-added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Мир {highlight}%world%{letters} теперь лобби.'
+  world-removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Мир {highlight}%world%{letters} больше не лобби.'

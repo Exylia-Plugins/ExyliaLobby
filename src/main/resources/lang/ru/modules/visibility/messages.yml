@@ -1,0 +1,25 @@
+# Игрок сменил, кого он видит. %state% — новый режим с цветом.
+changed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Теперь вы видите: %state%{letters}.'
+
+# Нажато слишком быстро. %seconds% — оставшееся время.
+cooling: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Подождите {highlight}%seconds% с{warning} перед следующим переключением.'
+
+# Режим цветным словом для кнопки хотбара и чата: %lobby_visibility_state%.
+state-everyone: '{success}Все'
+state-friends: '{info}Друзья и персонал'
+state-nobody: '{error}Никто'
+
+# Запись в /settings: категория, название, описание и три варианта (простой текст).
+category: Лобби
+category-text:
+- Как лобби выглядит для вас.
+name: Видимость игроков
+description:
+- Кого вы видите, пока находитесь
+- в лобби. Персонал виден всегда.
+label-everyone: Все
+label-friends: Друзья и персонал
+label-nobody: Никто
+
+# Показывается в /settings, если скрыть игроков здесь нельзя.
+unavailable: Нужен PacketEvents на сервере.

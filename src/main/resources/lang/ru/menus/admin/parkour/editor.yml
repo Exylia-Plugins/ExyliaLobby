@@ -1,0 +1,216 @@
+menu-version: 1
+# НЕ РЕДАКТИРОВАТЬ — ПЕРЕСОЗДАЁТСЯ ПРИ КАЖДОМ ЗАПУСКЕ.
+#
+# Одна трасса паркура: где она начинается, проходит и заканчивается, и как оценивается.
+
+title: '{primary}&lПАРКУР {letters_black}» {highlight}%course_id%'
+size: 36
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: FEATHER
+    name: "{letters}Трасса {letters_black}▸ <gradient:{primary}:{secondary_light}>%course_name%</gradient>"
+    lore:
+      - "{letters_black}Трасса"
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:check} {letters}Состояние{letters_black}: %course_state%"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Включена{letters_black}: %enabled%"
+
+  start:
+    slot: 11
+    material: LIME_BED
+    name: "{letters}Трасса {letters_black}▸ <gradient:{success}:{success_light}>Старт</gradient>"
+    lore:
+      - "{letters_black}Настройка трассы"
+      - ""
+      - "{success}✎ Информация"
+      - " {letters}Где начинается забег. Берёт вашу"
+      - " {letters}позицию и взгляд."
+      - ""
+      - "{success}✦ Статус"
+      - "  {letters_black}· {info}{icon:compass} {letters}Старт{letters_black}: %start_state%"
+      - ""
+      - "{success}{icon:click} Нажмите, чтобы задать здесь"
+      - "{letters_black}Заменяет старт."
+    actions:
+      - 'exylialobby:parkour_edit start %course_id%'
+
+  checkpoint:
+    slot: 12
+    material: LIGHT_WEIGHTED_PRESSURE_PLATE
+    name: "{letters}Трасса {letters_black}▸ <gradient:{success}:{success_light}>Добавить чекпоинт</gradient>"
+    lore:
+      - "{letters_black}Настройка трассы"
+      - ""
+      - "{success}✎ Информация"
+      - " {letters}Добавляет чекпоинт под вами."
+      - " {letters}Бегуны проходят их по порядку."
+      - ""
+      - "{success}✦ Статус"
+      - "  {letters_black}· {info}{icon:check} {letters}Чекпоинты{letters_black}: {info}%checkpoints%"
+      - ""
+      - "{success}{icon:click} Нажмите, чтобы добавить здесь"
+      - "{letters_black}Идёт после последнего."
+    actions:
+      - 'exylialobby:parkour_edit checkpoint %course_id%'
+
+  finish:
+    slot: 14
+    material: WHITE_BANNER
+    name: "{letters}Трасса {letters_black}▸ <gradient:{success}:{success_light}>Финиш</gradient>"
+    lore:
+      - "{letters_black}Настройка трассы"
+      - ""
+      - "{success}✎ Информация"
+      - " {letters}Где забег заканчивается. Берёт вашу"
+      - " {letters}позицию и взгляд."
+      - ""
+      - "{success}✦ Статус"
+      - "  {letters_black}· {info}{icon:star} {letters}Финиш{letters_black}: %finish_state%"
+      - ""
+      - "{success}{icon:click} Нажмите, чтобы задать здесь"
+      - "{letters_black}Заменяет финиш."
+    actions:
+      - 'exylialobby:parkour_edit finish %course_id%'
+
+  kill:
+    slot: 15
+    material: MAGMA_BLOCK
+    name: "{letters}Трасса {letters_black}▸ <gradient:{primary}:{secondary_light}>Блоки возврата</gradient>"
+    lore:
+      - "{letters_black}Настройка трассы"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Блок, на который вы смотрите,"
+      - " {letters}вернёт бегунов к чекпоинту."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:barrier} {letters}Блоки{letters_black}: {info}%kills%"
+      - ""
+      - "{primary}{icon:click} Нажмите, чтобы добавить блок"
+      - "{letters_black}Сначала посмотрите на блок."
+    actions:
+      - 'exylialobby:parkour_edit kill %course_id%'
+
+  medals:
+    slot: 20
+    material: GOLD_INGOT
+    name: "{letters}Трасса {letters_black}▸ <gradient:{primary}:{secondary_light}>Медали</gradient>"
+    lore:
+      - "{letters_black}Настройка трассы"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Целевое время в секундах для"
+      - " {letters}золота, серебра и бронзы."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:gold} {letters}Цели{letters_black}: {info}%medals%"
+      - ""
+      - "{primary}{icon:click} Нажмите, чтобы изменить"
+      - "{letters_black}Спросит три числа."
+    actions:
+      - 'exylialobby:parkour_edit medals %course_id%'
+
+  difficulty:
+    slot: 21
+    material: NETHER_STAR
+    name: "{letters}Трасса {letters_black}▸ <gradient:{primary}:{secondary_light}>Сложность</gradient>"
+    lore:
+      - "{letters_black}Настройка трассы"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Метка на её карточке."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:crit} {letters}Сложность{letters_black}: {info}%difficulty%"
+      - ""
+      - "{primary}{icon:click} Нажмите, чтобы изменить"
+      - "{letters_black}Любой текст, например Hard."
+    actions:
+      - 'exylialobby:parkour_edit difficulty %course_id%'
+
+  rewards:
+    slot: 23
+    material: CHEST
+    name: "{letters}Трасса {letters_black}▸ <gradient:{primary}:{secondary_light}>Награды</gradient>"
+    lore:
+      - "{letters_black}Настройка трассы"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Награды за первый и повторный"
+      - " {letters}финиш, мин. время, лимиты."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:book} {letters}Правится в файле трасс"
+      - ""
+      - "{primary}{icon:click} Нажмите, чтобы открыть"
+      - "{letters_black}Выберите там эту трассу."
+    actions:
+      - 'exylialobby:parkour_edit rewards %course_id%'
+
+  enabled:
+    slot: 24
+    material: LEVER
+    name: "{letters}Трасса {letters_black}▸ <gradient:{primary}:{secondary_light}>Включена</gradient>"
+    lore:
+      - "{letters_black}Настройка трассы"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Выключенную трассу не запустить."
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Включена{letters_black}: %enabled%"
+      - ""
+      - "{primary}{icon:click} Нажмите, чтобы вкл/выкл"
+      - "{letters_black}Меняется сразу."
+    actions:
+      - 'exylialobby:parkour_edit enabled %course_id%'
+
+  board:
+    slot: 27
+    material: OAK_SIGN
+    name: "{letters}Трасса {letters_black}▸ <gradient:{info}:{info_light}>Топ здесь</gradient>"
+    lore:
+      - "{letters_black}Голограмма"
+      - ""
+      - "{info}✎ Информация"
+      - " {letters}Голограмма с топом этой"
+      - " {letters}трассы у ваших ног."
+      - ""
+      - "{info}{icon:click} Нажмите, чтобы поставить"
+      - "{letters_black}Заменяет её топ."
+    actions:
+      - 'exylialobby:parkour_edit board %course_id%'
+
+  back:
+    slot: 31
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Назад {letters_black}▸ <gradient:{error}:{error_light}>Трассы</gradient>"
+    lore:
+      - "{error}{icon:click} Нажмите, чтобы вернуться"
+    actions:
+      - 'exylialobby:parkour_edit back %course_id%'
+
+  delete:
+    slot: 35
+    material: TNT
+    name: "{letters}Трасса {letters_black}▸ <gradient:{error}:{error_light}>Удалить</gradient>"
+    lore:
+      - "{letters_black}Опасная зона"
+      - ""
+      - "{error}✎ Информация"
+      - " {letters}Удаляет трассу и её"
+      - " {letters}настройки. Время сохранится."
+      - ""
+      - "{error}{icon:click} Нажмите, чтобы удалить"
+      - "{letters_black}Вас попросят подтвердить."
+    actions:
+      - 'exylialobby:parkour_edit delete %course_id%'

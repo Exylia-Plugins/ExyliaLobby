@@ -1,0 +1,302 @@
+# /parkour без аргументов. %courses% — список трасс, %command% — метка команды.
+usage: '%prefix% {letters}Трассы: %courses%{letters}. Играйте через {highlight}/%command% <course>{letters} или {highlight}/%command% endless{letters}.'
+unknown-course: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Нет трассы с названием {highlight}%course%{error}.'
+course-closed: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}{highlight}%course%{error} сейчас закрыта.'
+mode-off: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Этот режим выключен.'
+
+# Бесконечный режим без заданной области
+no-area: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}У бесконечного паркура пока нет области. Обратитесь к админу.'
+not-running: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Вы не проходите паркур.'
+
+# Выход из забега через /parkour leave или предмет выхода
+left: '%prefix% {letters}Вы покинули паркур.'
+
+# /parkour <трасса или режим> вне лобби или пока вас занимает другое (бой)
+not-in-lobby: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Паркур можно начать только в лобби.'
+busy: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Закончите текущее дело, прежде чем начинать паркур.'
+
+# Забеги на трассах. %course% — её название, %time% — время на данный момент, %checkpoint%/%total% — прогресс.
+start-title: '{primary}&l%course%'
+start-subtitle: '{letters}Вперёд!'
+checkpoint-title: '{info}%checkpoint%{letters_black}/{info}%total%'
+
+# %delta% — одна из строк ниже: зелёная — вы впереди рекорда, красная — позади.
+checkpoint-subtitle: '{letters}%time% %delta%'
+delta-ahead: '{success}%delta%'
+delta-behind: '{error}%delta%'
+boss-bar: '{primary}%course% {letters_black}» {info}%time%'
+
+# Финиш достигнут без всех чекпоинтов
+missed-checkpoint: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Вы пропустили чекпоинт. Пройдите все до финиша.'
+time-up: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Время на трассе {highlight}%course%{error} вышло.'
+
+# Финиш быстрее минимального времени трассы
+too-fast: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Этот финиш быстрее, чем допускает трасса, поэтому он не засчитан.'
+
+# Чат после финиша. %medal% — строка медали ниже или пусто, %rank% — место в общем топе.
+finished:
+- ''
+- '  {primary}&l%course% {letters_black}» {success}Финиш'
+- '  {letters_black}· {letters}Время{letters_black}: {info}%time% %record%'
+- '  {letters_black}· {letters}Рекорд{letters_black}: {highlight}%best% {letters_black}(#%rank%) %medal%'
+- ''
+new-record: '{success}Новый рекорд!'
+no-record: ''
+medal-gold: '{highlight}Золотая медаль'
+medal-silver: '{letters}Серебряная медаль'
+medal-bronze: '{warning}Бронзовая медаль'
+
+# Места в топе пока нет
+unranked: —
+
+# База данных недоступна для чтения или записи, финиш или счёт не сохранены
+not-saved: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Сейчас не удалось сохранить ваш результат. Попробуйте чуть позже.'
+
+# Бесконечные режимы. %mode% — название режима ниже, %score% — прыжки, %left% — оставшееся время спринта.
+endless-name: Бесконечный
+sprint-name: Спринт
+daily-name: Ежедневный
+endless-boss-bar: '{primary}%mode% {letters_black}» {info}%score% {letters}прыжков {letters_black}· {info}%time%'
+sprint-boss-bar: '{primary}%mode% {letters_black}» {info}%score% {letters}прыжков {letters_black}· {warning}%left%'
+
+# Показывается при смене темы пути. %theme% — название темы.
+theme-title: '%theme%'
+milestone-title: '{highlight}&l%score%'
+milestone-subtitle: '{letters}прыжков подряд'
+
+# Чат по окончании бесконечного забега. %retry% — кнопка повтора ниже.
+endless-ended:
+- ''
+- '  {primary}&l%mode% {letters_black}» {letters}Забег окончен'
+- '  {letters_black}· {letters}Счёт{letters_black}: {info}%score% {letters_black}за {info}%time% %record%'
+- '  {letters_black}· {letters}Рекорд{letters_black}: {highlight}%best% {letters_black}(#%rank%)'
+- '  %retry%'
+- ''
+retry: <click:run_command:'/%command% %mode_id%'><hover:show_text:'{letters}Начать новый забег'>{success}&l[↻ ЕЩЁ РАЗ]</hover></click>
+
+# Забег прерван из-за запрещённого. %reason% — одна из причин ниже.
+cheated: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Забег прерван: %reason%.'
+reasons:
+  flight: полёт
+  elytra: планирование
+  riptide: тритон
+  pearl: эндер-жемчуг
+  vehicle: езда на транспорте
+  game-mode: смена режима игры
+  teleport: телепортация
+  unconfirmed: прыжок не удалось подтвердить
+
+# Ваше время на трассе сброшено
+time-reset: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Ваше время на трассе {highlight}%course%{letters} сброшено.'
+
+# Команды персонала в /lobbyadmin parkour. %course% — id.
+course-created: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Трасса {highlight}%course%{letters} создана, старт у ваших ног. Добавьте чекпоинты и финиш.'
+course-exists: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Трасса {highlight}%course%{error} уже существует.'
+start-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Старт трассы {highlight}%course%{letters} задан у ваших ног.'
+checkpoint-added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Чекпоинт {highlight}%checkpoint%{letters} трассы {highlight}%course%{letters} добавлен у ваших ног.'
+finish-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Финиш трассы {highlight}%course%{letters} задан у ваших ног.'
+course-deleted: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Трасса {highlight}%course%{letters} удалена.'
+wrong-world: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Трасса {highlight}%course%{error} в мире {highlight}%world%{error}. Встаньте там, чтобы править её.'
+
+# Подпись над лучом следующего чекпоинта. %checkpoint%/%total% — чекпоинт, %distance% — расстояние в метрах.
+beacon-label: '{letters}Чекпоинт {info}%checkpoint%{letters_black}/{info}%total% {letters_black}· {info}%distance% м'
+
+# Предметы бегуна: к последнему чекпоинту, заново, выход.
+items:
+  checkpoint:
+    icon: LIGHT_WEIGHTED_PRESSURE_PLATE
+    name: '{letters}Паркур {letters_black}▸ <gradient:{primary}:{secondary_light}>Чекпоинт</gradient>'
+    lore:
+    - '{letters_black}Предмет забега'
+    - ''
+    - '{primary}{icon:click} Нажмите, чтобы вернуться'
+    - '{letters_black}К последнему чекпоинту.'
+  restart:
+    icon: CLOCK
+    name: '{letters}Паркур {letters_black}▸ <gradient:{primary}:{secondary_light}>Заново</gradient>'
+    lore:
+    - '{letters_black}Предмет забега'
+    - ''
+    - '{primary}{icon:click} Нажмите, чтобы начать заново'
+    - '{letters_black}Новый забег со старта.'
+  leave:
+    icon: BARRIER
+    name: '{letters}Паркур {letters_black}▸ <gradient:{error}:{error_light}>Выйти</gradient>'
+    lore:
+    - '{letters_black}Предмет забега'
+    - ''
+    - '{error}{icon:click} Нажмите, чтобы выйти'
+    - '{letters_black}Забег закончится без сохранения.'
+
+# Топы в чате и инструменты персонала.
+tools:
+  # %board% — id топа.
+  top-title: '%prefix% {primary}&l%board% {letters_black}» {letters}Топ'
+  # %place%, %name% и %value% одной строки.
+  top-line: '  {highlight}#%place% {letters_black}· {letters}%name% {letters_black}· {info}%value%'
+  top-empty: '%prefix% {letters}В этом топе пока никого нет.'
+  unknown-board: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Нет топа с названием {highlight}%board%{error}.'
+  # Строки голограммы-топа: заголовок, затем по строке на место (до 10).
+  board-title: '{primary}&l%board%'
+  board-line: '{highlight}#%place% {letters}%name% {letters_black}· {info}%value%'
+  board-empty: '{letters_black}Пока никого'
+  board-placed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Топ {highlight}%board%{letters} поставлен у ваших ног.'
+  kill-added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Теперь {highlight}%block%{letters} возвращает бегунов трассы {highlight}%course%{letters}.'
+  kill-no-block: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Сначала встаньте на блок или посмотрите на него.'
+  medals-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Медали трассы {highlight}%course%{letters} заданы.'
+  # Вопрос перед удалением трассы. %course% — id.
+  confirm-delete: Удалить %course% и её настройки? Сохранённое время останется в базе данных.
+  select-area: '%prefix% {letters}Выделите два угла области своим жезлом.'
+  no-selection: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Область не выделена.'
+  # Запрос названия области.
+  prompt-area: Название области
+  area-saved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Область бесконечного паркура {highlight}%area%{letters} сохранена, старт там, где вы стоите.'
+
+# Карточки меню: строки статов, подзаголовки, запросы и состояния. %tone% и %light% — цвета палитры карточки.
+screens:
+  'on': '{success}{icon:on} Вкл'
+  'off': '{error}{icon:off} Выкл'
+  # Значения, которого ещё нет: лучшего времени, места.
+  none: '{muted}Пока нет'
+  # Подзаголовки карточек. Пройденная трасса — ваша, поэтому в цвете успеха.
+  subtitle-course: '{letters_black}Трасса'
+  subtitle-course-done: '{success}Трасса · пройдена'
+  subtitle-endless: '{letters_black}Бесконечный режим'
+  subtitle-sprint: '{letters_black}Режим спринта'
+  subtitle-daily: '{letters_black}Ежедневный режим'
+  subtitle-top: '{letters_black}Рейтинг · %board%'
+  # Названия карточек: %subject% — трасса или режим; градиент оборачивает простые названия в цвет карточки.
+  name-course: '{letters}Трасса {letters_black}▸ %subject%'
+  name-mode: '{letters}Режим {letters_black}▸ %subject%'
+  name-row: '{letters}#%place% {letters_black}▸ %subject%'
+  gradient: <gradient:%tone%:%light%>%subject%</gradient>
+  label-rank: Место
+  back-list: Трассы
+  label-today: Место за день
+  # Заголовки разделов карточки.
+  label-info: '%tone%✎ Информация'
+  label-status: '%tone%✦ Статус'
+  # Что такое трасса или режим, в одной-двух строках. <nl> делит строки. %seconds% — длина спринта.
+  about-course: ' {letters}Стартуйте, пройдите все чекпоинты<nl> {letters}и {highlight}финишируйте {letters}как можно быстрее.'
+  about-endless: ' {letters}Прыгайте как можно дальше.<nl> {letters}Счёт — это {highlight}прыжки{letters}.'
+  about-sprint: ' {letters}Сделайте как можно больше<nl> {letters}прыжков за {highlight}%seconds% с{letters}.'
+  about-daily: ' {letters}Сегодня у всех один и тот же путь.<nl> {letters}Один топ, {highlight}сброс каждый день{letters}.'
+  # Строки статов: %value% — значение.
+  stat-difficulty: '  {letters_black}· {warning}{icon:star} {letters}Сложность{letters_black}: {warning}%value%'
+  stat-best: '  {letters_black}· {info}{icon:clock} {letters}Рекорд{letters_black}: {info}%value%'
+  stat-score: '  {letters_black}· {info}{icon:star} {letters}Рекорд{letters_black}: {info}%value%'
+  stat-medal: '  {letters_black}· {highlight}{icon:gold} {letters}Медаль{letters_black}: %value%'
+  stat-rank: '  {letters_black}· {highlight}{icon:star} {letters}%label%{letters_black}: {highlight}%value%'
+  stat-finishes: '  {letters_black}· {success}{icon:book} {letters}Финиши{letters_black}: {success}%value%'
+  stat-checkpoints: '  {letters_black}· {info}{icon:info} {letters}Чекпоинты{letters_black}: {info}%value%'
+  # Строки кликов карточки списка (трасса, затем режим).
+  click-course: '%tone%{icon:click} ЛКМ {letters_black}· {letters}играть<nl>%tone%{icon:right_click} ПКМ {letters_black}· {letters}детали<nl>{letters_black}Игра отправит вас на старт.'
+  click-mode: '%tone%{icon:click} ЛКМ {letters_black}· {letters}играть<nl>%tone%{icon:right_click} ПКМ {letters_black}· {letters}рейтинг<nl>{letters_black}Игра отправит вас в его область.'
+  # Ваши сплиты на экране трассы: строка на чекпоинт, затем финиш против золотой медали.
+  splits-none: ' {letters_black}Пройдите трассу, чтобы записать сплиты.'
+  split-line: '  {letters_black}· {info}{icon:clock} {letters}Чекпоинт %number%{letters_black}: {info}%time%'
+  split-more: '  {letters_black}· {letters_black}и ещё %more%'
+  split-finish: '  {letters_black}· {highlight}{icon:clock} {letters}Финиш{letters_black}: {info}%time% %medal%'
+  split-gold: '  {letters_black}· {highlight}{icon:gold} {letters}Золото{letters_black}: {warning}%time% {letters_black}(%delta%{letters_black})'
+  # Названия периодов в рейтинге.
+  periods:
+    all: За всё время
+    monthly: За месяц
+    weekly: За неделю
+    daily: За день
+  # Вопрос перед сбросом вашего времени. %course% — её название.
+  confirm-reset: Сбросить ваше время на %course%? Ваши места в её топах будут удалены.
+  # Экраны персонала.
+  prompt-course: Название трассы
+  prompt-difficulty: Сложность (Easy, Medium, Hard...)
+  prompt-gold: Время золотой медали в секундах (0 — нет)
+  prompt-silver: Время серебряной медали в секундах (0 — нет)
+  prompt-bronze: Время бронзовой медали в секундах (0 — нет)
+  prompt-area: Название области
+  confirm-delete-area: Удалить область бесконечного паркура %area%?
+  area-deleted: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Область бесконечного паркура {highlight}%area%{letters} удалена.'
+  theme-toggled: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Тема {highlight}%theme%{letters}: %state%{letters}.'
+  difficulty-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Сложность трассы {highlight}%course%{letters} теперь {highlight}%difficulty%{letters}.'
+  enabled-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Трасса {highlight}%course%{letters}: %state%{letters}.'
+  not-ready: '{error}Нужны старт и финиш'
+  ready: '{success}Готова к запуску'
+  placed: '{success}Поставлена'
+  not-placed: '{error}Не поставлена'
+  no-courses: '{muted}Больше нет трасс'
+  no-areas: '{muted}Больше нет областей'
+
+# Экраны персонала /lobbyadmin: списки трасс, областей и тем.
+staff:
+  back: Паркур
+  title-courses: Трассы
+  kind-course: Трасса
+  title-areas: Бесконечные области
+  kind-area: Область
+  title-themes: Темы
+  kind-theme: Тема
+  # Подзаголовки карточек строк.
+  subtitle-course-ready: Трасса · готова
+  subtitle-course-setup: Трасса · нужна настройка
+  subtitle-area: Бесконечная область
+  subtitle-theme: Тема бесконечного режима
+  # Подписи статов строк.
+  label-difficulty: Сложность
+  label-checkpoints: Чекпоинты
+  label-state: Состояние
+  label-world: Мир
+  label-start: Старт
+  label-floor: Пол
+  # Строки кликов строк, по одной на строку.
+  clicks-course:
+  - '{primary}{icon:click} ЛКМ {letters_black}· {letters}изменить'
+  - '{primary}{icon:right_click} ПКМ {letters_black}· {letters}вкл/выкл'
+  - '{error}{icon:right_click} Shift+ПКМ {letters_black}· {letters}удалить'
+  - '{letters_black}Вас попросят подтвердить.'
+  clicks-area:
+  - '{error}{icon:right_click} ПКМ {letters_black}· {letters}удалить'
+  - '{letters_black}Вас попросят подтвердить.'
+  clicks-theme:
+  - '{primary}{icon:click} Клик {letters_black}· {letters}вкл/выкл'
+  - '{letters_black}Бесконечные пути берут её, пока включена.'
+  # Кнопки добавления каждого списка (слоты 45 и 46).
+  create-course:
+    title: Создать
+    text:
+    - ' {letters}Новая трасса со стартом'
+    - ' {letters}у ваших ног.'
+    click: Нажмите, чтобы создать
+    next: Затем откроется её редактор.
+  settings-courses:
+    title: Настройки
+    text:
+    - ' {letters}Режимы, античит, топы'
+    - ' {letters}и остальное.'
+    click: Нажмите, чтобы открыть
+    next: Все настройки паркура.
+  add-area:
+    title: Добавить
+    text:
+    - ' {letters}Выделите два угла жезлом,'
+    - ' {letters}начиная там, где стоите.'
+    click: Нажмите, чтобы добавить
+    next: Имя зададите после выделения.
+  settings-areas:
+    title: Настройки
+    text:
+    - ' {letters}Настройка путей, вехи'
+    - ' {letters}и бесконечные режимы.'
+    click: Нажмите, чтобы открыть
+    next: Все настройки паркура.
+  edit-themes:
+    title: Изменить блоки
+    text:
+    - ' {letters}Блоки, из которых каждая'
+    - ' {letters}тема строит свой путь.'
+    click: Нажмите, чтобы открыть
+    next: Откроет файл тем.
+  enable-themes:
+    title: Включить все
+    text:
+    - ' {letters}Включает каждую тему.'
+    click: Нажмите, чтобы включить
+    next: Бесконечные пути берут все.

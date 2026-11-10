@@ -1,0 +1,87 @@
+menu-version: 1
+# DÜZENLEME — HER AÇILIŞTA YENİDEN OLUŞTURULUR.
+#
+# /lobbyadmin: ExyliaLobby yetkili merkezi.
+
+title: '{primary}&lLOBİ {letters_black}» {highlight}Yönetim'
+size: 27
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: NETHER_STAR
+    name: "<gradient:{primary}:{secondary_light}>ExyliaLobby</gradient>"
+    lore:
+      - "{letters_black}Lobi yönetimi"
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {success}{icon:on} {letters}Açık modüller{letters_black}: {success}%modules_on%{letters_black}/{info}%modules_total%"
+
+  modules:
+    slot: 11
+    material: COMMAND_BLOCK
+    name: "{letters}Lobi {letters_black}▸ <gradient:{primary}:{secondary_light}>Modüller</gradient>"
+    lore:
+      - "{letters_black}Kurulum bölümü"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Lobinin her bölümünü"
+      - " {letters}{highlight}canlı{letters} aç veya kapat."
+      - ""
+      - "{primary}{icon:click} Açmak için tıkla"
+      - "{letters_black}Her modül, durumuyla."
+    actions:
+      - 'exylialobby:admin_modules'
+
+  areas:
+    slot: 12
+    material: FILLED_MAP
+    name: "{letters}Lobi {letters_black}▸ <gradient:{primary}:{secondary_light}>Alanlar</gradient>"
+    lore:
+      - "{letters_black}Kurulum bölümü"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Lobi kurallarının geçerli"
+      - " {letters}olduğu dünyalar ve kutular."
+      - ""
+      - "{primary}{icon:click} Açmak için tıkla"
+      - "{letters_black}Dünya ekle veya kutu seç."
+    actions:
+      - 'exylialobby:admin_areas'
+
+  settings:
+    slot: 14
+    material: COMPARATOR
+    name: "{letters}Lobi {letters_black}▸ <gradient:{primary}:{secondary_light}>&lAYARLAR</gradient>"
+    lore:
+      - "{letters_black}Yapılandırma"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Her modülün tüm ayarları,"
+      - " {letters}{highlight}dosya{letters} düzenlemeden."
+      - ""
+      - "{primary}{icon:click} Açmak için tıkla"
+      - "{letters_black}Her dosyanın ayarları."
+    actions:
+      - 'exylialobby:admin_settings'
+
+  reload:
+    slot: 15
+    material: CLOCK
+    name: "{letters}Lobi {letters_black}▸ <gradient:{primary}:{secondary_light}>Yenile</gradient>"
+    lore:
+      - "{letters_black}Bakım"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Elle düzenledikten sonra"
+      - " {letters}dosyaları yeniden okur."
+      - ""
+      - "{primary}{icon:click} Yenilemek için tıkla"
+      - "{letters_black}Sorunlar sohbette listelenir."
+    actions:
+      - 'exylialobby:admin_reload'

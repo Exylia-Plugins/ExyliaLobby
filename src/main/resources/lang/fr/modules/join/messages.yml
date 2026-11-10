@@ -1,0 +1,37 @@
+# La ligne que tout le monde voit quand un joueur arrive. %player% est son pseudo. Vide : rien n’est affiché.
+join: '{letters_black}[{success}+{letters_black}] {letters}%player%'
+
+# La ligne que tout le monde voit quand un joueur part.
+leave: '{letters_black}[{error}-{letters_black}] {letters}%player%'
+
+# Remplace la ligne d’arrivée la toute première fois qu’un joueur se connecte. Vide : la ligne normale.
+first-join: '{letters_black}[{success}+{letters_black}] {highlight}%player%{letters} vient d’arriver pour la première fois !'
+
+# Montré au joueur lui-même peu après sa connexion : un titre et un court son.
+welcome:
+  # Grand texte au milieu de l’écran. Supprime-le pour ne rien afficher.
+  title:
+    # Accepte des couleurs comme {primary} et des placeholders comme %player_name%.
+    text: '{primary}&lBIENVENUE'
+    subtitle: '{letters}%player%'
+    # Accepte aussi une durée écrite : 30s, 1m30s.
+    fade-in: 0.3
+    # Secondes d’affichage complet. 0 le garde jusqu’à ce que quelque chose l’arrête.
+    # Accepte aussi une durée écrite : 30s, 1m30s.
+    stay: 2.5
+    fade-out: 0.6
+    # auto, seconds, tenths, hundredths, clock, full, compact ou precise.
+    time-style: auto
+  # Un son à jouer.
+  sound:
+    # ENTITY_PLAYER_LEVELUP, ou une clé comme minecraft:entity.player.levelup.
+    name: ENTITY_EXPERIENCE_ORB_PICKUP
+    # Au-dessus de 1.0, le son n’est pas plus fort, il porte plus loin.
+    volume: 0.5
+    # De 0.5 à 2.0.
+    pitch: 1.4
+    # MASTER, MUSIC, RECORDS, WEATHER, BLOCKS, HOSTILE, NEUTRAL, PLAYERS, AMBIENT ou VOICE.
+    category: MASTER
+
+# Lignes de chat envoyées au joueur peu après sa connexion, une par ligne. %player% est son pseudo.
+motd: []

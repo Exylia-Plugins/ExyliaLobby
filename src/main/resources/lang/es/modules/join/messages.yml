@@ -1,0 +1,37 @@
+# La línea que ve todo el mundo cuando entra un jugador. %player% es su nombre. Vacío no muestra nada.
+join: '{letters_black}[{success}+{letters_black}] {letters}%player%'
+
+# La línea que ve todo el mundo cuando un jugador sale.
+leave: '{letters_black}[{error}-{letters_black}] {letters}%player%'
+
+# Reemplaza la línea de entrada la primera vez que un jugador entra. Vacío usa la normal.
+first-join: '{letters_black}[{success}+{letters_black}] {highlight}%player%{letters} entró por primera vez.'
+
+# Se muestra al propio jugador un momento después de entrar: un título y un sonido corto.
+welcome:
+  # Texto grande en el centro de la pantalla. Quítalo para no mostrar nada.
+  title:
+    # Admite colores como {primary} y placeholders como %player_name%.
+    text: '{primary}&lBIENVENIDO'
+    subtitle: '{letters}%player%'
+    # También lee una duración escrita: 30s, 1m30s.
+    fade-in: 0.3
+    # Segundos totalmente visible. 0 lo mantiene hasta que algo lo detenga.
+    # También lee una duración escrita: 30s, 1m30s.
+    stay: 2.5
+    fade-out: 0.6
+    # auto, seconds, tenths, hundredths, clock, full, compact o precise.
+    time-style: auto
+  # Un sonido a reproducir.
+  sound:
+    # ENTITY_PLAYER_LEVELUP, o una clave como minecraft:entity.player.levelup.
+    name: ENTITY_EXPERIENCE_ORB_PICKUP
+    # Por encima de 1.0 no suena más fuerte, llega más lejos.
+    volume: 0.5
+    # De 0.5 a 2.0.
+    pitch: 1.4
+    # MASTER, MUSIC, RECORDS, WEATHER, BLOCKS, HOSTILE, NEUTRAL, PLAYERS, AMBIENT o VOICE.
+    category: MASTER
+
+# Líneas de chat enviadas al jugador un momento después de entrar, una por línea. %player% es su nombre.
+motd: []

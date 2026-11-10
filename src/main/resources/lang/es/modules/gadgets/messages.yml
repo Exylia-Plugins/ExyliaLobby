@@ -1,0 +1,80 @@
+# Líneas de chat. %gadget% es el nombre del gadget, %seconds% la recarga restante.
+cooling: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}%gadget%{warning} se está recargando: {highlight}%seconds%s{warning}.'
+no-permission: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Aún no tienes %gadget%{error}.'
+equipped: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%gadget%{letters} está en tu hotbar.'
+put-away: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Guardaste tu gadget.'
+unavailable: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Ese gadget no se puede usar en este servidor.'
+not-now: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}No puedes usar un gadget ahora mismo.'
+
+# La preferencia en la pantalla de ajustes del jugador.
+setting-category: Gadgets
+setting-category-text:
+- 'Juguetes para usar en el lobby.'
+setting-name: Los gadgets me afectan
+setting-description:
+- 'Si los gadgets de otros jugadores'
+- 'pueden empujarte o pintar tu suelo.'
+
+# Palabras de las tarjetas del menú de gadgets.
+kind: Gadget
+kind-equipped: Gadget · Equipado
+kind-locked: Gadget · Bloqueado
+label-cooldown: Recarga
+label-needs: Requiere
+locked-note: Pregunta al staff cómo desbloquearlo.
+click-equip: Clic para equipar
+click-equip-next: Va a tu hotbar.
+click-put: Clic para guardar
+click-put-next: Tu espacio de hotbar se libera.
+
+# Cada gadget: su nombre, una descripción (hasta tres líneas), el clic que usa y qué hace.
+cards:
+  grapple:
+    name: Gancho
+    text:
+    - 'Lánzalo a una pared o al suelo'
+    - 'y te jala hasta allí.'
+    click: Clic derecho
+    use: lanzar y recoger
+  ender:
+    name: Viaje Ender
+    text:
+    - 'Viaja en tu propia perla por'
+    - 'el aire y aterriza a salvo.'
+    click: Clic derecho
+    use: lanzar y montar
+  paint:
+    name: Pistola de pintura
+    text:
+    - 'Los disparos pintan el suelo'
+    - 'unos segundos. No rompe nada.'
+    click: Clic derecho
+    use: disparar pintura
+  knockback:
+    name: Palo de empuje
+    text:
+    - 'Empuja a quien lo permite.'
+    - 'Nunca hace daño.'
+    click: Golpear a un jugador
+    use: empujarlo
+  leap:
+    name: Pluma de salto
+    text:
+    - 'Impúlsate hacia donde miras y'
+    - 'aterriza con suavidad.'
+    click: Clic derecho
+    use: saltar adelante
+  snowball:
+    name: Cañón de nieve
+    text:
+    - 'Una ráfaga de bolas de nieve que'
+    - 'empujan a quien lo permite.'
+    click: Clic derecho
+    use: disparar una ráfaga
+  trampoline:
+    name: Trampolín
+    text:
+    - 'Una plataforma elástica bajo tus'
+    - 'pies por unos segundos.'
+    click: Clic derecho
+    use: colocar la plataforma

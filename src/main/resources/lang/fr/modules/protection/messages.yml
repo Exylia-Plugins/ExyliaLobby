@@ -1,0 +1,9 @@
+# /lobbyadmin build activé ou désactivé
+build-on: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Mode construction {success}activé{letters}. La protection du lobby t’ignore.'
+build-off: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Mode construction {error}désactivé{letters}. La protection du lobby est de retour.'
+
+# Boss bar affichée tant que le mode construction est actif
+build-bar: '{warning}&lMODE CONSTRUCTION {letters_black}• {letters}Protection désactivée pour toi'
+
+# /lobbyadmin build utilisé hors du lobby
+not-in-lobby: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Place-toi dans le lobby pour utiliser le mode construction.'

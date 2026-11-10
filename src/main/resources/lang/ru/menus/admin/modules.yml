@@ -1,0 +1,74 @@
+menu-version: 1
+# НЕ РЕДАКТИРОВАТЬ — ПЕРЕСОЗДАЁТСЯ ПРИ КАЖДОМ ЗАПУСКЕ.
+#
+# Все модули ExyliaLobby: включайте на лету или открывайте их настройки.
+
+title: '{primary}&lЛОББИ {letters_black}» {highlight}Модули {muted}%current_page%/%total_pages%'
+size: 54
+type: PAGINATION
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+  pagination:
+    material: LIGHT_GRAY_STAINED_GLASS_PANE
+    name: '{muted}Больше нет модулей'
+    lore:
+      - "{letters_black}Здесь все модули."
+    hide_tooltip: false
+
+pagination:
+  slots: '0-35'
+
+  item_template:
+    material: '%module_icon%'
+    glow: '%module_glow%'
+    name: "{letters}Модуль {letters_black}▸ <gradient:{primary}:{secondary_light}>%module_name%</gradient>"
+    lore:
+      - "{letters_black}Модуль лобби"
+      - ""
+      - "{primary}✎ Информация"
+      - "%module_description%"
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Состояние{letters_black}: %module_state%"
+      - ""
+      - "{primary}{icon:click} ЛКМ {letters_black}· {letters}вкл/выкл"
+      - "{letters_black}Применяется сразу, без рестарта."
+      - "{primary}{icon:right_click} ПКМ {letters_black}· {letters}открыть"
+      - "{letters_black}Его экран или настройки."
+    actions:
+      - 'left: exylialobby:module_toggle %module_id%'
+      - 'right: exylialobby:module_open %module_id%'
+
+  navigation:
+    previous:
+      slot: 48
+      sound: 'minecraft:item.book.page_turn|1.0|1.0'
+      material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGExZDU1YjNmOTg5NDEwYTM0NzUyNjUwZTI0OGM5YjZjMTc4M2E3ZWMyYWEzZmQ3Nzg3YmRjNGQwZTYzN2QzOSJ9fX0='
+      name: "{letters}Страница {letters_black}▸ <gradient:{error}:{error_light}>← Предыдущая</gradient>"
+      lore:
+        - "  {letters_black}· {letters}Страница{letters_black}: {info}%current_page%{letters_black}/{info}%total_pages%"
+      actions:
+        - 'previous_page'
+    next:
+      slot: 50
+      sound: 'minecraft:item.book.page_turn|1.0|1.0'
+      material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmE4N2UzZDk2ZTFjZmViOWNjZmIzYmE1M2EyMTdmYWY1MjQ5ZTI4NTUzM2IyNzFhMmZiMjg0YzMwZGJkOTgyOSJ9fX0='
+      name: "{letters}Страница {letters_black}▸ <gradient:{success}:{success_light}>Следующая →</gradient>"
+      lore:
+        - "  {letters_black}· {letters}Страница{letters_black}: {info}%current_page%{letters_black}/{info}%total_pages%"
+      actions:
+        - 'next_page'
+
+items:
+  back:
+    slot: 49
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Назад {letters_black}▸ <gradient:{error}:{error_light}>Админка</gradient>"
+    lore:
+      - "{error}{icon:click} Нажмите, чтобы вернуться"
+    actions:
+      - 'exylialobby:admin_hub'

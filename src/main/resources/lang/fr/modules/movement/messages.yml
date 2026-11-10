@@ -1,0 +1,43 @@
+# Éditeur de plateformes : lignes de chat. %pad% est l’id de la plateforme.
+pad-added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Plateforme de lancement {highlight}%pad%{letters} ajoutée.'
+pad-removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Plateforme de lancement {highlight}%pad%{letters} supprimée.'
+pad-changed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Plateforme de lancement {highlight}%pad%{letters} mise à jour.'
+no-target: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Regarde un bloc à moins de 8 blocs.'
+same-place: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Il y a déjà une plateforme sur ce bloc.'
+
+# Invites de l’éditeur de plateformes.
+prompt-power: '{letters}Vitesse horizontale de cette plateforme (0.1 à 8).'
+prompt-vertical: '{letters}Vitesse verticale de cette plateforme (0.1 à 4).'
+confirm-remove: Supprimer la plateforme de lancement {highlight}%pad%{letters} ?
+
+# Éditeur de plateformes : textes des cartes.
+list-title: Mouvement
+list-kind: Plateforme de lancement
+row-subtitle: Projette celui qui marche dessus
+label-place: Bloc
+label-power: Puissance
+label-vertical: Hauteur
+label-direction: Direction
+direction-look: '{info}Là où tu regardes'
+
+# La direction d’une plateforme fixe. %yaw% est l’angle en degrés.
+direction-fixed: '{info}Fixe à %yaw%°'
+clicks:
+- '{primary}{icon:click} Clic gauche {letters_black}· {letters}modifier la puissance'
+- '{primary}{icon:right_click} Clic droit {letters_black}· {letters}modifier la hauteur'
+- '{primary}{icon:click} Shift + clic gauche {letters_black}· {letters}changer la direction'
+- '{error}{icon:right_click} Shift + clic droit {letters_black}· {letters}supprimer'
+- '{letters_black}La suppression demande confirmation.'
+add-here-title: À mes pieds
+add-here-text:
+- ' {letters}Transforme le bloc où tu es'
+- ' {letters}en plateforme de lancement.'
+add-here-click: Clique pour ajouter
+add-here-next: Modifie ensuite sa puissance ici.
+add-look-title: Là où je regarde
+add-look-text:
+- ' {letters}Transforme le bloc visé'
+- ' {letters}en plateforme de lancement.'
+add-look-click: Clique pour ajouter
+add-look-next: Modifie ensuite sa puissance ici.
+back-name: Mouvement

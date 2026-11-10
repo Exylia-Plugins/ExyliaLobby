@@ -1,0 +1,82 @@
+# Uma entrada por id de módulo: nome e descrição curta (duas ou três linhas de cerca de 30 caracteres).
+modules:
+  spawn:
+    name: Spawn
+    description:
+    - Ponto de spawn, /spawn, volta
+    - do void e renascer no spawn.
+  state:
+    name: Estado do jogador
+    description:
+    - Modo de jogo, vida, fome,
+    - efeitos, horário e clima.
+  protection:
+    name: Proteção
+    description:
+    - Sem construção, dano, drops,
+    - mobs, fogo ou explosões.
+  join:
+    name: Entrada e saída
+    description:
+    - Mensagens, título de boas-vindas
+    - e comandos ao entrar e sair.
+  hotbar:
+    name: Hotbar
+    description:
+    - Itens que abrem menus, enviam
+    - a servidores ou rodam comandos.
+  movement:
+    name: Movimento
+    description:
+    - Pulo duplo e
+    - plataformas de impulso.
+  visibility:
+    name: Visibilidade
+    description:
+    - Os jogadores escolhem quem
+    - veem no lobby.
+  selector:
+    name: Seletor de servidores
+    description:
+    - Servidores e lobbies com
+    - contagem ao vivo, NPCs e portais.
+  games:
+    name: Jogos
+    description:
+    - Todos os jogos dos plugins
+    - Exylia, em uma só tela.
+  hud:
+    name: HUD
+    description:
+    - Sidebar, lista de jogadores,
+    - boss bars e anúncios.
+  pvp:
+    name: PvP do lobby
+    description:
+    - Segure a espada para lutar
+    - com quem aceitou.
+  parkour:
+    name: Parkour
+    description:
+    - Percursos, parkour infinito
+    - e rankings.
+  gadgets:
+    name: Gadgets
+    description:
+    - Gancho, passeio no ender,
+    - canhão de tinta e mais.
+  holograms:
+    name: Hologramas
+    description:
+    - Quadros de texto e
+    - de ranking no lobby.
+  chat:
+    name: Chat
+    description:
+    - Bloqueio do chat, modo lento
+    - e limpar chat.
+  onboarding:
+    name: Integração
+    description:
+    - Leva os novatos
+    - ao ExyliaJourney.

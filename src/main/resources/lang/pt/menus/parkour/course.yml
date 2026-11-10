@@ -1,0 +1,92 @@
+menu-version: 1
+# Um percurso de parkour. # Seu para reestilizar: novos padrões aguardam em /exylialib updates.
+
+title: '{primary}&lPARKOUR {letters_black}» {highlight}%course_name%'
+size: 27
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: FEATHER
+    name: "{letters}Percurso {letters_black}▸ %course_name%"
+    lore:
+      - "{letters_black}Percurso"
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {warning}{icon:star} {letters}Dificuldade{letters_black}: {warning}%course_difficulty%"
+      - "  {letters_black}· {info}{icon:clock} {letters}Melhor{letters_black}: {info}%course_best%"
+      - "  {letters_black}· {highlight}{icon:gold} {letters}Medalha{letters_black}: %course_medal%"
+      - "  {letters_black}· {success}{icon:book} {letters}Conclusões{letters_black}: {success}%course_finishes%"
+
+  play:
+    slot: 12
+    material: LIME_DYE
+    name: "{letters}Percurso {letters_black}▸ <gradient:{success}:{success_light}>Jogar</gradient>"
+    lore:
+      - "{letters_black}Correr"
+      - ""
+      - "{success}✎ Informação"
+      - " {letters}Bata seu melhor para subir"
+      - " {letters}no {highlight}ranking{letters}."
+      - ""
+      - "{success}{icon:click} Clique para jogar"
+      - "{letters_black}Você vai para a largada."
+    actions:
+      - 'exylialobby:parkour_play %course_id%'
+
+  splits:
+    slot: 13
+    material: CLOCK
+    name: "{letters}Percurso {letters_black}▸ <gradient:{info}:{info_light}>Seus parciais</gradient>"
+    lore:
+      - "{letters_black}Sua melhor corrida"
+      - ""
+      - "{info}⌚ Checkpoints"
+      - "%course_splits%"
+
+  top:
+    slot: 14
+    material: GOLD_INGOT
+    name: "{letters}Percurso {letters_black}▸ <gradient:{highlight}:{warning_light}>Ranking</gradient>"
+    lore:
+      - "{letters_black}Rankings"
+      - ""
+      - "{highlight}✎ Informação"
+      - " {letters}As corridas mais rápidas: geral,"
+      - " {letters}mensal, semanal e diário."
+      - ""
+      - "{highlight}{icon:click} Clique para abrir"
+      - "{letters_black}Veja sua posição."
+    actions:
+      - 'exylialobby:parkour_top %course_id%'
+
+  back:
+    slot: 22
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Voltar {letters_black}▸ <gradient:{error}:{error_light}>Percursos</gradient>"
+    lore:
+      - "{error}{icon:click} Clique para voltar"
+    actions:
+      - 'exylialobby:parkour_list'
+
+  reset:
+    slot: 26
+    material: TNT
+    name: "{letters}Percurso {letters_black}▸ <gradient:{error}:{error_light}>Resetar meu tempo</gradient>"
+    lore:
+      - "{letters_black}Zona de perigo"
+      - ""
+      - "{error}✎ Informação"
+      - " {letters}Apaga seu melhor, parciais e"
+      - " {letters}posições nos rankings deste percurso."
+      - ""
+      - "{error}{icon:click} Clique para resetar"
+      - "{letters_black}Você terá que confirmar."
+    actions:
+      - 'exylialobby:parkour_reset %course_id%'

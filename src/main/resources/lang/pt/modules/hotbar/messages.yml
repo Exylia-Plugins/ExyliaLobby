@@ -1,0 +1,8 @@
+# Um botão apertado de novo cedo demais. %seconds% é o tempo restante.
+cooling: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Espere {highlight}%seconds%s{warning} antes de usar isso de novo.'
+
+# Registrado uma vez quando o ExyliaPracticeCore mantém a própria hotbar do lobby.
+practice-in-charge: 'ExyliaPracticeCore está instalado: a hotbar de lobby dele continua no comando. Defina ''force: true'' em modules/hotbar/config.yml para mostrar esta.'
+
+# Registrado uma vez quando falta o PacketEvents, então nenhuma hotbar pode ser desenhada.
+no-packets: 'PacketEvents não está instalado: a hotbar do lobby precisa dele e não é mostrada.'

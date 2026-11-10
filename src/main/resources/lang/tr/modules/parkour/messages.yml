@@ -1,0 +1,239 @@
+usage: '%prefix% {letters}Parkurlar: %courses%{letters}. Birini {highlight}/%command% <course>{letters} ile veya {highlight}/%command% endless{letters} ile oyna.'
+unknown-course: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}{highlight}%course%{error} adlı parkur yok.'
+course-closed: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}{highlight}%course%{error} şu an kapalı.'
+mode-off: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Bu mod kapalı.'
+no-area: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Sonsuz parkurun henüz alanı yok. Yöneticiye sor.'
+not-running: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Şu an bir parkurda değilsin.'
+left: '%prefix% {letters}Parkurdan ayrıldın.'
+not-in-lobby: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Parkur yalnızca lobide başlatılabilir.'
+busy: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Parkura başlamadan önce yaptığını bitir.'
+start-title: '{primary}&l%course%'
+start-subtitle: '{letters}Başla!'
+checkpoint-title: '{info}%checkpoint%{letters_black}/{info}%total%'
+checkpoint-subtitle: '{letters}%time% %delta%'
+delta-ahead: '{success}%delta%'
+delta-behind: '{error}%delta%'
+boss-bar: '{primary}%course% {letters_black}» {info}%time%'
+missed-checkpoint: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Bir kontrol noktasını kaçırdın. Bitişten önce hepsine ulaş.'
+time-up: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}{highlight}%course%{error} parkurunda süre doldu.'
+too-fast: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Bu bitiş parkurun izin verdiğinden hızlıydı, sayılmadı.'
+finished:
+- ''
+- '  {primary}&l%course% {letters_black}» {success}Bitti'
+- '  {letters_black}· {letters}Süre{letters_black}: {info}%time% %record%'
+- '  {letters_black}· {letters}En iyi{letters_black}: {highlight}%best% {letters_black}(#%rank%) %medal%'
+- ''
+new-record: '{success}Yeni rekor!'
+no-record: ''
+medal-gold: '{highlight}Altın madalya'
+medal-silver: '{letters}Gümüş madalya'
+medal-bronze: '{warning}Bronz madalya'
+unranked: —
+not-saved: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Sonucun şu an kaydedilemedi. Birazdan tekrar dene.'
+endless-name: Sonsuz
+sprint-name: Sprint
+daily-name: Günlük
+endless-boss-bar: '{primary}%mode% {letters_black}» {info}%score% {letters}zıplama {letters_black}· {info}%time%'
+sprint-boss-bar: '{primary}%mode% {letters_black}» {info}%score% {letters}zıplama {letters_black}· {warning}%left%'
+theme-title: '%theme%'
+milestone-title: '{highlight}&l%score%'
+milestone-subtitle: '{letters}üst üste zıplama'
+endless-ended:
+- ''
+- '  {primary}&l%mode% {letters_black}» {letters}Koşu bitti'
+- '  {letters_black}· {letters}Skor{letters_black}: {info}%score% {letters_black}/ {info}%time% %record%'
+- '  {letters_black}· {letters}En iyi{letters_black}: {highlight}%best% {letters_black}(#%rank%)'
+- '  %retry%'
+- ''
+retry: <click:run_command:'/%command% %mode_id%'><hover:show_text:'{letters}Yeni bir koşu başlat'>{success}&l[↻ TEKRAR]</hover></click>
+cheated: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Koşu sona erdi: %reason%.'
+reasons:
+  flight: uçuş
+  elytra: süzülme
+  riptide: riptide
+  pearl: ender incisi
+  vehicle: binek
+  game-mode: oyun modu değişti
+  teleport: ışınlanma
+  unconfirmed: bir zıplama doğrulanamadı
+time-reset: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%course%{letters} parkurundaki sürelerin sıfırlandı.'
+course-created: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%course%{letters} parkuru başlangıcı ayağının altında oluşturuldu. Kontrol noktaları ve bitiş ekle.'
+course-exists: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}{highlight}%course%{error} adlı bir parkur zaten var.'
+start-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%course%{letters} başlangıcı ayağının altına ayarlandı.'
+checkpoint-added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%course%{letters} parkurunun {highlight}%checkpoint%{letters}. kontrol noktası ayağının altına eklendi.'
+finish-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%course%{letters} bitişi ayağının altına ayarlandı.'
+course-deleted: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%course%{letters} parkuru silindi.'
+wrong-world: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}{highlight}%course%{error} parkuru {highlight}%world%{error} dünyasında. Düzenlemek için orada dur.'
+beacon-label: '{letters}Kontrol noktası {info}%checkpoint%{letters_black}/{info}%total% {letters_black}· {info}%distance% m'
+items:
+  checkpoint:
+    icon: LIGHT_WEIGHTED_PRESSURE_PLATE
+    name: '{letters}Parkur {letters_black}▸ <gradient:{primary}:{secondary_light}>Kontrol noktası</gradient>'
+    lore:
+    - '{letters_black}Koşu eşyası'
+    - ''
+    - '{primary}{icon:click} Geri dönmek için tıkla'
+    - '{letters_black}Son kontrol noktana döner.'
+  restart:
+    icon: CLOCK
+    name: '{letters}Parkur {letters_black}▸ <gradient:{primary}:{secondary_light}>Yeniden başla</gradient>'
+    lore:
+    - '{letters_black}Koşu eşyası'
+    - ''
+    - '{primary}{icon:click} Yeniden başlamak için tıkla'
+    - '{letters_black}Baştan yeni bir koşu.'
+  leave:
+    icon: BARRIER
+    name: '{letters}Parkur {letters_black}▸ <gradient:{error}:{error_light}>Ayrıl</gradient>'
+    lore:
+    - '{letters_black}Koşu eşyası'
+    - ''
+    - '{error}{icon:click} Ayrılmak için tıkla'
+    - '{letters_black}Koşuyu bitirir; kaydedilmez.'
+tools:
+  top-title: '%prefix% {primary}&l%board% {letters_black}» {letters}Sıralama'
+  top-line: '  {highlight}#%place% {letters_black}· {letters}%name% {letters_black}· {info}%value%'
+  top-empty: '%prefix% {letters}Bu sıralamada henüz kimse yok.'
+  unknown-board: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}{highlight}%board%{error} adlı sıralama yok.'
+  board-title: '{primary}&l%board%'
+  board-line: '{highlight}#%place% {letters}%name% {letters_black}· {info}%value%'
+  board-empty: '{letters_black}Henüz kimse yok'
+  board-placed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%board%{letters} sıralaması ayağının altına yerleştirildi.'
+  kill-added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%block%{letters} artık {highlight}%course%{letters} koşucularını geri gönderiyor.'
+  kill-no-block: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Önce bir bloğun üstünde dur veya ona bak.'
+  medals-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%course%{letters} madalyaları ayarlandı.'
+  confirm-delete: '%course% ve ayarları silinsin mi? Kayıtlı süreler veritabanında kalır.'
+  select-area: '%prefix% {letters}Alanın iki köşesini asanla seç.'
+  no-selection: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Alan seçilmedi.'
+  prompt-area: Alanın adı
+  area-saved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%area%{letters} sonsuz alanı, durduğun yerden başlayacak şekilde kaydedildi.'
+screens:
+  'on': '{success}{icon:on} Açık'
+  'off': '{error}{icon:off} Kapalı'
+  none: '{muted}Henüz yok'
+  subtitle-course: '{letters_black}Parkur'
+  subtitle-course-done: '{success}Parkur · bitirildi'
+  subtitle-endless: '{letters_black}Sonsuz mod'
+  subtitle-sprint: '{letters_black}Sprint modu'
+  subtitle-daily: '{letters_black}Günlük mod'
+  subtitle-top: '{letters_black}Sıralama · %board%'
+  name-course: '{letters}Parkur {letters_black}▸ %subject%'
+  name-mode: '{letters}Mod {letters_black}▸ %subject%'
+  name-row: '{letters}#%place% {letters_black}▸ %subject%'
+  gradient: <gradient:%tone%:%light%>%subject%</gradient>
+  label-rank: Sıra
+  back-list: Parkurlar
+  label-today: Bugünkü sıran
+  label-info: '%tone%✎ Bilgi'
+  label-status: '%tone%✦ Durum'
+  about-course: ' {letters}Başla, her kontrol noktasına ulaş,<nl> {letters}sonra olabildiğince hızlı {highlight}bitir{letters}.'
+  about-endless: ' {letters}Olabildiğince uzağa zıpla.<nl> {letters}Skorun {highlight}zıplama{letters} sayısı.'
+  about-sprint: ' {letters}{highlight}%seconds% saniyede{letters}<nl> {letters}olabildiğince çok zıpla.'
+  about-daily: ' {letters}Bugün herkes için aynı yol.<nl> {letters}Tek sıralama, {highlight}günlük sıfırlanır{letters}.'
+  stat-difficulty: '  {letters_black}· {warning}{icon:star} {letters}Zorluk{letters_black}: {warning}%value%'
+  stat-best: '  {letters_black}· {info}{icon:clock} {letters}En iyi{letters_black}: {info}%value%'
+  stat-score: '  {letters_black}· {info}{icon:star} {letters}En iyi{letters_black}: {info}%value%'
+  stat-medal: '  {letters_black}· {highlight}{icon:gold} {letters}Madalya{letters_black}: %value%'
+  stat-rank: '  {letters_black}· {highlight}{icon:star} {letters}%label%{letters_black}: {highlight}%value%'
+  stat-finishes: '  {letters_black}· {success}{icon:book} {letters}Bitirme{letters_black}: {success}%value%'
+  stat-checkpoints: '  {letters_black}· {info}{icon:info} {letters}Kontrol noktaları{letters_black}: {info}%value%'
+  click-course: '%tone%{icon:click} Sol tık {letters_black}· {letters}oyna<nl>%tone%{icon:right_click} Sağ tık {letters_black}· {letters}ayrıntılar<nl>{letters_black}Oynamak seni başlangıca götürür.'
+  click-mode: '%tone%{icon:click} Sol tık {letters_black}· {letters}oyna<nl>%tone%{icon:right_click} Sağ tık {letters_black}· {letters}sıralama<nl>{letters_black}Oynamak seni alanına götürür.'
+  splits-none: ' {letters_black}Ara süre için parkuru bitir.'
+  split-line: '  {letters_black}· {info}{icon:clock} {letters}Kontrol noktası %number%{letters_black}: {info}%time%'
+  split-more: '  {letters_black}· {letters_black}ve %more% tane daha'
+  split-finish: '  {letters_black}· {highlight}{icon:clock} {letters}Bitiş{letters_black}: {info}%time% %medal%'
+  split-gold: '  {letters_black}· {highlight}{icon:gold} {letters}Altın{letters_black}: {warning}%time% {letters_black}(%delta%{letters_black})'
+  periods:
+    all: Tüm zamanlar
+    monthly: Aylık
+    weekly: Haftalık
+    daily: Günlük
+  confirm-reset: '%course% parkurundaki sürelerin silinsin mi? Sıralamalardaki yerlerin kaldırılır.'
+  prompt-course: Parkurun adı
+  prompt-difficulty: Zorluk (Kolay, Orta, Zor...)
+  prompt-gold: Altın madalya süresi, saniye (yoksa 0)
+  prompt-silver: Gümüş madalya süresi, saniye (yoksa 0)
+  prompt-bronze: Bronz madalya süresi, saniye (yoksa 0)
+  prompt-area: Alanın adı
+  confirm-delete-area: '%area% sonsuz alanı silinsin mi?'
+  area-deleted: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%area%{letters} sonsuz alanı silindi.'
+  theme-toggled: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%theme%{letters} teması: %state%{letters}.'
+  difficulty-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%course%{letters} zorluğu {highlight}%difficulty%{letters} olarak ayarlandı.'
+  enabled-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%course%{letters} parkuru: %state%{letters}.'
+  not-ready: '{error}Başlangıç ve bitiş gerekli'
+  ready: '{success}Koşuya hazır'
+  placed: '{success}Yerleştirildi'
+  not-placed: '{error}Yerleştirilmedi'
+  no-courses: '{muted}Başka parkur yok'
+  no-areas: '{muted}Başka alan yok'
+staff:
+  back: Parkur
+  title-courses: Parkurlar
+  kind-course: Parkur
+  title-areas: Sonsuz alanlar
+  kind-area: Alan
+  title-themes: Temalar
+  kind-theme: Tema
+  subtitle-course-ready: Parkur · hazır
+  subtitle-course-setup: Parkur · kurulum gerekli
+  subtitle-area: Sonsuz alan
+  subtitle-theme: Sonsuz tema
+  label-difficulty: Zorluk
+  label-checkpoints: Kontrol noktaları
+  label-state: Durum
+  label-world: Dünya
+  label-start: Başlangıç
+  label-floor: Zemin
+  clicks-course:
+  - '{primary}{icon:click} Sol tık {letters_black}· {letters}düzenle'
+  - '{primary}{icon:right_click} Sağ tık {letters_black}· {letters}aç / kapat'
+  - '{error}{icon:right_click} Shift + sağ tık {letters_black}· {letters}sil'
+  - '{letters_black}Onay istenecek.'
+  clicks-area:
+  - '{error}{icon:right_click} Sağ tık {letters_black}· {letters}sil'
+  - '{letters_black}Onay istenecek.'
+  clicks-theme:
+  - '{primary}{icon:click} Tık {letters_black}· {letters}aç / kapat'
+  - '{letters_black}Açıkken sonsuz yollar kullanır.'
+  create-course:
+    title: Oluştur
+    text:
+    - ' {letters}Başlangıcı ayağının altında'
+    - ' {letters}yeni bir parkur.'
+    click: Oluşturmak için tıkla
+    next: Sonra düzenleyicisi açılır.
+  settings-courses:
+    title: Ayarlar
+    text:
+    - ' {letters}Modlar, hile koruması,'
+    - ' {letters}sıralamalar ve fazlası.'
+    click: Açmak için tıkla
+    next: Tüm parkur ayarları.
+  add-area:
+    title: Ekle
+    text:
+    - ' {letters}Asanla iki köşe seç,'
+    - ' {letters}durduğun yerden başlar.'
+    click: Eklemek için tıkla
+    next: Seçtikten sonra ad verirsin.
+  settings-areas:
+    title: Ayarlar
+    text:
+    - ' {letters}Yol ayarı, kilometre taşları'
+    - ' {letters}ve sonsuz modlar.'
+    click: Açmak için tıkla
+    next: Tüm parkur ayarları.
+  edit-themes:
+    title: Blokları düzenle
+    text:
+    - ' {letters}Her temanın yolunu'
+    - ' {letters}çizdiği bloklar.'
+    click: Açmak için tıkla
+    next: Temalar dosyasını açar.
+  enable-themes:
+    title: Hepsini etkinleştir
+    text:
+    - ' {letters}Tüm temaları açar.'
+    click: Etkinleştirmek için tıkla
+    next: Sonsuz yollar hepsini kullanır.

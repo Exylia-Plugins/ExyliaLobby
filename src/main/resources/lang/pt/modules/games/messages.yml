@@ -1,0 +1,2 @@
+# Dito quando nenhum plugin neste servidor oferece um jogo ainda.
+empty: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Ainda não há jogos neste servidor.'

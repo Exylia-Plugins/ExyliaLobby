@@ -1,0 +1,80 @@
+# Чат-сообщения. %gadget% — название гаджета, %seconds% — оставшаяся перезарядка.
+cooling: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}%gadget%{warning} перезаряжается: {highlight}%seconds% с{warning}.'
+no-permission: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}У вас пока нет гаджета %gadget%{error}.'
+equipped: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%gadget%{letters} теперь в вашем хотбаре.'
+put-away: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Вы убрали гаджет.'
+unavailable: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Этот гаджет нельзя использовать на сервере.'
+not-now: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Сейчас нельзя использовать гаджет.'
+
+# Настройка на экране настроек игрока.
+setting-category: Гаджеты
+setting-category-text:
+- Игрушки для игры в лобби.
+setting-name: Гаджеты влияют на меня
+setting-description:
+- Могут ли гаджеты других игроков
+- толкать вас или красить пол.
+
+# Слова на карточках меню гаджетов.
+kind: Гаджет
+kind-equipped: Гаджет · Экипирован
+kind-locked: Гаджет · Закрыт
+label-cooldown: Перезарядка
+label-needs: Нужно
+locked-note: Спросите персонал, как открыть.
+click-equip: Нажмите, чтобы экипировать
+click-equip-next: Он попадёт в ваш хотбар.
+click-put: Нажмите, чтобы убрать
+click-put-next: Слот хотбара освободится.
+
+# Каждый гаджет: название, описание (до трёх строк), используемый клик и что он делает.
+cards:
+  grapple:
+    name: Крюк-кошка
+    text:
+    - Забросьте в стену или пол,
+    - и он подтянет вас туда.
+    click: ПКМ
+    use: забросить и подтянуться
+  ender:
+    name: Эндер-поездка
+    text:
+    - Летите на своей жемчужине
+    - и мягко приземлитесь.
+    click: ПКМ
+    use: бросить и лететь
+  paint:
+    name: Краскомёт
+    text:
+    - Выстрелы красят землю на
+    - пару секунд. Ничего не ломают.
+    click: ПКМ
+    use: стрелять краской
+  knockback:
+    name: Палка отбрасывания
+    text:
+    - Толкает игроков, что не против.
+    - Урона не наносит.
+    click: Удар по игроку
+    use: оттолкнуть его
+  leap:
+    name: Перо прыжка
+    text:
+    - Подбрасывает вас вперёд
+    - с мягким приземлением.
+    click: ПКМ
+    use: прыгнуть вперёд
+  snowball:
+    name: Снежная пушка
+    text:
+    - Очередь снежков, что толкает
+    - игроков, не против этого.
+    click: ПКМ
+    use: выстрелить очередью
+  trampoline:
+    name: Батут
+    text:
+    - Прыгучая площадка под ногами
+    - на несколько секунд.
+    click: ПКМ
+    use: поставить площадку

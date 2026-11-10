@@ -1,0 +1,52 @@
+equip-bar: '{success}&lKUŞANILIYOR {letters_black}» {letters}Kılıcını tutmaya devam et {letters_black}({info}%seconds%sn{letters_black})'
+unequip-bar: '{error}&lÇEKİLİNİYOR {letters_black}» {letters}Kılıcını uzak tut {letters_black}({info}%seconds%sn{letters_black})'
+equipped: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {success}Dövüştesin.{letters} Yalnızca kılıcı elinde olanlar sana vurabilir.'
+unequipped: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Dövüşten çıktın ve eşyaların geri geldi.'
+tagged: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}{highlight}%seconds%sn{error} boyunca savaştasın. Kılıcını elinde tut.'
+no-permission: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Lobide dövüşemezsin.'
+busy-elsewhere: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Başka bir şey yaparken dövüşemezsin.'
+killer: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%victim%{letters} oyuncusunu öldürdün. Seri {accent}%streak%{letters}.'
+victim: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {letters}{highlight}%killer%{letters} seni öldürdü.'
+quit-killer: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%victim%{letters} savaşta çıktı. Seri {accent}%streak%{letters}.'
+streak-reward: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {accent}%streak%{letters} öldürme için {success}seri ödülü{letters}.'
+sword-name: '{letters}PvP {letters_black}▸ <gradient:{error}:{error_light}>Kılıç</gradient>'
+sword-lore:
+- '{letters_black}Lobi PvP'
+- ''
+- '{error}✎ Bilgi'
+- ' {letters}Aynısını yapan oyuncularla'
+- ' {letters}dövüşmek için elinde tut.'
+- ''
+- '{error}{icon:click} Dövüşmek için tut'
+- '{letters_black}Kısa beklemeyle kuşanırsın.'
+board-title: '{primary}&lÖLDÜRME SIRALAMASI'
+board-row: '{highlight}%rank%. {letters}%name% {letters_black}· {info}%kills%'
+board-empty: '{muted}Henüz kimse dövüş kazanmadı.'
+top-empty: '-'
+list-title: Lobi PvP
+list-kind: PvP bölgesi
+subtitle-zone: PvP bölgesi
+label-place: Konum
+label-size: Boyut
+clicks-zone:
+- '{primary}{icon:click} Sol tık {letters_black}· {letters}çerçevesini göster'
+- '{error}{icon:right_click} Shift + sağ tık {letters_black}· {letters}kaldır'
+- '{letters_black}Kaldırırken onay istenir.'
+add-zone-title: Bölge
+add-zone-text:
+- ' {letters}Bir kutu seç; oyuncular içine'
+- ' {letters}girince teçhizat kuşanılır.'
+add-zone-click: Seçmek için tıkla
+add-zone-next: Çıkınca teçhizat çıkar.
+add-here-title: Çevrende
+add-here-text:
+- ' {letters}Durduğun yere ortalı'
+- ' {letters}13x13 bloklu bir kutu.'
+add-here-click: Eklemek için tıkla
+add-here-next: Boyutu sonra config'den değiştir.
+select-zone: '{letters}Bölgeyi altın baltayla seç: bir köşeye {highlight}sol tık{letters}, diğerine {highlight}sağ tık{letters}, sonra {highlight}shift + sol tık{letters}.'
+added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} eklendi.'
+removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} kaldırıldı.'
+confirm-remove: '{highlight}%what%{letters} kaldırılsın mı?'
+spawn-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}PvP yeniden doğuş noktası konumuna ayarlandı.'
+board-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Sıralama hologramı konumuna yerleştirildi.'

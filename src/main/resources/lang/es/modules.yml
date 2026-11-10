@@ -1,0 +1,82 @@
+# Una entrada por id de módulo: su nombre y una descripción corta (dos o tres líneas de unos 30 caracteres).
+modules:
+  spawn:
+    name: Spawn
+    description:
+    - 'Punto de spawn, /spawn, vuelta'
+    - 'del vacío y reaparición.'
+  state:
+    name: Estado del jugador
+    description:
+    - 'Modo de juego, vida, hambre,'
+    - 'efectos, hora y clima.'
+  protection:
+    name: Protección
+    description:
+    - 'Sin construir, daño, drops,'
+    - 'mobs, fuego ni explosiones.'
+  join:
+    name: Entrada y salida
+    description:
+    - 'Mensajes, título de bienvenida y'
+    - 'comandos al entrar y salir.'
+  hotbar:
+    name: Hotbar
+    description:
+    - 'Ítems que abren menús, envían'
+    - 'a servidores o ejecutan comandos.'
+  movement:
+    name: Movimiento
+    description:
+    - 'Doble salto y'
+    - 'plataformas de impulso.'
+  visibility:
+    name: Visibilidad
+    description:
+    - 'Los jugadores eligen a quién'
+    - 'ven en el lobby.'
+  selector:
+    name: Selector de servidores
+    description:
+    - 'Servidores y lobbies con conteo'
+    - 'en vivo, NPC y portales.'
+  games:
+    name: Juegos
+    description:
+    - 'Todos los juegos de los plugins'
+    - 'Exylia, en una sola pantalla.'
+  hud:
+    name: HUD
+    description:
+    - 'Sidebar, lista de jugadores,'
+    - 'boss bars y anuncios.'
+  pvp:
+    name: PvP del lobby
+    description:
+    - 'Empuña la espada para pelear'
+    - 'con quien también quiera.'
+  parkour:
+    name: Parkour
+    description:
+    - 'Recorridos, parkour infinito'
+    - 'y rankings.'
+  gadgets:
+    name: Gadgets
+    description:
+    - 'Gancho, viaje ender, pistola'
+    - 'de pintura y más.'
+  holograms:
+    name: Hologramas
+    description:
+    - 'Textos y rankings en'
+    - 'hologramas del lobby.'
+  chat:
+    name: Chat
+    description:
+    - 'Bloqueo del chat, modo lento'
+    - 'y limpiar chat.'
+  onboarding:
+    name: Introducción
+    description:
+    - 'Envía a los jugadores nuevos'
+    - 'a ExyliaJourney.'

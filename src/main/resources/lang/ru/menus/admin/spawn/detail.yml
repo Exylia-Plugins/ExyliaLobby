@@ -1,0 +1,78 @@
+menu-version: 1
+# НЕ РЕДАКТИРОВАТЬ — ПЕРЕСОЗДАЁТСЯ ПРИ КАЖДОМ ЗАПУСКЕ.
+#
+# Модуль спавна: задайте точку спавна, проверьте её и правьте зоны лобби.
+
+title: '{primary}&lСПАВН {letters_black}» {highlight}Настройка'
+size: 27
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: RED_BED
+    name: "<gradient:{primary}:{secondary_light}>Спавн</gradient>"
+    lore:
+      - "{letters_black}Модуль спавна"
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:map} {letters}Мир{letters_black}: {info}%spawn_world%"
+      - "  {letters_black}· {info}{icon:compass} {letters}Спавн здесь{letters_black}: %spawn_state%"
+
+  set:
+    slot: 12
+    material: LIME_BED
+    name: "{letters}Спавн {letters_black}▸ <gradient:{success}:{success_light}>Задать здесь</gradient>"
+    lore:
+      - "{letters_black}Точка спавна"
+      - ""
+      - "{success}✎ Информация"
+      - " {letters}Берёт вашу позицию и взгляд"
+      - " {letters}как спавн этого {highlight}мира{letters}."
+      - ""
+      - "{success}{icon:click} Нажмите, чтобы задать"
+      - "{letters_black}Заменяет спавн этого мира."
+    actions:
+      - 'exylialobby:spawn_set'
+
+  areas:
+    slot: 14
+    material: FILLED_MAP
+    name: "{letters}Спавн {letters_black}▸ <gradient:{primary}:{secondary_light}>Зоны лобби</gradient>"
+    lore:
+      - "{letters_black}Раздел настройки"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Миры и области, где действуют"
+      - " {letters}правила лобби."
+      - ""
+      - "{primary}{icon:click} Нажмите, чтобы открыть"
+      - "{letters_black}Добавьте мир или выделите область."
+    actions:
+      - 'exylialobby:spawn_areas'
+
+  teleport:
+    slot: 18
+    material: ENDER_PEARL
+    name: "{letters}Спавн {letters_black}▸ <gradient:{info}:{info_light}>Телепорт</gradient>"
+    lore:
+      - "{letters_black}Тест"
+      - ""
+      - "{info}{icon:click} Нажмите, чтобы телепортироваться"
+      - "{letters_black}Перейти на спавн этого мира."
+    actions:
+      - 'exylialobby:spawn_tp'
+
+  back:
+    slot: 22
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Назад {letters_black}▸ <gradient:{error}:{error_light}>Модули</gradient>"
+    lore:
+      - "{error}{icon:click} Нажмите, чтобы вернуться"
+    actions:
+      - 'exylialobby:admin_modules'

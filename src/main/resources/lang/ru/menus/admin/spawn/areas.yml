@@ -1,0 +1,101 @@
+menu-version: 1
+# НЕ РЕДАКТИРОВАТЬ — ПЕРЕСОЗДАЁТСЯ ПРИ КАЖДОМ ЗАПУСКЕ.
+#
+# Зоны лобби: миры и области, где действуют правила лобби.
+
+title: '{primary}&lЗОНЫ {letters_black}» {highlight}Лобби {muted}%current_page%/%total_pages%'
+size: 54
+type: PAGINATION
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+  pagination:
+    material: LIGHT_GRAY_STAINED_GLASS_PANE
+    name: '{muted}Больше нет зон'
+    lore:
+      - "{letters_black}Добавьте мир или область ниже."
+    hide_tooltip: false
+
+pagination:
+  slots: '0-35'
+
+  item_template:
+    material: '%area_icon%'
+    name: "{letters}Зона {letters_black}▸ <gradient:{primary}:{secondary_light}>%area_name%</gradient>"
+    lore:
+      - "{letters_black}%area_kind_label%"
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {info}{icon:map} {letters}Мир{letters_black}: {info}%area_world%"
+      - "  {letters_black}· {info}{icon:redstone} {letters}%area_state_label%{letters_black}: %area_state%"
+      - ""
+      - "{error}{icon:right_click} ПКМ {letters_black}· {letters}убрать"
+      - "{letters_black}Вас попросят подтвердить."
+    actions:
+      - 'right: exylialobby:spawn_area_remove %area_kind% %area_id%'
+
+  navigation:
+    previous:
+      slot: 48
+      sound: 'minecraft:item.book.page_turn|1.0|1.0'
+      material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGExZDU1YjNmOTg5NDEwYTM0NzUyNjUwZTI0OGM5YjZjMTc4M2E3ZWMyYWEzZmQ3Nzg3YmRjNGQwZTYzN2QzOSJ9fX0='
+      name: "{letters}Страница {letters_black}▸ <gradient:{error}:{error_light}>← Предыдущая</gradient>"
+      lore:
+        - "  {letters_black}· {letters}Страница{letters_black}: {info}%current_page%{letters_black}/{info}%total_pages%"
+      actions:
+        - 'previous_page'
+    next:
+      slot: 50
+      sound: 'minecraft:item.book.page_turn|1.0|1.0'
+      material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmE4N2UzZDk2ZTFjZmViOWNjZmIzYmE1M2EyMTdmYWY1MjQ5ZTI4NTUzM2IyNzFhMmZiMjg0YzMwZGJkOTgyOSJ9fX0='
+      name: "{letters}Страница {letters_black}▸ <gradient:{success}:{success_light}>Следующая →</gradient>"
+      lore:
+        - "  {letters_black}· {letters}Страница{letters_black}: {info}%current_page%{letters_black}/{info}%total_pages%"
+      actions:
+        - 'next_page'
+
+items:
+  add_box:
+    slot: 45
+    material: GOLDEN_AXE
+    name: "{letters}Зона {letters_black}▸ <gradient:{success}:{success_light}>Добавить область</gradient>"
+    lore:
+      - "{letters_black}Зона лобби"
+      - ""
+      - "{success}✎ Информация"
+      - " {letters}Выделите два угла золотым"
+      - " {letters}топором; правила лобби"
+      - " {letters}действуют внутри области."
+      - ""
+      - "{success}{icon:click} Нажмите, чтобы выделить"
+      - "{letters_black}Затем зададите ей имя."
+    actions:
+      - 'exylialobby:spawn_area_add_box'
+
+  add_world:
+    slot: 46
+    material: GRASS_BLOCK
+    name: "{letters}Зона {letters_black}▸ <gradient:{success}:{success_light}>Добавить этот мир</gradient>"
+    lore:
+      - "{letters_black}Зона лобби"
+      - ""
+      - "{success}✎ Информация"
+      - " {letters}Весь мир, где вы стоите,"
+      - " {letters}станет {highlight}лобби{letters}."
+      - ""
+      - "{success}{icon:click} Нажмите, чтобы добавить"
+      - "{letters_black}Применяется сразу, без рестарта."
+    actions:
+      - 'exylialobby:spawn_area_add_world'
+
+  back:
+    slot: 49
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Назад {letters_black}▸ <gradient:{error}:{error_light}>%back_name%</gradient>"
+    lore:
+      - "{error}{icon:click} Нажмите, чтобы вернуться"
+    actions:
+      - 'exylialobby:spawn_areas_back'

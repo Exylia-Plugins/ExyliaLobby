@@ -1,0 +1,89 @@
+menu-version: 1
+# DÜZENLEME — HER AÇILIŞTA YENİDEN OLUŞTURULUR.
+#
+# Parkur modülü: parkurlar, sonsuz alanlar ve temalar.
+
+title: '{primary}&lPARKOUR {letters_black}» {highlight}Kurulum'
+size: 27
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: FEATHER
+    name: "<gradient:{primary}:{secondary_light}>Parkur</gradient>"
+    lore:
+      - "{letters_black}Parkur modülü"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Oyuncuların koştuğu parkurlar"
+      - " {letters}ve sonsuz modlar."
+
+  courses:
+    slot: 12
+    material: FILLED_MAP
+    name: "{letters}Parkur {letters_black}▸ <gradient:{primary}:{secondary_light}>Parkurlar</gradient>"
+    lore:
+      - "{letters_black}Kurulum bölümü"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Başlangıç, kontrol noktaları"
+      - " {letters}ve bitiş yerleştir."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:check} {letters}Hazır{letters_black}: {info}%courses_ready%{letters_black}/{info}%courses_total%"
+      - ""
+      - "{primary}{icon:click} Açmak için tıkla"
+      - "{letters_black}Parkur oluştur ve düzenle."
+    actions:
+      - 'exylialobby:parkour_admin_open courses'
+
+  endless_areas:
+    slot: 13
+    material: GRASS_BLOCK
+    name: "{letters}Parkur {letters_black}▸ <gradient:{primary}:{secondary_light}>Sonsuz alanlar</gradient>"
+    lore:
+      - "{letters_black}Kurulum bölümü"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Sonsuz yolların çizildiği yer."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:map} {letters}Alanlar{letters_black}: {info}%areas_total%"
+      - ""
+      - "{primary}{icon:click} Açmak için tıkla"
+      - "{letters_black}Alan ekle veya sil."
+    actions:
+      - 'exylialobby:parkour_admin_open areas'
+
+  themes:
+    slot: 14
+    material: PAINTING
+    name: "{letters}Parkur {letters_black}▸ <gradient:{primary}:{secondary_light}>Temalar</gradient>"
+    lore:
+      - "{letters_black}Kurulum bölümü"
+      - ""
+      - "{primary}✎ Bilgi"
+      - " {letters}Yolların blok paletleri."
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: {info}%themes_on%"
+      - ""
+      - "{primary}{icon:click} Açmak için tıkla"
+      - "{letters_black}Temaları aç veya kapat."
+    actions:
+      - 'exylialobby:parkour_admin_open themes'
+
+  back:
+    slot: 22
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Geri {letters_black}▸ <gradient:{error}:{error_light}>Modüller</gradient>"
+    lore:
+      - "{error}{icon:click} Geri dönmek için tıkla"
+    actions:
+      - 'exylialobby:parkour_admin_back'

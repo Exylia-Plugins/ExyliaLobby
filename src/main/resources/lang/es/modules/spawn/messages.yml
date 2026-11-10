@@ -1,0 +1,31 @@
+# /spawn cuando no se encontró un punto de spawn
+no-spawn: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}No hay spawn definido. Pide ayuda a un admin.'
+
+# /spawn con espera. %seconds% es la espera.
+teleporting: '%prefix% {letters}Teletransporte en {highlight}%seconds%s{letters}. No te muevas.'
+cancelled: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Teletransporte cancelado.'
+
+# Un admin fijó el spawn de un mundo. %world% es su nombre.
+spawn-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Spawn de {highlight}%world%{letters} fijado en tu posición.'
+
+# Se muestra en la pantalla de Spawn: hay un spawn aquí, o no
+state-set: '{success}{icon:on} Fijado'
+state-unset: '{warning}{icon:warning} Sin fijar'
+
+# Editor de áreas del lobby: tipos y estados de cada tarjeta
+kind-world: Mundo del lobby
+kind-box: Zona del lobby
+state-label-world: Estado
+state-label-box: Tamaño
+world-loaded: '{success}{icon:on} Cargado'
+world-missing: '{error}{icon:off} No cargado'
+
+# Tamaño de una zona. %x%, %y% y %z% son sus lados en bloques.
+box-size: '{info}%x%×%y%×%z% bloques'
+
+# Mensajes del editor de áreas
+select-box: '{letters}Selecciona la zona con el hacha dorada: {highlight}clic izquierdo{letters} en una esquina, {highlight}clic derecho{letters} en la otra y luego {highlight}shift + clic izquierdo{letters}.'
+prompt-name: '{letters}Nombra esta zona del lobby (letras, números, guiones).'
+name-taken: '{error}Ese nombre ya está en uso.'
+confirm-world: '¿Dejar de tratar el mundo {highlight}%area%{letters} como lobby?'
+confirm-box: '¿Eliminar la zona del lobby {highlight}%area%{letters}?'

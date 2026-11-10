@@ -1,0 +1,58 @@
+# Чат-сообщения. %server% — название сервера из каталога (или его id).
+connecting: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Подключение к %server%{letters}...'
+offline: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}%server%{error} сейчас не в сети.'
+no-permission: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Вы не можете зайти на %server%{error}.'
+here: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Вы уже на %server%{warning}.'
+unreachable: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Сеть недоступна. Попробуйте чуть позже.'
+unknown-server: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Этот сервер не настроен.'
+
+# Строки карточки сервера. Статусы и подсказка по клику (две строки, соединены <nl>).
+status-online: '{success}В сети'
+status-offline: '{error}Не в сети'
+status-unknown: '{muted}Нет данных'
+click-join: '{info}{icon:click} Нажмите, чтобы зайти<nl>{letters_black}Вас переместит сразу.'
+click-locked: '{warning}{icon:locked} Закрыто<nl>{letters_black}Для входа нужен ранг.'
+click-offline: '{error}{icon:off} Не в сети<nl>{letters_black}Попробуйте чуть позже.'
+click-here: '{success}{icon:on} Вы здесь<nl>{letters_black}Выберите другое лобби.'
+no-lobbies: '{warning}{icon:warning} Лобби не заданы<nl>{letters_black}Попросите админа добавить.'
+lobbies-next: '{info}{icon:click} Нажмите, чтобы открыть<nl>{letters_black}Выберите лобби для игры.'
+
+# Админ-экран: NPC и порталы.
+list-title: Выбор сервера
+list-kind: NPC или портал сервера
+subtitle-npc: NPC сервера
+subtitle-portal: Портал сервера
+label-server: Сервер
+label-place: Место
+label-size: Размер
+server-missing: '{error}Нет в каталоге'
+clicks-npc:
+- '{primary}{icon:click} ЛКМ {letters_black}· {letters}сменить сервер'
+- '{primary}{icon:right_click} ПКМ {letters_black}· {letters}перенести сюда'
+- '{error}{icon:right_click} Shift+ПКМ {letters_black}· {letters}убрать'
+- '{letters_black}Удаление нужно подтвердить.'
+clicks-portal:
+- '{primary}{icon:click} ЛКМ {letters_black}· {letters}сменить сервер'
+- '{primary}{icon:right_click} ПКМ {letters_black}· {letters}показать контур'
+- '{error}{icon:right_click} Shift+ПКМ {letters_black}· {letters}убрать'
+- '{letters_black}Удаление нужно подтвердить.'
+add-npc-title: NPC сервера
+add-npc-text:
+- ' {letters}Ставит NPC там, где вы'
+- ' {letters}стоите; клик отправляет игроков.'
+add-npc-click: Нажмите, чтобы добавить
+add-npc-next: Сначала выберете его сервер.
+add-portal-title: Портал
+add-portal-text:
+- ' {letters}Выделите область; вход в неё'
+- ' {letters}отправляет игроков на сервер.'
+add-portal-click: Нажмите, чтобы выделить
+add-portal-next: Сервер выберете после.
+prompt-server: '{letters}На какой сервер он отправляет игроков?'
+select-portal: '{letters}Выделите портал золотым топором: {highlight}ЛКМ{letters} — один угол, {highlight}ПКМ{letters} — другой, затем {highlight}Shift + ЛКМ{letters}.'
+no-servers: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Сначала добавьте сервер в каталог (modules/selector/config.yml).'
+added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} добавлено.'
+removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} удалено.'
+changed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} теперь отправляет игроков на %server%{letters}.'
+moved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} перенесено к вам.'
+confirm-remove: Удалить {highlight}%what%{letters}?

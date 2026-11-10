@@ -1,0 +1,9 @@
+# /lobbyadmin build включён или выключен
+build-on: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Режим стройки {success}включён{letters}. Защита лобби вас игнорирует.'
+build-off: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Режим стройки {error}выключен{letters}. Защита лобби снова действует.'
+
+# Боссбар, пока включён режим стройки
+build-bar: '{warning}&lРЕЖИМ СТРОЙКИ {letters_black}• {letters}Защита для вас отключена'
+
+# /lobbyadmin build вне лобби
+not-in-lobby: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Для режима стройки встаньте внутри лобби.'
