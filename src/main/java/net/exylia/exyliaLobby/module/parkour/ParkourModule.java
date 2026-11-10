@@ -134,7 +134,7 @@ public final class ParkourModule extends LobbyModule implements Busy {
     @Override
     protected void leave(@NotNull Player player, @NotNull AreaCause cause) {
         ParkourRuns current = runs; // null once the module stopped: its runs were closed then
-        if (current != null) current.stop(player, RunEnd.LOBBY);
+        if (current != null) current.stop(player, cause == AreaCause.DISABLE ? RunEnd.DISABLED : RunEnd.LOBBY);
         data.forget(player.getUniqueId());
     }
 

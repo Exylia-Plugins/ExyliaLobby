@@ -282,7 +282,10 @@ final class EndlessRun extends Run {
             fakeBlocks().clear(player, at);
         }
         drawn.clear();
-        if (end == RunEnd.LEFT || end.scored() || end.cheat() && end != RunEnd.TELEPORT) runs.home(player, origin);
+        // home() does nothing while the server stops: the drawn blocks are cleared and that is all
+        if (end == RunEnd.LEFT || end == RunEnd.DISABLED || end.scored() || end.cheat() && end != RunEnd.TELEPORT) {
+            runs.home(player, origin);
+        }
         if (end.scored()) runs.scored(this);
     }
 }
