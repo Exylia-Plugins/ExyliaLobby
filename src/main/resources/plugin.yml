@@ -29,8 +29,11 @@ permissions:
     children:
       exylialobby.build: true
   exylialobby.build:
-    description: Build, break and use everything inside lobby areas.
+    description: Build, break and use everything inside lobby areas, once /lobbyadmin build is on.
     default: op
+  exylialobby.spawn:
+    description: Use /spawn.
+    default: true
 
 libraries:
   # The same list ExyliaLib declares, in the same order and the same versions.

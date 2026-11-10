@@ -5,6 +5,7 @@ import net.exylia.exyliaLobby.Permissions;
 import net.exylia.exyliaLobby.config.LobbyMessages;
 import net.exylia.exyliaLobby.config.ModuleNames;
 import net.exylia.exyliaLobby.module.LobbyModule;
+import net.exylia.exyliaLobby.module.spawn.SpawnModule;
 import net.exylia.lib.action.ActionResult;
 import net.exylia.lib.action.Actions;
 import net.exylia.lib.action.PluginActions;
@@ -51,7 +52,8 @@ public final class AdminHub {
     /** A menu under {@code menus/admin/} a module ships; loaded with the core's on start and reload. */
     public void menu(@NotNull String id) {
         if (!extra.contains(id)) extra.add(id);
-        load(id);
+        // On the very first start the files are written by load() below, once every module registered.
+        if (Languages.file(lobby.getPlugin(), "menus/" + id + ".yml").exists()) load(id);
     }
 
     public void load() {
@@ -111,6 +113,10 @@ public final class AdminHub {
             openModules(action.player());
             return ActionResult.success();
         });
+        actions.registerSync("admin_areas", Permissions.ADMIN, (action, args) -> {
+            openAreas(action.player());
+            return ActionResult.success();
+        });
         actions.registerSync("admin_settings", Permissions.ADMIN, (action, args) -> {
             ConfigMenus.of(lobby.getPlugin()).permission(Permissions.ADMIN).back(this::open).open(action.player());
             return ActionResult.success();
@@ -127,6 +133,19 @@ public final class AdminHub {
             openModule(action.player(), args.string(0, ""));
             return ActionResult.success();
         });
+    }
+
+    /** The lobby areas editor, which lives in the spawn module. */
+    private void openAreas(Player viewer) {
+        Optional<SpawnModule> spawn = lobby.getRegistered().stream()
+                .filter(module -> module instanceof SpawnModule && module.isEnabled())
+                .map(SpawnModule.class::cast).findFirst();
+        if (spawn.isPresent()) {
+            spawn.get().openAreas(viewer, "Admin", () -> open(viewer));
+            return;
+        }
+        Text.from(lobby.getPlugin(), lobby.getMessages().get().moduleOff())
+                .withFormatted("module", lobby.getNames().get().of(SpawnModule.ID).name()).send(viewer);
     }
 
     public void reload(@NotNull Player viewer) {

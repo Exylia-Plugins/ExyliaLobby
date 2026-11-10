@@ -1,5 +1,6 @@
 package net.exylia.exyliaLobby.module;
 
+import net.exylia.exyliaLobby.module.spawn.SpawnModule;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public final class Modules {
 
     public static @NotNull List<LobbyModule> all(@NotNull LobbyContext context) {
         return List.of(
+                new SpawnModule(context)
         );
     }
 }

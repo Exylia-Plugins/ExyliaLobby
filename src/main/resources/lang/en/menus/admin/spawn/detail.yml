@@ -1,0 +1,78 @@
+menu-version: 1
+# DO NOT EDIT — REGENERATED ON EVERY STARTUP.
+#
+# The spawn module: set the spawn point, test it, and edit the lobby areas.
+
+title: '{primary}&lSPAWN {letters_black}» {highlight}Setup'
+size: 27
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: RED_BED
+    name: "<gradient:{primary}:{secondary_light}>Spawn</gradient>"
+    lore:
+      - "{letters_black}Spawn module"
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:info} {letters}World{letters_black}: {info}%spawn_world%"
+      - "  {letters_black}· {info}{icon:info} {letters}Spawn here{letters_black}: %spawn_state%"
+
+  set:
+    slot: 12
+    material: LIME_BED
+    name: "{letters}Spawn {letters_black}▸ <gradient:{success}:{success_light}>Set here</gradient>"
+    lore:
+      - "{letters_black}Spawn point"
+      - ""
+      - "{success}✎ Information"
+      - " {letters}Uses your position and view"
+      - " {letters}as the spawn of this {highlight}world{letters}."
+      - ""
+      - "{success}{icon:click} Click to set"
+      - "{letters_black}Replaces this world's spawn."
+    actions:
+      - 'exylialobby:spawn_set'
+
+  areas:
+    slot: 14
+    material: FILLED_MAP
+    name: "{letters}Spawn {letters_black}▸ <gradient:{primary}:{secondary_light}>Lobby areas</gradient>"
+    lore:
+      - "{letters_black}Setup section"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}The worlds and boxes where"
+      - " {letters}the lobby rules apply."
+      - ""
+      - "{primary}{icon:click} Click to open"
+      - "{letters_black}Add a world or select a box."
+    actions:
+      - 'exylialobby:spawn_areas'
+
+  teleport:
+    slot: 18
+    material: ENDER_PEARL
+    name: "{letters}Spawn {letters_black}▸ <gradient:{info}:{info_light}>Teleport</gradient>"
+    lore:
+      - "{letters_black}Test"
+      - ""
+      - "{info}{icon:click} Click to teleport"
+      - "{letters_black}Go to the spawn of this world."
+    actions:
+      - 'exylialobby:spawn_tp'
+
+  back:
+    slot: 22
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Back {letters_black}▸ <gradient:{error}:{error_light}>Modules</gradient>"
+    lore:
+      - "{error}{icon:click} Click to go back"
+    actions:
+      - 'exylialobby:admin_modules'
