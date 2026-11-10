@@ -1,6 +1,7 @@
 package net.exylia.exyliaLobby.module;
 
 import net.exylia.exyliaLobby.module.chat.ChatModule;
+import net.exylia.exyliaLobby.module.hotbar.HotbarModule;
 import net.exylia.exyliaLobby.module.join.JoinModule;
 import net.exylia.exyliaLobby.module.onboarding.OnboardingModule;
 import net.exylia.exyliaLobby.module.protection.ProtectionModule;
@@ -27,7 +28,8 @@ public final class Modules {
                 new ProtectionModule(context),
                 new JoinModule(context),
                 new ChatModule(context),
-                new OnboardingModule(context)
+                new OnboardingModule(context),
+                new HotbarModule(context)
         );
     }
 }

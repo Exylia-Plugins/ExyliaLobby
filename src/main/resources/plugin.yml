@@ -21,6 +21,7 @@ softdepend:
   - PacketEvents
   - WorldGuard
   - ExyliaJourney
+  - ExyliaPracticeCore
 
 permissions:
   exylialobby.admin:
