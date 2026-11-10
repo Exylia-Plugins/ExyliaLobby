@@ -31,10 +31,10 @@ public record SpawnMessages(
         String confirmBox) {
 
     public SpawnMessages() {
-        this("ENTITY_VILLAGER_NO %prefix% {error}No spawn is set. Ask an admin.",
+        this("[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}No spawn is set. Ask an admin.",
                 "%prefix% {letters}Teleporting in {highlight}%seconds%s{letters}. Stand still.",
-                "ENTITY_VILLAGER_NO %prefix% {error}Teleport cancelled.",
-                "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}Spawn of {highlight}%world%{letters} set to your position.",
+                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Teleport cancelled.",
+                "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Spawn of {highlight}%world%{letters} set to your position.",
                 "{success}{icon:on} Set",
                 "{warning}{icon:warning} Not set",
                 "Lobby world",

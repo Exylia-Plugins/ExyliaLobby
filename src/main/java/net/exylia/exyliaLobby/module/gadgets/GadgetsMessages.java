@@ -42,12 +42,12 @@ public record GadgetsMessages(
     }
 
     public GadgetsMessages() {
-        this("ENTITY_VILLAGER_NO %prefix% {warning}%gadget%{warning} is cooling down: {highlight}%seconds%s{warning}.",
-                "ENTITY_VILLAGER_NO %prefix% {error}You do not have %gadget%{error} yet.",
-                "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {highlight}%gadget%{letters} is in your hotbar.",
-                "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}You put your gadget away.",
-                "ENTITY_VILLAGER_NO %prefix% {error}That gadget cannot be used on this server.",
-                "ENTITY_VILLAGER_NO %prefix% {warning}You cannot use a gadget right now.",
+        this("[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}%gadget%{warning} is cooling down: {highlight}%seconds%s{warning}.",
+                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}You do not have %gadget%{error} yet.",
+                "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%gadget%{letters} is in your hotbar.",
+                "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}You put your gadget away.",
+                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}That gadget cannot be used on this server.",
+                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}You cannot use a gadget right now.",
                 "Gadgets",
                 List.of("Toys to play with in the lobby."),
                 "Gadgets affect me",

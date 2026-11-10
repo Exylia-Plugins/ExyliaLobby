@@ -32,11 +32,11 @@ public record HologramsMessages(
         String addLookNext) {
 
     public HologramsMessages() {
-        this("ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}Hologram {highlight}%name%{letters} added.",
-                "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}Hologram {highlight}%name%{letters} removed.",
-                "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}Hologram {highlight}%name%{letters} updated.",
-                "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}Hologram {highlight}%name%{letters} moved to your position.",
-                "ENTITY_VILLAGER_NO %prefix% {error}Look at a block within 8 blocks.",
+        this("[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Hologram {highlight}%name%{letters} added.",
+                "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Hologram {highlight}%name%{letters} removed.",
+                "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Hologram {highlight}%name%{letters} updated.",
+                "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Hologram {highlight}%name%{letters} moved to your position.",
+                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Look at a block within 8 blocks.",
                 "{letters}The lines of the hologram, separated by {highlight}<nl>{letters}.",
                 "Remove hologram {highlight}%name%{letters}?",
                 "Holograms",

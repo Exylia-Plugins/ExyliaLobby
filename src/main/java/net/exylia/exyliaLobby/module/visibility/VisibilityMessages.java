@@ -26,8 +26,8 @@ public record VisibilityMessages(
         String unavailable) {
 
     public VisibilityMessages() {
-        this("ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}You now see: %state%{letters}.",
-                "ENTITY_VILLAGER_NO %prefix% {warning}Wait {highlight}%seconds%s{warning} before switching again.",
+        this("[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}You now see: %state%{letters}.",
+                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Wait {highlight}%seconds%s{warning} before switching again.",
                 "{success}Everyone",
                 "{info}Friends and staff",
                 "{error}Nobody",

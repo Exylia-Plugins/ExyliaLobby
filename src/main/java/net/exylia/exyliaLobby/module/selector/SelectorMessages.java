@@ -52,12 +52,12 @@ public record SelectorMessages(
         String confirmRemove) {
 
     public SelectorMessages() {
-        this("ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}Connecting to %server%{letters}...",
-                "ENTITY_VILLAGER_NO %prefix% {error}%server%{error} is offline right now.",
-                "ENTITY_VILLAGER_NO %prefix% {error}You cannot join %server%{error}.",
-                "ENTITY_VILLAGER_NO %prefix% {warning}You are already on %server%{warning}.",
-                "ENTITY_VILLAGER_NO %prefix% {error}The network could not be reached. Try again in a moment.",
-                "ENTITY_VILLAGER_NO %prefix% {error}That server is not set up.",
+        this("[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Connecting to %server%{letters}...",
+                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}%server%{error} is offline right now.",
+                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}You cannot join %server%{error}.",
+                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}You are already on %server%{warning}.",
+                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}The network could not be reached. Try again in a moment.",
+                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}That server is not set up.",
                 "{success}Online",
                 "{error}Offline",
                 "{muted}No data",
@@ -93,11 +93,11 @@ public record SelectorMessages(
                 "You pick its server after.",
                 "{letters}Which server does it send players to?",
                 "{letters}Select the portal with the golden axe: {highlight}left-click{letters} a corner, {highlight}right-click{letters} the other, then {highlight}shift + left-click{letters}.",
-                "ENTITY_VILLAGER_NO %prefix% {error}Add a server to the catalogue first (modules/selector/config.yml).",
-                "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {highlight}%what%{letters} added.",
-                "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {highlight}%what%{letters} removed.",
-                "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {highlight}%what%{letters} now sends players to %server%{letters}.",
-                "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {highlight}%what%{letters} moved to your position.",
+                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Add a server to the catalogue first (modules/selector/config.yml).",
+                "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} added.",
+                "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} removed.",
+                "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} now sends players to %server%{letters}.",
+                "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} moved to your position.",
                 "Remove {highlight}%what%{letters}?");
     }
 }

@@ -20,7 +20,7 @@ public record LobbyMessages(
 
     public LobbyMessages() {
         this("{primary}&lLOBBY {letters_black}•<reset>",
-                "ENTITY_VILLAGER_NO %prefix% {letters}The {highlight}%module%{letters} module is switched off.",
+                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {letters}The {highlight}%module%{letters} module is switched off.",
                 new Modules(), new Areas());
     }
 
@@ -42,10 +42,10 @@ public record LobbyMessages(
 
         public Modules() {
             this("{success}{icon:on} On", "{error}{icon:off} Off", "{warning}{icon:warning} Needs %required%",
-                    "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}Module {highlight}%module%{letters} is now {success}on{letters}.",
-                    "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}Module {highlight}%module%{letters} is now {error}off{letters}.",
-                    "ENTITY_VILLAGER_NO %prefix% {letters}Module {highlight}%module%{letters} needs {warning}%required%{letters} first.",
-                    "ENTITY_VILLAGER_NO %prefix% {error}Module {highlight}%module%{error} could not start. See the console.",
+                    "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Module {highlight}%module%{letters} is now {success}on{letters}.",
+                    "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Module {highlight}%module%{letters} is now {error}off{letters}.",
+                    "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {letters}Module {highlight}%module%{letters} needs {warning}%required%{letters} first.",
+                    "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Module {highlight}%module%{error} could not start. See the console.",
                     "{letters_black}Also turns off: %modules%");
         }
     }
@@ -59,11 +59,11 @@ public record LobbyMessages(
             String worldRemoved) {
 
         public Areas() {
-            this("ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}Lobby area {highlight}%area%{letters} saved.",
-                    "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}Lobby area {highlight}%area%{letters} removed.",
-                    "ENTITY_VILLAGER_NO %prefix% {error}Select two corners first.",
-                    "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}World {highlight}%world%{letters} is now lobby.",
-                    "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}World {highlight}%world%{letters} is no longer lobby.");
+            this("[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Lobby area {highlight}%area%{letters} saved.",
+                    "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Lobby area {highlight}%area%{letters} removed.",
+                    "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Select two corners first.",
+                    "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}World {highlight}%world%{letters} is now lobby.",
+                    "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}World {highlight}%world%{letters} is no longer lobby.");
         }
     }
 }

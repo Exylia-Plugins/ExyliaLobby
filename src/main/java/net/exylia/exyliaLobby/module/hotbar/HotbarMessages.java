@@ -12,7 +12,7 @@ public record HotbarMessages(
         String noPackets) {
 
     public HotbarMessages() {
-        this("ENTITY_VILLAGER_NO %prefix% {warning}Wait {highlight}%seconds%s{warning} before using that again.",
+        this("[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Wait {highlight}%seconds%s{warning} before using that again.",
                 "ExyliaPracticeCore is installed: its lobby hotbar stays in charge. Set 'force: true' in modules/hotbar/config.yml to show this one.",
                 "PacketEvents is not installed: the lobby hotbar needs it and is not shown.");
     }

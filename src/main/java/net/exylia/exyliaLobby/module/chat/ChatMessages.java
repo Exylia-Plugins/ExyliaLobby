@@ -18,8 +18,8 @@ public record ChatMessages(
         String cleared) {
 
     public ChatMessages() {
-        this("ENTITY_VILLAGER_NO %prefix% {error}The chat is locked.",
-                "ENTITY_VILLAGER_NO %prefix% {error}Wait {highlight}%seconds%s{error} before talking again.",
+        this("[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}The chat is locked.",
+                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Wait {highlight}%seconds%s{error} before talking again.",
                 "%prefix% {highlight}%player%{letters} locked the chat.",
                 "%prefix% {highlight}%player%{letters} unlocked the chat.",
                 "%prefix% {letters}Slow mode on: one message every {highlight}%seconds%s{letters}.",

@@ -39,11 +39,11 @@ public record MovementMessages(
         String backName) {
 
     public MovementMessages() {
-        this("ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}Launch pad {highlight}%pad%{letters} added.",
-                "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}Launch pad {highlight}%pad%{letters} removed.",
-                "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}Launch pad {highlight}%pad%{letters} updated.",
-                "ENTITY_VILLAGER_NO %prefix% {error}Look at a block within 8 blocks.",
-                "ENTITY_VILLAGER_NO %prefix% {error}There is already a pad on that block.",
+        this("[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Launch pad {highlight}%pad%{letters} added.",
+                "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Launch pad {highlight}%pad%{letters} removed.",
+                "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Launch pad {highlight}%pad%{letters} updated.",
+                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Look at a block within 8 blocks.",
+                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}There is already a pad on that block.",
                 "{letters}Horizontal speed of this pad (0.1 to 8).",
                 "{letters}Upward speed of this pad (0.1 to 4).",
                 "Remove launch pad {highlight}%pad%{letters}?",

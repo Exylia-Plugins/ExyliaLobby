@@ -13,9 +13,9 @@ public record ProtectionMessages(
         String notInLobby) {
 
     public ProtectionMessages() {
-        this("ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}Build mode {success}on{letters}. The lobby protection ignores you.",
-                "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}Build mode {error}off{letters}. The lobby protection is back.",
+        this("[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Build mode {success}on{letters}. The lobby protection ignores you.",
+                "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Build mode {error}off{letters}. The lobby protection is back.",
                 "{warning}&lBUILD MODE {letters_black}• {letters}Protection is off for you",
-                "ENTITY_VILLAGER_NO %prefix% {error}Stand inside the lobby to use build mode.");
+                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Stand inside the lobby to use build mode.");
     }
 }

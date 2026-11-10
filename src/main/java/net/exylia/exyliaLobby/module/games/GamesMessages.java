@@ -8,6 +8,6 @@ public record GamesMessages(
         String empty) {
 
     public GamesMessages() {
-        this("ENTITY_VILLAGER_NO %prefix% {error}There are no games on this server yet.");
+        this("[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}There are no games on this server yet.");
     }
 }
