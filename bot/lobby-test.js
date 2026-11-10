@@ -84,7 +84,10 @@ async function main() {
   const ref = bot.blockAt(new Vec3(gx + 2, gy - 1, gz))
   await bot.placeBlock(ref, new Vec3(0, 1, 0)).catch(() => { }); await sleep(800)
   result('protection: place refused', bot.blockAt(new Vec3(gx + 2, gy, gz)).name === 'air', bot.blockAt(new Vec3(gx + 2, gy, gz)).name)
-  const itemsOnGround = () => Object.values(bot.entities).filter(e => e.name === 'item').length
+  const groundItems = () => Object.values(bot.entities).filter(e => e.name === 'item')
+  const before = new Set(groundItems().map(e => e.id))
+  if (before.size) console.log('ground items before drop:', groundItems().map(e => `${e.getDroppedItem()?.name} @${e.position.floored()}`).join(', '))
+  const itemsOnGround = () => groundItems().filter(e => !before.has(e.id)).length
   cmd(`clear ${NAME} dirt 0`); await sleep(600)
   const held = (/Found (\d+)/.exec(serverLog().split('\n').slice(-3).join('\n')) || [])[1]
   const dirt2 = bot.inventory.items().find(i => i.name === 'dirt')
