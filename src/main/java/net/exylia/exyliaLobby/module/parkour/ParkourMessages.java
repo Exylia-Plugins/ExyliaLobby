@@ -145,6 +145,9 @@ public record ParkourMessages(
 
     /** A run item's look: its material, name and lore. */
     public record RunItem(String icon, String name, List<String> lore) {
+        public RunItem() {
+            this("STONE", "", List.of());
+        }
     }
 
     public record RunItems(RunItem checkpoint, RunItem restart, RunItem leave) {

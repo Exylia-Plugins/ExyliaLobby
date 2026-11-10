@@ -33,7 +33,7 @@ public final class AdminScreens {
     public static final String MENU = "admin/list";
 
     private static final Map<String, AdminScreens> BY_ID = new ConcurrentHashMap<>();
-    private static volatile PluginActions registeredOn;
+    private static final java.util.concurrent.atomic.AtomicBoolean REGISTERED = new java.util.concurrent.atomic.AtomicBoolean();
 
     /** What a click on a row does. {@code click} is {@code left}, {@code right} or {@code shift}. */
     public interface RowClick {
@@ -62,8 +62,8 @@ public final class AdminScreens {
     public void register() {
         context.hub().menu(MENU);
         PluginActions actions = Actions.of(context.plugin());
-        if (registeredOn == actions) return;
-        registeredOn = actions;
+        // Shared by every module's screen: registered once for the plugin's life.
+        if (!REGISTERED.compareAndSet(false, true)) return;
         actions.registerSync("screen_row", Permissions.ADMIN, (action, args) -> {
             AdminScreens screen = BY_ID.get(args.string(0, ""));
             if (screen != null) screen.rowClick.on(action.player(), args.string(1, ""), args.string(2, ""));

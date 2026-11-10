@@ -100,9 +100,10 @@ public final class HotbarModule extends LobbyModule {
 
     /** Keeps a slot free of buttons (the pvp module reserves its sword slot); the returned handle frees it. */
     public @NotNull Runnable reserve(int slot) {
-        if (reserved.add(slot) && hotbars != null) rebuild();
+        // Deferred: modules reserve while the plugin starts, before the actions the set names are all registered.
+        if (reserved.add(slot)) context.tasks().run(this::rebuildIfRunning);
         return () -> {
-            if (reserved.remove(slot) && hotbars != null) rebuild();
+            if (reserved.remove(slot)) context.tasks().run(this::rebuildIfRunning);
         };
     }
 
@@ -147,6 +148,10 @@ public final class HotbarModule extends LobbyModule {
         String now = context.modules().all().stream().filter(module -> module.isEnabled()).map(module -> module.getId())
                 .sorted().reduce("", (a, b) -> a + "," + b);
         if (!now.equals(signature) || registeredSet.isEmpty()) rebuild();
+    }
+
+    private void rebuildIfRunning() {
+        if (isEnabled() && hotbars != null) rebuild();
     }
 
     private synchronized void rebuild() {

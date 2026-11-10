@@ -49,17 +49,24 @@ public final class AdminHub {
         registerActions();
     }
 
-    /** A menu under {@code menus/admin/} a module ships; loaded with the core's on start and reload. */
+    private volatile boolean ready;
+
+    /**
+     * A menu a module ships ({@code menus/<id>.yml} of the server's language), loaded with the core's on start and
+     * reload. Menus compile their action lines when loaded, so this waits until every module's actions exist: until
+     * the core's first {@link #load()} at start, and one tick when a module is switched on live (its actions are
+     * registered after its start).
+     */
     public void menu(@NotNull String id) {
         if (!extra.contains(id)) extra.add(id);
-        // On the very first start the files are written by load() below, once every module registered.
-        if (Languages.file(lobby.getPlugin(), "menus/" + id + ".yml").exists()) load(id);
+        if (ready) lobby.getTasks().run(() -> load(id));
     }
 
     public void load() {
         Languages.replace(lobby.getPlugin(), AdminHub.class, DIRECTORY);
         for (String id : MENUS) load(id);
         for (String id : extra) load(id);
+        ready = true;
     }
 
     private void load(String id) {

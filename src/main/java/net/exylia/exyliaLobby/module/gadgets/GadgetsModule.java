@@ -165,14 +165,7 @@ public final class GadgetsModule extends LobbyModule {
     }
 
     private void loadMenu() {
-        java.io.File file = Languages.file(plugin(), "menus/" + MENU + ".yml");
-        try {
-            org.bukkit.configuration.file.YamlConfiguration yaml = new org.bukkit.configuration.file.YamlConfiguration();
-            yaml.load(file);
-            Menus.of(plugin()).load(MENU, yaml);
-        } catch (java.io.IOException | org.bukkit.configuration.InvalidConfigurationException failure) {
-            context.debug().error("The " + MENU + " menu could not be read. Fix " + file.getPath() + " and reload.", failure);
-        }
+        context.hub().menu(MENU);
     }
 
     // ======================== public hooks ========================

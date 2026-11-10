@@ -17,7 +17,7 @@ import java.util.UUID;
  */
 @Table(value = "lobby_parkour_stats", data = DataKind.PROGRESS)
 public record ParkourStat(
-        @Id @Column(value = "id", length = 160) String id,
+        @Id(value = "id", length = 160) String id,
         @Owner @Indexed @Column("player") UUID player,
         @Column(value = "course", length = 64) String course,
         @Column("completions") int completions) {

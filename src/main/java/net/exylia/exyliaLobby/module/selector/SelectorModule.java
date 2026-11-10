@@ -142,14 +142,7 @@ public final class SelectorModule extends LobbyModule {
     }
 
     private void load(String id) {
-        File file = Languages.file(plugin(), "menus/" + id + ".yml");
-        try {
-            YamlConfiguration yaml = new YamlConfiguration();
-            yaml.load(file);
-            Menus.of(plugin()).load(id, yaml);
-        } catch (IOException | InvalidConfigurationException failure) {
-            context.debug().error("The " + id + " menu could not be read. Fix " + file.getPath() + " and reload.", failure);
-        }
+        context.hub().menu(id);
     }
 
     // ======================== public hooks ========================

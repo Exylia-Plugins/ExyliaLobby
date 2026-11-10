@@ -24,7 +24,7 @@ import java.util.UUID;
 @Index(columns = {"board", "value"}, name = "lobby_parkour_records_fastest")
 @Index(columns = {"board", "value"}, descending = {"value"}, name = "lobby_parkour_records_highest")
 public record ParkourRecord(
-        @Id @Column(value = "id", length = 160) String id,
+        @Id(value = "id", length = 160) String id,
         @Owner @Indexed @Column("player") UUID player,
         @Column(value = "name", length = 16) String name,
         @Column(value = "board", length = 120) String board,

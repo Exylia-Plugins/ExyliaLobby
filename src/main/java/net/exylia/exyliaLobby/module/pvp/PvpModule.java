@@ -714,14 +714,7 @@ public final class PvpModule extends LobbyModule implements Busy {
     }
 
     private void loadMenu() {
-        java.io.File file = Languages.file(plugin(), "menus/" + TOP_MENU + ".yml");
-        try {
-            org.bukkit.configuration.file.YamlConfiguration yaml = new org.bukkit.configuration.file.YamlConfiguration();
-            yaml.load(file);
-            Menus.of(plugin()).load(TOP_MENU, yaml);
-        } catch (java.io.IOException | org.bukkit.configuration.InvalidConfigurationException failure) {
-            context.debug().error("The " + TOP_MENU + " menu could not be read. Fix " + file.getPath() + " and reload.", failure);
-        }
+        context.hub().menu(TOP_MENU);
     }
 
     private void buildBoard() {
