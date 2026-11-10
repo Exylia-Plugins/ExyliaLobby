@@ -39,13 +39,13 @@ public final class Modules {
                 new ChatModule(context),
                 new OnboardingModule(context),
                 new HotbarModule(context),
+                new HologramsModule(context),
                 new ParkourModule(context),
                 new MovementModule(context),
                 new VisibilityModule(context),
                 new SelectorModule(context),
                 new GamesModule(context),
                 new HudModule(context),
-                new HologramsModule(context),
                 new PvpModule(context),
                 new GadgetsModule(context)
         );
