@@ -111,6 +111,8 @@ public final class PvpModule extends LobbyModule implements Busy {
     private final Map<UUID, Countdown> countdowns = new ConcurrentHashMap<>();
     private final Map<UUID, Tag> tags = new ConcurrentHashMap<>();
     private final Map<UUID, PvpStat> cache = new ConcurrentHashMap<>();
+    /** When each killer last killed each victim ("killer:victim"), for the repeat-kill window. */
+    private final Map<String, Long> lastKills = new ConcurrentHashMap<>();
 
     private record Tag(long until, UUID opponent) {
     }
@@ -215,6 +217,7 @@ public final class PvpModule extends LobbyModule implements Busy {
         restoring.clear();
         tags.clear();
         cache.clear();
+        lastKills.clear();
     }
 
     @Override
@@ -634,12 +637,27 @@ public final class PvpModule extends LobbyModule implements Busy {
         if (!quit) send(victim, text.victim(), Values.of("killer", killer == null ? "?" : killer.getName()));
         if (killer == null) return;
         UUID killerId = killer.getUniqueId();
+        tags.remove(killerId);
+        if (repeated(killerId, victimId)) {
+            // The same victim again within the window: no kill, no streak, no reward, so two accounts farm nothing.
+            send(killer, quit ? text.quitKiller() : text.killer(), Values.of("victim", victimName).put("streak", stat(killerId).streak()));
+            return;
+        }
         change(killerId, killer.getName(), stat -> stat.killed(killer.getName()), stat -> context.tasks().runAtEntity(killer, () -> {
             Values values = Values.of("victim", victimName).put("streak", stat.streak());
             send(killer, quit ? text.quitKiller() : text.killer(), values);
-            reward(killer, stat.streak());
+            // A quit is not a fight won: it counts, but it pays nothing.
+            if (!quit) reward(killer, stat.streak());
         }));
-        tags.remove(killerId);
+    }
+
+    /** Whether this killer already killed this victim within the repeat window; remembers this kill either way. */
+    private boolean repeated(UUID killer, UUID victim) {
+        long now = System.currentTimeMillis();
+        long window = settings.get().repeatKillWindow().toMillis();
+        lastKills.values().removeIf(at -> now - at >= window);
+        Long before = lastKills.put(killer + ":" + victim, now);
+        return before != null && now - before < window;
     }
 
     private void change(UUID id, String name, UnaryOperator<PvpStat> edit, java.util.function.Consumer<PvpStat> done) {
@@ -808,7 +826,7 @@ public final class PvpModule extends LobbyModule implements Busy {
         settings.update(current -> new PvpSettings(current.topCommand(), current.permission(), current.equipSeconds(),
                 current.unequipSeconds(), current.tagSeconds(), current.swordSlot(), current.swordMaterial(), current.quitCounts(),
                 current.kit(), point(at), current.topRefreshSeconds(), current.boardRows(), current.board(),
-                current.streakRewards(), current.zones()));
+                current.streakRewards(), current.zones(), current.repeatKillWindow()));
         send(admin, messages.get().spawnSet(), Values.of());
     }
 
@@ -817,7 +835,7 @@ public final class PvpModule extends LobbyModule implements Busy {
         settings.update(current -> new PvpSettings(current.topCommand(), current.permission(), current.equipSeconds(),
                 current.unequipSeconds(), current.tagSeconds(), current.swordSlot(), current.swordMaterial(), current.quitCounts(),
                 current.kit(), current.respawn(), current.topRefreshSeconds(), current.boardRows(), point(at),
-                current.streakRewards(), current.zones()));
+                current.streakRewards(), current.zones(), current.repeatKillWindow()));
         buildBoard();
         send(admin, messages.get().boardSet(), Values.of());
     }
@@ -913,7 +931,8 @@ public final class PvpModule extends LobbyModule implements Busy {
             change.accept(map);
             return new PvpSettings(current.topCommand(), current.permission(), current.equipSeconds(), current.unequipSeconds(),
                     current.tagSeconds(), current.swordSlot(), current.swordMaterial(), current.quitCounts(), current.kit(),
-                    current.respawn(), current.topRefreshSeconds(), current.boardRows(), current.board(), current.streakRewards(), map);
+                    current.respawn(), current.topRefreshSeconds(), current.boardRows(), current.board(), current.streakRewards(), map,
+                    current.repeatKillWindow());
         });
         buildZones();
     }

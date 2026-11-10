@@ -2,6 +2,7 @@ package net.exylia.exyliaLobby.module.pvp;
 
 import net.exylia.lib.config.Comment;
 
+import java.time.Duration;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,11 +53,15 @@ public record PvpSettings(
         Map<String, List<String>> streakRewards,
 
         @Comment("Boxes where the kit goes on when walking in and off when walking out. Placed from /lobbyadmin → Lobby PvP.")
-        Map<String, Zone> zones) {
+        Map<String, Zone> zones,
+
+        @Comment("Killing the same player again within this time counts no kill, no streak and no reward (their death")
+        @Comment("still counts), so two accounts farm nothing. Quitting in combat never pays a streak reward either.")
+        Duration repeatKillWindow) {
 
     public PvpSettings() {
         this(List.of("pvptop"), "", 5, 5, 10, 4, "WOODEN_SWORD", true, new Kit(), new Point(), 30, 5, new Point(),
-                new LinkedHashMap<>(), new LinkedHashMap<>());
+                new LinkedHashMap<>(), new LinkedHashMap<>(), Duration.ofMinutes(5));
     }
 
     /** The fighter's gear. */
