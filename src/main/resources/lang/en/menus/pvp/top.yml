@@ -1,4 +1,4 @@
-menu-version: 1
+menu-version: 2
 # The lobby PvP kills top. Yours to restyle: new defaults wait in /exylialib updates.
 
 title: '{primary}&lKILLS {letters_black}» {highlight}Lobby PvP {muted}%current_page%/%total_pages%'
@@ -63,4 +63,5 @@ items:
       - "  {letters_black}· {highlight}{icon:star} {letters}Rank{letters_black}: {highlight}%my_rank%"
       - "  {letters_black}· {success}{icon:kills} {letters}Kills{letters_black}: {success}%my_kills%"
       - "  {letters_black}· {error}{icon:deaths} {letters}Deaths{letters_black}: {error}%my_deaths%"
-      - "  {letters_black}· {accent}{icon:heart} {letters}Streak{letters_black}: {accent}%my_streak%{letters_black}/{accent}%my_best%"
+      - "  {letters_black}· {accent}{icon:heart} {letters}Streak{letters_black}: {accent}%my_streak%"
+      - "  {letters_black}· {accent}{icon:star} {letters}Best streak{letters_black}: {accent}%my_best%"

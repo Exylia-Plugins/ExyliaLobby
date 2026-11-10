@@ -261,7 +261,7 @@ public final class PvpModule extends LobbyModule implements Busy {
         values.put("my_deaths", (Supplier<Object>) () -> stat(id).deaths());
         values.put("my_streak", (Supplier<Object>) () -> stat(id).streak());
         values.put("my_best", (Supplier<Object>) () -> stat(id).bestStreak());
-        values.put("my_rank", (Supplier<Object>) () -> rankOf(id));
+        values.put("my_rank", (Supplier<Object>) () -> rankOf(id) == 0 ? "—" : rankOf(id));
         Menus.of(plugin()).open(player, TOP_MENU, values, this::topRows);
     }
 
@@ -820,8 +820,8 @@ public final class PvpModule extends LobbyModule implements Busy {
         for (Map.Entry<String, PvpSettings.Zone> entry : settings.get().zones().entrySet()) {
             PvpSettings.Zone zone = entry.getValue();
             rows.add(AdminScreens.row(entry.getKey(), "IRON_SWORD", entry.getKey(), text.subtitleZone(), List.of(
-                    AdminScreens.stat(text.labelPlace(), "{info}" + zone.world() + " " + zone.x1() + " " + zone.y1() + " " + zone.z1()),
-                    AdminScreens.stat(text.labelSize(), "{info}" + (Math.abs(zone.x2() - zone.x1()) + 1) + "x"
+                    AdminScreens.stat("map", text.labelPlace(), "{info}" + zone.world() + " " + zone.x1() + " " + zone.y1() + " " + zone.z1()),
+                    AdminScreens.stat("hopper", text.labelSize(), "{info}" + (Math.abs(zone.x2() - zone.x1()) + 1) + "x"
                             + (Math.abs(zone.y2() - zone.y1()) + 1) + "x" + (Math.abs(zone.z2() - zone.z1()) + 1))),
                     text.clicksZone(), false));
         }

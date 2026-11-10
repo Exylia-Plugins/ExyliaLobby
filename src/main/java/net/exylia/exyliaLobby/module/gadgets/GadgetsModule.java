@@ -178,6 +178,10 @@ public final class GadgetsModule extends LobbyModule {
             String now = equipped.get(id);
             return now == null ? "None" : card(now).name();
         });
+        // The summary card only offers the click while something is equipped.
+        GadgetsMessages text = messages.get();
+        values.put("equipped_action", (Supplier<Object>) () -> equipped.get(id) == null ? "{letters_black}Equip one below."
+                : "{primary}{icon:click} " + text.clickPut() + "<nl>{letters_black}" + text.clickPutNext());
         Menus.of(plugin()).open(player, MENU, values, () -> rows(player));
     }
 
@@ -216,9 +220,9 @@ public final class GadgetsModule extends LobbyModule {
                 lore.stat("locked", "warning", text.labelNeeds(), gadget.permission());
                 lore.line("").note(text.lockedNote());
             } else if (on) {
-                lore.line("").action(text.clickPut()).note(text.clickPutNext());
+                lore.action(text.clickPut()).note(text.clickPutNext());
             } else {
-                lore.line("").action(text.clickEquip()).note(text.clickEquipNext());
+                lore.action(text.clickEquip()).note(text.clickEquipNext());
             }
             rows.add(UiEntry.of(id)
                     .with("row_id", id)

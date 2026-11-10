@@ -1,4 +1,4 @@
-menu-version: 1
+menu-version: 2
 # The gadgets screen. Yours to restyle: new defaults wait in /exylialib updates.
 
 title: '{primary}&lGADGETS {letters_black}» {highlight}Lobby {muted}%current_page%/%total_pages%'
@@ -69,7 +69,6 @@ items:
       - "{primary}✦ Status"
       - "  {letters_black}· {letters}Gadget{letters_black}: {info}%equipped_name%"
       - ""
-      - "{primary}{icon:click} Click to put away"
-      - "{letters_black}Your hotbar slot is freed."
+      - "%equipped_action%"
     actions:
       - 'exylialobby:gadgets_off'
