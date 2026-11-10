@@ -53,6 +53,27 @@ permissions:
   exylialobby.pvp:
     description: Fight in the lobby PvP (the kit and the sword).
     default: true
+  exylialobby.gadget.grapple:
+    description: Equip and use the grapple gadget.
+    default: true
+  exylialobby.gadget.ender:
+    description: Equip and use the ender gadget.
+    default: false
+  exylialobby.gadget.paint:
+    description: Equip and use the paint gadget.
+    default: true
+  exylialobby.gadget.knockback:
+    description: Equip and use the knockback gadget.
+    default: true
+  exylialobby.gadget.leap:
+    description: Equip and use the leap gadget.
+    default: true
+  exylialobby.gadget.snowball:
+    description: Equip and use the snowball gadget.
+    default: true
+  exylialobby.gadget.trampoline:
+    description: Equip and use the trampoline gadget.
+    default: false
   exylialobby.spawn:
     description: Use /spawn.
     default: true

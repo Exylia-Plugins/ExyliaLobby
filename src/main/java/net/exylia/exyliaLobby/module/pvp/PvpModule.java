@@ -505,7 +505,7 @@ public final class PvpModule extends LobbyModule implements Busy {
         int slot = swordSlot();
         if (weapon != null) inventory.setItem(slot, weapon);
         inventory.setHeldItemSlot(slot);
-        var max = player.getAttribute(org.bukkit.attribute.Attribute.MAX_HEALTH);
+        var max = player.getAttribute(net.exylia.lib.platform.Attributes.MAX_HEALTH);
         player.setHealth(max == null ? 20.0 : max.getValue());
         player.setFoodLevel(20);
     }

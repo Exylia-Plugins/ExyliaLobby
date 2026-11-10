@@ -1,6 +1,7 @@
 package net.exylia.exyliaLobby.module;
 
 import net.exylia.exyliaLobby.module.chat.ChatModule;
+import net.exylia.exyliaLobby.module.gadgets.GadgetsModule;
 import net.exylia.exyliaLobby.module.games.GamesModule;
 import net.exylia.exyliaLobby.module.holograms.HologramsModule;
 import net.exylia.exyliaLobby.module.hotbar.HotbarModule;
@@ -45,7 +46,8 @@ public final class Modules {
                 new GamesModule(context),
                 new HudModule(context),
                 new HologramsModule(context),
-                new PvpModule(context)
+                new PvpModule(context),
+                new GadgetsModule(context)
         );
     }
 }
