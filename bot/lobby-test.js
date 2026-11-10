@@ -76,8 +76,8 @@ async function main() {
   const target = new Vec3(gx + 2, gy - 1, gz)
   await bot.lookAt(target.offset(0.5, 0.5, 0.5), true)
   await bot.dig(bot.blockAt(target)).catch(() => { }); await sleep(800)
-  cmd(`execute if block ${target.x} ${target.y} ${target.z} stone`); await sleep(600)
-  result('protection: break refused', /Test passed/.test(serverLog().split('\n').slice(-3).join('\n')), `client ${bot.blockAt(target).name}; ${serverLog().split('\n').slice(-2).join(' / ')}`)
+  cmd(`fill ${target.x} ${target.y} ${target.z} ${target.x} ${target.y} ${target.z} stone replace air`); await sleep(600)
+  result('protection: break refused', /No blocks were filled/.test(serverLog().split('\n').slice(-3).join('\n')), `client ${bot.blockAt(target).name}; ${serverLog().split('\n').slice(-2).join(' / ')}`)
   cmd(`give ${NAME} dirt 5`); await sleep(800)
   const dirt = bot.inventory.items().find(i => i.name === 'dirt')
   await bot.equip(dirt, 'hand').catch(() => { })
@@ -202,7 +202,7 @@ async function main() {
   await tp(bot, gx + 5.5, gy, gz + 7.5)
   // ---- leaving the lobby area restores the game mode (a fresh bot: the first one had its mode changed by commands)
   cmd(`tp ${NAME2} 0 -60 0`); await sleep(1200)
-  const mode = async () => { cmd(`data get entity ${NAME2} playerGameType`); await sleep(700); return (/entity data: (\d)/.exec(serverLog().split('\n').slice(-2).join('\n')) || [])[1] }
+  const mode = async () => ({ survival: '0', creative: '1', adventure: '2', spectator: '3' })[bot2.game.gameMode]  // client side: `data get` fails on Folia
   const inside = await mode()
   cmd(`execute in minecraft:the_end run tp ${NAME2} 100 50 0`); await sleep(3500)
   const outside = await mode()
