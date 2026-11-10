@@ -1,5 +1,6 @@
 package net.exylia.exyliaLobby.module.parkour;
 
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import revxrsal.commands.annotation.CommandPlaceholder;
 import revxrsal.commands.annotation.Optional;
@@ -20,7 +21,7 @@ final class ParkourCommand implements OrphanCommand {
 
     @CommandPlaceholder
     public void parkour(Player player, @Optional @Single String what) {
-        if (what == null) module.chatCourses(player);
+        if (what == null) module.openCourses(player);
         else module.play(player, what);
     }
 
@@ -30,12 +31,12 @@ final class ParkourCommand implements OrphanCommand {
     }
 
     @Subcommand("top")
-    public void top(Player player) {
+    public void top(CommandSender player) {
         module.top(player, Board.ENDLESS);
     }
 
     @Subcommand("top")
-    public void top(Player player, @Single String board) {
+    public void top(CommandSender player, @Single String board) {
         module.top(player, board);
     }
 }

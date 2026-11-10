@@ -238,7 +238,7 @@ final class ParkourData {
                 .register();
     }
 
-    private static String show(Board board, long value) {
+    static String show(Board board, long value) {
         return board.isMode() ? Long.toString(value) : Times.format(value);
     }
 

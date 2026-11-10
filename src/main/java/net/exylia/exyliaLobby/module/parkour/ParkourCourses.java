@@ -78,6 +78,16 @@ public record ParkourCourses(
                     medals, minimumTime, firstRewards, repeatRewards, repeatCooldown);
         }
 
+        public Course withDifficulty(String difficulty) {
+            return new Course(name, enabled, difficulty, icon, world, start, checkpoints, finish, killBlocks, timeLimit,
+                    medals, minimumTime, firstRewards, repeatRewards, repeatCooldown);
+        }
+
+        public Course withEnabled(boolean enabled) {
+            return new Course(name, enabled, difficulty, icon, world, start, checkpoints, finish, killBlocks, timeLimit,
+                    medals, minimumTime, firstRewards, repeatRewards, repeatCooldown);
+        }
+
         public Course inWorld(String name) {
             return new Course(this.name, enabled, difficulty, icon, name, start, checkpoints, finish, killBlocks,
                     timeLimit, medals, minimumTime, firstRewards, repeatRewards, repeatCooldown);

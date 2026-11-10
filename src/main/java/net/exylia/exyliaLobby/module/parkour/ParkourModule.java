@@ -47,6 +47,8 @@ public final class ParkourModule extends LobbyModule implements Busy {
     private ConfigFile<ParkourMessages> messages;
     private ConfigFile<ParkourCourses> courses;
     private ConfigFile<ParkourThemes> themes;
+    private final ParkourScreens screens = new ParkourScreens(this);
+    private final ParkourAdminScreens adminScreens = new ParkourAdminScreens(this);
     private volatile ParkourRuns runs;
     private volatile ParkourData data;
     private volatile PeriodClock clock;
@@ -76,6 +78,8 @@ public final class ParkourModule extends LobbyModule implements Busy {
         clock = buildClock();
         data = ParkourData.create(context.plugin(), context.debug(), () -> clock, () -> settings.get().tops().size());
         data.register(context.plugin());
+        screens.register();
+        adminScreens.register();
         runs = new ParkourRuns(context, settings, courses, themes, messages, data, () -> clock);
         listen(runs);
         listen(runs.guard());
@@ -100,6 +104,8 @@ public final class ParkourModule extends LobbyModule implements Busy {
         if (rescueHandle != null) rescueHandle.run();
         rescueHandle = null;
         context.visibility().remove(RULE);
+        screens.clear();
+        adminScreens.clear();
         clearBoards();
         if (runs != null) runs.close();
         runs = null;
@@ -131,6 +137,74 @@ public final class ParkourModule extends LobbyModule implements Busy {
         data.forget(player.getUniqueId());
     }
 
+    // ======================== screens ========================
+
+    @Override
+    protected void actions(net.exylia.lib.action.PluginActions actions) {
+        screens.registerActions(actions);
+        adminScreens.registerActions(actions);
+    }
+
+    @Override
+    public boolean hasAdmin() {
+        return true;
+    }
+
+    @Override
+    public void openAdmin(@NotNull Player viewer, @NotNull Runnable back) {
+        adminScreens.openHub(viewer, back);
+    }
+
+    LobbyContext ctx() {
+        return context;
+    }
+
+    ParkourScreens screens() {
+        return screens;
+    }
+
+    ParkourAdminScreens adminScreens() {
+        return adminScreens;
+    }
+
+    ParkourData data() {
+        return data;
+    }
+
+    ParkourMessages text() {
+        return messages.get();
+    }
+
+    ParkourSettings rules() {
+        return settings.get();
+    }
+
+    ParkourCourses catalogue() {
+        return courses.get();
+    }
+
+    ParkourThemes themeSet() {
+        return themes.get();
+    }
+
+    ConfigFile<ParkourCourses> coursesFile() {
+        return courses;
+    }
+
+    ConfigFile<ParkourThemes> themesFile() {
+        return themes;
+    }
+
+    ConfigFile<ParkourSettings> settingsFile() {
+        return settings;
+    }
+
+    /** The shown name of a course, its id when unknown. */
+    String courseName(String id) {
+        ParkourCourses.Course course = courses.get().courses().get(id);
+        return course == null ? id : course.name();
+    }
+
     // ======================== public ========================
 
     /** Whether the player is on a run now. Safe from any thread. */
@@ -154,6 +228,10 @@ public final class ParkourModule extends LobbyModule implements Busy {
                 .flatMap(List::stream).toList();
     }
 
+    void openCourses(Player player) {
+        screens.openList(player);
+    }
+
     void chatCourses(Player player) {
         List<String> ids = new ArrayList<>();
         courses.get().courses().forEach((id, course) -> {
@@ -174,18 +252,24 @@ public final class ParkourModule extends LobbyModule implements Busy {
         else runs.send(player, messages.get().notRunning(), Values.of());
     }
 
-    void top(Player player, String typed) {
+    /** A player gets the leaderboard screen; the console gets chat lines. */
+    void top(org.bukkit.command.CommandSender sender, String typed) {
         Board board = Board.parse(typed);
         ParkourMessages.Tools text = messages.get().tools();
+        PluginMessages chat = PluginMessages.of(plugin());
         if (!board.isMode() && !courses.get().courses().containsKey(board.name())) {
-            runs.send(player, text.unknownBoard(), Values.of("board", typed));
+            chat.send(sender, text.unknownBoard(), Values.of("board", typed));
+            return;
+        }
+        if (sender instanceof Player player) {
+            screens.openTop(player, board, () -> screens.openList(player), messages.get().screens().backList());
             return;
         }
         List<ParkourRecord> top = data.top(board);
-        runs.send(player, text.topTitle(), Values.of("board", board.id()));
-        if (top.isEmpty()) runs.send(player, text.topEmpty(), Values.of());
+        chat.send(sender, text.topTitle(), Values.of("board", board.id()));
+        if (top.isEmpty()) chat.send(sender, text.topEmpty(), Values.of());
         for (int i = 0; i < Math.min(top.size(), BOARD_ROWS); i++) {
-            runs.send(player, text.topLine(), row(i, top.get(i), board));
+            chat.send(sender, text.topLine(), row(i, top.get(i), board));
         }
     }
 
@@ -252,23 +336,86 @@ public final class ParkourModule extends LobbyModule implements Busy {
     }
 
     void delete(Player admin, String typed) {
+        delete(admin, typed, deleted -> {
+        });
+    }
+
+    /** Asks first; {@code done} gets whether the course was deleted (false on no or cancel). */
+    void delete(Player admin, String typed, java.util.function.Consumer<Boolean> done) {
         String id = ParkourCourses.id(typed);
         if (!courses.get().courses().containsKey(id)) {
             send(admin, messages.get().unknownCourse(), Values.of("course", typed));
+            done.accept(false);
             return;
         }
         var inputs = Inputs.of(plugin());
         inputs.answered(admin, inputs.confirm(admin, Values.of("course", id).apply(messages.get().tools().confirmDelete()))
                 .dangerous().open(), yes -> {
-            if (!yes) return;
+            if (!yes) {
+                done.accept(false);
+                return;
+            }
             courses.update(current -> {
                 Map<String, ParkourCourses.Course> map = new LinkedHashMap<>(current.courses());
                 map.remove(id);
                 return new ParkourCourses(map);
             });
             send(admin, messages.get().courseDeleted(), Values.of("course", id));
-        }, () -> {
+            done.accept(true);
+        }, () -> done.accept(false));
+    }
+
+    void setDifficulty(Player admin, String id, String difficulty) {
+        ParkourCourses.Course course = courses.get().courses().get(id);
+        if (course == null) return;
+        put(id, course.withDifficulty(difficulty));
+        send(admin, messages.get().screens().difficultySet(), Values.of("course", id).put("difficulty", difficulty));
+    }
+
+    void toggleCourse(Player admin, String id) {
+        ParkourCourses.Course course = courses.get().courses().get(id);
+        if (course == null) return;
+        put(id, course.withEnabled(!course.enabled()));
+        ParkourMessages.Screens text = messages.get().screens();
+        send(admin, text.enabledSet(), Values.of("course", id).put("state", course.enabled() ? text.off() : text.on()));
+    }
+
+    void toggleTheme(Player admin, String id) {
+        ParkourThemes.Theme theme = themes.get().themes().get(id);
+        if (theme == null) return;
+        setThemes(map -> map.put(id, theme.withEnabled(!theme.enabled())));
+        ParkourMessages.Screens text = messages.get().screens();
+        send(admin, text.themeToggled(), Values.of("theme", id).put("state", theme.enabled() ? text.off() : text.on()));
+    }
+
+    void enableAllThemes() {
+        setThemes(map -> map.replaceAll((key, theme) -> theme.withEnabled(true)));
+    }
+
+    private void setThemes(java.util.function.Consumer<Map<String, ParkourThemes.Theme>> change) {
+        themes.update(current -> {
+            Map<String, ParkourThemes.Theme> map = new LinkedHashMap<>(current.themes());
+            change.accept(map);
+            return new ParkourThemes(map);
         });
+    }
+
+    void deleteArea(Player admin, String name, Runnable reopen) {
+        var inputs = Inputs.of(plugin());
+        inputs.answered(admin, inputs.confirm(admin, Values.of("area", name).apply(messages.get().screens().confirmDeleteArea()))
+                .dangerous().open(), yes -> {
+            if (yes) {
+                settings.update(current -> {
+                    Map<String, ParkourSettings.Area> map = new LinkedHashMap<>(current.endless().areas());
+                    map.remove(name);
+                    ParkourSettings.Endless e = current.endless();
+                    return current.withEndless(new ParkourSettings.Endless(map, e.ahead(), e.behind(), e.themeEvery(),
+                            e.milestones(), e.fallDepth(), e.bestMarker(), e.milestoneRewards(), e.tuning()));
+                });
+                send(admin, messages.get().screens().areaDeleted(), Values.of("area", name));
+            }
+            reopen.run();
+        }, reopen);
     }
 
     private void edit(Player admin, String typed, UnaryOperator<ParkourCourses.Course> change, String done, Values values) {

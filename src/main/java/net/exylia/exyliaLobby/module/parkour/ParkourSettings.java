@@ -53,6 +53,11 @@ public record ParkourSettings(
                 new Periods(), new Sounds(), Map.of());
     }
 
+    public ParkourSettings withEndless(Endless endless) {
+        return new ParkourSettings(command, modes, endless, hideRunners, checkpointBeacon, runItems, courseFallDepth,
+                antiCheat, tops, periods, sounds, boards);
+    }
+
     public record Modes(
             @Comment("Endless: the score is how many jumps you make before falling.")
             boolean endless,

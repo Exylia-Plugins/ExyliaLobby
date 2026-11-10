@@ -76,7 +76,9 @@ public record ParkourMessages(
         @Comment("The items a runner holds: back to the last checkpoint, start again, leave.")
         RunItems items,
         @Comment("Chat leaderboards and staff tools.")
-        Tools tools) {
+        Tools tools,
+        @Comment("Menu cards: stat lines, subtitles, prompts and states. %tone% and %light% are the card's palette colours.")
+        Screens screens) {
 
     public ParkourMessages() {
         this("%prefix% {letters}Courses: %courses%{letters}. Play one with {highlight}/%command% <course>{letters}, or {highlight}/%command% endless{letters}.",
@@ -140,7 +142,8 @@ public record ParkourMessages(
 
                 "{letters}Checkpoint {info}%checkpoint%{letters_black}/{info}%total% {letters_black}· {info}%distance% m",
                 new RunItems(),
-                new Tools());
+                new Tools(),
+                new Screens());
     }
 
     /** A run item's look: its material, name and lore. */
@@ -215,6 +218,130 @@ public record ParkourMessages(
                     "ENTITY_VILLAGER_NO %prefix% {error}No area was selected.",
                     "Name of the area",
                     "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}Endless area {highlight}%area%{letters} saved, starting where you stand.");
+        }
+    }
+
+    /** Text the parkour menus build their cards from. */
+    public record Screens(
+            String on,
+            String off,
+            @Comment("A value that does not exist yet: no best time, no rank.")
+            String none,
+            @Comment("Card subtitles. A finished course is yours, so it takes the success tone.")
+            String subtitleCourse,
+            String subtitleCourseDone,
+            String subtitleEndless,
+            String subtitleSprint,
+            String subtitleDaily,
+            String subtitleTop,
+            @Comment("Card names: %subject% is the course or mode; the gradient wraps plain names in the card's tone.")
+            String nameCourse,
+            String nameMode,
+            String nameRow,
+            String gradient,
+            String labelRank,
+            String backList,
+            String labelToday,
+            @Comment("The section labels of a card.")
+            String labelInfo,
+            String labelStatus,
+            @Comment("What a course or mode is, in a line or two. <nl> splits lines. %seconds% is a sprint's length.")
+            String aboutCourse,
+            String aboutEndless,
+            String aboutSprint,
+            String aboutDaily,
+            @Comment("Stat lines: %value% is the value.")
+            String statDifficulty,
+            String statBest,
+            String statScore,
+            String statMedal,
+            String statRank,
+            String statFinishes,
+            String statCheckpoints,
+            @Comment("The click lines of a list card (a course, then a mode).")
+            String clickCourse,
+            String clickMode,
+            @Comment("Your splits on a course's detail screen: one line per checkpoint, then the finish against the gold medal.")
+            String splitsNone,
+            String splitLine,
+            String splitMore,
+            String splitFinish,
+            String splitGold,
+            @Comment("Names of the periods on a leaderboard.")
+            Periods periods,
+            @Comment("Asks before wiping your times. %course% is its name.")
+            String confirmReset,
+            @Comment("Staff screens.")
+            String promptCourse,
+            String promptDifficulty,
+            String promptGold,
+            String promptSilver,
+            String promptBronze,
+            String promptArea,
+            String confirmDeleteArea,
+            String areaDeleted,
+            String themeToggled,
+            String difficultySet,
+            String enabledSet,
+            String notReady,
+            String ready,
+            String placed,
+            String notPlaced,
+            String noCourses,
+            String noAreas) {
+
+        public Screens() {
+            this("{success}{icon:on} On", "{error}{icon:off} Off", "{muted}None yet",
+                    "{letters_black}Course", "{success}Course · finished", "{letters_black}Endless mode",
+                    "{letters_black}Sprint mode", "{letters_black}Daily mode", "{letters_black}Leaderboard · %board%",
+                    "{letters}Course {letters_black}▸ %subject%", "{letters}Mode {letters_black}▸ %subject%",
+                    "{letters}#%place% {letters_black}▸ %subject%", "<gradient:%tone%:%light%>%subject%</gradient>",
+                    "Rank", "Courses", "Today's rank",
+                    "%tone%✎ Information", "%tone%✦ Status",
+                    " {letters}Start, reach every checkpoint,<nl> {letters}then {highlight}finish {letters}as fast as you can.",
+                    " {letters}Jump as far as you can.<nl> {letters}Your score is the {highlight}jumps{letters}.",
+                    " {letters}Make as many jumps as you can<nl> {letters}in {highlight}%seconds% seconds{letters}.",
+                    " {letters}The same path for everyone today.<nl> {letters}One board, {highlight}reset daily{letters}.",
+                    "  {letters_black}· {warning}{icon:star} {letters}Difficulty{letters_black}: {warning}%value%",
+                    "  {letters_black}· {info}{icon:clock} {letters}Best{letters_black}: {info}%value%",
+                    "  {letters_black}· {info}{icon:star} {letters}Best{letters_black}: {info}%value%",
+                    "  {letters_black}· {highlight}{icon:gold} {letters}Medal{letters_black}: %value%",
+                    "  {letters_black}· {highlight}{icon:star} {letters}%label%{letters_black}: {highlight}%value%",
+                    "  {letters_black}· {success}{icon:book} {letters}Finishes{letters_black}: {success}%value%",
+                    "  {letters_black}· {info}{icon:info} {letters}Checkpoints{letters_black}: {info}%value%",
+                    "%tone%{icon:click} Left-click {letters_black}· {letters}play<nl>%tone%{icon:right_click} Right-click {letters_black}· {letters}details<nl>{letters_black}Play sends you to the start.",
+                    "%tone%{icon:click} Left-click {letters_black}· {letters}play<nl>%tone%{icon:right_click} Right-click {letters_black}· {letters}leaderboard<nl>{letters_black}Play sends you to its area.",
+                    " {letters_black}Finish the course to record splits.",
+                    "  {letters_black}· {info}{icon:clock} {letters}Checkpoint %number%{letters_black}: {info}%time%",
+                    "  {letters_black}· {letters_black}and %more% more",
+                    "  {letters_black}· {highlight}{icon:clock} {letters}Finish{letters_black}: {info}%time% %medal%",
+                    "  {letters_black}· {highlight}{icon:gold} {letters}Gold{letters_black}: {warning}%time% {letters_black}(%delta%{letters_black})",
+                    new Periods(),
+                    "Wipe your times on %course%? Your places on its boards are removed.",
+                    "Name of the course", "Difficulty (Easy, Medium, Hard...)", "Gold medal time in seconds (0 for none)",
+                    "Silver medal time in seconds (0 for none)", "Bronze medal time in seconds (0 for none)", "Name of the area",
+                    "Delete the endless area %area%?",
+                    "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}Endless area {highlight}%area%{letters} deleted.",
+                    "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}Theme {highlight}%theme%{letters}: %state%{letters}.",
+                    "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}Difficulty of {highlight}%course%{letters} set to {highlight}%difficulty%{letters}.",
+                    "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}Course {highlight}%course%{letters}: %state%{letters}.",
+                    "{error}Needs a start and a finish", "{success}Ready to run", "{success}Placed", "{error}Not placed",
+                    "{muted}No more courses", "{muted}No more areas");
+        }
+    }
+
+    public record Periods(String all, String monthly, String weekly, String daily) {
+        public Periods() {
+            this("All time", "Monthly", "Weekly", "Daily");
+        }
+
+        String of(Board.Period period) {
+            return switch (period) {
+                case ALL -> all;
+                case MONTHLY -> monthly;
+                case WEEKLY -> weekly;
+                case DAILY -> daily;
+            };
         }
     }
 }

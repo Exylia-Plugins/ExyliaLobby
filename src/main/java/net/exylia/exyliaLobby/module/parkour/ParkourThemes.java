@@ -33,6 +33,10 @@ public record ParkourThemes(
                     "STONE_BRICK_SLAB[type=top]", "LADDER", "CRACKED_STONE_BRICKS", "MOSSY_STONE_BRICKS");
         }
 
+        public Theme withEnabled(boolean enabled) {
+            return new Theme(name, enabled, floor, bonus, rest, post, ceiling, ladder, wall, pillar);
+        }
+
         /** The block for a role; null for the functional ones every theme shares. */
         public String block(Role role) {
             return switch (role) {
