@@ -1,5 +1,6 @@
 package net.exylia.exyliaLobby.module;
 
+import net.exylia.exyliaLobby.module.join.JoinModule;
 import net.exylia.exyliaLobby.module.protection.ProtectionModule;
 import net.exylia.exyliaLobby.module.spawn.SpawnModule;
 import net.exylia.exyliaLobby.module.state.StateModule;
@@ -21,7 +22,8 @@ public final class Modules {
         return List.of(
                 new SpawnModule(context),
                 new StateModule(context),
-                new ProtectionModule(context)
+                new ProtectionModule(context),
+                new JoinModule(context)
         );
     }
 }
