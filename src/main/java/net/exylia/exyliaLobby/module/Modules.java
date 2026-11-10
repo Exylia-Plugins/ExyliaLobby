@@ -1,6 +1,7 @@
 package net.exylia.exyliaLobby.module;
 
 import net.exylia.exyliaLobby.module.chat.ChatModule;
+import net.exylia.exyliaLobby.module.games.GamesModule;
 import net.exylia.exyliaLobby.module.hotbar.HotbarModule;
 import net.exylia.exyliaLobby.module.join.JoinModule;
 import net.exylia.exyliaLobby.module.movement.MovementModule;
@@ -35,7 +36,8 @@ public final class Modules {
                 new HotbarModule(context),
                 new MovementModule(context),
                 new VisibilityModule(context),
-                new SelectorModule(context)
+                new SelectorModule(context),
+                new GamesModule(context)
         );
     }
 }
