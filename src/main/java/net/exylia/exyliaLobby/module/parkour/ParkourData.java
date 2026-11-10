@@ -74,21 +74,24 @@ final class ParkourData {
 
     // ======================== players ========================
 
-    /** Reads a player's rows once; later calls answer the same future. */
+    /**
+     * Reads a player's rows once; later calls answer the same future. A failed read fails the future (so nothing
+     * is written over rows that were never read) and is forgotten, so the next call reads again.
+     */
     CompletableFuture<Mine> load(UUID player) {
-        return players.computeIfAbsent(player, id -> rows.where("player", id).find()
+        CompletableFuture<Mine> loaded = players.computeIfAbsent(player, id -> rows.where("player", id).find()
                 .thenCombine(stats.where("player", id).find(), (found, counted) -> {
                     // ponytail: reads every period ever stored for the player; prune old period rows if this grows
                     Mine mine = new Mine(new ConcurrentHashMap<>(), new ConcurrentHashMap<>());
                     for (ParkourRecord row : found) mine.bests().put(row.board(), row);
                     for (ParkourStat row : counted) mine.stats().put(row.course(), row);
                     return mine;
-                })
-                .exceptionally(failed -> {
-                    debug.error("Could not read the parkour records of " + id, failed);
-                    players.remove(id);
-                    return new Mine(new ConcurrentHashMap<>(), new ConcurrentHashMap<>());
                 }));
+        loaded.whenComplete((mine, failed) -> {
+            if (failed == null) return;
+            if (players.remove(player, loaded)) debug.error("Could not read the parkour records of " + player, failed);
+        });
+        return loaded;
     }
 
     void forget(UUID player) {

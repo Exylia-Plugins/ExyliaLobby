@@ -358,6 +358,7 @@ final class ParkourRuns implements Listener {
         data.record(player, run.id, millis, splits).whenComplete((outcome, failed) -> {
             if (failed != null) {
                 context.debug().error("Could not record the parkour finish of " + player.getName() + " on " + run.id, failed);
+                notSaved(player);
                 return;
             }
             onPlayer(player, () -> finished(player, run, millis, outcome));
@@ -410,6 +411,7 @@ final class ParkourRuns implements Listener {
         data.record(player, run.mode.id(), run.score, List.of()).whenComplete((outcome, failed) -> {
             if (failed != null) {
                 context.debug().error("Could not record the parkour " + run.mode.id() + " score of " + player.getName(), failed);
+                notSaved(player);
                 return;
             }
             onPlayer(player, () -> {
@@ -419,6 +421,13 @@ final class ParkourRuns implements Listener {
                         .put("rank", outcome.rank() > 0 ? String.valueOf(outcome.rank()) : text.unranked()));
                 if (outcome.improved() && outcome.previous() != null) sound(player, settings.get().sounds().record());
             });
+        });
+    }
+
+    /** Nothing was recorded or rewarded: tell the runner. Any thread. */
+    private void notSaved(Player player) {
+        onPlayer(player, () -> {
+            if (player.isOnline()) send(player, messages.get().notSaved(), Values.of());
         });
     }
 

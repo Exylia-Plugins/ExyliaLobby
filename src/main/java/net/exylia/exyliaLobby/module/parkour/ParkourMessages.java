@@ -40,6 +40,8 @@ public record ParkourMessages(
         String medalBronze,
         @Comment("No place on a board yet")
         String unranked,
+        @Comment("The database could not be read or written, so a finish or score was not saved")
+        String notSaved,
 
         @Comment("Endless modes. %mode% is a mode name below, %score% the jumps, %left% a sprint's time left.")
         String endlessName,
@@ -110,6 +112,7 @@ public record ParkourMessages(
                 "{letters}Silver medal",
                 "{warning}Bronze medal",
                 "—",
+                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Your result could not be saved right now. Try again in a moment.",
 
                 "Endless",
                 "Sprint",
