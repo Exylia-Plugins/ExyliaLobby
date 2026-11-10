@@ -1,7 +1,7 @@
 package net.exylia.exyliaLobby.module.parkour;
 
 import net.exylia.lib.task.TaskHandle;
-import net.kyori.adventure.bossbar.BossBar;
+import net.exylia.lib.effect.Display;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
@@ -19,7 +19,7 @@ abstract class Run {
     /** Ticks counted so far: the run's time. */
     long ticks;
     TaskHandle timer;
-    BossBar bar;
+    Display bar;
     /** The hotbar set the player wore before the run, given back after it. */
     @Nullable String hotbarBefore;
     /** Where a teleport this module started is going, so the guard lets it through. */

@@ -76,8 +76,7 @@ final class CourseRun extends Run {
             return;
         }
         if (ticks % 2 == 0) {
-            bar.name(runs.component(player, runs.messages().bossBar(), values()));
-            bar.progress(Math.min(1f, (float) reached / total()));
+            runs.bar(this, runs.messages().bossBar(), values(), (float) reached / total());
         }
     }
 

@@ -7,6 +7,7 @@ import net.exylia.lib.action.Actions;
 import net.exylia.lib.action.PluginActions;
 import net.exylia.lib.config.ConfigFile;
 import net.exylia.lib.effect.Effects;
+import net.exylia.lib.text.Text;
 import net.exylia.lib.guide.BeaconStyle;
 import net.exylia.lib.guide.GuideBeacon;
 import net.exylia.lib.guide.Guides;
@@ -27,9 +28,7 @@ import net.exylia.lib.util.reward.RewardEntry;
 import net.exylia.lib.util.reward.Rewards;
 import net.exylia.lib.util.teleport.TeleportResult;
 import net.exylia.lib.util.teleport.Teleports;
-import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -75,7 +74,6 @@ final class ParkourRuns implements Listener {
     static final String ACTION_RESTART = "parkour_run_restart";
     static final String ACTION_LEAVE = "parkour_run_leave";
     static final String LOG_TOO_FAST = "parkour-too-fast";
-    private static final Title.Times TITLE_TIMES = Title.Times.times(Duration.ZERO, Duration.ofMillis(1500), Duration.ofMillis(400));
 
     private final LobbyContext context;
     private final ConfigFile<ParkourSettings> settings;
@@ -323,8 +321,7 @@ final class ParkourRuns implements Listener {
         Run old = runs.get(player.getUniqueId());
         if (old != null) close(old, RunEnd.REPLACED);
         runs.put(player.getUniqueId(), run);
-        run.bar = BossBar.bossBar(Component.empty(), 0f, BossBar.Color.PURPLE, BossBar.Overlay.PROGRESS);
-        player.showBossBar(run.bar);
+        run.bar = Effects.of(context.plugin()).bossBar("").colour("PURPLE").progress(0f).show(player);
         guard.protect(run);
         if (settings.get().runItems() && Hotbars.isAvailable()) {
             run.hotbarBefore = hotbars.showing(player).orElse("");
@@ -344,7 +341,7 @@ final class ParkourRuns implements Listener {
         Player player = run.player;
         runs.remove(player.getUniqueId(), run);
         if (run.timer != null) run.timer.cancel();
-        if (run.bar != null) player.hideBossBar(run.bar);
+        if (run.bar != null) run.bar.stop();
         guard.release(run);
         if (run.hotbarBefore != null) {
             if (run.hotbarBefore.isEmpty()) hotbars.hide(player);
@@ -603,7 +600,14 @@ final class ParkourRuns implements Listener {
     }
 
     void title(Player player, String title, String subtitle, Values values) {
-        player.showTitle(Title.title(component(player, title, values), component(player, subtitle, values), TITLE_TIMES));
+        Effects.of(context.plugin()).title(values.apply(title)).subtitle(values.apply(subtitle)).times(0, 1.5, 0.4).show(player);
+    }
+
+    /** Redraws a run's boss bar; the same text again sends nothing. Player's thread. */
+    void bar(Run run, String line, Values values, float progress) {
+        if (run.bar == null) return;
+        run.bar.text(values.applyTo(Text.from(context.plugin(), line)));
+        run.bar.progress(Math.max(0f, Math.min(1f, progress)));
     }
 
     void sound(Player player, String line) {

@@ -113,8 +113,8 @@ final class EndlessRun extends Run {
         }
         if (ticks % 2 != 0) return;
         ParkourMessages text = runs.messages();
-        bar.name(runs.component(player, mode == EndlessMode.SPRINT ? text.sprintBossBar() : text.endlessBossBar(), values()));
-        bar.progress(mode == EndlessMode.SPRINT ? Math.max(0f, Math.min(1f, 1f - (float) millis() / sprintMillis())) : 1f);
+        runs.bar(this, mode == EndlessMode.SPRINT ? text.sprintBossBar() : text.endlessBossBar(), values(),
+                mode == EndlessMode.SPRINT ? 1f - (float) millis() / sprintMillis() : 1f);
     }
 
     @Override

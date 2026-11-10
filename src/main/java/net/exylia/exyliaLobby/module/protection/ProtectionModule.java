@@ -5,9 +5,10 @@ import net.exylia.exyliaLobby.area.AreaCause;
 import net.exylia.exyliaLobby.module.LobbyContext;
 import net.exylia.exyliaLobby.module.LobbyModule;
 import net.exylia.lib.config.ConfigFile;
+import net.exylia.lib.effect.Display;
+import net.exylia.lib.effect.Effects;
 import net.exylia.lib.text.PluginMessages;
 import net.exylia.lib.text.Values;
-import net.kyori.adventure.bossbar.BossBar;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
@@ -35,7 +36,7 @@ public final class ProtectionModule extends LobbyModule {
     private ConfigFile<ProtectionSettings> settings;
     private ConfigFile<ProtectionMessages> messages;
     private final Set<UUID> building = ConcurrentHashMap.newKeySet();
-    private final Map<UUID, BossBar> bars = new ConcurrentHashMap<>();
+    private final Map<UUID, Display> bars = new ConcurrentHashMap<>();
     private final List<BiPredicate<Player, Player>> pvp = new CopyOnWriteArrayList<>();
     private volatile List<String> causeNames = List.of();
     private volatile Set<DamageCause> causes = Set.of();
@@ -67,6 +68,7 @@ public final class ProtectionModule extends LobbyModule {
             if (player != null) context.tasks().runAtEntity(player, () -> context.areas().pause(player, false));
         }
         building.clear();
+        bars.values().forEach(Display::stop);
         bars.clear();
     }
 
@@ -107,16 +109,14 @@ public final class ProtectionModule extends LobbyModule {
         }
         building.add(player.getUniqueId());
         context.areas().pause(player, true);
-        BossBar bar = BossBar.bossBar(PluginMessages.of(plugin()).text(text.buildBar(), Values.of()).build(), 1f,
-                BossBar.Color.YELLOW, BossBar.Overlay.PROGRESS);
-        bars.put(player.getUniqueId(), bar);
-        player.showBossBar(bar);
+        hideBar(player);
+        bars.put(player.getUniqueId(), Effects.of(plugin()).bossBar(text.buildBar()).colour("YELLOW").progress(1f).show(player));
         send(player, text.buildOn());
     }
 
     private void hideBar(Player player) {
-        BossBar bar = bars.remove(player.getUniqueId());
-        if (bar != null) player.hideBossBar(bar);
+        Display bar = bars.remove(player.getUniqueId());
+        if (bar != null) bar.stop();
     }
 
     @Override
