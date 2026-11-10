@@ -397,11 +397,13 @@ public final class SelectorModule extends LobbyModule {
             }, reopen);
             case "right" -> {
                 if (npc) {
-                    Location at = viewer.getLocation();
-                    edit(true, key, current -> new SelectorSettings.Npc(current.server(), current.skin(), at.getWorld().getName(),
-                            at.getX(), at.getY(), at.getZ(), at.getYaw(), at.getPitch(), current.hologram(), current.hologramHeight()), null);
-                    send(viewer, text.moved(), Values.of("what", what));
-                    screens.update(viewer);
+                    viewer.closeInventory();
+                    setup(viewer, reopen).spawn(text.wizardNpc(), key, at -> {
+                        edit(true, key, current -> new SelectorSettings.Npc(current.server(), current.skin(), at.getWorld().getName(),
+                                at.getX(), at.getY(), at.getZ(), at.getYaw(), at.getPitch(), current.hologram(), current.hologramHeight()), null);
+                        send(viewer, text.moved(), Values.of("what", what));
+                        reopen.run();
+                    });
                 } else {
                     viewer.closeInventory();
                     regions.visualize(viewer, "portal-" + key);
@@ -460,8 +462,7 @@ public final class SelectorModule extends LobbyModule {
 
     private void addNpc(Player admin) {
         Runnable reopen = () -> openAdmin(admin, back);
-        askServer(admin, server -> {
-            Location at = admin.getLocation();
+        askServer(admin, server -> setup(admin, reopen).spawn(messages.get().wizardNpc(), at -> {
             String key = nextId(settings.get().npcs().keySet(), "npc-");
             SelectorSettings.Npc base = new SelectorSettings.Npc();
             settings.update(current -> {
@@ -473,7 +474,7 @@ public final class SelectorModule extends LobbyModule {
             build();
             send(admin, messages.get().added(), Values.of("what", messages.get().subtitleNpc() + " " + key));
             reopen.run();
-        }, reopen);
+        }), reopen);
     }
 
     private void addPortal(Player admin) {
@@ -483,14 +484,8 @@ public final class SelectorModule extends LobbyModule {
             return;
         }
         admin.closeInventory();
-        PluginMessages.of(plugin()).send(admin, messages.get().selectPortal(), Values.of());
-        regions.beginSelection(admin).result().whenComplete((result, error) -> context.tasks().runAtEntity(admin, () -> {
-            if (error != null || result == null) {
-                reopen.run();
-                return;
-            }
-            askServer(admin, server -> savePortal(admin, server, result, reopen), reopen);
-        }));
+        setup(admin, reopen).area(messages.get().wizardPortal(),
+                result -> askServer(admin, server -> savePortal(admin, server, result, reopen), reopen));
     }
 
     private void savePortal(Player admin, String server, SelectionResult result, Runnable reopen) {

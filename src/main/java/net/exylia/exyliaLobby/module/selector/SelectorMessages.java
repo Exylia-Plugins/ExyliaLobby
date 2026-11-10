@@ -43,13 +43,15 @@ public record SelectorMessages(
         String addPortalClick,
         String addPortalNext,
         String promptServer,
-        String selectPortal,
         String noServers,
         String added,
         String removed,
         String changed,
         String moved,
-        String confirmRemove) {
+        String confirmRemove,
+        @Comment("What the setup wizards name on screen (plain text, no colours).")
+        String wizardNpc,
+        String wizardPortal) {
 
     public SelectorMessages() {
         this("[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Connecting to %server%{letters}...",
@@ -76,7 +78,7 @@ public record SelectorMessages(
                 "Size",
                 "{error}Not in the catalogue",
                 List.of("{primary}{icon:click} Left-click {letters_black}· {letters}change server",
-                        "{primary}{icon:right_click} Right-click {letters_black}· {letters}move here",
+                        "{primary}{icon:right_click} Right-click {letters_black}· {letters}move it",
                         "{error}{icon:right_click} Shift-right-click {letters_black}· {letters}remove",
                         "{letters_black}Removing asks you to confirm."),
                 List.of("{primary}{icon:click} Left-click {letters_black}· {letters}change server",
@@ -84,20 +86,21 @@ public record SelectorMessages(
                         "{error}{icon:right_click} Shift-right-click {letters_black}· {letters}remove",
                         "{letters_black}Removing asks you to confirm."),
                 "Server NPC",
-                List.of(" {letters}Places an NPC where you", " {letters}stand; a click sends players."),
-                "Click to add",
-                "You pick its server first.",
+                List.of(" {letters}Pick its server, walk to the", " {letters}spot, face the way it looks", " {letters}and {highlight}sneak-click{letters}."),
+                "Click to start",
+                "A click on it sends players.",
                 "Portal",
                 List.of(" {letters}Select a box; walking into", " {letters}it sends players away."),
-                "Click to select",
+                "Click to start",
                 "You pick its server after.",
                 "{letters}Which server does it send players to?",
-                "{letters}Select the portal with the golden axe: {highlight}left-click{letters} a corner, {highlight}right-click{letters} the other, then {highlight}shift + left-click{letters}.",
                 "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Add a server to the catalogue first (modules/selector/config.yml).",
                 "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} added.",
                 "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} removed.",
                 "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} now sends players to %server%{letters}.",
-                "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} moved to your position.",
-                "Remove {highlight}%what%{letters}?");
+                "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} moved.",
+                "Remove {highlight}%what%{letters}?",
+                "Server NPC",
+                "Portal");
     }
 }
