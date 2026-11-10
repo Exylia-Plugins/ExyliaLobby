@@ -19,27 +19,27 @@ final class ParkourAdminCommand implements OrphanCommand {
 
     @Subcommand("parkour create")
     public void create(Player admin, @Single String id) {
-        module.create(admin, id);
+        module.create(admin, id, null);
     }
 
     @Subcommand("parkour setstart")
     public void setStart(Player admin, @Single String course) {
-        module.setStart(admin, course);
+        module.setStart(admin, course, null);
     }
 
     @Subcommand("parkour addcheckpoint")
     public void addCheckpoint(Player admin, @Single String course) {
-        module.addCheckpoint(admin, course);
+        module.addCheckpoint(admin, course, null);
     }
 
     @Subcommand("parkour setfinish")
     public void setFinish(Player admin, @Single String course) {
-        module.setFinish(admin, course);
+        module.setFinish(admin, course, null);
     }
 
     @Subcommand("parkour addkill")
     public void addKill(Player admin, @Single String course) {
-        module.addKill(admin, course);
+        module.addKill(admin, course, null);
     }
 
     @Subcommand("parkour medals")
@@ -54,11 +54,11 @@ final class ParkourAdminCommand implements OrphanCommand {
 
     @Subcommand("parkour board")
     public void board(Player admin, @Single String board) {
-        module.board(admin, board);
+        module.board(admin, board, null);
     }
 
     @Subcommand("parkour endlessarea")
     public void endlessArea(Player admin, @Single String name) {
-        module.endlessArea(admin, name);
+        module.endlessArea(admin, name, null);
     }
 }

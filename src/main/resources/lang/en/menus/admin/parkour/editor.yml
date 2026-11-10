@@ -1,4 +1,4 @@
-menu-version: 1
+menu-version: 2
 # DO NOT EDIT — REGENERATED ON EVERY STARTUP.
 #
 # One parkour course: where it starts, passes and ends, and how it is judged.
@@ -31,13 +31,13 @@ items:
       - "{letters_black}Course setting"
       - ""
       - "{success}✎ Information"
-      - " {letters}Where a run begins. Uses your"
-      - " {letters}position and view."
+      - " {letters}Where a run begins: stand"
+      - " {letters}there and {highlight}sneak-click{letters}."
       - ""
       - "{success}✦ Status"
       - "  {letters_black}· {info}{icon:compass} {letters}Start{letters_black}: %start_state%"
       - ""
-      - "{success}{icon:click} Click to set here"
+      - "{success}{icon:click} Click to start"
       - "{letters_black}Replaces the start."
     actions:
       - 'exylialobby:parkour_edit start %course_id%'
@@ -50,13 +50,13 @@ items:
       - "{letters_black}Course setting"
       - ""
       - "{success}✎ Information"
-      - " {letters}Adds a checkpoint at your feet."
+      - " {letters}Stand on it and {highlight}sneak-click{letters}."
       - " {letters}Runners reach them in order."
       - ""
       - "{success}✦ Status"
       - "  {letters_black}· {info}{icon:check} {letters}Checkpoints{letters_black}: {info}%checkpoints%"
       - ""
-      - "{success}{icon:click} Click to add here"
+      - "{success}{icon:click} Click to start"
       - "{letters_black}Added after the last one."
     actions:
       - 'exylialobby:parkour_edit checkpoint %course_id%'
@@ -69,13 +69,13 @@ items:
       - "{letters_black}Course setting"
       - ""
       - "{success}✎ Information"
-      - " {letters}Where a run ends. Uses your"
-      - " {letters}position and view."
+      - " {letters}Where a run ends: stand"
+      - " {letters}there and {highlight}sneak-click{letters}."
       - ""
       - "{success}✦ Status"
       - "  {letters_black}· {info}{icon:star} {letters}Finish{letters_black}: %finish_state%"
       - ""
-      - "{success}{icon:click} Click to set here"
+      - "{success}{icon:click} Click to start"
       - "{letters_black}Replaces the finish."
     actions:
       - 'exylialobby:parkour_edit finish %course_id%'
@@ -88,14 +88,14 @@ items:
       - "{letters_black}Course setting"
       - ""
       - "{primary}✎ Information"
-      - " {letters}The block you look at sends"
-      - " {letters}runners to their checkpoint."
+      - " {letters}Click a block: every block of"
+      - " {letters}its type sends runners back."
       - ""
       - "{primary}✦ Status"
       - "  {letters_black}· {info}{icon:barrier} {letters}Blocks{letters_black}: {info}%kills%"
       - ""
-      - "{primary}{icon:click} Click to add block"
-      - "{letters_black}Look at a block first."
+      - "{primary}{icon:click} Click to start"
+      - "{letters_black}Then click the block."
     actions:
       - 'exylialobby:parkour_edit kill %course_id%'
 
@@ -176,15 +176,15 @@ items:
   board:
     slot: 27
     material: OAK_SIGN
-    name: "{letters}Course {letters_black}▸ <gradient:{info}:{info_light}>Board here</gradient>"
+    name: "{letters}Course {letters_black}▸ <gradient:{info}:{info_light}>Board</gradient>"
     lore:
       - "{letters_black}Hologram"
       - ""
       - "{info}✎ Information"
       - " {letters}A leaderboard hologram of"
-      - " {letters}this course at your feet."
+      - " {letters}this course over a block."
       - ""
-      - "{info}{icon:click} Click to place"
+      - "{info}{icon:click} Click to start"
       - "{letters_black}Replaces its board."
     actions:
       - 'exylialobby:parkour_edit board %course_id%'

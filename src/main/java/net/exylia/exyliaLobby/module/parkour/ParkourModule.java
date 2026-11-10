@@ -8,7 +8,12 @@ import net.exylia.exyliaLobby.module.holograms.HologramsModule;
 import net.exylia.exyliaLobby.module.spawn.SpawnModule;
 import net.exylia.lib.config.ConfigFile;
 import net.exylia.lib.input.Inputs;
-import net.exylia.lib.region.Regions;
+import net.exylia.lib.region.SelectionResult;
+import net.exylia.lib.text.LibraryMessages;
+import net.exylia.lib.util.wizard.Wizard;
+import net.exylia.lib.util.wizard.WizardBuilder;
+import net.exylia.lib.util.wizard.WizardKey;
+import net.exylia.lib.util.wizard.Wizards;
 import net.exylia.lib.task.TaskHandle;
 import net.exylia.lib.text.PluginMessages;
 import net.exylia.lib.text.Values;
@@ -295,53 +300,123 @@ public final class ParkourModule extends LobbyModule implements Busy {
 
     // ======================== staff: courses ========================
 
-    void create(Player admin, String typed) {
+    /** Checkpoints the new course flow offers; more are added from the course editor. */
+    private static final int WIZARD_CHECKPOINTS = 20;
+
+    /**
+     * Creates a course in one flow: start, checkpoints (add more or go on), finish, then a review. Nothing is saved
+     * until the admin confirms; afterwards its editor opens, or {@code back} when they cancelled.
+     */
+    void create(Player admin, String typed, Runnable back) {
         String id = ParkourCourses.id(typed);
         if (id.isEmpty()) return;
         if (courses.get().courses().containsKey(id)) {
             send(admin, messages.get().courseExists(), Values.of("course", id));
             return;
         }
-        ParkourCourses.Course course = new ParkourCourses.Course().inWorld(admin.getWorld().getName()).withStart(spot(admin));
-        put(id, new ParkourCourses.Course(id, course.enabled(), course.difficulty(), course.icon(), course.world(), course.start(),
-                course.checkpoints(), course.finish(), course.killBlocks(), course.timeLimit(), course.medals(),
-                course.minimumTime(), course.firstRewards(), course.repeatRewards(), course.repeatCooldown()));
-        send(admin, messages.get().courseCreated(), Values.of("course", id));
-        refreshTops();
+        ParkourMessages.Wizard text = messages.get().wizard();
+        WizardKey<Location> start = WizardKey.location(text.start());
+        WizardKey<Location> finish = WizardKey.location(text.finish());
+        List<WizardKey<Location>> checkpoints = new ArrayList<>();
+        for (int i = 1; i <= WIZARD_CHECKPOINTS; i++) checkpoints.add(WizardKey.location(text.checkpoint() + " " + i));
+        WizardBuilder flow = Wizards.of(plugin()).define("parkour-course")
+                .title(Values.of("course", id).apply(text.course()))
+                .progress(false)
+                .stand(start, stand(text.start()));
+        WizardKey<Boolean> first = more(text, 1);
+        flow.ask(first, step -> step.confirm(Values.of("checkpoint", 1).apply(text.more())))
+                .when(first, yes -> yes, branch -> checkpoint(branch, text, checkpoints, 1));
+        Wizard wizard = flow.stand(finish, stand(text.finish()))
+                .summary()
+                .onFinish(values -> {
+                    Location from = values.getLocation(start);
+                    ParkourCourses.Course course = new ParkourCourses.Course().inWorld(from.getWorld().getName())
+                            .withStart(spot(from)).withFinish(spot(values.getLocation(finish)));
+                    for (WizardKey<Location> key : checkpoints) {
+                        if (values.has(key)) course = course.withCheckpoint(spot(values.getLocation(key)));
+                    }
+                    put(id, course.withName(id));
+                    send(admin, messages.get().courseCreated(), Values.of("course", id));
+                    refreshTops();
+                })
+                .build();
+        admin.closeInventory();
+        Wizards.of(plugin()).start(admin, wizard, () -> {
+            if (courses.get().courses().containsKey(id)) adminScreens.openEditor(admin, id);
+            else if (back != null) back.run();
+        });
     }
 
-    void setStart(Player admin, String id) {
-        edit(admin, id, course -> course.withStart(spot(admin)), messages.get().startSet(), Values.of("course", id));
+    /** Checkpoint {@code n}, then the question whether there is another, nested so a no goes on to the finish. */
+    private void checkpoint(WizardBuilder.Branch branch, ParkourMessages.Wizard text, List<WizardKey<Location>> keys, int n) {
+        branch.stand(keys.get(n - 1), stand(text.checkpoint() + " " + n));
+        if (n >= keys.size()) return;
+        WizardKey<Boolean> more = more(text, n + 1);
+        branch.ask(more, step -> step.confirm(Values.of("checkpoint", n + 1).apply(text.more())))
+                .when(more, yes -> yes, next -> checkpoint(next, text, keys, n + 1));
     }
 
-    void addCheckpoint(Player admin, String id) {
+    private WizardKey<Boolean> more(ParkourMessages.Wizard text, int n) {
+        return WizardKey.flag("+ " + text.checkpoint() + " " + n);
+    }
+
+    private String stand(String step) {
+        return Values.of("step", step).apply(messages.get().wizard().stand());
+    }
+
+    void setStart(Player admin, String id, Runnable back) {
+        placeSpot(admin, id, back, messages.get().wizard().start(), (course, spot) -> course.withStart(spot),
+                messages.get().startSet(), Values.of("course", id));
+    }
+
+    void addCheckpoint(Player admin, String id, Runnable back) {
         ParkourCourses.Course course = courses.get().courses().get(ParkourCourses.id(id));
         int number = course == null ? 1 : course.checkpoints().size() + 1;
-        edit(admin, id, found -> found.withCheckpoint(spot(admin)), messages.get().checkpointAdded(),
-                Values.of("course", id).put("checkpoint", number));
+        placeSpot(admin, id, back, messages.get().wizard().checkpoint() + " " + number, (found, spot) -> found.withCheckpoint(spot),
+                messages.get().checkpointAdded(), Values.of("course", id).put("checkpoint", number));
     }
 
-    void setFinish(Player admin, String id) {
-        edit(admin, id, course -> course.withFinish(spot(admin)), messages.get().finishSet(), Values.of("course", id));
+    void setFinish(Player admin, String id, Runnable back) {
+        placeSpot(admin, id, back, messages.get().wizard().finish(), (course, spot) -> course.withFinish(spot),
+                messages.get().finishSet(), Values.of("course", id));
     }
 
-    void addKill(Player admin, String id) {
-        Block block = admin.getTargetBlockExact(6);
-        if (block == null) block = admin.getLocation().subtract(0, 1, 0).getBlock();
-        if (block.getType().isAir()) {
-            send(admin, messages.get().tools().killNoBlock(), Values.of());
-            return;
-        }
-        String type = block.getType().name();
-        edit(admin, id, course -> {
-            List<String> kills = new ArrayList<>(course.killBlocks());
-            if (!kills.contains(type)) kills.add(type);
-            return withKills(course, kills);
-        }, messages.get().tools().killAdded(), Values.of("course", id).put("block", type));
+    /** One place of a course, stood on by the admin. */
+    private void placeSpot(Player admin, String typed, Runnable back, String name,
+                           java.util.function.BiFunction<ParkourCourses.Course, ParkourCourses.Spot, ParkourCourses.Course> change,
+                           String done, Values values) {
+        String id = ParkourCourses.id(typed);
+        if (!known(admin, typed)) return;
+        admin.closeInventory();
+        setup(admin, back).spawn(name, id, where -> {
+            edit(admin, id, where, course -> change.apply(course, spot(where)), done, values);
+            if (back != null) back.run();
+        });
+    }
+
+    void addKill(Player admin, String typed, Runnable back) {
+        String id = ParkourCourses.id(typed);
+        if (!known(admin, typed)) return;
+        admin.closeInventory();
+        setup(admin, back).block(messages.get().wizard().kill(), id, at -> {
+            String type = at.getBlock().getType().name();
+            edit(admin, id, at, course -> {
+                List<String> kills = new ArrayList<>(course.killBlocks());
+                if (!kills.contains(type)) kills.add(type);
+                return withKills(course, kills);
+            }, messages.get().tools().killAdded(), Values.of("course", id).put("block", type));
+            if (back != null) back.run();
+        });
+    }
+
+    private boolean known(Player admin, String typed) {
+        if (courses.get().courses().containsKey(ParkourCourses.id(typed))) return true;
+        send(admin, messages.get().unknownCourse(), Values.of("course", typed));
+        return false;
     }
 
     void setMedals(Player admin, String id, double gold, double silver, double bronze) {
-        edit(admin, id, course -> withMedals(course, new ParkourCourses.Medals(gold, silver, bronze)),
+        edit(admin, id, null, course -> withMedals(course, new ParkourCourses.Medals(gold, silver, bronze)),
                 messages.get().tools().medalsSet(), Values.of("course", id));
     }
 
@@ -428,14 +503,14 @@ public final class ParkourModule extends LobbyModule implements Busy {
         }, reopen);
     }
 
-    private void edit(Player admin, String typed, UnaryOperator<ParkourCourses.Course> change, String done, Values values) {
+    private void edit(Player admin, String typed, Location where, UnaryOperator<ParkourCourses.Course> change, String done, Values values) {
         String id = ParkourCourses.id(typed);
         ParkourCourses.Course course = courses.get().courses().get(id);
         if (course == null) {
             send(admin, messages.get().unknownCourse(), Values.of("course", typed));
             return;
         }
-        if (!course.world().equals(admin.getWorld().getName())) {
+        if (where != null && !course.world().equals(where.getWorld().getName())) {
             send(admin, messages.get().wrongWorld(), Values.of("course", id).put("world", course.world()));
             return;
         }
@@ -451,8 +526,7 @@ public final class ParkourModule extends LobbyModule implements Busy {
         });
     }
 
-    private static ParkourCourses.Spot spot(Player admin) {
-        Location at = admin.getLocation();
+    private static ParkourCourses.Spot spot(Location at) {
         return new ParkourCourses.Spot(at.getX(), at.getY(), at.getZ(), at.getYaw(), at.getPitch(), new ParkourCourses.Spot().radius());
     }
 
@@ -470,22 +544,26 @@ public final class ParkourModule extends LobbyModule implements Busy {
 
     // ======================== staff: boards and areas ========================
 
-    /** Saves a leaderboard hologram at the admin's feet and draws it. */
-    void board(Player admin, String typed) {
+    /** Saves a leaderboard hologram over a block the admin clicks and draws it. */
+    void board(Player admin, String typed, Runnable back) {
         Board board = Board.parse(typed);
         if (!board.isMode() && !courses.get().courses().containsKey(board.name())) {
             send(admin, messages.get().tools().unknownBoard(), Values.of("board", typed));
             return;
         }
-        Location at = admin.getLocation().add(0, 2.2, 0);
-        ParkourSettings.BoardSpot spot = new ParkourSettings.BoardSpot(at.getWorld().getName(), at.getX(), at.getY(), at.getZ());
-        settings.update(current -> {
-            Map<String, ParkourSettings.BoardSpot> map = new LinkedHashMap<>(current.boards());
-            map.put(board.id(), spot);
-            return withBoards(current, map);
+        admin.closeInventory();
+        setup(admin, back).block(messages.get().wizard().board(), board.id(), block -> {
+            Location at = block.clone().add(0.5, 3.2, 0.5);
+            ParkourSettings.BoardSpot spot = new ParkourSettings.BoardSpot(at.getWorld().getName(), at.getX(), at.getY(), at.getZ());
+            settings.update(current -> {
+                Map<String, ParkourSettings.BoardSpot> map = new LinkedHashMap<>(current.boards());
+                map.put(board.id(), spot);
+                return withBoards(current, map);
+            });
+            placeBoards();
+            send(admin, messages.get().tools().boardPlaced(), Values.of("board", board.id()));
+            if (back != null) back.run();
         });
-        placeBoards();
-        send(admin, messages.get().tools().boardPlaced(), Values.of("board", board.id()));
     }
 
     private void placeBoards() {
@@ -521,20 +599,22 @@ public final class ParkourModule extends LobbyModule implements Busy {
                 s.courseFallDepth(), s.antiCheat(), s.tops(), s.periods(), s.sounds(), boards);
     }
 
-    /** Saves an endless area from the admin's selection, with the run starting where they stand. */
-    void endlessArea(Player admin, String typed) {
+    /** Saves an endless area: the box the runs stay in, then where a run starts and which way it heads. */
+    void endlessArea(Player admin, String typed, Runnable back) {
         String name = ParkourCourses.id(typed);
         if (name.isEmpty()) return;
-        send(admin, messages.get().tools().selectArea(), Values.of());
-        Regions.of(plugin()).beginSelection(admin).result().whenComplete((result, error) ->
-                context.tasks().runAtEntity(admin, () -> {
-                    if (error != null || result == null) {
-                        send(admin, messages.get().tools().noSelection(), Values.of());
-                        return;
-                    }
+        ParkourMessages.Wizard text = messages.get().wizard();
+        WizardKey<SelectionResult> box = WizardKey.region(text.area());
+        WizardKey<Location> from = WizardKey.location(text.areaStart());
+        Wizard wizard = Wizards.of(plugin()).define("parkour-endless")
+                .title("{primary}&l" + text.area().toUpperCase(Locale.ROOT) + " {muted}" + name)
+                .region(box, LibraryMessages.get().wizard().region())
+                .stand(from, stand(text.areaStart()))
+                .onFinish(values -> {
+                    SelectionResult result = values.getRegion(box);
+                    Location at = values.getLocation(from);
                     var a = result.first();
                     var b = result.second();
-                    Location at = admin.getLocation();
                     int heading = Math.floorMod(Math.round((at.getYaw() + 90f) / 90f), 4);
                     ParkourSettings.Area area = new ParkourSettings.Area(result.world().fallbackName(),
                             Math.min(a.x(), b.x()) + " " + Math.min(a.y(), b.y()) + " " + Math.min(a.z(), b.z()),
@@ -544,14 +624,14 @@ public final class ParkourModule extends LobbyModule implements Busy {
                         Map<String, ParkourSettings.Area> map = new LinkedHashMap<>(current.endless().areas());
                         map.put(name, area);
                         ParkourSettings.Endless e = current.endless();
-                        return new ParkourSettings(current.command(), current.modes(), new ParkourSettings.Endless(map, e.ahead(),
-                                e.behind(), e.themeEvery(), e.milestones(), e.fallDepth(), e.bestMarker(), e.milestoneRewards(), e.milestonePeriod(),
-                                e.tuning()), current.hideRunners(), current.checkpointBeacon(), current.runItems(),
-                                current.courseFallDepth(), current.antiCheat(), current.tops(), current.periods(),
-                                current.sounds(), current.boards());
+                        return current.withEndless(new ParkourSettings.Endless(map, e.ahead(), e.behind(), e.themeEvery(),
+                                e.milestones(), e.fallDepth(), e.bestMarker(), e.milestoneRewards(), e.milestonePeriod(), e.tuning()));
                     });
                     send(admin, messages.get().tools().areaSaved(), Values.of("area", name));
-                }));
+                })
+                .build();
+        admin.closeInventory();
+        Wizards.of(plugin()).start(admin, wizard, back);
     }
 
     private void send(Player to, String line, Values values) {

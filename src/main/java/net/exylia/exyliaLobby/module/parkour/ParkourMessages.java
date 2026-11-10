@@ -78,6 +78,8 @@ public record ParkourMessages(
 
         @Comment("The label over the next checkpoint's beam. %checkpoint%/%total% the checkpoint, %distance% metres away.")
         String beaconLabel,
+        @Comment("The setup wizards: what they name on screen and what they ask.")
+        Wizard wizard,
         @Comment("The items a runner holds: back to the last checkpoint, start again, leave.")
         RunItems items,
         @Comment("Chat leaderboards and staff tools.")
@@ -142,15 +144,16 @@ public record ParkourMessages(
 
                 "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Your times on {highlight}%course%{letters} were reset.",
 
-                "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Course {highlight}%course%{letters} created with its start at your feet. Add checkpoints and a finish.",
+                "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Course {highlight}%course%{letters} created.",
                 "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}A course called {highlight}%course%{error} already exists.",
-                "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Start of {highlight}%course%{letters} set at your feet.",
-                "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Checkpoint {highlight}%checkpoint%{letters} of {highlight}%course%{letters} added at your feet.",
-                "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Finish of {highlight}%course%{letters} set at your feet.",
+                "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Start of {highlight}%course%{letters} set.",
+                "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Checkpoint {highlight}%checkpoint%{letters} of {highlight}%course%{letters} added.",
+                "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Finish of {highlight}%course%{letters} set.",
                 "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Course {highlight}%course%{letters} deleted.",
-                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}{highlight}%course%{error} is in world {highlight}%world%{error}. Stand there to edit it.",
+                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}{highlight}%course%{error} is in world {highlight}%world%{error}. Set its places there.",
 
                 "{letters}Checkpoint {info}%checkpoint%{letters_black}/{info}%total% {letters_black}· {info}%distance% m",
+                new Wizard(),
                 new RunItems(),
                 new Tools(),
                 new Screens(),
@@ -208,12 +211,12 @@ public record ParkourMessages(
                             "{letters_black}You will be asked to confirm."),
                     List.of("{primary}{icon:click} Click {letters_black}· {letters}turn on or off",
                             "{letters_black}Endless paths use it while on."),
-                    new Button("Create", List.of(" {letters}A new course with its start", " {letters}at your feet."),
-                            "Click to create", "Opens its editor next."),
+                    new Button("Create", List.of(" {letters}Name it, then set its start,", " {letters}checkpoints and finish."),
+                            "Click to start", "Opens its editor when done."),
                     new Button("Settings", List.of(" {letters}Modes, anti-cheat, boards", " {letters}and the rest."),
                             "Click to open", "Every parkour setting."),
-                    new Button("Add", List.of(" {letters}Select two corners with your", " {letters}wand, starting where you stand."),
-                            "Click to add", "You name it after selecting."),
+                    new Button("Add", List.of(" {letters}Name it, select its box,", " {letters}then stand where runs start."),
+                            "Click to start", "Runs head the way you face."),
                     new Button("Settings", List.of(" {letters}Path tuning, milestones", " {letters}and the endless modes."),
                             "Click to open", "Every parkour setting."),
                     new Button("Edit blocks", List.of(" {letters}The blocks each theme", " {letters}draws its path with."),
@@ -256,6 +259,29 @@ public record ParkourMessages(
         }
     }
 
+    /**
+     * The setup wizards. Names (start to areaStart) are plain text, no colours; the title and prompts take colours.
+     *
+     * @param course   the title of the new course flow; %course% is its id
+     * @param stand    a stand-and-sneak-click step; %step% names it
+     * @param more     whether to add another checkpoint; %checkpoint% is its number
+     */
+    public record Wizard(String course, String stand, String more, String start, String checkpoint, String finish,
+                         String kill, String board, String area, String areaStart) {
+        public Wizard() {
+            this("{primary}&lNEW COURSE {muted}%course%",
+                    "{warning}➥ {highlight}%step%{letters}: stand there and {highlight}sneak + click{letters}.",
+                    "Add checkpoint %checkpoint%? Answer no to set the finish.",
+                    "Course start",
+                    "Checkpoint",
+                    "Course finish",
+                    "Kill block",
+                    "Top board",
+                    "Endless area",
+                    "Endless start");
+        }
+    }
+
     /** Chat boards, hologram boards and the rest of the staff tools. */
     public record Tools(
             @Comment("%board% is the board id.")
@@ -270,12 +296,9 @@ public record ParkourMessages(
             String boardEmpty,
             String boardPlaced,
             String killAdded,
-            String killNoBlock,
             String medalsSet,
             @Comment("Asks before deleting a course. %course% is the id.")
             String confirmDelete,
-            String selectArea,
-            String noSelection,
             @Comment("Asks for the area's name.")
             String promptArea,
             String areaSaved) {
@@ -287,15 +310,12 @@ public record ParkourMessages(
                     "{primary}&l%board%",
                     "{highlight}#%place% {letters}%name% {letters_black}· {info}%value%",
                     "{letters_black}Nobody yet",
-                    "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Board {highlight}%board%{letters} placed at your feet.",
+                    "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Board {highlight}%board%{letters} placed.",
                     "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%block%{letters} now sends runners of {highlight}%course%{letters} back.",
-                    "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Stand on or look at a block first.",
                     "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Medals of {highlight}%course%{letters} set.",
                     "Delete %course% and its settings? Saved times stay in the database.",
-                    "%prefix% {letters}Select the two corners of the area with your wand.",
-                    "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}No area was selected.",
                     "Name of the area",
-                    "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Endless area {highlight}%area%{letters} saved, starting where you stand.");
+                    "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Endless area {highlight}%area%{letters} saved.");
         }
     }
 

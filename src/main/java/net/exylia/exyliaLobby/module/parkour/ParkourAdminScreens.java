@@ -145,10 +145,7 @@ final class ParkourAdminScreens {
         inputs.answered(admin, inputs.slug(admin, module.text().screens().promptCourse())
                 .validate(name -> !module.catalogue().courses().containsKey(ParkourCourses.id(name)),
                         Values.of("course", "").apply(module.text().courseExists()))
-                .open(), name -> {
-            module.create(admin, name);
-            openEditor(admin, ParkourCourses.id(name));
-        }, reopen);
+                .open(), name -> module.create(admin, name, reopen), reopen);
     }
 
     // ======================== editor ========================
@@ -186,12 +183,27 @@ final class ParkourAdminScreens {
         }
         Runnable reopen = () -> openEditor(admin, id);
         switch (op) {
-            case "start" -> module.setStart(admin, id);
-            case "checkpoint" -> module.addCheckpoint(admin, id);
-            case "finish" -> module.setFinish(admin, id);
-            case "kill" -> module.addKill(admin, id);
+            case "start" -> {
+                module.setStart(admin, id, reopen);
+                return;
+            }
+            case "checkpoint" -> {
+                module.addCheckpoint(admin, id, reopen);
+                return;
+            }
+            case "finish" -> {
+                module.setFinish(admin, id, reopen);
+                return;
+            }
+            case "kill" -> {
+                module.addKill(admin, id, reopen);
+                return;
+            }
+            case "board" -> {
+                module.board(admin, id, reopen);
+                return;
+            }
             case "enabled" -> module.toggleCourse(admin, id);
-            case "board" -> module.board(admin, id);
             case "back" -> {
                 openCourses(admin);
                 return;
@@ -281,7 +293,8 @@ final class ParkourAdminScreens {
     private void addArea(Player admin) {
         admin.closeInventory();
         var inputs = Inputs.of(module.ctx().plugin());
-        inputs.answered(admin, inputs.slug(admin, module.text().screens().promptArea()).open(), name -> module.endlessArea(admin, name), () -> openAreas(admin));
+        inputs.answered(admin, inputs.slug(admin, module.text().screens().promptArea()).open(), name -> module.endlessArea(admin, name, () -> openAreas(admin)),
+                () -> openAreas(admin));
     }
 
     // ======================== themes ========================
