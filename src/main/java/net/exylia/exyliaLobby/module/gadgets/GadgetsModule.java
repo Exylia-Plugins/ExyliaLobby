@@ -5,6 +5,7 @@ import net.exylia.exyliaLobby.module.Busy;
 import net.exylia.exyliaLobby.module.LobbyContext;
 import net.exylia.exyliaLobby.module.LobbyModule;
 import net.exylia.exyliaLobby.module.hotbar.HotbarModule;
+import net.exylia.exyliaLobby.module.shared.Slots;
 import net.exylia.lib.action.ActionResult;
 import net.exylia.lib.action.PluginActions;
 import net.exylia.lib.config.ConfigFile;
@@ -265,7 +266,7 @@ public final class GadgetsModule extends LobbyModule {
             meta.getPersistentDataContainer().set(marker, PersistentDataType.STRING, id);
             item.setItemMeta(meta);
         }
-        player.getInventory().setItem(slot(), item);
+        Slots.place(plugin(), player, slot(), item);
         equipped.put(player.getUniqueId(), id);
         send(player, text.equipped(), values);
     }

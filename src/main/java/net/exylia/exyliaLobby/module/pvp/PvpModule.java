@@ -10,6 +10,7 @@ import net.exylia.exyliaLobby.module.hotbar.HotbarModule;
 import net.exylia.exyliaLobby.module.protection.ProtectionModule;
 import net.exylia.exyliaLobby.module.state.StateModule;
 import net.exylia.exyliaLobby.module.shared.AdminScreens;
+import net.exylia.exyliaLobby.module.shared.Slots;
 import net.exylia.exyliaLobby.module.spawn.SpawnModule;
 import net.exylia.lib.config.ConfigFile;
 import net.exylia.lib.config.Languages;
@@ -540,7 +541,7 @@ public final class PvpModule extends LobbyModule implements Busy {
             meta.getPersistentDataContainer().set(marker, PersistentDataType.BYTE, (byte) 1);
             sword.setItemMeta(meta);
         }
-        inventory.setItem(swordSlot(), sword);
+        Slots.place(plugin(), player, swordSlot(), sword);
     }
 
     private void strip(Player player) {
