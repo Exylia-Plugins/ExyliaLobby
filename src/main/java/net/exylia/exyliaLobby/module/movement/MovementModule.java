@@ -132,10 +132,10 @@ public final class MovementModule extends LobbyModule {
         this.back = back;
         MovementMessages text = messages.get();
         screens.open(viewer, back, "Modules", text.listTitle(), text.listKind(), List.of(
-                new AdminScreens.Add("SLIME_BLOCK", text.addHereTitle(), text.addHereText(), text.addHereClick(), text.addHereNext(),
-                        admin -> add(admin, back, false)),
-                new AdminScreens.Add("SPYGLASS", text.addLookTitle(), text.addLookText(), text.addLookClick(), text.addLookNext(),
-                        admin -> add(admin, back, true))),
+                new AdminScreens.Add("SLIME_BLOCK", text.addPadTitle(), text.addPadText(), text.addPadClick(), text.addPadNext(),
+                        admin -> add(admin, false)),
+                new AdminScreens.Add("SPYGLASS", text.addAimedTitle(), text.addAimedText(), text.addAimedClick(), text.addAimedNext(),
+                        admin -> add(admin, true))),
                 this::rows);
     }
 
@@ -171,9 +171,19 @@ public final class MovementModule extends LobbyModule {
                     current -> new MovementSettings.Pad(current.world(), current.x(), current.y(), current.z(), current.power(),
                             value, current.fixed(), current.yaw())));
             case "turn" -> {
-                change(viewer, id, current -> new MovementSettings.Pad(current.world(), current.x(), current.y(), current.z(),
-                        current.power(), current.vertical(), !current.fixed(), viewer.getLocation().getYaw()));
-                screens.update(viewer);
+                if (pad.fixed()) {
+                    change(viewer, id, current -> new MovementSettings.Pad(current.world(), current.x(), current.y(), current.z(),
+                            current.power(), current.vertical(), false, current.yaw()));
+                    screens.update(viewer);
+                    return;
+                }
+                // The aim is a facing, so it is asked the way a spawn is: stand on the pad looking where it throws.
+                viewer.closeInventory();
+                setup(viewer, reopen).spawn(text.wizardAim(), id, where -> {
+                    change(viewer, id, current -> new MovementSettings.Pad(current.world(), current.x(), current.y(), current.z(),
+                            current.power(), current.vertical(), true, where.getYaw()));
+                    reopen.run();
+                });
             }
             case "shift" -> screens.confirm(viewer, Values.of("pad", id).apply(text.confirmRemove()), () -> {
                 savePads(list -> {
@@ -207,17 +217,28 @@ public final class MovementModule extends LobbyModule {
         send(viewer, messages.get().padChanged(), Values.of("pad", id));
     }
 
-    private void add(Player admin, Runnable back, boolean looking) {
+    /** A new pad: a clicked block that throws the way the runner looks, or (aimed) the block stood on, throwing that way. */
+    private void add(Player admin, boolean aimed) {
         MovementMessages text = messages.get();
-        Block block = looking ? admin.getTargetBlockExact(8) : admin.getLocation().getBlock();
-        if (block == null) {
-            send(admin, text.noTarget(), Values.of());
-            return;
+        Runnable reopen = () -> openAdmin(admin, back);
+        admin.closeInventory();
+        if (aimed) {
+            setup(admin, reopen).spawn(text.wizardAimed(), where -> {
+                Block feet = where.getBlock();
+                save(admin, feet.getType().isAir() ? feet.getRelative(0, -1, 0) : feet, true, where.getYaw(), reopen);
+            });
+        } else {
+            setup(admin, reopen).block(text.wizardPad(), at -> save(admin, at.getBlock(), false, 0, reopen));
         }
+    }
+
+    private void save(Player admin, Block block, boolean fixed, float yaw, Runnable reopen) {
+        MovementMessages text = messages.get();
         String world = block.getWorld().getName();
         for (MovementSettings.Pad pad : settings.get().pads().list().values()) {
             if (pad.world().equals(world) && pad.x() == block.getX() && pad.y() == block.getY() && pad.z() == block.getZ()) {
                 send(admin, text.samePlace(), Values.of());
+                reopen.run();
                 return;
             }
         }
@@ -225,11 +246,11 @@ public final class MovementModule extends LobbyModule {
         while (settings.get().pads().list().containsKey("pad-" + number)) number++;
         String id = "pad-" + number;
         savePads(list -> {
-            list.put(id, new MovementSettings.Pad(world, block.getX(), block.getY(), block.getZ(), 1.6, 0.9, false, 0));
+            list.put(id, new MovementSettings.Pad(world, block.getX(), block.getY(), block.getZ(), 1.6, 0.9, fixed, yaw));
             return list;
         });
         send(admin, text.padAdded(), Values.of("pad", id));
-        screens.update(admin);
+        reopen.run();
     }
 
     // ======================== shared ========================
