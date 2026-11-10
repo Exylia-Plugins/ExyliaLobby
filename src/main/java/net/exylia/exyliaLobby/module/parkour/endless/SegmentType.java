@@ -41,7 +41,7 @@ public enum SegmentType {
     }),
     SLOW(2, 30, 4, draw -> List.of(
             Move.single(2 + draw.random.nextInt(2), 0, 0, Role.SOUL_SAND),
-            Move.straight(2 + draw.random.nextInt(2), 0),
+            Move.single(2, draw.random.nextInt(3) - 1, 0, Role.FLOOR),
             Move.single(2 + draw.random.nextInt(2), 0, 0, Role.HONEY),
             Move.straight(2, draw.random.nextBoolean() ? 0 : -1))),
     POSTS(3, 30, 6, draw -> {

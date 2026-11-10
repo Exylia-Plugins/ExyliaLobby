@@ -56,8 +56,8 @@ class JumpPhysicsTest {
 
     @Test
     void slowBlocksShortenTheJump() {
-        assertTrue(reachable(Role.SOUL_SAND, 0, false, 3, 0, 0, Role.FLOOR));
-        assertFalse(reachable(Role.SOUL_SAND, 0, false, 4, 0, 0, Role.FLOOR));
+        assertTrue(reachable(Role.SOUL_SAND, 0, false, 2, 0, 0, Role.FLOOR));
+        assertFalse(reachable(Role.SOUL_SAND, 0, false, 3, 0, 0, Role.FLOOR));
         assertTrue(reachable(Role.HONEY, 0, false, 2, 0, 0, Role.FLOOR));
         assertFalse(reachable(Role.HONEY, 0, false, 2, 0, 1, Role.FLOOR));
         assertFalse(reachable(Role.HONEY, 0, false, 3, 0, 0, Role.FLOOR));

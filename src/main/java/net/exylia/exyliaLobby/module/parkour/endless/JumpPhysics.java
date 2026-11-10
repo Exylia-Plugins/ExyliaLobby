@@ -11,7 +11,7 @@ package net.exylia.exyliaLobby.module.parkour.endless;
  *   <li>up half a block: 4.5, up one: 4 (a 3+1), up more than one: 3, more than 1.25: impossible;</li>
  *   <li>a slab over the take-off (head-hitter): no rise and 3 at most;</li>
  *   <li>off slime: up to 60% of the fall onto it, 3 far when above a normal jump's height;</li>
- *   <li>off soul sand: 3, or 2 going up; off honey: 2.5 and never up;</li>
+ *   <li>off soul sand (it slows the run-up): 2.5, or 2 going up; off honey: 2.5 and never up;</li>
  *   <li>onto a post: 3.6 at most (a narrow target); off a post: 4.</li>
  * </ul>
  */
@@ -50,7 +50,7 @@ public final class JumpPhysics {
                     yield rise > JUMP_HEIGHT ? 3.0 : normal(rise);
                 }
                 case HONEY -> rise > EPSILON ? 0 : 2.5;
-                case SOUL_SAND -> rise > 1.0 ? 0 : rise > EPSILON ? 2.0 : 3.0;
+                case SOUL_SAND -> rise > 1.0 ? 0 : rise > EPSILON ? 2.0 : 2.5;
                 default -> normal(rise);
             };
         }
