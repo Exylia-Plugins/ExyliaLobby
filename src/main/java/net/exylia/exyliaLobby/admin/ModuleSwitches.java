@@ -7,7 +7,8 @@ import net.exylia.exyliaLobby.config.LobbyMessages;
 import net.exylia.exyliaLobby.module.LobbyModule;
 import net.exylia.lib.config.ConfigMenus;
 import net.exylia.lib.module.ModuleToggle;
-import net.exylia.lib.text.Text;
+import net.exylia.lib.text.PluginMessages;
+import net.exylia.lib.text.Values;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
@@ -43,10 +44,8 @@ public final class ModuleSwitches {
             };
             String missing = result.missing().stream().map(id -> lobby.getNames().get().of(id).name())
                     .collect(Collectors.joining(", "));
-            Text.from(lobby.getPlugin(), line)
-                    .withFormatted("module", lobby.getNames().get().of(module.getId()).name())
-                    .withFormatted("required", missing)
-                    .send(viewer);
+            PluginMessages.of(lobby.getPlugin()).send(viewer, line, Values.of(
+                    "module", lobby.getNames().get().of(module.getId()).name()).put("required", missing));
             redraw.run();
         });
     }
