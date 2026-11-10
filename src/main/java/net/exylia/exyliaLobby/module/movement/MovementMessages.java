@@ -58,7 +58,7 @@ public record MovementMessages(
                 "{info}Fixed at %yaw%°",
                 List.of("{primary}{icon:click} Left-click {letters_black}· {letters}edit power",
                         "{primary}{icon:right_click} Right-click {letters_black}· {letters}edit lift",
-                        "{primary}{icon:click} Shift-left-click {letters_black}· {letters}fix or free direction",
+                        "{primary}{icon:click} Shift-left-click {letters_black}· {letters}toggle direction",
                         "{error}{icon:right_click} Shift-right-click {letters_black}· {letters}remove",
                         "{letters_black}Removing asks you to confirm."),
                 "At my feet",

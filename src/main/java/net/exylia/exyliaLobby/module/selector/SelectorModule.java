@@ -358,16 +358,16 @@ public final class SelectorModule extends LobbyModule {
         for (Map.Entry<String, SelectorSettings.Npc> entry : settings.get().npcs().entrySet()) {
             SelectorSettings.Npc npc = entry.getValue();
             rows.add(AdminScreens.row("npc:" + entry.getKey(), "PLAYER_HEAD", entry.getKey(), text.subtitleNpc(), List.of(
-                    AdminScreens.stat(text.labelServer(), serverName(npc.server())),
-                    AdminScreens.stat(text.labelPlace(), "{info}" + npc.world() + " " + Math.round(npc.x()) + " "
+                    AdminScreens.stat("compass", text.labelServer(), serverName(npc.server())),
+                    AdminScreens.stat("map", text.labelPlace(), "{info}" + npc.world() + " " + Math.round(npc.x()) + " "
                             + Math.round(npc.y()) + " " + Math.round(npc.z()))), text.clicksNpc(), false));
         }
         for (Map.Entry<String, SelectorSettings.Portal> entry : settings.get().portals().entrySet()) {
             SelectorSettings.Portal portal = entry.getValue();
             rows.add(AdminScreens.row("portal:" + entry.getKey(), "END_PORTAL_FRAME", entry.getKey(), text.subtitlePortal(), List.of(
-                    AdminScreens.stat(text.labelServer(), serverName(portal.server())),
-                    AdminScreens.stat(text.labelPlace(), "{info}" + portal.world() + " " + portal.x1() + " " + portal.y1() + " " + portal.z1()),
-                    AdminScreens.stat(text.labelSize(), "{info}" + (Math.abs(portal.x2() - portal.x1()) + 1) + "x"
+                    AdminScreens.stat("compass", text.labelServer(), serverName(portal.server())),
+                    AdminScreens.stat("map", text.labelPlace(), "{info}" + portal.world() + " " + portal.x1() + " " + portal.y1() + " " + portal.z1()),
+                    AdminScreens.stat("hopper", text.labelSize(), "{info}" + (Math.abs(portal.x2() - portal.x1()) + 1) + "x"
                             + (Math.abs(portal.y2() - portal.y1()) + 1) + "x" + (Math.abs(portal.z2() - portal.z1()) + 1))),
                     text.clicksPortal(), false));
         }

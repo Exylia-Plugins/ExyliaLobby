@@ -148,10 +148,10 @@ public final class MovementModule extends LobbyModule {
         for (Map.Entry<String, MovementSettings.Pad> entry : settings.get().pads().list().entrySet()) {
             MovementSettings.Pad pad = entry.getValue();
             rows.add(AdminScreens.row(entry.getKey(), "SLIME_BLOCK", entry.getKey(), text.rowSubtitle(), List.of(
-                    AdminScreens.stat(text.labelPlace(), "{info}" + pad.world() + " " + pad.x() + " " + pad.y() + " " + pad.z()),
-                    AdminScreens.stat(text.labelPower(), "{info}" + pad.power()),
-                    AdminScreens.stat(text.labelVertical(), "{info}" + pad.vertical()),
-                    AdminScreens.stat(text.labelDirection(), pad.fixed()
+                    AdminScreens.stat("map", text.labelPlace(), "{info}" + pad.world() + " " + pad.x() + " " + pad.y() + " " + pad.z()),
+                    AdminScreens.stat("blaze", text.labelPower(), "{info}" + pad.power()),
+                    AdminScreens.stat("arrow", text.labelVertical(), "{info}" + pad.vertical()),
+                    AdminScreens.stat("compass", text.labelDirection(), pad.fixed()
                             ? Values.of("yaw", Math.round(pad.yaw())).apply(text.directionFixed()) : text.directionLook())),
                     text.clicks(), false));
         }

@@ -32,7 +32,7 @@ pagination:
       - "%module_description%"
       - ""
       - "{primary}✦ Status"
-      - "  {letters_black}· {info}{icon:info} {letters}State{letters_black}: %module_state%"
+      - "  {letters_black}· {info}{icon:redstone} {letters}State{letters_black}: %module_state%"
       - ""
       - "{primary}{icon:click} Left-click {letters_black}· {letters}switch on or off"
       - "{letters_black}Applies at once, no restart."

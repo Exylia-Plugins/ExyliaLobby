@@ -20,8 +20,8 @@ items:
       - "{letters_black}Spawn module"
       - ""
       - "{primary}✦ Status"
-      - "  {letters_black}· {info}{icon:info} {letters}World{letters_black}: {info}%spawn_world%"
-      - "  {letters_black}· {info}{icon:info} {letters}Spawn here{letters_black}: %spawn_state%"
+      - "  {letters_black}· {info}{icon:map} {letters}World{letters_black}: {info}%spawn_world%"
+      - "  {letters_black}· {info}{icon:compass} {letters}Spawn here{letters_black}: %spawn_state%"
 
   set:
     slot: 12

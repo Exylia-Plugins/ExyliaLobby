@@ -176,9 +176,9 @@ public final class HologramsModule extends LobbyModule {
         for (Map.Entry<String, HologramsSettings.Hologram> entry : settings.get().holograms().entrySet()) {
             HologramsSettings.Hologram holo = entry.getValue();
             rows.add(AdminScreens.row(entry.getKey(), "OAK_SIGN", entry.getKey(), text.rowSubtitle(), List.of(
-                    AdminScreens.stat(text.labelPlace(), "{info}" + holo.world() + " " + Math.round(holo.x()) + " "
+                    AdminScreens.stat("map", text.labelPlace(), "{info}" + holo.world() + " " + Math.round(holo.x()) + " "
                             + Math.round(holo.y()) + " " + Math.round(holo.z())),
-                    AdminScreens.stat(text.labelLines(), "{info}" + holo.lines().size())), text.clicks(), false));
+                    AdminScreens.stat("paper", text.labelLines(), "{info}" + holo.lines().size())), text.clicks(), false));
         }
         return rows;
     }

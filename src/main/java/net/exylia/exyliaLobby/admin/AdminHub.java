@@ -83,8 +83,7 @@ public final class AdminHub {
     public void open(@NotNull Player viewer) {
         menus.open(viewer, HUB, Map.of(
                 "modules_on", (java.util.function.Supplier<String>) () -> String.valueOf(lobby.getRegistered().stream().filter(LobbyModule::isEnabled).count()),
-                "modules_total", String.valueOf(lobby.getRegistered().size()),
-                "lobby_players", (java.util.function.Supplier<String>) () -> String.valueOf(lobby.getAreas().players().size())));
+                "modules_total", String.valueOf(lobby.getRegistered().size())));
     }
 
     public void openModules(@NotNull Player viewer) {

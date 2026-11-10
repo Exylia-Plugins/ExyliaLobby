@@ -21,7 +21,6 @@ items:
       - ""
       - "{primary}✦ Status"
       - "  {letters_black}· {success}{icon:on} {letters}Modules on{letters_black}: {success}%modules_on%{letters_black}/{info}%modules_total%"
-      - "  {letters_black}· {info}{icon:heart} {letters}In the lobby{letters_black}: {info}%lobby_players%"
 
   modules:
     slot: 11
