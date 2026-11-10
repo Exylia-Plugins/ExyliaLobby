@@ -26,7 +26,7 @@ public enum Role {
     PILLAR;
 
     /** Where a player's feet are above the block's own y when standing on it. */
-    double surface() {
+    public double surface() {
         return this == POST ? 1.5 : 1.0;
     }
 

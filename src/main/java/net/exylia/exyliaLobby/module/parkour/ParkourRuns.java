@@ -39,9 +39,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import net.exylia.exyliaLobby.module.parkour.endless.Bounds;
+import net.exylia.exyliaLobby.module.parkour.endless.Cell;
+import net.exylia.exyliaLobby.module.parkour.endless.PathGenerator;
 
 import java.time.Duration;
 import java.util.List;
@@ -50,6 +55,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.DoubleFunction;
 import java.util.function.Supplier;
 
@@ -155,6 +161,67 @@ final class ParkourRuns implements Listener {
         return runs.get(player.getUniqueId());
     }
 
+    /**
+     * Sends the player onto a new endless path of a mode; tells them when it cannot.
+     */
+    void startEndless(@NotNull Player player, @NotNull EndlessMode mode) {
+        startEndless(player, mode, null);
+    }
+
+    /** @param origin where the runner goes back to at the end; null keeps the current run's, or where they stand */
+    void startEndless(Player player, EndlessMode mode, @Nullable Location origin) {
+        ParkourSettings rules = settings.get();
+        ParkourMessages text = messages.get();
+        if (!mode.enabled(rules.modes())) {
+            send(player, text.modeOff(), Values.of());
+            return;
+        }
+        List<ParkourSettings.Area> areas = List.copyOf(rules.endless().areas().values());
+        ParkourSettings.Area area = areas.isEmpty() ? null
+                : areas.get(mode == EndlessMode.DAILY ? 0 : ThreadLocalRandom.current().nextInt(areas.size()));
+        World world = area == null ? null : Bukkit.getWorld(area.world());
+        Cell min = area == null ? null : cell(area.min());
+        Cell max = area == null ? null : cell(area.max());
+        Cell start = area == null ? null : cell(area.start());
+        if (world == null || min == null || max == null || start == null) {
+            if (area != null) context.debug().warn("A parkour endless area has no loaded world or a bad min, max or start");
+            send(player, text.noArea(), Values.of());
+            return;
+        }
+        long seed = mode == EndlessMode.DAILY ? ("daily|" + clock.get().key(PeriodClock.Period.DAILY)).hashCode()
+                : ThreadLocalRandom.current().nextLong();
+        List<ParkourThemes.Theme> palette = themes.get().themes().values().stream().filter(ParkourThemes.Theme::enabled).toList();
+        if (palette.isEmpty()) palette = List.of(new ParkourThemes.Theme());
+        List<ParkourThemes.Theme> chosen = palette;
+        int offset = (int) Math.floorMod(seed, (long) palette.size());
+        Location at = new Location(world, start.x() + 0.5, start.y() + 1, start.z() + 0.5, Math.floorMod(area.heading(), 4) * 90f - 90f, 0);
+        PathGenerator generator = new PathGenerator(seed, new Bounds(min.x(), min.y(), min.z(), max.x(), max.y(), max.z()),
+                start, area.heading(), rules.endless().tuning().tuning());
+        onPlayer(player, () -> {
+            Run old = runs.get(player.getUniqueId());
+            Location home = origin != null ? origin : old instanceof EndlessRun endless ? endless.origin : player.getLocation();
+            if (old != null) close(old, RunEnd.REPLACED);
+            long best = data.best(player.getUniqueId(), new Board(mode.id(), Board.Period.ALL)).map(ParkourRecord::value).orElse(0L);
+            teleport(player, at).thenAccept(result -> {
+                if (result.isSuccess()) onPlayer(player, () -> {
+                    if (player.isOnline()) open(new EndlessRun(this, player, mode, world, home, at, generator, chosen, offset, best));
+                });
+            });
+        });
+    }
+
+    /** {@code x y z} → the block there; null when it is not three numbers. */
+    static @Nullable Cell cell(String written) {
+        String[] parts = written == null ? new String[0] : written.trim().split("[\\s,]+");
+        if (parts.length != 3) return null;
+        try {
+            return new Cell((int) Math.floor(Double.parseDouble(parts[0])), (int) Math.floor(Double.parseDouble(parts[1])),
+                    (int) Math.floor(Double.parseDouble(parts[2])));
+        } catch (NumberFormatException bad) {
+            return null;
+        }
+    }
+
     /** Ends the player's run, if any. Safe from any thread. */
     void stop(@NotNull Player player, @NotNull RunEnd end) {
         Run run = runs.get(player.getUniqueId());
@@ -192,6 +259,7 @@ final class ParkourRuns implements Listener {
         HotbarItem restart = button("restart", 4, items.restart(), ns + ACTION_RESTART);
         HotbarItem leave = button("leave", 5, items.leave(), ns + ACTION_LEAVE);
         hotbars.register(HotbarSet.of(CourseRun.HOTBAR, List.of(back, restart, leave)));
+        hotbars.register(HotbarSet.of(EndlessRun.HOTBAR, List.of(restart, leave)));
     }
 
     /** Ends every run and lets go of the run items' actions. */
@@ -323,6 +391,46 @@ final class ParkourRuns implements Listener {
         }
     }
 
+    /** An endless run ended by a fall or the sprint clock: record it and show the summary. Player's thread. */
+    void scored(EndlessRun run) {
+        Player player = run.player;
+        ParkourMessages text = messages.get();
+        Values values = run.values().put("retry", Values.of("command", label()).put("mode_id", run.mode.id()).apply(text.retry()));
+        sound(player, settings.get().sounds().fail());
+        Board board = new Board(run.mode.id(), Board.Period.ALL);
+        if (run.score <= 0) {
+            long best = data.best(player.getUniqueId(), board).map(ParkourRecord::value).orElse(0L);
+            int rank = data.rank(player.getUniqueId(), board);
+            send(player, text.endlessEnded(), values.put("record", text.noRecord()).put("best", best)
+                    .put("rank", rank > 0 ? String.valueOf(rank) : text.unranked()));
+            return;
+        }
+        data.record(player, run.mode.id(), run.score, List.of()).whenComplete((outcome, failed) -> {
+            if (failed != null) {
+                context.debug().error("Could not record the parkour " + run.mode.id() + " score of " + player.getName(), failed);
+                return;
+            }
+            onPlayer(player, () -> {
+                if (!player.isOnline()) return;
+                send(player, text.endlessEnded(), values.put("record", outcome.improved() ? text.newRecord() : text.noRecord())
+                        .put("best", outcome.best().value())
+                        .put("rank", outcome.rank() > 0 ? String.valueOf(outcome.rank()) : text.unranked()));
+                if (outcome.improved() && outcome.previous() != null) sound(player, settings.get().sounds().record());
+            });
+        });
+    }
+
+    /** The first label of the player command, for the retry button. */
+    private String label() {
+        List<String> labels = settings.get().command();
+        return labels.isEmpty() ? "parkour" : labels.get(0);
+    }
+
+    /** Sends a runner back where they were before an endless run. */
+    void home(Player player, Location origin) {
+        if (player.isOnline() && !context.stopping()) teleport(player, origin);
+    }
+
     /** Gives a reward list written in a config file; what does not fit waits in the reward queue. Player's thread. */
     void reward(Player player, List<Object> lines, String where) {
         if (lines == null || lines.isEmpty()) return;
@@ -355,6 +463,14 @@ final class ParkourRuns implements Listener {
             if (Busy.any(context, player)) return;
             openCourse(player, entry.getKey(), course, to.getWorld());
             return;
+        }
+    }
+
+    /** An endless runner stands on blocks only their client has: the server must not kick them for flying. */
+    @EventHandler(ignoreCancelled = true)
+    public void onKick(PlayerKickEvent event) {
+        if (event.getCause() == PlayerKickEvent.Cause.FLYING_PLAYER && runs.get(event.getPlayer().getUniqueId()) instanceof EndlessRun) {
+            event.setCancelled(true);
         }
     }
 

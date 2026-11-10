@@ -8,7 +8,7 @@ Worktree: /root/Java/Exylia/ExyliaLobby-worktrees/parkour (detached, commits onl
 - [x] data (ParkourData: tables, caches, tops, wipes, placeholders; module calls create, register, load/forget, refreshAll on a timer)
 - [x] runs 1/3: ParkourRuns registry + CourseRun (CourseTrack detection, splits, boss bar, beacon, run items via Hotbars, rewards, medals) + RunEnd
 - [x] runs 2/3: anti-cheat (RunGuard: ends on flight/elytra/riptide/pearl/mount/gamemode/foreign teleport; refuses velocity and blocked effects; minimum time refused + Logs `parkour-too-fast`)
-- [ ] runs 3/3: endless, sprint, daily (EndlessRun, fake blocks)
+- [x] runs 3/3: endless, sprint, daily (EndlessRun + EndlessMode, endless/Window; fake blocks kept for the runner only, themes, milestones, best marker, kick-for-flying cancelled)
 - [ ] module wiring, placeholders, commands, actions, visibility
 - [ ] player menus (list, course, top) + admin menus
 
@@ -20,4 +20,6 @@ Worktree: /root/Java/Exylia/ExyliaLobby-worktrees/parkour (detached, commits onl
 - `runs.isRunning(player)` for `Busy#busy` and the visibility rule; `runs.stop(player, RunEnd.LOBBY)` in `leave(...)` (QUIT is handled by its own listener).
 - `/parkour <course>`: `runs.startCourse(player, typed)` (sends its own errors). `/parkour leave`: `stop(player, RunEnd.LEFT)` (send `notRunning` when `!isRunning`).
 - Spawn void hook: `context.module("spawn", SpawnModule.class).ifPresent(s -> rescueHandle = s.rescue(100, runs::rescue))`; run the handle in `stop()`.
+- `/parkour endless|sprint|daily`: `EndlessMode.parse(arg).ifPresent(m -> runs.startEndless(player, m))` (sends modeOff/noArea itself).
+  The retry button runs `/<first label> <mode id>`, so the player command must accept the mode ids before course ids.
 - Stepping onto a course's start plate begins a run by itself (skipped when `Busy.any`).
