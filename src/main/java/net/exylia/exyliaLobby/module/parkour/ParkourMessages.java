@@ -78,7 +78,9 @@ public record ParkourMessages(
         @Comment("Chat leaderboards and staff tools.")
         Tools tools,
         @Comment("Menu cards: stat lines, subtitles, prompts and states. %tone% and %light% are the card's palette colours.")
-        Screens screens) {
+        Screens screens,
+        @Comment("The staff screens of /lobbyadmin: course, area and theme lists.")
+        Staff staff) {
 
     public ParkourMessages() {
         this("%prefix% {letters}Courses: %courses%{letters}. Play one with {highlight}/%command% <course>{letters}, or {highlight}/%command% endless{letters}.",
@@ -143,7 +145,74 @@ public record ParkourMessages(
                 "{letters}Checkpoint {info}%checkpoint%{letters_black}/{info}%total% {letters_black}· {info}%distance% m",
                 new RunItems(),
                 new Tools(),
-                new Screens());
+                new Screens(),
+                new Staff());
+    }
+
+    /** One add button of a staff list: card name, description lines, click line and the line saying what happens next. */
+    public record Button(String title, List<String> text, String click, String next) {
+        public Button() {
+            this("", List.of(), "", "");
+        }
+    }
+
+    /** Text of the staff lists (courses, endless areas, themes); the editor and hub keep theirs in their menu files. */
+    public record Staff(
+            String back,
+            String titleCourses,
+            String kindCourse,
+            String titleAreas,
+            String kindArea,
+            String titleThemes,
+            String kindTheme,
+            @Comment("Card subtitles of the rows.")
+            String subtitleCourseReady,
+            String subtitleCourseSetup,
+            String subtitleArea,
+            String subtitleTheme,
+            @Comment("Stat labels of the rows.")
+            String labelDifficulty,
+            String labelCheckpoints,
+            String labelState,
+            String labelWorld,
+            String labelStart,
+            String labelFloor,
+            @Comment("Click lines of the rows, one per line.")
+            List<String> clicksCourse,
+            List<String> clicksArea,
+            List<String> clicksTheme,
+            @Comment("The add buttons of each list (slots 45 and 46).")
+            Button createCourse,
+            Button settingsCourses,
+            Button addArea,
+            Button settingsAreas,
+            Button editThemes,
+            Button enableThemes) {
+        public Staff() {
+            this("Parkour", "Courses", "Course", "Endless areas", "Area", "Themes", "Theme",
+                    "Course · ready", "Course · setup needed", "Endless area", "Endless theme",
+                    "Difficulty", "Checkpoints", "State", "World", "Start", "Floor",
+                    List.of("{primary}{icon:click} Left-click {letters_black}· {letters}edit",
+                            "{primary}{icon:right_click} Right-click {letters_black}· {letters}turn on or off",
+                            "{error}{icon:right_click} Shift-right-click {letters_black}· {letters}delete",
+                            "{letters_black}You will be asked to confirm."),
+                    List.of("{error}{icon:right_click} Right-click {letters_black}· {letters}delete",
+                            "{letters_black}You will be asked to confirm."),
+                    List.of("{primary}{icon:click} Click {letters_black}· {letters}turn on or off",
+                            "{letters_black}Endless paths use it while on."),
+                    new Button("Create", List.of(" {letters}A new course with its start", " {letters}at your feet."),
+                            "Click to create", "Opens its editor next."),
+                    new Button("Settings", List.of(" {letters}Modes, anti-cheat, boards", " {letters}and the rest."),
+                            "Click to open", "Every parkour setting."),
+                    new Button("Add", List.of(" {letters}Select two corners with your", " {letters}wand, starting where you stand."),
+                            "Click to add", "You name it after selecting."),
+                    new Button("Settings", List.of(" {letters}Path tuning, milestones", " {letters}and the endless modes."),
+                            "Click to open", "Every parkour setting."),
+                    new Button("Edit blocks", List.of(" {letters}The blocks each theme", " {letters}draws its path with."),
+                            "Click to open", "Opens the themes file."),
+                    new Button("Enable all", List.of(" {letters}Turns every theme on."),
+                            "Click to enable", "Endless paths use them all."));
+        }
     }
 
     /** A run item's look: its material, name and lore. */

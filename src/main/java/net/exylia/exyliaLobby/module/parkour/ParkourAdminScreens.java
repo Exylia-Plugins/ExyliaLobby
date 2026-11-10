@@ -28,7 +28,6 @@ final class ParkourAdminScreens {
 
     static final String HUB = "admin/parkour/hub";
     static final String EDITOR = "admin/parkour/editor";
-    private static final String BACK_NAME = "Parkour";
 
     private final ParkourModule module;
     private final Map<UUID, Runnable> backs = new ConcurrentHashMap<>();
@@ -105,27 +104,23 @@ final class ParkourAdminScreens {
     // ======================== courses ========================
 
     void openCourses(Player admin) {
-        courses.open(admin, () -> hub(admin), BACK_NAME, "Courses", "Course", List.of(
-                new AdminScreens.Add("WRITABLE_BOOK", "Create", List.of(" {letters}A new course with its start", " {letters}at your feet."),
-                        "Click to create", "Opens its editor next.", player -> create(player)),
-                new AdminScreens.Add("COMPARATOR", "Settings", List.of(" {letters}Modes, anti-cheat, boards", " {letters}and the rest."),
-                        "Click to open", "Every parkour setting.", player -> settings(player, () -> openCourses(player)))),
+        ParkourMessages.Staff t = module.text().staff();
+        courses.open(admin, () -> hub(admin), t.back(), t.titleCourses(), t.kindCourse(), List.of(
+                button("WRITABLE_BOOK", t.createCourse(), this::create),
+                button("COMPARATOR", t.settingsCourses(), player -> settings(player, () -> openCourses(player)))),
                 () -> courseRows());
     }
 
     private List<UiEntry> courseRows() {
         ParkourMessages.Screens t = module.text().screens();
+        ParkourMessages.Staff staff = module.text().staff();
         List<UiEntry> rows = new ArrayList<>();
         module.catalogue().courses().forEach((id, course) -> rows.add(AdminScreens.row(id, icon(course.icon(), "FEATHER"), course.name(),
-                course.ready() ? "Course · ready" : "Course · setup needed",
-                List.of(AdminScreens.stat("Difficulty", "{info}" + course.difficulty()),
-                        AdminScreens.stat("Checkpoints", "{info}" + course.checkpoints().size()),
-                        AdminScreens.stat("State", course.enabled() ? t.on() : t.off())),
-                List.of("{primary}{icon:click} Left-click {letters_black}· {letters}edit",
-                        "{primary}{icon:right_click} Right-click {letters_black}· {letters}turn on or off",
-                        "{error}{icon:click} Shift-right-click {letters_black}· {letters}delete",
-                        "{letters_black}You will be asked to confirm."),
-                course.enabled())));
+                course.ready() ? staff.subtitleCourseReady() : staff.subtitleCourseSetup(),
+                List.of(AdminScreens.stat("star", staff.labelDifficulty(), "{info}" + course.difficulty()),
+                        AdminScreens.stat("check", staff.labelCheckpoints(), "{info}" + course.checkpoints().size()),
+                        AdminScreens.stat("redstone", staff.labelState(), course.enabled() ? t.on() : t.off())),
+                staff.clicksCourse(), course.enabled())));
         return rows;
     }
 
@@ -260,20 +255,19 @@ final class ParkourAdminScreens {
     // ======================== endless areas ========================
 
     void openAreas(Player admin) {
-        areas.open(admin, () -> hub(admin), BACK_NAME, "Endless areas", "Area", List.of(
-                new AdminScreens.Add("GRASS_BLOCK", "Add", List.of(" {letters}Select two corners with your", " {letters}wand, starting where you stand."),
-                        "Click to add", "You name it after selecting.", player -> addArea(player)),
-                new AdminScreens.Add("COMPARATOR", "Settings", List.of(" {letters}Path tuning, milestones", " {letters}and the endless modes."),
-                        "Click to open", "Every parkour setting.", player -> settings(player, () -> openAreas(player)))),
+        ParkourMessages.Staff t = module.text().staff();
+        areas.open(admin, () -> hub(admin), t.back(), t.titleAreas(), t.kindArea(), List.of(
+                button("GRASS_BLOCK", t.addArea(), this::addArea),
+                button("COMPARATOR", t.settingsAreas(), player -> settings(player, () -> openAreas(player)))),
                 () -> areaRows());
     }
 
     private List<UiEntry> areaRows() {
+        ParkourMessages.Staff t = module.text().staff();
         List<UiEntry> rows = new ArrayList<>();
-        module.rules().endless().areas().forEach((id, area) -> rows.add(AdminScreens.row(id, "GRASS_BLOCK", id, "Endless area",
-                List.of(AdminScreens.stat("World", "{info}" + area.world()), AdminScreens.stat("Start", "{info}" + area.start())),
-                List.of("{error}{icon:right_click} Right-click {letters_black}· {letters}delete", "{letters_black}You will be asked to confirm."),
-                false)));
+        module.rules().endless().areas().forEach((id, area) -> rows.add(AdminScreens.row(id, "GRASS_BLOCK", id, t.subtitleArea(),
+                List.of(AdminScreens.stat("map", t.labelWorld(), "{info}" + area.world()), AdminScreens.stat("compass", t.labelStart(), "{info}" + area.start())),
+                t.clicksArea(), false)));
         return rows;
     }
 
@@ -293,24 +287,25 @@ final class ParkourAdminScreens {
     // ======================== themes ========================
 
     void openThemes(Player admin) {
-        themes.open(admin, () -> hub(admin), BACK_NAME, "Themes", "Theme", List.of(
-                new AdminScreens.Add("PAINTING", "Edit blocks", List.of(" {letters}The blocks each theme", " {letters}draws its path with."),
-                        "Click to open", "Opens the themes file.", player -> ConfigMenus.of(module.ctx().plugin())
-                                .permission(Permissions.ADMIN).back(back -> openThemes(player)).file("modules/parkour/themes").open(player)),
-                new AdminScreens.Add("LIME_DYE", "Enable all", List.of(" {letters}Turns every theme on."),
-                        "Click to enable", "Endless paths use them all.", player -> {
-                            module.enableAllThemes();
-                            themes.update(player);
-                        })),
+        ParkourMessages.Staff t = module.text().staff();
+        themes.open(admin, () -> hub(admin), t.back(), t.titleThemes(), t.kindTheme(), List.of(
+                button("PAINTING", t.editThemes(), player -> ConfigMenus.of(module.ctx().plugin())
+                        .permission(Permissions.ADMIN).back(back -> openThemes(player)).file("modules/parkour/themes").open(player)),
+                button("LIME_DYE", t.enableThemes(), player -> {
+                    module.enableAllThemes();
+                    themes.update(player);
+                })),
                 () -> themeRows());
     }
 
     private List<UiEntry> themeRows() {
         ParkourMessages.Screens t = module.text().screens();
+        ParkourMessages.Staff staff = module.text().staff();
         List<UiEntry> rows = new ArrayList<>();
-        module.themeSet().themes().forEach((id, theme) -> rows.add(AdminScreens.row(id, icon(theme.floor(), "STONE"), id, "Endless theme",
-                List.of(AdminScreens.stat("State", theme.enabled() ? t.on() : t.off()), AdminScreens.stat("Floor", "{info}" + theme.floor())),
-                List.of("{primary}{icon:click} Click {letters_black}· {letters}turn on or off"), theme.enabled())));
+        module.themeSet().themes().forEach((id, theme) -> rows.add(AdminScreens.row(id, icon(theme.floor(), "STONE"), id, staff.subtitleTheme(),
+                List.of(AdminScreens.stat("redstone", staff.labelState(), theme.enabled() ? t.on() : t.off()),
+                        AdminScreens.stat("pickaxe", staff.labelFloor(), "{info}" + theme.floor())),
+                staff.clicksTheme(), theme.enabled())));
         return rows;
     }
 
@@ -318,6 +313,10 @@ final class ParkourAdminScreens {
         if (!click.equals("left")) return;
         module.toggleTheme(admin, id);
         themes.update(admin);
+    }
+
+    private static AdminScreens.Add button(String icon, ParkourMessages.Button text, java.util.function.Consumer<Player> run) {
+        return new AdminScreens.Add(icon, text.title(), text.text(), text.click(), text.next(), run);
     }
 
     /** A block or item name as a material, with block data after {@code [} dropped; the fallback when it is not one. */

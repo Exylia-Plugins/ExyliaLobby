@@ -140,9 +140,9 @@ public final class AdminScreens {
                 .build();
     }
 
-    /** A stat line of a card: {@code · icon Label: value}. */
-    public static @NotNull String stat(@NotNull String label, @NotNull String value) {
-        return "  {letters_black}· {info}{icon:info} {letters}" + label + "{letters_black}: " + value;
+    /** A stat line of a card: {@code · icon Label: value}, the icon a named ExyliaLib sprite. */
+    public static @NotNull String stat(@NotNull String icon, @NotNull String label, @NotNull String value) {
+        return "  {letters_black}· {info}{icon:" + icon + "} {letters}" + label + "{letters_black}: " + value;
     }
 
     /** Closes the screen, asks the question and runs {@code yes} on a yes; {@code reopen} on no or cancel. */
