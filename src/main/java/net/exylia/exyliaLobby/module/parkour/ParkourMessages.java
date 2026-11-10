@@ -16,6 +16,9 @@ public record ParkourMessages(
         String notRunning,
         @Comment("Left a run with /parkour leave or the leave item")
         String left,
+        @Comment("/parkour <course or mode> away from the lobby, or while another activity (a fight) holds you")
+        String notInLobby,
+        String busy,
 
         @Comment("Course runs. %course% is its name, %time% the time so far, %checkpoint%/%total% the progress.")
         String startTitle,
@@ -90,6 +93,8 @@ public record ParkourMessages(
                 "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Endless parkour has no area yet. Ask an admin.",
                 "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}You are not running a parkour.",
                 "%prefix% {letters}You left the parkour.",
+                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Parkour can only be started in the lobby.",
+                "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Finish what you are doing before starting a parkour.",
 
                 "{primary}&l%course%",
                 "{letters}Go!",

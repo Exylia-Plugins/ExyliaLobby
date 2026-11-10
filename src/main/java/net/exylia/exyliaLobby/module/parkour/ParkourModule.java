@@ -244,6 +244,15 @@ public final class ParkourModule extends LobbyModule implements Busy {
 
     /** Starts a mode (their ids come first) or a course. */
     void play(Player player, String typed) {
+        if (!inLobby(player)) {
+            runs.send(player, messages.get().notInLobby(), Values.of());
+            return;
+        }
+        // A runner may start another run over theirs; anything else holding them (a fight) comes first.
+        if (!runs.isRunning(player) && Busy.any(context, player)) {
+            runs.send(player, messages.get().busy(), Values.of());
+            return;
+        }
         EndlessMode.parse(typed).ifPresentOrElse(mode -> runs.startEndless(player, mode),
                 () -> runs.startCourse(player, typed));
     }
