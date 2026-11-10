@@ -35,10 +35,9 @@ final class GadgetsListener implements Listener {
         if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
         String id = module.gadgetOf(event.getItem());
         if (id == null) return;
-        if (id.equals("grapple")) {
-            if (!module.cast(event.getPlayer())) event.setCancelled(true);
-            return;
-        }
+        // The rod casts and reels as vanilla does; the cast is checked when it happens (PlayerFishEvent FISHING),
+        // so the reel-in click is never refused.
+        if (id.equals("grapple")) return;
         // The vanilla use (a thrown pearl or snowball, a placed block) never happens; the gadget does its own.
         event.setCancelled(true);
         module.use(event.getPlayer(), id);

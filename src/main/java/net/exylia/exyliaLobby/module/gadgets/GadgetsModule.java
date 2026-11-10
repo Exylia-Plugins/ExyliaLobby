@@ -28,6 +28,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Entity;
@@ -81,6 +82,10 @@ public final class GadgetsModule extends LobbyModule {
     private final Map<UUID, Long> rides = new ConcurrentHashMap<>();
     private final Map<UUID, Long> safe = new ConcurrentHashMap<>();
     private final Map<UUID, Long> bounced = new ConcurrentHashMap<>();
+    /** Where each player's grappling hook last struck a block, until it is reeled in. */
+    private final Map<UUID, Location> anchors = new ConcurrentHashMap<>();
+    private static final BlockFace[] NEIGHBOURS = {BlockFace.UP, BlockFace.DOWN, BlockFace.NORTH, BlockFace.SOUTH,
+            BlockFace.EAST, BlockFace.WEST};
     private final Random random = new Random();
 
     public GadgetsModule(@NotNull LobbyContext context) {
@@ -127,6 +132,7 @@ public final class GadgetsModule extends LobbyModule {
         rides.clear();
         safe.clear();
         bounced.clear();
+        anchors.clear();
     }
 
     private void reserve() {
@@ -308,6 +314,7 @@ public final class GadgetsModule extends LobbyModule {
         rides.remove(id);
         safe.remove(id);
         bounced.remove(id);
+        anchors.remove(id);
         strip(player);
     }
 
@@ -391,8 +398,8 @@ public final class GadgetsModule extends LobbyModule {
         }
     }
 
-    /** Whether a cast of the grappling hook is allowed now (cancels the cast otherwise). */
-    boolean cast(Player player) {
+    /** Whether a cast of the grappling hook is allowed now; tells the player why not. */
+    private boolean cast(Player player) {
         GadgetsSettings.Gadget gadget = settings.get().gadgets().get("grapple");
         GadgetsMessages text = messages.get();
         Values values = Values.of("gadget", card("grapple").name());
@@ -412,29 +419,71 @@ public final class GadgetsModule extends LobbyModule {
         return true;
     }
 
-    /** The hook: it pulls the rider to where it landed, and never hooks another player. */
+    /**
+     * The hook. A cast goes anywhere; reeling in pulls the player to the hook when it touches a block (the floor,
+     * a wall, a ceiling), and just reels in from open air. It never hooks a player or any other entity.
+     */
     void fished(PlayerFishEvent event) {
         Player player = event.getPlayer();
         if (!"grapple".equals(gadgetOf(player.getInventory().getItemInMainHand()))) return;
         FishHook hook = event.getHook();
         switch (event.getState()) {
-            case CAUGHT_ENTITY, CAUGHT_FISH -> event.setCancelled(true);
-            case IN_GROUND, REEL_IN -> {
-                // Only a hook that landed on something pulls; reeling in an empty cast does nothing.
-                if (event.getState() == PlayerFishEvent.State.REEL_IN && !hook.isOnGround()) return;
-                GadgetsSettings.Gadget gadget = settings.get().gadgets().get("grapple");
-                if (gadget == null || !ready(player, "grapple")) return;
-                Vector to = hook.getLocation().toVector().subtract(player.getLocation().toVector());
-                double distance = to.length();
-                if (distance < 1.5) return;
-                double speed = Math.min(2.4, 0.6 + distance * 0.12) * gadget.power();
-                player.setVelocity(to.normalize().multiply(speed).setY(Math.max(0.35, to.getY() / distance * speed + 0.3)));
-                keepSafe(player);
+            case FISHING -> {
+                anchors.remove(player.getUniqueId());
+                if (!cast(player)) event.setCancelled(true);
+            }
+            case CAUGHT_ENTITY, CAUGHT_FISH -> {
+                event.setCancelled(true);
                 hook.remove();
+                anchors.remove(player.getUniqueId());
+            }
+            case IN_GROUND, REEL_IN -> {
+                Location anchor = anchor(player, hook);
+                if (anchor == null || !inLobby(player) || Busy.any(context, player)) return;
+                GadgetsSettings.Gadget gadget = settings.get().gadgets().get("grapple");
+                if (gadget == null || !gadget.enabled()) return;
+                Vector to = anchor.toVector().subtract(player.getLocation().toVector());
+                if (to.length() < 1.5) return;
+                player.setVelocity(pull(to, gadget.power()));
+                Cooldowns.start(player, "lobby_gadget_grapple", Duration.ofMillis(Math.round(Math.max(0, gadget.cooldown()) * 1000)));
+                keepSafe(player);
             }
             default -> {
             }
         }
+    }
+
+    /** Where a grapple pulls to: the spot its hook stuck to, or null when it hangs in open air. */
+    private @Nullable Location anchor(Player player, FishHook hook) {
+        Location hit = anchors.remove(player.getUniqueId());
+        Location at = hook.getLocation();
+        // A hook that hit a wall or a ceiling slides off it; the spot it hit still holds while it is near.
+        if (hit != null && hit.getWorld() == at.getWorld() && hit.distanceSquared(at) < 36 && touchesBlock(hit)) return hit;
+        return touchesBlock(at) ? at : null;
+    }
+
+    private static boolean touchesBlock(Location at) {
+        Block block = at.getBlock();
+        if (block.getType().isSolid()) return true;
+        for (BlockFace face : NEIGHBOURS) {
+            if (block.getRelative(face).getType().isSolid()) return true;
+        }
+        // A hook resting on the floor sits a fraction above the block it lies on.
+        return at.clone().subtract(0, 0.2, 0).getBlock().getType().isSolid();
+    }
+
+    /**
+     * The pull towards a spot: straight at it with a lift that makes an arc, faster from further away and capped,
+     * so a long cast throws the player well without flinging them through the map.
+     */
+    static Vector pull(Vector to, double power) {
+        double distance = to.length();
+        double speed = Math.min(1.9, 0.45 + distance * 0.09) * power;
+        Vector velocity = to.clone().multiply(1 / distance).multiply(speed);
+        // Gravity eats the climb, so the lift grows with the height to reach; a pull downwards still hops a little.
+        double lift = 0.28 + Math.max(0, to.getY()) * 0.045;
+        velocity.setY(Math.max(-0.6, Math.min(1.5, velocity.getY() + lift)));
+        return velocity;
     }
 
     private void ride(Player player, GadgetsSettings.Gadget gadget) {
@@ -471,6 +520,15 @@ public final class GadgetsModule extends LobbyModule {
     /** A thrown pearl, paint or snowball landing. */
     void hit(ProjectileHitEvent event) {
         Projectile projectile = event.getEntity();
+        if (projectile instanceof FishHook && projectile.getShooter() instanceof Player owner
+                && "grapple".equals(gadgetOf(owner.getInventory().getItemInMainHand()))) {
+            if (event.getHitEntity() != null) {
+                event.setCancelled(true);
+            } else if (event.getHitBlock() != null) {
+                anchors.put(owner.getUniqueId(), projectile.getLocation());
+            }
+            return;
+        }
         String kind = projectile.getPersistentDataContainer().get(shotKey, PersistentDataType.STRING);
         if (kind == null) return;
         switch (kind) {
