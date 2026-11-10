@@ -7,14 +7,14 @@ Worktree: /root/Java/Exylia/ExyliaLobby-worktrees/parkour (detached, commits onl
 - [x] config records: ParkourSettings, ParkourCourses (catalogue, Spot, Medals), ParkourThemes, ParkourMessages + tests
 - [x] data (ParkourData: tables, caches, tops, wipes, placeholders; module calls create, register, load/forget, refreshAll on a timer)
 - [x] runs 1/3: ParkourRuns registry + CourseRun (CourseTrack detection, splits, boss bar, beacon, run items via Hotbars, rewards, medals) + RunEnd
-- [ ] runs 2/3: anti-cheat (RunGuard)
+- [x] runs 2/3: anti-cheat (RunGuard: ends on flight/elytra/riptide/pearl/mount/gamemode/foreign teleport; refuses velocity and blocked effects; minimum time refused + Logs `parkour-too-fast`)
 - [ ] runs 3/3: endless, sprint, daily (EndlessRun, fake blocks)
 - [ ] module wiring, placeholders, commands, actions, visibility
 - [ ] player menus (list, course, top) + admin menus
 
 ## Runs: what the wiring step needs
 
-- Build once in `start()`: `runs = new ParkourRuns(context, settings, courses, themes, messages, data, clockSupplier)`, then `listen(runs)`.
+- Build once in `start()`: `runs = new ParkourRuns(context, settings, courses, themes, messages, data, clockSupplier)`, then `listen(runs)` and `listen(runs.guard())`.
   It registers its own actions (`parkour_run_checkpoint|restart|leave`, namespace of `Actions.of(plugin)`), the run-item hotbar set
   and the reward queue (QUEUE + `PendingRewards.database`) if nobody set one. `stop()`: `runs.close()`. Reload: `runs.reload()` (redraws run items).
 - `runs.isRunning(player)` for `Busy#busy` and the visibility rule; `runs.stop(player, RunEnd.LOBBY)` in `leave(...)` (QUIT is handled by its own listener).

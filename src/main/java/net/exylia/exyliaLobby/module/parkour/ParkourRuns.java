@@ -14,6 +14,7 @@ import net.exylia.lib.hotbar.HotbarItem;
 import net.exylia.lib.hotbar.HotbarSet;
 import net.exylia.lib.hotbar.Hotbars;
 import net.exylia.lib.item.Item;
+import net.exylia.lib.log.Logs;
 import net.exylia.lib.text.PluginMessages;
 import net.exylia.lib.text.Values;
 import net.exylia.lib.util.Cooldowns;
@@ -63,6 +64,7 @@ final class ParkourRuns implements Listener {
     static final String ACTION_BACK = "parkour_run_checkpoint";
     static final String ACTION_RESTART = "parkour_run_restart";
     static final String ACTION_LEAVE = "parkour_run_leave";
+    static final String LOG_TOO_FAST = "parkour-too-fast";
     private static final Title.Times TITLE_TIMES = Title.Times.times(Duration.ZERO, Duration.ofMillis(1500), Duration.ofMillis(400));
 
     private final LobbyContext context;
@@ -75,6 +77,7 @@ final class ParkourRuns implements Listener {
     private final Map<UUID, Run> runs = new ConcurrentHashMap<>();
     private final PluginActions actions;
     private final Hotbars hotbars;
+    private final RunGuard guard = new RunGuard(this);
 
     ParkourRuns(LobbyContext context, ConfigFile<ParkourSettings> settings, ConfigFile<ParkourCourses> courses,
                 ConfigFile<ParkourThemes> themes, ConfigFile<ParkourMessages> messages, ParkourData data,
@@ -101,6 +104,7 @@ final class ParkourRuns implements Listener {
         });
         this.hotbars = Hotbars.of(context.plugin(), actions);
         reload();
+        Logs.of(context.plugin()).action(LOG_TOO_FAST, "FEATHER");
         PluginRewards rewards = Rewards.of(context.plugin());
         if (rewards.pending() == null) {
             rewards.overflow(OverflowPolicy.QUEUE).pending(PendingRewards.database(context.plugin())).claimOnJoin();
@@ -139,6 +143,16 @@ final class ParkourRuns implements Listener {
                 if (result.isSuccess()) onPlayer(player, () -> openCourse(player, id, course, world));
             });
         });
+    }
+
+    /** The anti-cheat listener; register it next to this one. */
+    Listener guard() {
+        return guard;
+    }
+
+    /** The player's run, read on their own thread. */
+    Run runOf(Player player) {
+        return runs.get(player.getUniqueId());
     }
 
     /** Ends the player's run, if any. Safe from any thread. */
@@ -210,6 +224,7 @@ final class ParkourRuns implements Listener {
         runs.put(player.getUniqueId(), run);
         run.bar = BossBar.bossBar(Component.empty(), 0f, BossBar.Color.PURPLE, BossBar.Overlay.PROGRESS);
         player.showBossBar(run.bar);
+        guard.protect(run);
         if (settings.get().runItems() && Hotbars.isAvailable()) {
             run.hotbarBefore = hotbars.showing(player).orElse("");
             hotbars.show(player, run.hotbar());
@@ -228,6 +243,7 @@ final class ParkourRuns implements Listener {
         runs.remove(player.getUniqueId(), run);
         if (run.timer != null) run.timer.cancel();
         if (run.bar != null) player.hideBossBar(run.bar);
+        guard.release(run);
         if (run.hotbarBefore != null) {
             if (run.hotbarBefore.isEmpty()) hotbars.hide(player);
             else hotbars.show(player, run.hotbarBefore);
@@ -260,6 +276,14 @@ final class ParkourRuns implements Listener {
         long millis = run.millis();
         List<Long> splits = List.copyOf(run.splits);
         close(run, RunEnd.FINISHED);
+        double minimum = run.course.minimumTime();
+        if (settings.get().antiCheat().minimumTime() && minimum > 0 && millis < minimum * 1000) {
+            send(player, messages.get().tooFast(), run.values());
+            String detail = run.id + " in " + Times.format(millis) + " (minimum " + Times.format((long) (minimum * 1000)) + ")";
+            Logs.of(context.plugin()).record(LOG_TOO_FAST, player, detail);
+            context.debug().warn("Refused a parkour finish of " + player.getName() + ": " + detail);
+            return;
+        }
         sound(player, settings.get().sounds().finish());
         data.record(player, run.id, millis, splits).whenComplete((outcome, failed) -> {
             if (failed != null) {

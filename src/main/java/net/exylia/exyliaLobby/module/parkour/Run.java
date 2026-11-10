@@ -25,6 +25,9 @@ abstract class Run {
     /** Where a teleport this module started is going, so the guard lets it through. */
     @Nullable Location expected;
     boolean ended;
+    /** What the guard took away for the run and gives back after it. */
+    boolean flightBefore;
+    final java.util.List<org.bukkit.potion.PotionEffect> effectsBefore = new java.util.ArrayList<>();
 
     Run(ParkourRuns runs, Player player) {
         this.runs = runs;
