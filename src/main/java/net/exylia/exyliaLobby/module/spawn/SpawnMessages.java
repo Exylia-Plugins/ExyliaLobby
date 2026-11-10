@@ -23,8 +23,10 @@ public record SpawnMessages(
         String worldMissing,
         @Comment("Size of a box. %x%, %y% and %z% are its sides in blocks.")
         String boxSize,
+        @Comment("What the setup wizards name on screen (plain text, no colours): the spawn of a world, a lobby box")
+        String wizardSpawn,
+        String wizardBox,
         @Comment("Prompts of the areas editor")
-        String selectBox,
         String promptName,
         String nameTaken,
         String confirmWorld,
@@ -34,7 +36,7 @@ public record SpawnMessages(
         this("[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}No spawn is set. Ask an admin.",
                 "%prefix% {letters}Teleporting in {highlight}%seconds%s{letters}. Stand still.",
                 "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Teleport cancelled.",
-                "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Spawn of {highlight}%world%{letters} set to your position.",
+                "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Spawn of {highlight}%world%{letters} set where you stood.",
                 "{success}{icon:on} Set",
                 "{warning}{icon:warning} Not set",
                 "Lobby world",
@@ -44,7 +46,8 @@ public record SpawnMessages(
                 "{success}{icon:on} Loaded",
                 "{error}{icon:off} Not loaded",
                 "{info}%x%×%y%×%z% blocks",
-                "{letters}Select the box with the golden axe: {highlight}left-click{letters} a corner, {highlight}right-click{letters} the other, then {highlight}shift + left-click{letters}.",
+                "Lobby spawn",
+                "Lobby box",
                 "{letters}Name this lobby box (letters, numbers, dashes).",
                 "{error}That name is already used.",
                 "Stop treating world {highlight}%area%{letters} as lobby?",

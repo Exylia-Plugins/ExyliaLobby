@@ -4,6 +4,8 @@ import net.exylia.exyliaLobby.area.AreaCause;
 import net.exylia.lib.config.ConfigFile;
 import net.exylia.lib.config.Configs;
 import net.exylia.lib.module.PluginModule;
+import net.exylia.lib.util.wizard.Setup;
+import net.exylia.lib.util.wizard.Wizards;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -120,6 +122,14 @@ public abstract class LobbyModule extends PluginModule {
         // An off module never loaded its files, and its labels live there; registerConfigs is safe to repeat.
         if (!isEnabled()) registerConfigs();
         return commands();
+    }
+
+    /**
+     * Sets one place in game: the admin walks there and confirms with the gesture the thing needs. {@code back} reopens
+     * the screen they came from when they cancel; {@code null} for a flow started from a command.
+     */
+    public final @NotNull Setup setup(@NotNull Player admin, @Nullable Runnable back) {
+        return back == null ? Wizards.of(plugin()).setup(admin) : Wizards.of(plugin()).setup(admin, back);
     }
 
     /** Whether the player is in the lobby now. */

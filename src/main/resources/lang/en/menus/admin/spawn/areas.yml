@@ -1,4 +1,4 @@
-menu-version: 1
+menu-version: 2
 # DO NOT EDIT — REGENERATED ON EVERY STARTUP.
 #
 # The lobby areas: the worlds and boxes where the lobby rules apply.
@@ -66,11 +66,11 @@ items:
       - ""
       - "{success}✎ Information"
       - " {letters}Select two corners with the"
-      - " {letters}golden axe; the lobby rules"
+      - " {letters}selector; the lobby rules"
       - " {letters}apply inside that box."
       - ""
-      - "{success}{icon:click} Click to select"
-      - "{letters_black}You then name the box."
+      - "{success}{icon:click} Click to start"
+      - "{letters_black}You select it, then name it."
     actions:
       - 'exylialobby:spawn_area_add_box'
 

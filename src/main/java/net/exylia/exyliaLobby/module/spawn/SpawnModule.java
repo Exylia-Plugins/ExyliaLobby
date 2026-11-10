@@ -279,17 +279,20 @@ public final class SpawnModule extends LobbyModule {
     }
 
     private void setSpawn(Player admin) {
-        Location here = admin.getLocation();
-        String world = here.getWorld().getName();
-        SpawnSettings.Point point = new SpawnSettings.Point(world, here.getX(), here.getY(), here.getZ(), here.getYaw(), here.getPitch());
-        settings.update(current -> {
-            Map<String, SpawnSettings.Point> points = new LinkedHashMap<>(current.points());
-            points.put(world, point);
-            return new SpawnSettings(current.command(), current.onJoin(), current.warmup(), current.respawn(),
-                    current.voidReturn(), current.voidY(), points);
+        admin.closeInventory();
+        String world = admin.getWorld().getName();
+        setup(admin, () -> openDetail(admin)).spawn(messages.get().wizardSpawn(), world, here -> {
+            String in = here.getWorld().getName();
+            SpawnSettings.Point point = new SpawnSettings.Point(in, here.getX(), here.getY(), here.getZ(), here.getYaw(), here.getPitch());
+            settings.update(current -> {
+                Map<String, SpawnSettings.Point> points = new LinkedHashMap<>(current.points());
+                points.put(in, point);
+                return new SpawnSettings(current.command(), current.onJoin(), current.warmup(), current.respawn(),
+                        current.voidReturn(), current.voidY(), points);
+            });
+            send(admin, messages.get().spawnSet(), Values.of("world", in));
+            openDetail(admin);
         });
-        send(admin, messages.get().spawnSet(), Values.of("world", world));
-        ui().update(admin, DETAIL, Map.of());
     }
 
     // ======================== shared with the editor ========================

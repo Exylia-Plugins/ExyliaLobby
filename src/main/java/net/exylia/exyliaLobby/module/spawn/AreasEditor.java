@@ -1,7 +1,6 @@
 package net.exylia.exyliaLobby.module.spawn;
 
 import net.exylia.exyliaLobby.config.LobbyConfig;
-import net.exylia.lib.region.Regions;
 import net.exylia.lib.region.SelectionResult;
 import net.exylia.lib.text.Values;
 import net.exylia.lib.ui.UiEntry;
@@ -92,16 +91,7 @@ final class AreasEditor {
 
     void addBox(Player admin) {
         admin.closeInventory();
-        module.send(admin, module.messages().get().selectBox(), Values.of());
-        Regions.of(module.context().plugin()).beginSelection(admin).result().whenComplete((result, error) ->
-                module.context().tasks().runAtEntity(admin, () -> {
-                    if (error != null || result == null) {
-                        module.send(admin, module.context().messages().get().areas().noSelection(), Values.of());
-                        open(admin);
-                        return;
-                    }
-                    askName(admin, result);
-                }));
+        module.setup(admin, () -> open(admin)).area(module.messages().get().wizardBox(), result -> askName(admin, result));
     }
 
     private void askName(Player admin, SelectionResult result) {

@@ -1,4 +1,4 @@
-menu-version: 1
+menu-version: 2
 # DO NOT EDIT — REGENERATED ON EVERY STARTUP.
 #
 # The spawn module: set the spawn point, test it, and edit the lobby areas.
@@ -26,15 +26,16 @@ items:
   set:
     slot: 12
     material: LIME_BED
-    name: "{letters}Spawn {letters_black}▸ <gradient:{success}:{success_light}>Set here</gradient>"
+    name: "{letters}Spawn {letters_black}▸ <gradient:{success}:{success_light}>Set spawn</gradient>"
     lore:
       - "{letters_black}Spawn point"
       - ""
       - "{success}✎ Information"
-      - " {letters}Uses your position and view"
-      - " {letters}as the spawn of this {highlight}world{letters}."
+      - " {letters}Walk to the spawn of this"
+      - " {highlight}world{letters}, face the way players"
+      - " {letters}should look and {highlight}sneak-click{letters}."
       - ""
-      - "{success}{icon:click} Click to set"
+      - "{success}{icon:click} Click to start"
       - "{letters_black}Replaces this world's spawn."
     actions:
       - 'exylialobby:spawn_set'
