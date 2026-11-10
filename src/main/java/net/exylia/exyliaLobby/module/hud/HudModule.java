@@ -50,6 +50,8 @@ public final class HudModule extends LobbyModule {
         Board board;
         Display bar;
         TaskHandle ticker;
+        /** Whether this session drew the player-list header, so turning the tab off by a reload still clears it. */
+        boolean tab;
         int seconds;
         int text;
     }
@@ -114,6 +116,7 @@ public final class HudModule extends LobbyModule {
         }
         Session old = sessions.put(player.getUniqueId(), session);
         if (old != null) clear(player, old);
+        session.tab = config.tab().enabled();
         tab(player, config.tab());
         bar(player, session, config.bossBars());
         if (config.tab().enabled() || config.bossBars().enabled()) {
@@ -131,7 +134,7 @@ public final class HudModule extends LobbyModule {
         if (session.ticker != null) session.ticker.cancel();
         if (session.board != null) session.board.stop();
         if (session.bar != null) session.bar.stop();
-        if (settings.get().tab().enabled() && player.isOnline()) {
+        if (session.tab && player.isOnline()) {
             player.sendPlayerListHeaderAndFooter(Component.empty(), Component.empty());
         }
     }

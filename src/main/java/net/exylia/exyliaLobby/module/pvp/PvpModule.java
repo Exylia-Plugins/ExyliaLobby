@@ -10,6 +10,7 @@ import net.exylia.exyliaLobby.module.hotbar.HotbarModule;
 import net.exylia.exyliaLobby.module.protection.ProtectionModule;
 import net.exylia.exyliaLobby.module.state.StateModule;
 import net.exylia.exyliaLobby.module.shared.AdminScreens;
+import net.exylia.exyliaLobby.module.shared.Slots;
 import net.exylia.exyliaLobby.module.spawn.SpawnModule;
 import net.exylia.lib.config.ConfigFile;
 import net.exylia.lib.config.Languages;
@@ -90,6 +91,7 @@ public final class PvpModule extends LobbyModule implements Busy {
     private PluginRegions regions;
     private AdminScreens screens;
     private NamespacedKey marker;
+    private NamespacedKey kitMarker;
     private RespawnHook locationHook;
     private RespawnHook afterHook;
     private Runnable damageHook;
@@ -109,6 +111,8 @@ public final class PvpModule extends LobbyModule implements Busy {
     private final Map<UUID, Countdown> countdowns = new ConcurrentHashMap<>();
     private final Map<UUID, Tag> tags = new ConcurrentHashMap<>();
     private final Map<UUID, PvpStat> cache = new ConcurrentHashMap<>();
+    /** When each killer last killed each victim ("killer:victim"), for the repeat-kill window. */
+    private final Map<String, Long> lastKills = new ConcurrentHashMap<>();
 
     private record Tag(long until, UUID opponent) {
     }
@@ -153,6 +157,7 @@ public final class PvpModule extends LobbyModule implements Busy {
     @Override
     protected void start() {
         marker = new NamespacedKey(plugin(), "pvp_sword");
+        kitMarker = new NamespacedKey(plugin(), "pvp_kit");
         repo = Databases.of(plugin()).repository(PvpStat.class);
         stays = Stays.of(plugin());
         regions = Regions.of(plugin(), ID);
@@ -161,7 +166,7 @@ public final class PvpModule extends LobbyModule implements Busy {
         screens = new AdminScreens(context, ID, this::click);
         screens.register();
         listen(new PvpListener(this));
-        context.module(ProtectionModule.ID, ProtectionModule.class).ifPresent(protection ->
+        context.registered(ProtectionModule.ID, ProtectionModule.class).ifPresent(protection ->
                 damageHook = protection.allowDamage(this::canHit));
         locationHook = Respawns.of(plugin()).location(EventPriority.HIGH, ctx -> dead.contains(ctx.player().getUniqueId())
                 ? respawnAt(ctx.player()) : null);
@@ -199,7 +204,7 @@ public final class PvpModule extends LobbyModule implements Busy {
         if (afterHook != null) afterHook.cancel();
         if (damageHook != null) damageHook.run();
         damageHook = null;
-        context.module(HologramsModule.ID, HologramsModule.class).ifPresent(holograms -> holograms.remove(BOARD));
+        context.registered(HologramsModule.ID, HologramsModule.class).ifPresent(holograms -> holograms.remove(BOARD));
         if (regions != null) regions.replaceAll(List.of());
         screens.clear();
         countdowns.values().forEach(c -> {
@@ -212,6 +217,7 @@ public final class PvpModule extends LobbyModule implements Busy {
         restoring.clear();
         tags.clear();
         cache.clear();
+        lastKills.clear();
     }
 
     @Override
@@ -285,8 +291,30 @@ public final class PvpModule extends LobbyModule implements Busy {
     }
 
     boolean isSword(@Nullable ItemStack item) {
+        return marked(item, marker);
+    }
+
+    /** A piece of the fighter's kit: never leaves the fight. */
+    boolean isKit(@Nullable ItemStack item) {
+        return marked(item, kitMarker);
+    }
+
+    private static boolean marked(@Nullable ItemStack item, NamespacedKey key) {
         if (item == null || item.getType().isAir() || !item.hasItemMeta()) return false;
-        return item.getItemMeta().getPersistentDataContainer().has(marker, PersistentDataType.BYTE);
+        return item.getItemMeta().getPersistentDataContainer().has(key, PersistentDataType.BYTE);
+    }
+
+    /** Whether a click or drag moving this item is refused: the sword always, the kit while fighting. */
+    boolean locked(Player player, @Nullable ItemStack item) {
+        return isSword(item) || (fighting(player) && isKit(item));
+    }
+
+    /** Takes the sword and kit pieces out of an inventory that is not the player's (a chest that got one). */
+    void sweep(org.bukkit.inventory.Inventory inventory) {
+        for (int slot = 0; slot < inventory.getSize(); slot++) {
+            ItemStack item = inventory.getItem(slot);
+            if (isSword(item) || isKit(item)) inventory.setItem(slot, null);
+        }
     }
 
     /** Whether dropping this item is refused: the sword, or anything while in the fight. */
@@ -490,7 +518,7 @@ public final class PvpModule extends LobbyModule implements Busy {
                     context.module(HotbarModule.ID, HotbarModule.class).ifPresent(hotbar -> hotbar.show(player));
                 } else {
                     strip(player);
-                    context.module(StateModule.ID, StateModule.class).ifPresent(state -> state.reapplyMode(player));
+                    context.module(StateModule.ID, StateModule.class).ifPresent(state -> state.reapply(player));
                 }
             });
         });
@@ -505,11 +533,15 @@ public final class PvpModule extends LobbyModule implements Busy {
         inventory.setBoots(piece(player, kit.boots()));
         ItemStack weapon = piece(player, kit.weapon());
         int slot = swordSlot();
-        if (weapon != null) inventory.setItem(slot, weapon);
+        if (weapon != null) Slots.place(plugin(), player, slot, weapon);
         inventory.setHeldItemSlot(slot);
         var max = player.getAttribute(net.exylia.lib.platform.Attributes.MAX_HEALTH);
         player.setHealth(max == null ? 20.0 : max.getValue());
         player.setFoodLevel(20);
+        // No lobby flight or effects in a fight. The stay's snapshot holds them and gives them back with the rest.
+        player.setFlying(false);
+        player.setAllowFlight(false);
+        for (var effect : player.getActivePotionEffects()) player.removePotionEffect(effect.getType());
     }
 
     private @Nullable ItemStack piece(Player player, String source) {
@@ -518,6 +550,7 @@ public final class PvpModule extends LobbyModule implements Busy {
         ItemMeta meta = stack.getItemMeta();
         if (meta != null) {
             meta.setUnbreakable(true);
+            meta.getPersistentDataContainer().set(kitMarker, PersistentDataType.BYTE, (byte) 1);
             stack.setItemMeta(meta);
         }
         return stack;
@@ -540,14 +573,13 @@ public final class PvpModule extends LobbyModule implements Busy {
             meta.getPersistentDataContainer().set(marker, PersistentDataType.BYTE, (byte) 1);
             sword.setItemMeta(meta);
         }
-        inventory.setItem(swordSlot(), sword);
+        Slots.place(plugin(), player, swordSlot(), sword);
     }
 
+    /** Takes the sword and any kit piece left over (a crash, a missed restore) out of the player's inventory. */
     private void strip(Player player) {
-        PlayerInventory inventory = player.getInventory();
-        for (int slot = 0; slot < inventory.getSize(); slot++) {
-            if (isSword(inventory.getItem(slot))) inventory.setItem(slot, null);
-        }
+        sweep(player.getInventory());
+        if (isSword(player.getItemOnCursor()) || isKit(player.getItemOnCursor())) player.setItemOnCursor(null);
     }
 
     @Override
@@ -605,12 +637,27 @@ public final class PvpModule extends LobbyModule implements Busy {
         if (!quit) send(victim, text.victim(), Values.of("killer", killer == null ? "?" : killer.getName()));
         if (killer == null) return;
         UUID killerId = killer.getUniqueId();
+        tags.remove(killerId);
+        if (repeated(killerId, victimId)) {
+            // The same victim again within the window: no kill, no streak, no reward, so two accounts farm nothing.
+            send(killer, quit ? text.quitKiller() : text.killer(), Values.of("victim", victimName).put("streak", stat(killerId).streak()));
+            return;
+        }
         change(killerId, killer.getName(), stat -> stat.killed(killer.getName()), stat -> context.tasks().runAtEntity(killer, () -> {
             Values values = Values.of("victim", victimName).put("streak", stat.streak());
             send(killer, quit ? text.quitKiller() : text.killer(), values);
-            reward(killer, stat.streak());
+            // A quit is not a fight won: it counts, but it pays nothing.
+            if (!quit) reward(killer, stat.streak());
         }));
-        tags.remove(killerId);
+    }
+
+    /** Whether this killer already killed this victim within the repeat window; remembers this kill either way. */
+    private boolean repeated(UUID killer, UUID victim) {
+        long now = System.currentTimeMillis();
+        long window = settings.get().repeatKillWindow().toMillis();
+        lastKills.values().removeIf(at -> now - at >= window);
+        Long before = lastKills.put(killer + ":" + victim, now);
+        return before != null && now - before < window;
     }
 
     private void change(UUID id, String name, UnaryOperator<PvpStat> edit, java.util.function.Consumer<PvpStat> done) {
@@ -720,7 +767,7 @@ public final class PvpModule extends LobbyModule implements Busy {
     }
 
     private void buildBoard() {
-        context.module(HologramsModule.ID, HologramsModule.class).ifPresent(holograms -> {
+        context.registered(HologramsModule.ID, HologramsModule.class).ifPresent(holograms -> {
             holograms.remove(BOARD);
             PvpSettings.Point point = settings.get().board();
             World world = point.set() ? Bukkit.getWorld(point.world()) : null;
@@ -779,7 +826,7 @@ public final class PvpModule extends LobbyModule implements Busy {
         settings.update(current -> new PvpSettings(current.topCommand(), current.permission(), current.equipSeconds(),
                 current.unequipSeconds(), current.tagSeconds(), current.swordSlot(), current.swordMaterial(), current.quitCounts(),
                 current.kit(), point(at), current.topRefreshSeconds(), current.boardRows(), current.board(),
-                current.streakRewards(), current.zones()));
+                current.streakRewards(), current.zones(), current.repeatKillWindow()));
         send(admin, messages.get().spawnSet(), Values.of());
     }
 
@@ -788,7 +835,7 @@ public final class PvpModule extends LobbyModule implements Busy {
         settings.update(current -> new PvpSettings(current.topCommand(), current.permission(), current.equipSeconds(),
                 current.unequipSeconds(), current.tagSeconds(), current.swordSlot(), current.swordMaterial(), current.quitCounts(),
                 current.kit(), current.respawn(), current.topRefreshSeconds(), current.boardRows(), point(at),
-                current.streakRewards(), current.zones()));
+                current.streakRewards(), current.zones(), current.repeatKillWindow()));
         buildBoard();
         send(admin, messages.get().boardSet(), Values.of());
     }
@@ -884,7 +931,8 @@ public final class PvpModule extends LobbyModule implements Busy {
             change.accept(map);
             return new PvpSettings(current.topCommand(), current.permission(), current.equipSeconds(), current.unequipSeconds(),
                     current.tagSeconds(), current.swordSlot(), current.swordMaterial(), current.quitCounts(), current.kit(),
-                    current.respawn(), current.topRefreshSeconds(), current.boardRows(), current.board(), current.streakRewards(), map);
+                    current.respawn(), current.topRefreshSeconds(), current.boardRows(), current.board(), current.streakRewards(), map,
+                    current.repeatKillWindow());
         });
         buildZones();
     }

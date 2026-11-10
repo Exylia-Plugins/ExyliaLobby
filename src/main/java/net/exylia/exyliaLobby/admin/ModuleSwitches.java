@@ -30,6 +30,11 @@ public final class ModuleSwitches {
                               @Nullable Boolean wanted, @NotNull Runnable redraw) {
         boolean on = wanted != null ? wanted : !module.isEnabled();
         lobby.getTasks().run(() -> {
+            if (on && !module.handedBack().isDone()) {
+                // Switched off a moment ago and still giving players their things back: switch on once that is done.
+                module.handedBack().thenRun(() -> toggle(lobby, viewer, module, true, redraw));
+                return;
+            }
             ModuleToggle result = lobby.getModules().setEnabled(module.getId(), on);
             if (result.succeeded()) {
                 lobby.getConfig().update(config -> new LobbyConfig(config.language(),

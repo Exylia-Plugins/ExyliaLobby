@@ -12,6 +12,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.WeatherType;
 import org.bukkit.entity.Player;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -38,8 +39,14 @@ public final class StateModule extends LobbyModule implements Listener {
 
     private ConfigFile<StateSettings> settings;
     private final Map<UUID, Saved> saved = new ConcurrentHashMap<>();
-    /** The mode each player got back on leaving, for a late snapshot restore that would put the lobby's one back. */
-    private final Map<UUID, GameMode> returned = new ConcurrentHashMap<>();
+    /** What each player got back on leaving, for a late snapshot restore that would put the lobby's state back. */
+    private final Map<UUID, Returned> returned = new ConcurrentHashMap<>();
+    /** On the player, saved with their data: what they had before the lobby, so a crash does not lose it. */
+    private NamespacedKey crashKey;
+
+    private record Returned(GameMode mode, boolean flyTouched, boolean allowFlight, boolean flying,
+                            List<PotionEffectType> applied) {
+    }
 
     /** What one player had before the lobby changed it; a null or false field means it was not touched. */
     private static final class Saved {
@@ -79,13 +86,26 @@ public final class StateModule extends LobbyModule implements Listener {
 
     @Override
     protected void start() {
+        crashKey = new NamespacedKey(plugin(), "lobby_state");
         listen(this);
     }
 
-    /** Puts back the mode this player had before the lobby, once something else restored a snapshot after they left. */
-    public void reapplyMode(@NotNull Player player) {
-        GameMode mode = returned.get(player.getUniqueId());
-        if (mode != null && !saved.containsKey(player.getUniqueId()) && player.getGameMode() != mode) player.setGameMode(mode);
+    /**
+     * Puts back what this player had before the lobby (mode, flight) and takes the lobby's effects off again, once
+     * something else restored a snapshot taken inside the lobby after they left.
+     */
+    public void reapply(@NotNull Player player) {
+        Returned back = returned.get(player.getUniqueId());
+        if (back == null || saved.containsKey(player.getUniqueId())) return;
+        if (back.mode() != null && player.getGameMode() != back.mode()) player.setGameMode(back.mode());
+        if (back.flyTouched()) {
+            player.setAllowFlight(back.allowFlight());
+            player.setFlying(back.allowFlight() && back.flying());
+        }
+        for (PotionEffectType type : back.applied()) {
+            PotionEffect effect = player.getPotionEffect(type);
+            if (effect != null && effect.isInfinite()) player.removePotionEffect(type);
+        }
     }
 
     @Override
@@ -120,10 +140,12 @@ public final class StateModule extends LobbyModule implements Listener {
         Saved before = new Saved();
         saved.put(player.getUniqueId(), before);
 
+        // Still marked from a lobby visit that never ended (a crash): what they have now is the lobby's.
+        String[] crashed = crashed(player);
         GameMode current = player.getGameMode();
         boolean staff = current == GameMode.CREATIVE || current == GameMode.SPECTATOR;
         if (now.changeGameMode() && (!staff || now.overrideStaffModes())) {
-            before.mode = current;
+            before.mode = crashed == null ? current : crashed[0].equals("-") ? null : GameMode.valueOf(crashed[0]);
             player.setGameMode(now.gameMode());
         }
 
@@ -137,8 +159,10 @@ public final class StateModule extends LobbyModule implements Listener {
         }
 
         if (now.clearEffects()) {
-            before.effects.addAll(player.getActivePotionEffects());
-            before.effects.forEach(effect -> player.removePotionEffect(effect.getType()));
+            for (PotionEffect effect : player.getActivePotionEffects()) {
+                if (!lobbyEffect(effect, now)) before.effects.add(effect);
+                player.removePotionEffect(effect.getType());
+            }
         }
         for (StateSettings.Effect entry : now.effects()) {
             PotionEffectType type = type(entry.effect());
@@ -147,21 +171,27 @@ public final class StateModule extends LobbyModule implements Listener {
                 continue;
             }
             PotionEffect previous = player.getPotionEffect(type);
-            if (previous != null && !now.clearEffects()) before.effects.add(previous);
+            if (previous != null && !now.clearEffects() && !lobbyEffect(previous, now)) before.effects.add(previous);
             before.applied.add(type);
             player.addPotionEffect(new PotionEffect(type, PotionEffect.INFINITE_DURATION, Math.max(0, entry.level() - 1),
                     false, entry.particles(), true));
         }
 
+        boolean allowFlight = crashed != null ? Boolean.parseBoolean(crashed[1]) : player.getAllowFlight();
+        boolean flying = crashed != null ? Boolean.parseBoolean(crashed[2]) : player.isFlying();
         if (now.fly() && !now.flyPermission().isBlank() && player.hasPermission(now.flyPermission())) {
             before.flyTouched = true;
-            before.allowFlight = player.getAllowFlight();
-            before.flying = player.isFlying();
+            before.allowFlight = allowFlight;
+            before.flying = flying;
             player.setAllowFlight(true);
-        } else if (before.mode != null) {
-            before.allowFlight = player.getAllowFlight();
-            before.flying = player.isFlying();
+        } else if (before.mode != null || crashed != null) {
+            before.allowFlight = allowFlight;
+            before.flying = flying;
             before.flyTouched = true;
+        }
+        if (crashed == null) {
+            player.getPersistentDataContainer().set(crashKey, PersistentDataType.STRING,
+                    (before.mode == null ? "-" : before.mode.name()) + ";" + allowFlight + ";" + flying);
         }
 
         if (now.time() >= 0) {
@@ -189,14 +219,14 @@ public final class StateModule extends LobbyModule implements Listener {
     protected void leave(@NotNull Player player, @NotNull AreaCause cause) {
         Saved before = saved.remove(player.getUniqueId());
         if (before == null) return;
+        player.getPersistentDataContainer().remove(crashKey);
 
         for (PotionEffectType type : before.applied) player.removePotionEffect(type);
         player.addPotionEffects(before.effects);
 
-        if (before.mode != null) {
-            player.setGameMode(before.mode);
-            returned.put(player.getUniqueId(), before.mode);
-        }
+        if (before.mode != null) player.setGameMode(before.mode);
+        returned.put(player.getUniqueId(), new Returned(before.mode, before.flyTouched, before.allowFlight, before.flying,
+                List.copyOf(before.applied)));
         if (before.flyTouched) {
             player.setAllowFlight(before.allowFlight);
             player.setFlying(before.allowFlight && before.flying);
@@ -230,6 +260,31 @@ public final class StateModule extends LobbyModule implements Listener {
         }
         player.setLevel(level);
         player.setExp((float) Math.max(0, Math.min(0.999, now.xpProgress())));
+    }
+
+    /** The mode, flight and flying a lobby visit that never ended recorded, or null when there is none. */
+    private String[] crashed(Player player) {
+        String value = player.getPersistentDataContainer().get(crashKey, PersistentDataType.STRING);
+        if (value == null) return null;
+        String[] parts = value.split(";");
+        if (parts.length != 3) return null;
+        try {
+            if (!parts[0].equals("-")) GameMode.valueOf(parts[0]);
+        } catch (IllegalArgumentException unknown) {
+            return null;
+        }
+        return parts;
+    }
+
+    /** One of the configured lobby effects, as {@code enter} gives it: never the player's own. */
+    private static boolean lobbyEffect(PotionEffect effect, StateSettings now) {
+        if (!effect.isInfinite()) return false;
+        for (StateSettings.Effect entry : now.effects()) {
+            if (effect.getType().equals(type(entry.effect())) && effect.getAmplifier() == Math.max(0, entry.level() - 1)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static PotionEffectType type(String name) {

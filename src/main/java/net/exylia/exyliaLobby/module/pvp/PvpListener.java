@@ -10,11 +10,18 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
+import org.bukkit.event.player.PlayerToggleFlightEvent;
+import org.bukkit.inventory.ItemStack;
 
 /** The events the PvP module reacts to; every decision lives in {@link PvpModule}. */
 final class PvpListener implements Listener {
@@ -70,10 +77,37 @@ final class PvpListener implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
-        if (module.isSword(event.getCurrentItem()) || module.isSword(event.getCursor())
-                || (module.fighting(player) && event.getSlotType() == org.bukkit.event.inventory.InventoryType.SlotType.ARMOR)) {
+        // The number key moves the hotbar item under it, which is neither the clicked item nor the cursor.
+        ItemStack keyed = event.getHotbarButton() >= 0 ? player.getInventory().getItem(event.getHotbarButton()) : null;
+        if (module.locked(player, event.getCurrentItem()) || module.locked(player, event.getCursor())
+                || module.locked(player, keyed)
+                || (event.getClick() == ClickType.SWAP_OFFHAND && module.locked(player, player.getInventory().getItemInOffHand()))
+                || (module.fighting(player) && event.getSlotType() == InventoryType.SlotType.ARMOR)) {
             event.setCancelled(true);
         }
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    public void onDrag(InventoryDragEvent event) {
+        if (event.getWhoClicked() instanceof Player player && module.locked(player, event.getOldCursor())) event.setCancelled(true);
+    }
+
+    /** A fighter opens nothing else (a chest, an ender chest, a menu): the kit could leave through it. */
+    @EventHandler(ignoreCancelled = true)
+    public void onOpen(InventoryOpenEvent event) {
+        if (event.getPlayer() instanceof Player player && module.fighting(player)) event.setCancelled(true);
+    }
+
+    /** Whatever got past the rules into another inventory is taken out of it when it closes. */
+    @EventHandler
+    public void onClose(InventoryCloseEvent event) {
+        InventoryType type = event.getInventory().getType();
+        if (type != InventoryType.CRAFTING && type != InventoryType.PLAYER) module.sweep(event.getInventory());
+    }
+
+    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
+    public void onFlight(PlayerToggleFlightEvent event) {
+        if (event.isFlying() && module.fighting(event.getPlayer())) event.setCancelled(true);
     }
 
     @EventHandler

@@ -34,6 +34,15 @@ public record LobbyContext(
         return modules.getModule(id, type);
     }
 
+    /**
+     * Another module whether it runs or not, to leave it a registration it keeps while off and applies when it is
+     * switched on (a hologram board, a reserved hotbar slot, a damage rule). Ask {@link #module} for anything else.
+     */
+    public <T extends PluginModule> @NotNull Optional<T> registered(@NotNull String id, @NotNull Class<T> type) {
+        return modules.all().stream().filter(module -> module.getId().equals(id))
+                .filter(type::isInstance).map(type::cast).findFirst();
+    }
+
     /** Whether the plugin is shutting down: no new tasks may be scheduled, work runs in place. */
     public boolean stopping() {
         return stoppingFlag.getAsBoolean();

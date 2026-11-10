@@ -79,8 +79,8 @@ public final class HotbarModule extends LobbyModule {
     protected void stop() {
         if (hotbars != null) Hotbars.release(plugin());
         hotbars = null;
+        // Reserved slots stay: the modules that reserved them may outlive this switch-off.
         signature = "";
-        reserved.clear();
     }
 
     private void once(String key, String line) {
@@ -98,7 +98,10 @@ public final class HotbarModule extends LobbyModule {
         return settings.get().swordSlot();
     }
 
-    /** Keeps a slot free of buttons (the pvp module reserves its sword slot); the returned handle frees it. */
+    /**
+     * Keeps a slot free of buttons (the gadgets module reserves its slot); the returned handle frees it. Kept while
+     * this module is off, so reserve through {@code context.registered} to survive it being switched on later.
+     */
     public @NotNull Runnable reserve(int slot) {
         // Deferred: modules reserve while the plugin starts, before the actions the set names are all registered.
         if (reserved.add(slot)) context.tasks().run(this::rebuildIfRunning);
