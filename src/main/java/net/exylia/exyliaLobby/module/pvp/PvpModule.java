@@ -42,6 +42,7 @@ import net.exylia.lib.util.reward.RewardEntry;
 import net.exylia.lib.util.reward.Rewards;
 import net.exylia.lib.database.wipe.Wipes;
 import net.exylia.lib.effect.Effects;
+import net.exylia.lib.format.Numbers;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -63,7 +64,6 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.time.Duration;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -744,7 +744,7 @@ public final class PvpModule extends LobbyModule implements Busy {
                     .with("row_kills", row.kills())
                     .with("row_deaths", row.deaths())
                     .with("row_best", row.bestStreak())
-                    .with("row_ratio", String.format(Locale.ROOT, "%.2f", row.kills() / (double) Math.max(1, row.deaths())))
+                    .with("row_ratio", Numbers.decimals(row.kills() / (double) Math.max(1, row.deaths()), 2))
                     .build());
         }
         return rows;

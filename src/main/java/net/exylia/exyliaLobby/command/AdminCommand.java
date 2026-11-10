@@ -4,6 +4,8 @@ import net.exylia.exyliaLobby.ExyliaLobby;
 import net.exylia.exyliaLobby.Permissions;
 import net.exylia.exyliaLobby.admin.ModuleSwitches;
 import net.exylia.exyliaLobby.module.LobbyModule;
+import net.exylia.lib.text.PluginMessages;
+import net.exylia.lib.text.Values;
 import org.bukkit.command.CommandSender;
 import java.util.stream.Collectors;
 import revxrsal.commands.annotation.Single;
@@ -43,15 +45,19 @@ public final class AdminCommand implements OrphanCommand {
         switch (state.toLowerCase()) {
             case "on", "true" -> switchModule(sender, id, true);
             case "off", "false" -> switchModule(sender, id, false);
-            default -> sender.sendMessage("Usage: /lobbyadmin module <id> [on|off]");
+            default -> send(sender, lobby.getMessages().get().modules().usage(), Values.of());
         }
     }
 
     private void switchModule(CommandSender sender, String id, Boolean on) {
         lobby.getRegistered().stream().filter(module -> module.getId().equalsIgnoreCase(id)).findFirst().ifPresentOrElse(
                 module -> ModuleSwitches.toggle(lobby, sender, module, on, () -> { }),
-                () -> sender.sendMessage("Unknown module '" + id + "'. Ids: " + lobby.getRegistered().stream()
-                        .map(LobbyModule::getId).collect(Collectors.joining(", "))));
+                () -> send(sender, lobby.getMessages().get().modules().unknown(), Values.of().putText("id", id).put("modules",
+                        lobby.getRegistered().stream().map(LobbyModule::getId).collect(Collectors.joining(", ")))));
+    }
+
+    private void send(CommandSender sender, String line, Values values) {
+        PluginMessages.of(lobby.getPlugin()).send(sender, line, values);
     }
 
     @Subcommand("reload")

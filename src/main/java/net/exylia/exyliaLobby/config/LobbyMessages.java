@@ -38,7 +38,11 @@ public record LobbyMessages(
             @Comment("The module could not start; the console says why")
             String failed,
             @Comment("Turning this one off also turns these off. %modules% lists them.")
-            String dependants) {
+            String dependants,
+            @Comment("/lobbyadmin module with a state that is not on or off")
+            String usage,
+            @Comment("/lobbyadmin module with an id no module has. %id% is what was typed, %modules% the ids.")
+            String unknown) {
 
         public Modules() {
             this("{success}{icon:on} On", "{error}{icon:off} Off", "{warning}{icon:warning} Needs %required%",
@@ -46,7 +50,9 @@ public record LobbyMessages(
                     "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Module {highlight}%module%{letters} is now {error}off{letters}.",
                     "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {letters}Module {highlight}%module%{letters} needs {warning}%required%{letters} first.",
                     "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Module {highlight}%module%{error} could not start. See the console.",
-                    "{letters_black}Also turns off: %modules%");
+                    "{letters_black}Also turns off: %modules%",
+                    "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {letters}Use {highlight}/lobbyadmin module {letters_black}id{highlight} on{letters} or {highlight}off{letters}.",
+                    "[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}No module is called {highlight}%id%{error}. {letters}Ids: {letters_black}%modules%");
         }
     }
 
