@@ -1,0 +1,16 @@
+# Un jugador intentó hablar con el chat bloqueado
+locked: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}El chat está bloqueado.'
+
+# Un jugador habló demasiado pronto. %seconds% es la espera restante.
+slow-denied: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Espera {highlight}%seconds%s{error} antes de volver a hablar.'
+
+# Se envía al lobby cuando el chat se bloquea o desbloquea. %player% es quien lo hizo.
+lock-on: '%prefix% {highlight}%player%{letters} bloqueó el chat.'
+lock-off: '%prefix% {highlight}%player%{letters} desbloqueó el chat.'
+
+# Se envía al lobby cuando cambia el modo lento. %seconds% es el nuevo retraso.
+slow-on: '%prefix% {letters}Modo lento activado: un mensaje cada {highlight}%seconds%s{letters}.'
+slow-off: '%prefix% {letters}Modo lento desactivado.'
+
+# Se envía al lobby tras limpiar el chat
+cleared: '%prefix% {letters}Se limpió el chat.'

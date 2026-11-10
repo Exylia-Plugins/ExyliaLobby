@@ -1,0 +1,18 @@
+no-spawn: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Doğuş ayarlı değil. Yöneticiye sor.'
+teleporting: '%prefix% {letters}{highlight}%seconds%sn{letters} içinde ışınlanıyorsun. Kıpırdama.'
+cancelled: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Işınlanma iptal edildi.'
+spawn-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%world%{letters} doğuşu konumuna ayarlandı.'
+state-set: '{success}{icon:on} Ayarlı'
+state-unset: '{warning}{icon:warning} Ayarlı değil'
+kind-world: Lobi dünyası
+kind-box: Lobi kutusu
+state-label-world: Durum
+state-label-box: Boyut
+world-loaded: '{success}{icon:on} Yüklü'
+world-missing: '{error}{icon:off} Yüklü değil'
+box-size: '{info}%x%×%y%×%z% blok'
+select-box: '{letters}Kutuyu altın baltayla seç: bir köşeye {highlight}sol tık{letters}, diğerine {highlight}sağ tık{letters}, sonra {highlight}shift + sol tık{letters}.'
+prompt-name: '{letters}Bu lobi kutusuna ad ver (harf, rakam, tire).'
+name-taken: '{error}Bu ad zaten kullanılıyor.'
+confirm-world: '{highlight}%area%{letters} dünyası artık lobi sayılmasın mı?'
+confirm-box: '{highlight}%area%{letters} lobi kutusu kaldırılsın mı?'

@@ -1,0 +1,81 @@
+modules:
+  spawn:
+    name: Doğuş
+    description:
+    - Doğuş noktası, /spawn, boşluk
+    - dönüşü ve doğuşta yeniden doğma.
+  state:
+    name: Oyuncu durumu
+    description:
+    - Oyun modu, can, açlık,
+    - efektler, zaman ve hava.
+  protection:
+    name: Koruma
+    description:
+    - İnşa, hasar, eşya düşürme,
+    - mob, yangın ve patlama yok.
+  join:
+    name: Giriş ve çıkış
+    description:
+    - Mesajlar, karşılama başlığı ve
+    - girişte/çıkışta komutlar.
+  hotbar:
+    name: Hotbar
+    description:
+    - Menü açan, sunuculara
+    - gönderen, komut çalıştıran eşyalar.
+  movement:
+    name: Hareket
+    description:
+    - Çift zıplama ve
+    - fırlatma pedleri.
+  visibility:
+    name: Görünürlük
+    description:
+    - Oyuncular lobide kimi
+    - göreceğini seçer.
+  selector:
+    name: Sunucu seçici
+    description:
+    - Canlı sayılı sunucular ve lobiler,
+    - NPC'ler ve portallar.
+  games:
+    name: Oyunlar
+    description:
+    - Exylia eklentilerinin tüm
+    - oyunları tek ekranda.
+  hud:
+    name: HUD
+    description:
+    - Kenar çubuğu, sekme listesi,
+    - boss barlar ve duyurular.
+  pvp:
+    name: Lobi PvP
+    description:
+    - Kılıcı tut ve katılmayı seçen
+    - oyuncularla dövüş.
+  parkour:
+    name: Parkur
+    description:
+    - Parkurlar, sonsuz parkur
+    - ve sıralamalar.
+  gadgets:
+    name: Gadget'lar
+    description:
+    - Kanca, ender yolculuğu,
+    - boya tabancası ve dahası.
+  holograms:
+    name: Hologramlar
+    description:
+    - Lobide metin ve
+    - sıralama panoları.
+  chat:
+    name: Sohbet
+    description:
+    - Sohbet kilidi, yavaş mod
+    - ve sohbeti temizleme.
+  onboarding:
+    name: Karşılama
+    description:
+    - Yeni oyuncuları
+    - ExyliaJourney'e yönlendirir.

@@ -1,0 +1,80 @@
+# Linhas de chat. %gadget% é o nome do gadget, %seconds% a recarga restante.
+cooling: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}%gadget%{warning} está em recarga: {highlight}%seconds%s{warning}.'
+no-permission: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Você ainda não tem %gadget%{error}.'
+equipped: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%gadget%{letters} está na sua hotbar.'
+put-away: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Você guardou seu gadget.'
+unavailable: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Esse gadget não pode ser usado neste servidor.'
+not-now: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Você não pode usar um gadget agora.'
+
+# A preferência na tela de configurações do jogador.
+setting-category: Gadgets
+setting-category-text:
+- Brinquedos para curtir no lobby.
+setting-name: Gadgets me afetam
+setting-description:
+- Se os gadgets de outros jogadores
+- podem te empurrar ou pintar o chão.
+
+# Palavras dos cards do menu de gadgets.
+kind: Gadget
+kind-equipped: Gadget · Equipado
+kind-locked: Gadget · Bloqueado
+label-cooldown: Recarga
+label-needs: Requer
+locked-note: Pergunte à staff como desbloquear.
+click-equip: Clique para equipar
+click-equip-next: Vai para a sua hotbar.
+click-put: Clique para guardar
+click-put-next: O slot da hotbar é liberado.
+
+# Cada gadget: nome, descrição (até três linhas), o clique que usa e o que ele faz.
+cards:
+  grapple:
+    name: Gancho
+    text:
+    - Lance em uma parede ou no chão
+    - e ele puxa você até lá.
+    click: Clique direito
+    use: lançar e puxar
+  ender:
+    name: Passeio no Ender
+    text:
+    - Voe na sua própria pérola
+    - e aterrisse com segurança.
+    click: Clique direito
+    use: lançar e montar
+  paint:
+    name: Canhão de Tinta
+    text:
+    - Os tiros colorem o chão por
+    - alguns segundos. Nada quebra.
+    click: Clique direito
+    use: atirar tinta
+  knockback:
+    name: Bastão de Repulsão
+    text:
+    - Empurre jogadores que permitem.
+    - Nunca machuca.
+    click: Bater em um jogador
+    use: empurrá-lo
+  leap:
+    name: Pena de Salto
+    text:
+    - Impulsione-se para onde olha,
+    - caindo suavemente.
+    click: Clique direito
+    use: saltar para a frente
+  snowball:
+    name: Canhão de Neve
+    text:
+    - Uma rajada de bolas de neve
+    - que empurra quem permite.
+    click: Clique direito
+    use: disparar uma rajada
+  trampoline:
+    name: Trampolim
+    text:
+    - Uma plataforma elástica sob
+    - seus pés por alguns segundos.
+    click: Clique direito
+    use: colocar a plataforma

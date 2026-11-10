@@ -1,0 +1,89 @@
+menu-version: 1
+# NE PAS MODIFIER — RÉGÉNÉRÉ À CHAQUE DÉMARRAGE.
+#
+# Le module parkour : parcours, zones infinies et thèmes.
+
+title: '{primary}&lPARKOUR {letters_black}» {highlight}Config'
+size: 27
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: FEATHER
+    name: "<gradient:{primary}:{secondary_light}>Parkour</gradient>"
+    lore:
+      - "{letters_black}Module parkour"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Les parcours des joueurs et les"
+      - " {letters}modes infinis."
+
+  courses:
+    slot: 12
+    material: FILLED_MAP
+    name: "{letters}Parkour {letters_black}▸ <gradient:{primary}:{secondary_light}>Parcours</gradient>"
+    lore:
+      - "{letters_black}Section de config"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Place un départ, des checkpoints"
+      - " {letters}et une arrivée."
+      - ""
+      - "{primary}✦ Statut"
+      - "  {letters_black}· {info}{icon:check} {letters}Prêts{letters_black}: {info}%courses_ready%{letters_black}/{info}%courses_total%"
+      - ""
+      - "{primary}{icon:click} Clique pour ouvrir"
+      - "{letters_black}Crée et modifie des parcours."
+    actions:
+      - 'exylialobby:parkour_admin_open courses'
+
+  endless_areas:
+    slot: 13
+    material: GRASS_BLOCK
+    name: "{letters}Parkour {letters_black}▸ <gradient:{primary}:{secondary_light}>Zones infinies</gradient>"
+    lore:
+      - "{letters_black}Section de config"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Où les chemins infinis se dessinent."
+      - ""
+      - "{primary}✦ Statut"
+      - "  {letters_black}· {info}{icon:map} {letters}Zones{letters_black}: {info}%areas_total%"
+      - ""
+      - "{primary}{icon:click} Clique pour ouvrir"
+      - "{letters_black}Ajoute ou supprime des zones."
+    actions:
+      - 'exylialobby:parkour_admin_open areas'
+
+  themes:
+    slot: 14
+    material: PAINTING
+    name: "{letters}Parkour {letters_black}▸ <gradient:{primary}:{secondary_light}>Thèmes</gradient>"
+    lore:
+      - "{letters_black}Section de config"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Les palettes de blocs des chemins."
+      - ""
+      - "{primary}✦ Statut"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Actifs{letters_black}: {info}%themes_on%"
+      - ""
+      - "{primary}{icon:click} Clique pour ouvrir"
+      - "{letters_black}Active ou désactive les thèmes."
+    actions:
+      - 'exylialobby:parkour_admin_open themes'
+
+  back:
+    slot: 22
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Retour {letters_black}▸ <gradient:{error}:{error_light}>Modules</gradient>"
+    lore:
+      - "{error}{icon:click} Clique pour revenir"
+    actions:
+      - 'exylialobby:parkour_admin_back'

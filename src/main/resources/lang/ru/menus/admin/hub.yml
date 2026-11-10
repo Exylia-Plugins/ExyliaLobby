@@ -1,0 +1,87 @@
+menu-version: 1
+# НЕ РЕДАКТИРОВАТЬ — ПЕРЕСОЗДАЁТСЯ ПРИ КАЖДОМ ЗАПУСКЕ.
+#
+# /lobbyadmin: хаб администрирования ExyliaLobby.
+
+title: '{primary}&lЛОББИ {letters_black}» {highlight}Админка'
+size: 27
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: NETHER_STAR
+    name: "<gradient:{primary}:{secondary_light}>ExyliaLobby</gradient>"
+    lore:
+      - "{letters_black}Управление лобби"
+      - ""
+      - "{primary}✦ Статус"
+      - "  {letters_black}· {success}{icon:on} {letters}Модулей включено{letters_black}: {success}%modules_on%{letters_black}/{info}%modules_total%"
+
+  modules:
+    slot: 11
+    material: COMMAND_BLOCK
+    name: "{letters}Лобби {letters_black}▸ <gradient:{primary}:{secondary_light}>Модули</gradient>"
+    lore:
+      - "{letters_black}Раздел настройки"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Включайте и выключайте части"
+      - " {letters}лобби {highlight}на лету{letters}."
+      - ""
+      - "{primary}{icon:click} Нажмите, чтобы открыть"
+      - "{letters_black}Все модули и их состояние."
+    actions:
+      - 'exylialobby:admin_modules'
+
+  areas:
+    slot: 12
+    material: FILLED_MAP
+    name: "{letters}Лобби {letters_black}▸ <gradient:{primary}:{secondary_light}>Зоны</gradient>"
+    lore:
+      - "{letters_black}Раздел настройки"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Миры и области, где действуют"
+      - " {letters}правила лобби."
+      - ""
+      - "{primary}{icon:click} Нажмите, чтобы открыть"
+      - "{letters_black}Добавьте мир или выделите область."
+    actions:
+      - 'exylialobby:admin_areas'
+
+  settings:
+    slot: 14
+    material: COMPARATOR
+    name: "{letters}Лобби {letters_black}▸ <gradient:{primary}:{secondary_light}>&lНАСТРОЙКИ</gradient>"
+    lore:
+      - "{letters_black}Конфигурация"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Все настройки каждого модуля"
+      - " {letters}без правки {highlight}файлов{letters}."
+      - ""
+      - "{primary}{icon:click} Нажмите, чтобы открыть"
+      - "{letters_black}Настройки каждого файла."
+    actions:
+      - 'exylialobby:admin_settings'
+
+  reload:
+    slot: 15
+    material: CLOCK
+    name: "{letters}Лобби {letters_black}▸ <gradient:{primary}:{secondary_light}>Перезагрузка</gradient>"
+    lore:
+      - "{letters_black}Обслуживание"
+      - ""
+      - "{primary}✎ Информация"
+      - " {letters}Заново читает все файлы после"
+      - " {letters}ручной правки."
+      - ""
+      - "{primary}{icon:click} Нажмите, чтобы перезагрузить"
+      - "{letters_black}Проблемы выводятся в чат."
+    actions:
+      - 'exylialobby:admin_reload'

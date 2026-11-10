@@ -1,0 +1,74 @@
+menu-version: 1
+# DÜZENLEME — HER AÇILIŞTA YENİDEN OLUŞTURULUR.
+#
+# ExyliaLobby'nin tüm modülleri: canlı aç/kapat ya da ayarlarını aç.
+
+title: '{primary}&lLOBİ {letters_black}» {highlight}Modüller {muted}%current_page%/%total_pages%'
+size: 54
+type: PAGINATION
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+  pagination:
+    material: LIGHT_GRAY_STAINED_GLASS_PANE
+    name: '{muted}Başka modül yok'
+    lore:
+      - "{letters_black}Tüm modüller burada listelenir."
+    hide_tooltip: false
+
+pagination:
+  slots: '0-35'
+
+  item_template:
+    material: '%module_icon%'
+    glow: '%module_glow%'
+    name: "{letters}Modül {letters_black}▸ <gradient:{primary}:{secondary_light}>%module_name%</gradient>"
+    lore:
+      - "{letters_black}Lobi modülü"
+      - ""
+      - "{primary}✎ Bilgi"
+      - "%module_description%"
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Durum{letters_black}: %module_state%"
+      - ""
+      - "{primary}{icon:click} Sol tık {letters_black}· {letters}aç / kapat"
+      - "{letters_black}Anında uygulanır, restart yok."
+      - "{primary}{icon:right_click} Sağ tık {letters_black}· {letters}aç"
+      - "{letters_black}Ekranını veya ayarlarını açar."
+    actions:
+      - 'left: exylialobby:module_toggle %module_id%'
+      - 'right: exylialobby:module_open %module_id%'
+
+  navigation:
+    previous:
+      slot: 48
+      sound: 'minecraft:item.book.page_turn|1.0|1.0'
+      material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGExZDU1YjNmOTg5NDEwYTM0NzUyNjUwZTI0OGM5YjZjMTc4M2E3ZWMyYWEzZmQ3Nzg3YmRjNGQwZTYzN2QzOSJ9fX0='
+      name: "{letters}Sayfa {letters_black}▸ <gradient:{error}:{error_light}>← Önceki</gradient>"
+      lore:
+        - "  {letters_black}· {letters}Sayfa{letters_black}: {info}%current_page%{letters_black}/{info}%total_pages%"
+      actions:
+        - 'previous_page'
+    next:
+      slot: 50
+      sound: 'minecraft:item.book.page_turn|1.0|1.0'
+      material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmE4N2UzZDk2ZTFjZmViOWNjZmIzYmE1M2EyMTdmYWY1MjQ5ZTI4NTUzM2IyNzFhMmZiMjg0YzMwZGJkOTgyOSJ9fX0='
+      name: "{letters}Sayfa {letters_black}▸ <gradient:{success}:{success_light}>Sonraki →</gradient>"
+      lore:
+        - "  {letters_black}· {letters}Sayfa{letters_black}: {info}%current_page%{letters_black}/{info}%total_pages%"
+      actions:
+        - 'next_page'
+
+items:
+  back:
+    slot: 49
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Geri {letters_black}▸ <gradient:{error}:{error_light}>Yönetim</gradient>"
+    lore:
+      - "{error}{icon:click} Geri dönmek için tıkla"
+    actions:
+      - 'exylialobby:admin_hub'

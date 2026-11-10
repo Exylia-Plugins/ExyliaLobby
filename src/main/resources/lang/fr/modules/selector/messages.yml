@@ -1,0 +1,58 @@
+# Lignes de chat. %server% est le nom du serveur dans le catalogue (ou son id).
+connecting: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Connexion à %server%{letters}...'
+offline: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}%server%{error} est hors ligne pour le moment.'
+no-permission: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Tu ne peux pas rejoindre %server%{error}.'
+here: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Tu es déjà sur %server%{warning}.'
+unreachable: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Le réseau est injoignable. Réessaie dans un instant.'
+unknown-server: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Ce serveur n’est pas configuré.'
+
+# Lignes d’une carte de serveur. Les mots d’état et l’invite de clic (deux lignes, jointes par <nl>).
+status-online: '{success}En ligne'
+status-offline: '{error}Hors ligne'
+status-unknown: '{muted}Pas de données'
+click-join: '{info}{icon:click} Clique pour rejoindre<nl>{letters_black}Tu es déplacé aussitôt.'
+click-locked: '{warning}{icon:locked} Verrouillé<nl>{letters_black}Il faut un grade pour rejoindre.'
+click-offline: '{error}{icon:off} Hors ligne<nl>{letters_black}Réessaie dans un instant.'
+click-here: '{success}{icon:on} Tu es ici<nl>{letters_black}Choisis un autre lobby pour changer.'
+no-lobbies: '{warning}{icon:warning} Aucun lobby défini<nl>{letters_black}Demande à un admin de les lister.'
+lobbies-next: '{info}{icon:click} Clique pour ouvrir<nl>{letters_black}Choisis le lobby où jouer.'
+
+# Écran d’admin : PNJ et portails.
+list-title: Sélecteur
+list-kind: PNJ ou portail de serveur
+subtitle-npc: PNJ de serveur
+subtitle-portal: Portail de serveur
+label-server: Serveur
+label-place: Position
+label-size: Taille
+server-missing: '{error}Absent du catalogue'
+clicks-npc:
+- '{primary}{icon:click} Clic gauche {letters_black}· {letters}changer de serveur'
+- '{primary}{icon:right_click} Clic droit {letters_black}· {letters}déplacer ici'
+- '{error}{icon:right_click} Shift + clic droit {letters_black}· {letters}supprimer'
+- '{letters_black}La suppression demande confirmation.'
+clicks-portal:
+- '{primary}{icon:click} Clic gauche {letters_black}· {letters}changer de serveur'
+- '{primary}{icon:right_click} Clic droit {letters_black}· {letters}voir son contour'
+- '{error}{icon:right_click} Shift + clic droit {letters_black}· {letters}supprimer'
+- '{letters_black}La suppression demande confirmation.'
+add-npc-title: PNJ de serveur
+add-npc-text:
+- ' {letters}Place un PNJ où tu te tiens ;'
+- ' {letters}un clic y envoie les joueurs.'
+add-npc-click: Clique pour ajouter
+add-npc-next: Tu choisis d’abord son serveur.
+add-portal-title: Portail
+add-portal-text:
+- ' {letters}Sélectionne une zone ; la'
+- ' {letters}traverser envoie ailleurs.'
+add-portal-click: Clique pour sélectionner
+add-portal-next: Tu choisis son serveur après.
+prompt-server: '{letters}Vers quel serveur envoie-t-il les joueurs ?'
+select-portal: '{letters}Sélectionne le portail avec la hache dorée : {highlight}clic gauche{letters} sur un coin, {highlight}clic droit{letters} sur l’autre, puis {highlight}shift + clic gauche{letters}.'
+no-servers: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Ajoute d’abord un serveur au catalogue (modules/selector/config.yml).'
+added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} ajouté.'
+removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} supprimé.'
+changed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} envoie maintenant les joueurs vers %server%{letters}.'
+moved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} déplacé à ta position.'
+confirm-remove: Supprimer {highlight}%what%{letters} ?

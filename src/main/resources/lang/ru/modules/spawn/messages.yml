@@ -1,0 +1,31 @@
+# /spawn, когда точка спавна не найдена
+no-spawn: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Спавн не задан. Обратитесь к админу.'
+
+# /spawn с задержкой. %seconds% — ожидание.
+teleporting: '%prefix% {letters}Телепорт через {highlight}%seconds% с{letters}. Стойте на месте.'
+cancelled: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Телепорт отменён.'
+
+# Админ задал спавн мира. %world% — его название.
+spawn-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Спавн мира {highlight}%world%{letters} перенесён на вашу позицию.'
+
+# Показывается на экране «Спавн»: спавн здесь задан или нет
+state-set: '{success}{icon:on} Задан'
+state-unset: '{warning}{icon:warning} Не задан'
+
+# Редактор зон лобби: виды и состояния на каждой карточке
+kind-world: Мир лобби
+kind-box: Область лобби
+state-label-world: Состояние
+state-label-box: Размер
+world-loaded: '{success}{icon:on} Загружен'
+world-missing: '{error}{icon:off} Не загружен'
+
+# Размер области. %x%, %y% и %z% — её стороны в блоках.
+box-size: '{info}%x%×%y%×%z% блоков'
+
+# Запросы редактора зон
+select-box: '{letters}Выделите область золотым топором: {highlight}ЛКМ{letters} — один угол, {highlight}ПКМ{letters} — другой, затем {highlight}Shift + ЛКМ{letters}.'
+prompt-name: '{letters}Назовите эту область лобби (буквы, цифры, дефисы).'
+name-taken: '{error}Это имя уже занято.'
+confirm-world: Перестать считать мир {highlight}%area%{letters} лобби?
+confirm-box: Удалить область лобби {highlight}%area%{letters}?

@@ -1,0 +1,63 @@
+# Боссбары при надевании и снятии набора. %seconds% — оставшееся время.
+equip-bar: '{success}&lЭКИПИРОВКА {letters_black}» {letters}Держите меч в руке {letters_black}({info}%seconds% с{letters_black})'
+unequip-bar: '{error}&lВЫХОД ИЗ БОЯ {letters_black}» {letters}Уберите меч {letters_black}({info}%seconds% с{letters_black})'
+
+# Чат-сообщения. %seconds% — оставшееся время боя, %victim%, %killer% и %streak% описывают схватку.
+equipped: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {success}Вы в бою.{letters} Вас могут бить только игроки с мечом в руке.'
+unequipped: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Вы вышли из боя, ваши вещи вернулись.'
+tagged: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Вы в бою ещё {highlight}%seconds% с{error}. Держите меч в руке.'
+no-permission: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Вы не можете драться в лобби.'
+busy-elsewhere: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Нельзя драться, пока вы заняты другим.'
+killer: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Вы убили {highlight}%victim%{letters}. Серия {accent}%streak%{letters}.'
+victim: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {letters}Вас убил {highlight}%killer%{letters}.'
+quit-killer: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%victim%{letters} вышел во время боя. Серия {accent}%streak%{letters}.'
+streak-reward: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {success}Награда за серию{letters}: {accent}%streak%{letters} убийств.'
+
+# Меч, который держит каждый игрок в лобби: название и лор карточки.
+sword-name: '{letters}PvP {letters_black}▸ <gradient:{error}:{error_light}>Меч</gradient>'
+sword-lore:
+- '{letters_black}PvP лобби'
+- ''
+- '{error}✎ Информация'
+- ' {letters}Держите его, чтобы драться'
+- ' {letters}с такими же игроками.'
+- ''
+- '{error}{icon:click} Держите, чтобы драться'
+- '{letters_black}Набор наденется после паузы.'
+
+# Голограмма-топ. %rank%, %name% и %kills% заполняют каждую строку.
+board-title: '{primary}&lТОП УБИЙСТВ'
+board-row: '{highlight}%rank%. {letters}%name% {letters_black}· {info}%kills%'
+board-empty: '{muted}Пока никто не выиграл бой.'
+
+# Что отвечает плейсхолдер топа для места, которое пока никто не занял.
+top-empty: '-'
+
+# Админ-экран: зоны.
+list-title: PvP лобби
+list-kind: PvP-зона
+subtitle-zone: PvP-зона
+label-place: Место
+label-size: Размер
+clicks-zone:
+- '{primary}{icon:click} ЛКМ {letters_black}· {letters}показать контур'
+- '{error}{icon:right_click} Shift+ПКМ {letters_black}· {letters}убрать'
+- '{letters_black}Удаление нужно подтвердить.'
+add-zone-title: Зона
+add-zone-text:
+- ' {letters}Выделите область; набор'
+- ' {letters}надевается при входе в неё.'
+add-zone-click: Нажмите, чтобы выделить
+add-zone-next: При выходе набор снимается.
+add-here-title: Вокруг вас
+add-here-text:
+- ' {letters}Область 13x13 блоков'
+- ' {letters}с центром там, где вы стоите.'
+add-here-click: Нажмите, чтобы добавить
+add-here-next: Размер можно изменить в конфиге.
+select-zone: '{letters}Выделите зону золотым топором: {highlight}ЛКМ{letters} — один угол, {highlight}ПКМ{letters} — другой, затем {highlight}Shift + ЛКМ{letters}.'
+added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} добавлено.'
+removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} удалено.'
+confirm-remove: Удалить {highlight}%what%{letters}?
+spawn-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Точка возрождения PvP перенесена на вашу позицию.'
+board-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Голограмма-топ поставлена на вашу позицию.'

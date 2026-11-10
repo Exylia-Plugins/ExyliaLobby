@@ -1,0 +1,67 @@
+menu-version: 2
+# Lobi PvP öldürme sıralaması. Sana kalmış: yeni varsayılanlar /exylialib updates içinde bekler.
+
+title: '{primary}&lÖLDÜRME {letters_black}» {highlight}Lobi PvP {muted}%current_page%/%total_pages%'
+size: 54
+type: PAGINATION
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+  pagination:
+    material: LIGHT_GRAY_STAINED_GLASS_PANE
+    name: '{muted}Başka oyuncu yok'
+    lore:
+      - "{letters_black}Listeye girmek için dövüş kazan."
+    hide_tooltip: false
+
+pagination:
+  slots: '0-35'
+
+  item_template:
+    material: 'playerhead-%row_name%'
+    name: "{letters}Sıra {letters_black}▸ <gradient:{highlight}:{warning_light}>#%row_rank% %row_name%</gradient>"
+    lore:
+      - "{letters_black}Sıralama · Öldürme"
+      - ""
+      - "{highlight}♦ Kayıt"
+      - "  {letters_black}· {success}{icon:kills} {letters}Öldürme{letters_black}: {success}%row_kills%"
+      - "  {letters_black}· {error}{icon:deaths} {letters}Ölüm{letters_black}: {error}%row_deaths%"
+      - "  {letters_black}· {info}{icon:star} {letters}Oran{letters_black}: {info}%row_ratio%"
+      - "  {letters_black}· {accent}{icon:heart} {letters}En iyi seri{letters_black}: {accent}%row_best%"
+
+  navigation:
+    previous:
+      slot: 48
+      sound: 'minecraft:item.book.page_turn|1.0|1.0'
+      material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGExZDU1YjNmOTg5NDEwYTM0NzUyNjUwZTI0OGM5YjZjMTc4M2E3ZWMyYWEzZmQ3Nzg3YmRjNGQwZTYzN2QzOSJ9fX0='
+      name: "{letters}Sayfa {letters_black}▸ <gradient:{error}:{error_light}>← Önceki</gradient>"
+      lore:
+        - "  {letters_black}· {letters}Sayfa{letters_black}: {info}%current_page%{letters_black}/{info}%total_pages%"
+      actions:
+        - 'previous_page'
+    next:
+      slot: 50
+      sound: 'minecraft:item.book.page_turn|1.0|1.0'
+      material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmE4N2UzZDk2ZTFjZmViOWNjZmIzYmE1M2EyMTdmYWY1MjQ5ZTI4NTUzM2IyNzFhMmZiMjg0YzMwZGJkOTgyOSJ9fX0='
+      name: "{letters}Sayfa {letters_black}▸ <gradient:{success}:{success_light}>Sonraki →</gradient>"
+      lore:
+        - "  {letters_black}· {letters}Sayfa{letters_black}: {info}%current_page%{letters_black}/{info}%total_pages%"
+      actions:
+        - 'next_page'
+
+items:
+  summary:
+    slot: 49
+    material: 'playerhead-%player_name%'
+    name: "{letters}Lobi PvP {letters_black}▸ <gradient:{primary}:{secondary_light}>Rekorun</gradient>"
+    lore:
+      - "{letters_black}Dövüşlerin"
+      - ""
+      - "{primary}✦ Durum"
+      - "  {letters_black}· {highlight}{icon:star} {letters}Sıra{letters_black}: {highlight}%my_rank%"
+      - "  {letters_black}· {success}{icon:kills} {letters}Öldürme{letters_black}: {success}%my_kills%"
+      - "  {letters_black}· {error}{icon:deaths} {letters}Ölüm{letters_black}: {error}%my_deaths%"
+      - "  {letters_black}· {accent}{icon:heart} {letters}Seri{letters_black}: {accent}%my_streak%"
+      - "  {letters_black}· {accent}{icon:star} {letters}En iyi seri{letters_black}: {accent}%my_best%"

@@ -1,0 +1,43 @@
+# Редактор падов: чат-сообщения. %pad% — id пада.
+pad-added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Джамп-пад {highlight}%pad%{letters} добавлен.'
+pad-removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Джамп-пад {highlight}%pad%{letters} удалён.'
+pad-changed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Джамп-пад {highlight}%pad%{letters} обновлён.'
+no-target: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Посмотрите на блок в пределах 8 блоков.'
+same-place: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}На этом блоке уже есть пад.'
+
+# Запросы редактора падов.
+prompt-power: '{letters}Горизонтальная скорость пада (от 0.1 до 8).'
+prompt-vertical: '{letters}Скорость вверх у пада (от 0.1 до 4).'
+confirm-remove: Удалить джамп-пад {highlight}%pad%{letters}?
+
+# Редактор падов: тексты карточек.
+list-title: Движение
+list-kind: Джамп-пад
+row-subtitle: Подбрасывает наступившего
+label-place: Блок
+label-power: Сила
+label-vertical: Высота
+label-direction: Направление
+direction-look: '{info}Куда вы смотрите'
+
+# Направление фиксированного пада. %yaw% — угол в градусах.
+direction-fixed: '{info}Задано: %yaw%°'
+clicks:
+- '{primary}{icon:click} ЛКМ {letters_black}· {letters}изменить силу'
+- '{primary}{icon:right_click} ПКМ {letters_black}· {letters}изменить высоту'
+- '{primary}{icon:click} Shift+ЛКМ {letters_black}· {letters}сменить направление'
+- '{error}{icon:right_click} Shift+ПКМ {letters_black}· {letters}убрать'
+- '{letters_black}Удаление нужно подтвердить.'
+add-here-title: Под ногами
+add-here-text:
+- ' {letters}Делает блок, на котором вы'
+- ' {letters}стоите, джамп-падом.'
+add-here-click: Нажмите, чтобы добавить
+add-here-next: Затем измените силу здесь.
+add-look-title: Куда смотрю
+add-look-text:
+- ' {letters}Делает блок, на который вы'
+- ' {letters}смотрите, джамп-падом.'
+add-look-click: Нажмите, чтобы добавить
+add-look-next: Затем измените силу здесь.
+back-name: Движение

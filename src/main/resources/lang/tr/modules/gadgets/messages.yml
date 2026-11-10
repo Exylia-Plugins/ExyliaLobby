@@ -1,0 +1,73 @@
+cooling: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}%gadget%{warning} bekleme süresinde: {highlight}%seconds%sn{warning}.'
+no-permission: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Henüz %gadget%{error} sende yok.'
+equipped: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%gadget%{letters} hotbar''ında.'
+put-away: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Gadget''ını kaldırdın.'
+unavailable: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Bu gadget bu sunucuda kullanılamaz.'
+not-now: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Şu an gadget kullanamazsın.'
+setting-category: Gadget'lar
+setting-category-text:
+- Lobide oynayacağın oyuncaklar.
+setting-name: Gadget'lar beni etkilesin
+setting-description:
+- Diğer oyuncuların gadget'ları
+- seni itebilsin, zeminini boyayabilsin.
+kind: Gadget
+kind-equipped: Gadget · Kuşanıldı
+kind-locked: Gadget · Kilitli
+label-cooldown: Bekleme
+label-needs: Gerekli
+locked-note: Yetkililere nasıl açılacağını sor.
+click-equip: Kuşanmak için tıkla
+click-equip-next: Hotbar'ına girer.
+click-put: Kaldırmak için tıkla
+click-put-next: Hotbar yuvan boşalır.
+cards:
+  grapple:
+    name: Kanca
+    text:
+    - Duvara veya zemine at,
+    - seni oraya çeker.
+    click: Sağ tık
+    use: at ve çek
+  ender:
+    name: Ender Yolculuğu
+    text:
+    - Kendi incinin üstünde havada
+    - süzül, güvenle in.
+    click: Sağ tık
+    use: fırlat ve bin
+  paint:
+    name: Boya Tabancası
+    text:
+    - Atışlar zemini birkaç saniye
+    - boyar. Hiçbir şey kırılmaz.
+    click: Sağ tık
+    use: boya sık
+  knockback:
+    name: İtme Sopası
+    text:
+    - İzin veren oyuncuları it.
+    - Asla zarar vermez.
+    click: Oyuncuya vur
+    use: onu it
+  leap:
+    name: Sıçrama Tüyü
+    text:
+    - Baktığın yöne fırla,
+    - yumuşak in.
+    click: Sağ tık
+    use: ileri sıçra
+  snowball:
+    name: Kartopu Topu
+    text:
+    - İzin veren oyuncuları hafifçe
+    - iten bir kartopu yağmuru.
+    click: Sağ tık
+    use: yağmuru ateşle
+  trampoline:
+    name: Trambolin
+    text:
+    - Ayaklarının altında birkaç
+    - saniyelik zıplatan ped.
+    click: Sağ tık
+    use: pedi yerleştir

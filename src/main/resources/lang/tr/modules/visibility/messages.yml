@@ -1,0 +1,16 @@
+changed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Artık şunu görüyorsun: %state%{letters}.'
+cooling: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Tekrar değiştirmeden önce {highlight}%seconds%sn{warning} bekle.'
+state-everyone: '{success}Herkes'
+state-friends: '{info}Arkadaşlar ve yetkililer'
+state-nobody: '{error}Hiç kimse'
+category: Lobi
+category-text:
+- Lobinin sana nasıl göründüğü.
+name: Oyuncu görünürlüğü
+description:
+- Lobideyken kimi göreceğin.
+- Yetkililer hep görünür.
+label-everyone: Herkes
+label-friends: Arkadaşlar ve yetkililer
+label-nobody: Hiç kimse
+unavailable: Bu sunucuda PacketEvents gerekli.

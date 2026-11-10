@@ -1,0 +1,27 @@
+# Prefixo das linhas de chat deste plugin como %prefix%
+prefix: '{primary}&lLOBBY {letters_black}•<reset>'
+
+# Um comando ou botão de um módulo desativado. %module% é o nome dele.
+module-off: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {letters}O módulo {highlight}%module%{letters} está desativado.'
+modules:
+  # O estado mostrado no card de um módulo
+  'on': '{success}{icon:on} Ativado'
+  'off': '{error}{icon:off} Desativado'
+  # O módulo espera por outro que está desativado. %required% é o nome dele.
+  blocked: '{warning}{icon:warning} Precisa de %required%'
+  # Enviado após um módulo ser alternado na tela de Módulos
+  switched-on: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}O módulo {highlight}%module%{letters} agora está {success}ativado{letters}.'
+  switched-off: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}O módulo {highlight}%module%{letters} agora está {error}desativado{letters}.'
+  # Enviado quando um módulo não inicia porque %required% está desativado ou ausente
+  blocked-by: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {letters}O módulo {highlight}%module%{letters} precisa antes de {warning}%required%{letters}.'
+  # O módulo não pôde iniciar; o console diz o motivo
+  failed: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}O módulo {highlight}%module%{error} não pôde iniciar. Veja o console.'
+  # Desativar este também desativa estes. %modules% os lista.
+  dependants: '{letters_black}Também desativa: %modules%'
+areas:
+  # Mostrado quando um admin salva uma caixa do lobby a partir da seleção
+  box-saved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Área do lobby {highlight}%area%{letters} salva.'
+  box-removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Área do lobby {highlight}%area%{letters} removida.'
+  no-selection: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Selecione dois cantos primeiro.'
+  world-added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}O mundo {highlight}%world%{letters} agora é lobby.'
+  world-removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}O mundo {highlight}%world%{letters} não é mais lobby.'

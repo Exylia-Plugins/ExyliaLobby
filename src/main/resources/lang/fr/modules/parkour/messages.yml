@@ -1,0 +1,302 @@
+# /parkour sans rien après. %courses% liste les parcours, %command% est le label de la commande.
+usage: '%prefix% {letters}Parcours : %courses%{letters}. Lance-en un avec {highlight}/%command% <course>{letters}, ou {highlight}/%command% endless{letters}.'
+unknown-course: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Aucun parcours nommé {highlight}%course%{error}.'
+course-closed: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}{highlight}%course%{error} est fermé pour le moment.'
+mode-off: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Ce mode est désactivé.'
+
+# Un mode infini sans zone configurée
+no-area: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Le parkour infini n’a pas encore de zone. Demande à un admin.'
+not-running: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Tu n’es pas en train de faire un parkour.'
+
+# Course quittée avec /parkour leave ou l’objet de sortie
+left: '%prefix% {letters}Tu as quitté le parkour.'
+
+# /parkour <parcours ou mode> hors du lobby, ou pendant qu’une autre activité (un combat) te retient
+not-in-lobby: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Le parkour ne peut être lancé que dans le lobby.'
+busy: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Termine ce que tu fais avant de lancer un parkour.'
+
+# Courses sur parcours. %course% est son nom, %time% le temps écoulé, %checkpoint%/%total% la progression.
+start-title: '{primary}&l%course%'
+start-subtitle: '{letters}Go !'
+checkpoint-title: '{info}%checkpoint%{letters_black}/{info}%total%'
+
+# %delta% est l’une des lignes delta ci-dessous : vert devant ton record, rouge derrière.
+checkpoint-subtitle: '{letters}%time% %delta%'
+delta-ahead: '{success}%delta%'
+delta-behind: '{error}%delta%'
+boss-bar: '{primary}%course% {letters_black}» {info}%time%'
+
+# L’arrivée a été atteinte sans tous les checkpoints
+missed-checkpoint: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Tu as raté un checkpoint. Passe-les tous avant l’arrivée.'
+time-up: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Temps écoulé sur {highlight}%course%{error}.'
+
+# Une arrivée sous le temps minimum du parcours
+too-fast: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Cette arrivée est plus rapide que ce que permet ce parcours, elle n’a pas été comptée.'
+
+# Lignes de chat après une arrivée. %medal% est une ligne de médaille ci-dessous ou rien, %rank% la place au classement général.
+finished:
+- ''
+- '  {primary}&l%course% {letters_black}» {success}Terminé'
+- '  {letters_black}· {letters}Temps{letters_black}: {info}%time% %record%'
+- '  {letters_black}· {letters}Record{letters_black}: {highlight}%best% {letters_black}(#%rank%) %medal%'
+- ''
+new-record: '{success}Nouveau record !'
+no-record: ''
+medal-gold: '{highlight}Médaille d’or'
+medal-silver: '{letters}Médaille d’argent'
+medal-bronze: '{warning}Médaille de bronze'
+
+# Pas encore de place dans un classement
+unranked: —
+
+# La base de données n’a pas pu être lue ou écrite, donc une arrivée ou un score n’a pas été enregistré
+not-saved: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Ton résultat n’a pas pu être enregistré. Réessaie dans un instant.'
+
+# Modes infinis. %mode% est un nom de mode ci-dessous, %score% les sauts, %left% le temps restant d’un sprint.
+endless-name: Infini
+sprint-name: Sprint
+daily-name: Quotidien
+endless-boss-bar: '{primary}%mode% {letters_black}» {info}%score% {letters}sauts {letters_black}· {info}%time%'
+sprint-boss-bar: '{primary}%mode% {letters_black}» {info}%score% {letters}sauts {letters_black}· {warning}%left%'
+
+# Affiché quand le chemin change de thème. %theme% est le nom du thème.
+theme-title: '%theme%'
+milestone-title: '{highlight}&l%score%'
+milestone-subtitle: '{letters}sauts d’affilée'
+
+# Lignes de chat à la fin d’une course infinie. %retry% est le bouton de nouvel essai ci-dessous.
+endless-ended:
+- ''
+- '  {primary}&l%mode% {letters_black}» {letters}Course terminée'
+- '  {letters_black}· {letters}Score{letters_black}: {info}%score% {letters_black}en {info}%time% %record%'
+- '  {letters_black}· {letters}Record{letters_black}: {highlight}%best% {letters_black}(#%rank%)'
+- '  %retry%'
+- ''
+retry: <click:run_command:'/%command% %mode_id%'><hover:show_text:'{letters}Lance une nouvelle partie'>{success}&l[↻ REJOUER]</hover></click>
+
+# Une course interrompue par quelque chose d’interdit. %reason% est l’une des raisons ci-dessous.
+cheated: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Course interrompue : %reason%.'
+reasons:
+  flight: vol
+  elytra: planeur
+  riptide: impulsion du trident
+  pearl: perle du Ender
+  vehicle: monture
+  game-mode: mode de jeu changé
+  teleport: téléportation
+  unconfirmed: un saut n’a pas pu être confirmé
+
+# Tes temps sur un parcours ont été effacés
+time-reset: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Tes temps sur {highlight}%course%{letters} ont été réinitialisés.'
+
+# Commandes staff sous /lobbyadmin parkour. %course% est l’id.
+course-created: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Parcours {highlight}%course%{letters} créé avec son départ à tes pieds. Ajoute des checkpoints et une arrivée.'
+course-exists: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Un parcours nommé {highlight}%course%{error} existe déjà.'
+start-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Départ de {highlight}%course%{letters} défini à tes pieds.'
+checkpoint-added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Checkpoint {highlight}%checkpoint%{letters} de {highlight}%course%{letters} ajouté à tes pieds.'
+finish-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Arrivée de {highlight}%course%{letters} définie à tes pieds.'
+course-deleted: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Parcours {highlight}%course%{letters} supprimé.'
+wrong-world: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}{highlight}%course%{error} est dans le monde {highlight}%world%{error}. Va là-bas pour le modifier.'
+
+# L’étiquette au-dessus du faisceau du prochain checkpoint. %checkpoint%/%total% le checkpoint, %distance% mètres de distance.
+beacon-label: '{letters}Checkpoint {info}%checkpoint%{letters_black}/{info}%total% {letters_black}· {info}%distance% m'
+
+# Les objets d’un coureur : retour au dernier checkpoint, recommencer, quitter.
+items:
+  checkpoint:
+    icon: LIGHT_WEIGHTED_PRESSURE_PLATE
+    name: '{letters}Parkour {letters_black}▸ <gradient:{primary}:{secondary_light}>Checkpoint</gradient>'
+    lore:
+    - '{letters_black}Objet de course'
+    - ''
+    - '{primary}{icon:click} Clique pour revenir'
+    - '{letters_black}Au dernier checkpoint atteint.'
+  restart:
+    icon: CLOCK
+    name: '{letters}Parkour {letters_black}▸ <gradient:{primary}:{secondary_light}>Recommencer</gradient>'
+    lore:
+    - '{letters_black}Objet de course'
+    - ''
+    - '{primary}{icon:click} Clique pour recommencer'
+    - '{letters_black}Une nouvelle course depuis le départ.'
+  leave:
+    icon: BARRIER
+    name: '{letters}Parkour {letters_black}▸ <gradient:{error}:{error_light}>Quitter</gradient>'
+    lore:
+    - '{letters_black}Objet de course'
+    - ''
+    - '{error}{icon:click} Clique pour quitter'
+    - '{letters_black}Termine la course ; rien n’est gardé.'
+
+# Classements de chat et outils staff.
+tools:
+  # %board% est l’id du classement.
+  top-title: '%prefix% {primary}&l%board% {letters_black}» {letters}Top'
+  # %place%, %name% et %value% d’une ligne.
+  top-line: '  {highlight}#%place% {letters_black}· {letters}%name% {letters_black}· {info}%value%'
+  top-empty: '%prefix% {letters}Personne n’est encore dans ce classement.'
+  unknown-board: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Aucun classement nommé {highlight}%board%{error}.'
+  # Lignes du tableau hologramme : un titre, puis une ligne par place (jusqu’à 10).
+  board-title: '{primary}&l%board%'
+  board-line: '{highlight}#%place% {letters}%name% {letters_black}· {info}%value%'
+  board-empty: '{letters_black}Personne pour l’instant'
+  board-placed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Classement {highlight}%board%{letters} placé à tes pieds.'
+  kill-added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%block%{letters} renvoie maintenant au départ les coureurs de {highlight}%course%{letters}.'
+  kill-no-block: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Tiens-toi sur un bloc ou regarde-en un d’abord.'
+  medals-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Médailles de {highlight}%course%{letters} définies.'
+  # Demande confirmation avant de supprimer un parcours. %course% est l’id.
+  confirm-delete: Supprimer %course% et ses réglages ? Les temps enregistrés restent dans la base de données.
+  select-area: '%prefix% {letters}Sélectionne les deux coins de la zone avec ta baguette.'
+  no-selection: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Aucune zone sélectionnée.'
+  # Demande le nom de la zone.
+  prompt-area: Nom de la zone
+  area-saved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Zone infinie {highlight}%area%{letters} enregistrée, départ là où tu te tiens.'
+
+# Cartes de menu : lignes de stats, sous-titres, invites et états. %tone% et %light% sont les couleurs de la palette de la carte.
+screens:
+  'on': '{success}{icon:on} Activé'
+  'off': '{error}{icon:off} Désactivé'
+  # Une valeur qui n’existe pas encore : pas de meilleur temps, pas de rang.
+  none: '{muted}Pas encore'
+  # Sous-titres des cartes. Un parcours terminé est à toi, donc il prend le ton succès.
+  subtitle-course: '{letters_black}Parcours'
+  subtitle-course-done: '{success}Parcours · terminé'
+  subtitle-endless: '{letters_black}Mode infini'
+  subtitle-sprint: '{letters_black}Mode sprint'
+  subtitle-daily: '{letters_black}Mode quotidien'
+  subtitle-top: '{letters_black}Classement · %board%'
+  # Noms des cartes : %subject% est le parcours ou le mode ; le dégradé enveloppe les noms simples dans le ton de la carte.
+  name-course: '{letters}Parcours {letters_black}▸ %subject%'
+  name-mode: '{letters}Mode {letters_black}▸ %subject%'
+  name-row: '{letters}#%place% {letters_black}▸ %subject%'
+  gradient: <gradient:%tone%:%light%>%subject%</gradient>
+  label-rank: Rang
+  back-list: Parcours
+  label-today: Rang du jour
+  # Les libellés de section d’une carte.
+  label-info: '%tone%✎ Information'
+  label-status: '%tone%✦ Statut'
+  # Ce qu’est un parcours ou un mode, en une ou deux lignes. <nl> sépare les lignes. %seconds% est la durée d’un sprint.
+  about-course: ' {letters}Pars, passe chaque checkpoint,<nl> {letters}puis {highlight}termine {letters}au plus vite.'
+  about-endless: ' {letters}Saute aussi loin que possible.<nl> {letters}Ton score, ce sont les {highlight}sauts{letters}.'
+  about-sprint: ' {letters}Enchaîne le plus de sauts<nl> {letters}en {highlight}%seconds% secondes{letters}.'
+  about-daily: ' {letters}Le même chemin pour tous aujourd’hui.<nl> {letters}Un classement, {highlight}remis à zéro chaque jour{letters}.'
+  # Lignes de stats : %value% est la valeur.
+  stat-difficulty: '  {letters_black}· {warning}{icon:star} {letters}Difficulté{letters_black}: {warning}%value%'
+  stat-best: '  {letters_black}· {info}{icon:clock} {letters}Record{letters_black}: {info}%value%'
+  stat-score: '  {letters_black}· {info}{icon:star} {letters}Record{letters_black}: {info}%value%'
+  stat-medal: '  {letters_black}· {highlight}{icon:gold} {letters}Médaille{letters_black}: %value%'
+  stat-rank: '  {letters_black}· {highlight}{icon:star} {letters}%label%{letters_black}: {highlight}%value%'
+  stat-finishes: '  {letters_black}· {success}{icon:book} {letters}Arrivées{letters_black}: {success}%value%'
+  stat-checkpoints: '  {letters_black}· {info}{icon:info} {letters}Checkpoints{letters_black}: {info}%value%'
+  # Les lignes de clic d’une carte de liste (un parcours, puis un mode).
+  click-course: '%tone%{icon:click} Clic gauche {letters_black}· {letters}jouer<nl>%tone%{icon:right_click} Clic droit {letters_black}· {letters}détails<nl>{letters_black}Jouer t’envoie au départ.'
+  click-mode: '%tone%{icon:click} Clic gauche {letters_black}· {letters}jouer<nl>%tone%{icon:right_click} Clic droit {letters_black}· {letters}classement<nl>{letters_black}Jouer t’envoie dans sa zone.'
+  # Tes temps intermédiaires sur l’écran d’un parcours : une ligne par checkpoint, puis l’arrivée face à la médaille d’or.
+  splits-none: ' {letters_black}Termine le parcours pour enregistrer des temps.'
+  split-line: '  {letters_black}· {info}{icon:clock} {letters}Checkpoint %number%{letters_black}: {info}%time%'
+  split-more: '  {letters_black}· {letters_black}et %more% de plus'
+  split-finish: '  {letters_black}· {highlight}{icon:clock} {letters}Arrivée{letters_black}: {info}%time% %medal%'
+  split-gold: '  {letters_black}· {highlight}{icon:gold} {letters}Or{letters_black}: {warning}%time% {letters_black}(%delta%{letters_black})'
+  # Noms des périodes d’un classement.
+  periods:
+    all: Tout temps
+    monthly: Mensuel
+    weekly: Hebdo
+    daily: Quotidien
+  # Demande confirmation avant d’effacer tes temps. %course% est son nom.
+  confirm-reset: Effacer tes temps sur %course% ? Tes places dans ses classements sont retirées.
+  # Écrans staff.
+  prompt-course: Nom du parcours
+  prompt-difficulty: Difficulté (Facile, Moyen, Difficile...)
+  prompt-gold: Temps de la médaille d’or en secondes (0 pour aucune)
+  prompt-silver: Temps de la médaille d’argent en secondes (0 pour aucune)
+  prompt-bronze: Temps de la médaille de bronze en secondes (0 pour aucune)
+  prompt-area: Nom de la zone
+  confirm-delete-area: Supprimer la zone infinie %area% ?
+  area-deleted: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Zone infinie {highlight}%area%{letters} supprimée.'
+  theme-toggled: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Thème {highlight}%theme%{letters} : %state%{letters}.'
+  difficulty-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Difficulté de {highlight}%course%{letters} définie sur {highlight}%difficulty%{letters}.'
+  enabled-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Parcours {highlight}%course%{letters} : %state%{letters}.'
+  not-ready: '{error}Requiert un départ et une arrivée'
+  ready: '{success}Prêt à jouer'
+  placed: '{success}Placée'
+  not-placed: '{error}Non placée'
+  no-courses: '{muted}Plus de parcours'
+  no-areas: '{muted}Plus de zones'
+
+# Les écrans staff de /lobbyadmin : listes de parcours, zones et thèmes.
+staff:
+  back: Parkour
+  title-courses: Parcours
+  kind-course: Parcours
+  title-areas: Zones infinies
+  kind-area: Zone
+  title-themes: Thèmes
+  kind-theme: Thème
+  # Sous-titres de cartes des lignes.
+  subtitle-course-ready: Parcours · prêt
+  subtitle-course-setup: Parcours · à configurer
+  subtitle-area: Zone infinie
+  subtitle-theme: Thème infini
+  # Libellés de stats des lignes.
+  label-difficulty: Difficulté
+  label-checkpoints: Checkpoints
+  label-state: État
+  label-world: Monde
+  label-start: Départ
+  label-floor: Sol
+  # Lignes de clic des lignes, une par ligne.
+  clicks-course:
+  - '{primary}{icon:click} Clic gauche {letters_black}· {letters}modifier'
+  - '{primary}{icon:right_click} Clic droit {letters_black}· {letters}activer ou désactiver'
+  - '{error}{icon:right_click} Shift + clic droit {letters_black}· {letters}supprimer'
+  - '{letters_black}Une confirmation te sera demandée.'
+  clicks-area:
+  - '{error}{icon:right_click} Clic droit {letters_black}· {letters}supprimer'
+  - '{letters_black}Une confirmation te sera demandée.'
+  clicks-theme:
+  - '{primary}{icon:click} Clic {letters_black}· {letters}activer ou désactiver'
+  - '{letters_black}Les chemins infinis l’utilisent si actif.'
+  # Les boutons d’ajout de chaque liste (slots 45 et 46).
+  create-course:
+    title: Créer
+    text:
+    - ' {letters}Un nouveau parcours avec son'
+    - ' {letters}départ à tes pieds.'
+    click: Clique pour créer
+    next: Ouvre ensuite son éditeur.
+  settings-courses:
+    title: Réglages
+    text:
+    - ' {letters}Modes, anti-triche, classements'
+    - ' {letters}et le reste.'
+    click: Clique pour ouvrir
+    next: Tous les réglages du parkour.
+  add-area:
+    title: Ajouter
+    text:
+    - ' {letters}Sélectionne deux coins avec ta'
+    - ' {letters}baguette, départ où tu te tiens.'
+    click: Clique pour ajouter
+    next: Tu la nommes après sélection.
+  settings-areas:
+    title: Réglages
+    text:
+    - ' {letters}Réglage du chemin, paliers'
+    - ' {letters}et modes infinis.'
+    click: Clique pour ouvrir
+    next: Tous les réglages du parkour.
+  edit-themes:
+    title: Modifier les blocs
+    text:
+    - ' {letters}Les blocs avec lesquels chaque'
+    - ' {letters}thème dessine son chemin.'
+    click: Clique pour ouvrir
+    next: Ouvre le fichier des thèmes.
+  enable-themes:
+    title: Tout activer
+    text:
+    - ' {letters}Active tous les thèmes.'
+    click: Clique pour activer
+    next: Les chemins infinis les utilisent tous.

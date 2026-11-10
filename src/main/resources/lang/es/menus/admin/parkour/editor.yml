@@ -1,0 +1,216 @@
+menu-version: 1
+# NO EDITAR — SE REGENERA EN CADA INICIO.
+#
+# Un recorrido de parkour: dónde empieza, pasa y termina, y cómo se juzga.
+
+title: '{primary}&lPARKOUR {letters_black}» {highlight}%course_id%'
+size: 36
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: FEATHER
+    name: "{letters}Recorrido {letters_black}▸ <gradient:{primary}:{secondary_light}>%course_name%</gradient>"
+    lore:
+      - "{letters_black}Recorrido"
+      - ""
+      - "{primary}✦ Estado"
+      - "  {letters_black}· {info}{icon:check} {letters}Estado{letters_black}: %course_state%"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Activado{letters_black}: %enabled%"
+
+  start:
+    slot: 11
+    material: LIME_BED
+    name: "{letters}Recorrido {letters_black}▸ <gradient:{success}:{success_light}>Inicio</gradient>"
+    lore:
+      - "{letters_black}Ajuste del recorrido"
+      - ""
+      - "{success}✎ Información"
+      - " {letters}Donde empieza. Usa tu"
+      - " {letters}posición y mirada."
+      - ""
+      - "{success}✦ Estado"
+      - "  {letters_black}· {info}{icon:compass} {letters}Inicio{letters_black}: %start_state%"
+      - ""
+      - "{success}{icon:click} Clic para fijar aquí"
+      - "{letters_black}Reemplaza el inicio."
+    actions:
+      - 'exylialobby:parkour_edit start %course_id%'
+
+  checkpoint:
+    slot: 12
+    material: LIGHT_WEIGHTED_PRESSURE_PLATE
+    name: "{letters}Recorrido {letters_black}▸ <gradient:{success}:{success_light}>Añadir checkpoint</gradient>"
+    lore:
+      - "{letters_black}Ajuste del recorrido"
+      - ""
+      - "{success}✎ Información"
+      - " {letters}Añade un checkpoint a tus pies."
+      - " {letters}Se alcanzan en orden."
+      - ""
+      - "{success}✦ Estado"
+      - "  {letters_black}· {info}{icon:check} {letters}Checkpoints{letters_black}: {info}%checkpoints%"
+      - ""
+      - "{success}{icon:click} Clic para añadir aquí"
+      - "{letters_black}Se añade tras el último."
+    actions:
+      - 'exylialobby:parkour_edit checkpoint %course_id%'
+
+  finish:
+    slot: 14
+    material: WHITE_BANNER
+    name: "{letters}Recorrido {letters_black}▸ <gradient:{success}:{success_light}>Meta</gradient>"
+    lore:
+      - "{letters_black}Ajuste del recorrido"
+      - ""
+      - "{success}✎ Información"
+      - " {letters}Donde termina. Usa tu"
+      - " {letters}posición y mirada."
+      - ""
+      - "{success}✦ Estado"
+      - "  {letters_black}· {info}{icon:star} {letters}Meta{letters_black}: %finish_state%"
+      - ""
+      - "{success}{icon:click} Clic para fijar aquí"
+      - "{letters_black}Reemplaza la meta."
+    actions:
+      - 'exylialobby:parkour_edit finish %course_id%'
+
+  kill:
+    slot: 15
+    material: MAGMA_BLOCK
+    name: "{letters}Recorrido {letters_black}▸ <gradient:{primary}:{secondary_light}>Bloques mortales</gradient>"
+    lore:
+      - "{letters_black}Ajuste del recorrido"
+      - ""
+      - "{primary}✎ Información"
+      - " {letters}El bloque que miras envía"
+      - " {letters}jugadores a su checkpoint."
+      - ""
+      - "{primary}✦ Estado"
+      - "  {letters_black}· {info}{icon:barrier} {letters}Bloques{letters_black}: {info}%kills%"
+      - ""
+      - "{primary}{icon:click} Clic para añadir bloque"
+      - "{letters_black}Mira un bloque primero."
+    actions:
+      - 'exylialobby:parkour_edit kill %course_id%'
+
+  medals:
+    slot: 20
+    material: GOLD_INGOT
+    name: "{letters}Recorrido {letters_black}▸ <gradient:{primary}:{secondary_light}>Medallas</gradient>"
+    lore:
+      - "{letters_black}Ajuste del recorrido"
+      - ""
+      - "{primary}✎ Información"
+      - " {letters}Tiempos objetivo en segundos de"
+      - " {letters}oro, plata y bronce."
+      - ""
+      - "{primary}✦ Estado"
+      - "  {letters_black}· {info}{icon:gold} {letters}Objetivos{letters_black}: {info}%medals%"
+      - ""
+      - "{primary}{icon:click} Clic para editar"
+      - "{letters_black}Pide tres números."
+    actions:
+      - 'exylialobby:parkour_edit medals %course_id%'
+
+  difficulty:
+    slot: 21
+    material: NETHER_STAR
+    name: "{letters}Recorrido {letters_black}▸ <gradient:{primary}:{secondary_light}>Dificultad</gradient>"
+    lore:
+      - "{letters_black}Ajuste del recorrido"
+      - ""
+      - "{primary}✎ Información"
+      - " {letters}La etiqueta de su tarjeta."
+      - ""
+      - "{primary}✦ Estado"
+      - "  {letters_black}· {info}{icon:crit} {letters}Dificultad{letters_black}: {info}%difficulty%"
+      - ""
+      - "{primary}{icon:click} Clic para editar"
+      - "{letters_black}Texto libre, como Difícil."
+    actions:
+      - 'exylialobby:parkour_edit difficulty %course_id%'
+
+  rewards:
+    slot: 23
+    material: CHEST
+    name: "{letters}Recorrido {letters_black}▸ <gradient:{primary}:{secondary_light}>Recompensas</gradient>"
+    lore:
+      - "{letters_black}Ajuste del recorrido"
+      - ""
+      - "{primary}✎ Información"
+      - " {letters}Recompensas de primera meta y"
+      - " {letters}tiempo mínimo y límites."
+      - ""
+      - "{primary}✦ Estado"
+      - "  {letters_black}· {info}{icon:book} {letters}Editado en el archivo"
+      - ""
+      - "{primary}{icon:click} Clic para abrir"
+      - "{letters_black}Elige este recorrido ahí."
+    actions:
+      - 'exylialobby:parkour_edit rewards %course_id%'
+
+  enabled:
+    slot: 24
+    material: LEVER
+    name: "{letters}Recorrido {letters_black}▸ <gradient:{primary}:{secondary_light}>Activado</gradient>"
+    lore:
+      - "{letters_black}Ajuste del recorrido"
+      - ""
+      - "{primary}✎ Información"
+      - " {letters}Nadie puede iniciarlo apagado."
+      - ""
+      - "{primary}✦ Estado"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Activado{letters_black}: %enabled%"
+      - ""
+      - "{primary}{icon:click} Clic para activar o desactivar"
+      - "{letters_black}Cambia al instante."
+    actions:
+      - 'exylialobby:parkour_edit enabled %course_id%'
+
+  board:
+    slot: 27
+    material: OAK_SIGN
+    name: "{letters}Recorrido {letters_black}▸ <gradient:{info}:{info_light}>Ranking aquí</gradient>"
+    lore:
+      - "{letters_black}Holograma"
+      - ""
+      - "{info}✎ Información"
+      - " {letters}Un holograma del ranking de"
+      - " {letters}este recorrido a tus pies."
+      - ""
+      - "{info}{icon:click} Clic para colocar"
+      - "{letters_black}Reemplaza su ranking."
+    actions:
+      - 'exylialobby:parkour_edit board %course_id%'
+
+  back:
+    slot: 31
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Volver {letters_black}▸ <gradient:{error}:{error_light}>Recorridos</gradient>"
+    lore:
+      - "{error}{icon:click} Clic para volver"
+    actions:
+      - 'exylialobby:parkour_edit back %course_id%'
+
+  delete:
+    slot: 35
+    material: TNT
+    name: "{letters}Recorrido {letters_black}▸ <gradient:{error}:{error_light}>Eliminar</gradient>"
+    lore:
+      - "{letters_black}Zona de peligro"
+      - ""
+      - "{error}✎ Información"
+      - " {letters}Elimina el recorrido y sus"
+      - " {letters}ajustes. Tus tiempos se quedan."
+      - ""
+      - "{error}{icon:click} Clic para eliminar"
+      - "{letters_black}Se te pedirá confirmar."
+    actions:
+      - 'exylialobby:parkour_edit delete %course_id%'

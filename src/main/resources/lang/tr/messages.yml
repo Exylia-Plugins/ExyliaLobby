@@ -1,0 +1,17 @@
+prefix: '{primary}&lLOBİ {letters_black}•<reset>'
+module-off: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {letters}{highlight}%module%{letters} modülü kapalı.'
+modules:
+  'on': '{success}{icon:on} Açık'
+  'off': '{error}{icon:off} Kapalı'
+  blocked: '{warning}{icon:warning} %required% gerekli'
+  switched-on: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%module%{letters} modülü artık {success}açık{letters}.'
+  switched-off: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%module%{letters} modülü artık {error}kapalı{letters}.'
+  blocked-by: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {letters}{highlight}%module%{letters} modülü için önce {warning}%required%{letters} gerekli.'
+  failed: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}{highlight}%module%{error} modülü başlatılamadı. Konsola bak.'
+  dependants: '{letters_black}Bunlar da kapanır: %modules%'
+areas:
+  box-saved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%area%{letters} lobi alanı kaydedildi.'
+  box-removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%area%{letters} lobi alanı kaldırıldı.'
+  no-selection: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Önce iki köşe seç.'
+  world-added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%world%{letters} dünyası artık lobi.'
+  world-removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%world%{letters} dünyası artık lobi değil.'

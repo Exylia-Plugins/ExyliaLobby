@@ -1,0 +1,82 @@
+menu-version: 1
+# La liste des parcours de parkour. # À toi de la restyler : les nouveaux défauts attendent dans /exylialib updates.
+
+title: '{primary}&lPARKOUR {letters_black}» {highlight}Parcours {muted}%current_page%/%total_pages%'
+size: 36
+type: PAGINATION
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+  pagination:
+    material: LIGHT_GRAY_STAINED_GLASS_PANE
+    name: '{muted}Plus de parcours'
+    lore:
+      - "{letters_black}Un admin en ajoute avec /lobbyadmin."
+    hide_tooltip: false
+
+pagination:
+  slots: '10-16,19-25'
+
+  item_template:
+    material: '%row_icon%'
+    glow: '%row_glow%'
+    name: "%row_name%"
+    lore:
+      - "%row_subtitle%"
+      - ""
+      - "%row_label_info%"
+      - "%row_about%"
+      - ""
+      - "%row_label_status%"
+      - "%row_stats%"
+      - ""
+      - "%row_clicks%"
+    actions:
+      - 'left: exylialobby:parkour_play %row_id%'
+      - 'right: exylialobby:parkour_details %row_id%'
+
+  navigation:
+    previous:
+      slot: 30
+      sound: 'minecraft:item.book.page_turn|1.0|1.0'
+      material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGExZDU1YjNmOTg5NDEwYTM0NzUyNjUwZTI0OGM5YjZjMTc4M2E3ZWMyYWEzZmQ3Nzg3YmRjNGQwZTYzN2QzOSJ9fX0='
+      name: "{letters}Page {letters_black}▸ <gradient:{error}:{error_light}>← Précédente</gradient>"
+      lore:
+        - "  {letters_black}· {letters}Page{letters_black}: {info}%current_page%{letters_black}/{info}%total_pages%"
+      actions:
+        - 'previous_page'
+    next:
+      slot: 32
+      sound: 'minecraft:item.book.page_turn|1.0|1.0'
+      material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmE4N2UzZDk2ZTFjZmViOWNjZmIzYmE1M2EyMTdmYWY1MjQ5ZTI4NTUzM2IyNzFhMmZiMjg0YzMwZGJkOTgyOSJ9fX0='
+      name: "{letters}Page {letters_black}▸ <gradient:{success}:{success_light}>Suivante →</gradient>"
+      lore:
+        - "  {letters_black}· {letters}Page{letters_black}: {info}%current_page%{letters_black}/{info}%total_pages%"
+      actions:
+        - 'next_page'
+
+items:
+  header:
+    slot: 4
+    material: FEATHER
+    name: "<gradient:{info}:{info_light}>Parkour</gradient>"
+    lore:
+      - "{letters_black}Parcours et modes infinis"
+      - ""
+      - "{info}✎ Information"
+      - " {letters}Clic gauche pour jouer. Clic droit"
+      - " {letters}pour les détails et le top."
+      - " {letters}Ceux terminés {success}brillent{letters}."
+
+  summary:
+    slot: 31
+    material: GOLD_INGOT
+    name: "{letters}Parkour {letters_black}▸ <gradient:{highlight}:{warning_light}>Ta progression</gradient>"
+    lore:
+      - "{letters_black}Tes parcours"
+      - ""
+      - "{highlight}✦ Statut"
+      - "  {letters_black}· {success}{icon:book} {letters}Terminés{letters_black}: {success}%done%{letters_black}/{info}%total%"
+      - "  {letters_black}· {highlight}{icon:gold} {letters}Médailles{letters_black}: {highlight}%medals%"

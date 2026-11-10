@@ -1,0 +1,17 @@
+join: '{letters_black}[{success}+{letters_black}] {letters}%player%'
+leave: '{letters_black}[{error}-{letters_black}] {letters}%player%'
+first-join: '{letters_black}[{success}+{letters_black}] {highlight}%player%{letters} ilk kez katıldı!'
+welcome:
+  title:
+    text: '{primary}&lHOŞ GELDİN'
+    subtitle: '{letters}%player%'
+    fade-in: 0.3
+    stay: 2.5
+    fade-out: 0.6
+    time-style: auto
+  sound:
+    name: ENTITY_EXPERIENCE_ORB_PICKUP
+    volume: 0.5
+    pitch: 1.4
+    category: MASTER
+motd: []

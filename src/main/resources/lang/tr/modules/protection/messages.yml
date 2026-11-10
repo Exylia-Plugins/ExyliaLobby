@@ -1,0 +1,4 @@
+build-on: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}İnşa modu {success}açık{letters}. Lobi koruması seni yok sayar.'
+build-off: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}İnşa modu {error}kapalı{letters}. Lobi koruması geri geldi.'
+build-bar: '{warning}&lİNŞA MODU {letters_black}• {letters}Koruma senin için kapalı'
+not-in-lobby: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}İnşa modu için lobinin içinde dur.'

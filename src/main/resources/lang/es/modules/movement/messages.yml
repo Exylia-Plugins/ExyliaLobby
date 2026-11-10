@@ -1,0 +1,43 @@
+# Editor de plataformas: líneas de chat. %pad% es el id de la plataforma.
+pad-added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Plataforma de impulso {highlight}%pad%{letters} añadida.'
+pad-removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Plataforma de impulso {highlight}%pad%{letters} eliminada.'
+pad-changed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Plataforma de impulso {highlight}%pad%{letters} actualizada.'
+no-target: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Mira un bloque a menos de 8 bloques.'
+same-place: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Ya hay una plataforma en ese bloque.'
+
+# Mensajes del editor de plataformas.
+prompt-power: '{letters}Velocidad horizontal de esta plataforma (0.1 a 8).'
+prompt-vertical: '{letters}Velocidad hacia arriba de esta plataforma (0.1 a 4).'
+confirm-remove: '¿Eliminar la plataforma de impulso {highlight}%pad%{letters}?'
+
+# Editor de plataformas: textos de las tarjetas.
+list-title: Movimiento
+list-kind: Plataforma de impulso
+row-subtitle: Lanza a quien la pisa
+label-place: Bloque
+label-power: Potencia
+label-vertical: Altura
+label-direction: Dirección
+direction-look: '{info}Hacia donde miras'
+
+# La dirección de una plataforma fija. %yaw% es el ángulo en grados.
+direction-fixed: '{info}Fija a %yaw%°'
+clicks:
+- '{primary}{icon:click} Clic izquierdo {letters_black}· {letters}editar potencia'
+- '{primary}{icon:right_click} Clic derecho {letters_black}· {letters}editar altura'
+- '{primary}{icon:click} Shift + clic izquierdo {letters_black}· {letters}cambiar dirección'
+- '{error}{icon:right_click} Shift + clic derecho {letters_black}· {letters}eliminar'
+- '{letters_black}Eliminar pide confirmación.'
+add-here-title: A mis pies
+add-here-text:
+- ' {letters}Convierte el bloque donde'
+- ' {letters}estás en una plataforma.'
+add-here-click: Clic para añadir
+add-here-next: Luego edita su potencia aquí.
+add-look-title: Donde miro
+add-look-text:
+- ' {letters}Convierte el bloque que miras'
+- ' {letters}en una plataforma.'
+add-look-click: Clic para añadir
+add-look-next: Luego edita su potencia aquí.
+back-name: Movimiento

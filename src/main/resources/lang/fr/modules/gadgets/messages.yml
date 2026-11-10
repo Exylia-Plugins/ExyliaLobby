@@ -1,0 +1,80 @@
+# Lignes de chat. %gadget% est le nom du gadget, %seconds% le délai restant.
+cooling: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}%gadget%{warning} est en recharge : {highlight}%seconds%s{warning}.'
+no-permission: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Tu n’as pas encore %gadget%{error}.'
+equipped: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%gadget%{letters} est dans ta hotbar.'
+put-away: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Tu as rangé ton gadget.'
+unavailable: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Ce gadget est inutilisable sur ce serveur.'
+not-now: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Tu ne peux pas utiliser de gadget maintenant.'
+
+# La préférence dans l’écran de réglages du joueur.
+setting-category: Gadgets
+setting-category-text:
+- Des jouets pour t’amuser dans le lobby.
+setting-name: Les gadgets m’affectent
+setting-description:
+- Si les gadgets des autres peuvent
+- te pousser ou peindre ton sol.
+
+# Mots des cartes du menu des gadgets.
+kind: Gadget
+kind-equipped: Gadget · Équipé
+kind-locked: Gadget · Verrouillé
+label-cooldown: Recharge
+label-needs: Requiert
+locked-note: Demande au staff comment le débloquer.
+click-equip: Clique pour équiper
+click-equip-next: Il va dans ta hotbar.
+click-put: Clique pour ranger
+click-put-next: Ton slot de hotbar est libéré.
+
+# Chaque gadget : son nom, une description (jusqu’à trois lignes), le clic utilisé et son effet.
+cards:
+  grapple:
+    name: Grappin
+    text:
+    - Lance-le sur un mur ou le sol
+    - et il t’y tire.
+    click: Clic droit
+    use: lancer et tirer
+  ender:
+    name: Balade en ender
+    text:
+    - Chevauche ta propre perle dans
+    - les airs et atterris en douceur.
+    click: Clic droit
+    use: lancer et chevaucher
+  paint:
+    name: Pistolet à peinture
+    text:
+    - Les tirs colorent le sol quelques
+    - secondes. Rien ne casse.
+    click: Clic droit
+    use: tirer de la peinture
+  knockback:
+    name: Bâton de recul
+    text:
+    - Repousse les joueurs qui
+    - l’acceptent. Aucun dégât.
+    click: Frapper un joueur
+    use: le repousser
+  leap:
+    name: Plume de bond
+    text:
+    - Propulse-toi là où tu regardes,
+    - avec un atterrissage doux.
+    click: Clic droit
+    use: bondir en avant
+  snowball:
+    name: Canon à boules de neige
+    text:
+    - Une rafale de boules de neige
+    - qui poussent les joueurs consentants.
+    click: Clic droit
+    use: tirer une rafale
+  trampoline:
+    name: Trampoline
+    text:
+    - Un tapis rebondissant sous tes
+    - pieds quelques secondes.
+    click: Clic droit
+    use: poser le tapis

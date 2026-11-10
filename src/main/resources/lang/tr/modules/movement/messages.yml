@@ -1,0 +1,36 @@
+pad-added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%pad%{letters} fırlatma pedi eklendi.'
+pad-removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%pad%{letters} fırlatma pedi kaldırıldı.'
+pad-changed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%pad%{letters} fırlatma pedi güncellendi.'
+no-target: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}8 blok içindeki bir bloğa bak.'
+same-place: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Bu blokta zaten bir ped var.'
+prompt-power: '{letters}Bu pedin yatay hızı (0.1 - 8).'
+prompt-vertical: '{letters}Bu pedin yukarı hızı (0.1 - 4).'
+confirm-remove: '{highlight}%pad%{letters} fırlatma pedi kaldırılsın mı?'
+list-title: Hareket
+list-kind: Fırlatma pedi
+row-subtitle: Üstüne basanı fırlatır
+label-place: Blok
+label-power: Güç
+label-vertical: Yükseliş
+label-direction: Yön
+direction-look: '{info}Baktığın yön'
+direction-fixed: '{info}%yaw%° sabit'
+clicks:
+- '{primary}{icon:click} Sol tık {letters_black}· {letters}gücü düzenle'
+- '{primary}{icon:right_click} Sağ tık {letters_black}· {letters}yükselişi düzenle'
+- '{primary}{icon:click} Shift + sol tık {letters_black}· {letters}yönü değiştir'
+- '{error}{icon:right_click} Shift + sağ tık {letters_black}· {letters}kaldır'
+- '{letters_black}Kaldırırken onay istenir.'
+add-here-title: Ayağımın altı
+add-here-text:
+- ' {letters}Üstünde durduğun bloğu'
+- ' {letters}fırlatma pedi yapar.'
+add-here-click: Eklemek için tıkla
+add-here-next: Gücünü sonra buradan düzenle.
+add-look-title: Baktığım yer
+add-look-text:
+- ' {letters}Baktığın bloğu'
+- ' {letters}fırlatma pedi yapar.'
+add-look-click: Eklemek için tıkla
+add-look-next: Gücünü sonra buradan düzenle.
+back-name: Hareket

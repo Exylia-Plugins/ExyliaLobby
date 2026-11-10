@@ -1,0 +1,25 @@
+# O jogador mudou o que vê. %state% é o novo modo, colorido.
+changed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Agora você vê: %state%{letters}.'
+
+# Apertou de novo cedo demais. %seconds% é o tempo restante.
+cooling: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Espere {highlight}%seconds%s{warning} antes de trocar de novo.'
+
+# O modo como palavra colorida, para o botão da hotbar e o chat: %lobby_visibility_state%.
+state-everyone: '{success}Todos'
+state-friends: '{info}Amigos e staff'
+state-nobody: '{error}Ninguém'
+
+# A entrada de /settings: categoria, nome, descrição e as três opções (texto simples).
+category: Lobby
+category-text:
+- Como o lobby aparece para você.
+name: Visibilidade de jogadores
+description:
+- Quem você vê enquanto está no
+- lobby. A staff sempre é vista.
+label-everyone: Todos
+label-friends: Amigos e staff
+label-nobody: Ninguém
+
+# Mostrado na entrada de /settings quando ocultar jogadores não é possível aqui.
+unavailable: Precisa do PacketEvents neste servidor.

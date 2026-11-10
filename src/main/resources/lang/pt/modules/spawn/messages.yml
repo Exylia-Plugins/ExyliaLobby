@@ -1,0 +1,31 @@
+# /spawn quando nenhum ponto de spawn foi encontrado
+no-spawn: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Nenhum spawn definido. Fale com um admin.'
+
+# /spawn com tempo de espera. %seconds% é a espera.
+teleporting: '%prefix% {letters}Teleportando em {highlight}%seconds%s{letters}. Fique parado.'
+cancelled: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Teleporte cancelado.'
+
+# Um admin definiu o spawn de um mundo. %world% é o nome dele.
+spawn-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Spawn de {highlight}%world%{letters} definido na sua posição.'
+
+# Mostrado na tela de Spawn: há um spawn definido aqui, ou não
+state-set: '{success}{icon:on} Definido'
+state-unset: '{warning}{icon:warning} Não definido'
+
+# Editor de áreas do lobby: tipos e estados mostrados em cada card
+kind-world: Mundo do lobby
+kind-box: Caixa do lobby
+state-label-world: Estado
+state-label-box: Tamanho
+world-loaded: '{success}{icon:on} Carregado'
+world-missing: '{error}{icon:off} Não carregado'
+
+# Tamanho de uma caixa. %x%, %y% e %z% são os lados em blocos.
+box-size: '{info}%x%×%y%×%z% blocos'
+
+# Prompts do editor de áreas
+select-box: '{letters}Selecione a caixa com o machado dourado: {highlight}clique esquerdo{letters} em um canto, {highlight}clique direito{letters} no outro, depois {highlight}shift + clique esquerdo{letters}.'
+prompt-name: '{letters}Dê um nome a esta caixa do lobby (letras, números, hifens).'
+name-taken: '{error}Esse nome já está em uso.'
+confirm-world: Parar de tratar o mundo {highlight}%area%{letters} como lobby?
+confirm-box: Remover a caixa do lobby {highlight}%area%{letters}?

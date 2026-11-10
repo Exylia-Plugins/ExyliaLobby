@@ -1,0 +1,34 @@
+# Linhas de chat. %name% é o nome do holograma.
+added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Holograma {highlight}%name%{letters} adicionado.'
+removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Holograma {highlight}%name%{letters} removido.'
+changed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Holograma {highlight}%name%{letters} atualizado.'
+moved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Holograma {highlight}%name%{letters} movido para a sua posição.'
+no-target: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Olhe para um bloco a até 8 blocos.'
+
+# O prompt do editor de texto. Separe as linhas com <nl>.
+prompt-lines: '{letters}As linhas do holograma, separadas por {highlight}<nl>{letters}.'
+confirm-remove: Remover o holograma {highlight}%name%{letters}?
+
+# Tela de admin.
+list-title: Hologramas
+list-kind: Holograma
+row-subtitle: Holograma de texto
+label-place: Local
+label-lines: Linhas
+clicks:
+- '{primary}{icon:click} Clique esquerdo {letters_black}· {letters}editar o texto'
+- '{primary}{icon:right_click} Clique direito {letters_black}· {letters}mover para cá'
+- '{error}{icon:right_click} Shift + clique direito {letters_black}· {letters}remover'
+- '{letters_black}Remover pede confirmação.'
+add-here-title: Nos meus pés
+add-here-text:
+- ' {letters}Põe um holograma flutuando'
+- ' {letters}na altura dos seus olhos.'
+add-here-click: Clique para adicionar
+add-here-next: Depois edite o texto aqui.
+add-look-title: Onde eu olho
+add-look-text:
+- ' {letters}Põe um holograma flutuando'
+- ' {letters}sobre o bloco que você olha.'
+add-look-click: Clique para adicionar
+add-look-next: Depois edite o texto aqui.

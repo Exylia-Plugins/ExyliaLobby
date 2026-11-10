@@ -1,0 +1,53 @@
+connecting: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}%server%{letters} sunucusuna bağlanılıyor...'
+offline: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}%server%{error} şu an çevrimdışı.'
+no-permission: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}%server%{error} sunucusuna katılamazsın.'
+here: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Zaten %server%{warning} sunucusundasın.'
+unreachable: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Ağa ulaşılamadı. Birazdan tekrar dene.'
+unknown-server: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Bu sunucu kurulu değil.'
+status-online: '{success}Çevrimiçi'
+status-offline: '{error}Çevrimdışı'
+status-unknown: '{muted}Veri yok'
+click-join: '{info}{icon:click} Katılmak için tıkla<nl>{letters_black}Anında taşınırsın.'
+click-locked: '{warning}{icon:locked} Kilitli<nl>{letters_black}Katılmak için rütbe gerekir.'
+click-offline: '{error}{icon:off} Çevrimdışı<nl>{letters_black}Birazdan tekrar dene.'
+click-here: '{success}{icon:on} Buradasın<nl>{letters_black}Geçmek için başka lobi seç.'
+no-lobbies: '{warning}{icon:warning} Lobi ayarlı değil<nl>{letters_black}Yöneticiden eklemesini iste.'
+lobbies-next: '{info}{icon:click} Açmak için tıkla<nl>{letters_black}Oynayacağın lobiyi seç.'
+list-title: Seçici
+list-kind: Sunucu NPC'si veya portal
+subtitle-npc: Sunucu NPC'si
+subtitle-portal: Sunucu portalı
+label-server: Sunucu
+label-place: Konum
+label-size: Boyut
+server-missing: '{error}Katalogda yok'
+clicks-npc:
+- '{primary}{icon:click} Sol tık {letters_black}· {letters}sunucuyu değiştir'
+- '{primary}{icon:right_click} Sağ tık {letters_black}· {letters}buraya taşı'
+- '{error}{icon:right_click} Shift + sağ tık {letters_black}· {letters}kaldır'
+- '{letters_black}Kaldırırken onay istenir.'
+clicks-portal:
+- '{primary}{icon:click} Sol tık {letters_black}· {letters}sunucuyu değiştir'
+- '{primary}{icon:right_click} Sağ tık {letters_black}· {letters}çerçevesini göster'
+- '{error}{icon:right_click} Shift + sağ tık {letters_black}· {letters}kaldır'
+- '{letters_black}Kaldırırken onay istenir.'
+add-npc-title: Sunucu NPC'si
+add-npc-text:
+- ' {letters}Durduğun yere bir NPC koyar;'
+- ' {letters}tıklayan oyuncular gönderilir.'
+add-npc-click: Eklemek için tıkla
+add-npc-next: Önce sunucusunu seçersin.
+add-portal-title: Portal
+add-portal-text:
+- ' {letters}Bir kutu seç; içine girmek'
+- ' {letters}oyuncuları gönderir.'
+add-portal-click: Seçmek için tıkla
+add-portal-next: Sunucusunu sonra seçersin.
+prompt-server: '{letters}Oyuncuları hangi sunucuya göndersin?'
+select-portal: '{letters}Portalı altın baltayla seç: bir köşeye {highlight}sol tık{letters}, diğerine {highlight}sağ tık{letters}, sonra {highlight}shift + sol tık{letters}.'
+no-servers: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Önce kataloğa bir sunucu ekle (modules/selector/config.yml).'
+added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} eklendi.'
+removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} kaldırıldı.'
+changed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} artık oyuncuları %server%{letters} sunucusuna gönderiyor.'
+moved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} konumuna taşındı.'
+confirm-remove: '{highlight}%what%{letters} kaldırılsın mı?'

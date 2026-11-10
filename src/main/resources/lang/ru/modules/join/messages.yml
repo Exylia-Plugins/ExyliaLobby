@@ -1,0 +1,37 @@
+# Строка для всех при входе игрока. %player% — его ник. Пусто — ничего не показывать.
+join: '{letters_black}[{success}+{letters_black}] {letters}%player%'
+
+# Строка для всех при выходе игрока.
+leave: '{letters_black}[{error}-{letters_black}] {letters}%player%'
+
+# Заменяет строку входа при самом первом входе игрока. Пусто — обычная строка.
+first-join: '{letters_black}[{success}+{letters_black}] {highlight}%player%{letters} зашёл впервые!'
+
+# Показывается самому игроку чуть позже после входа: титр и короткий звук.
+welcome:
+  # Крупный текст в центре экрана. Удалите, чтобы ничего не показывать.
+  title:
+    # Поддерживает цвета вроде {primary} и плейсхолдеры вроде %player_name%.
+    text: '{primary}&lДОБРО ПОЖАЛОВАТЬ'
+    subtitle: '{letters}%player%'
+    # Понимает и записанную длительность: 30s, 1m30s.
+    fade-in: 0.3
+    # Секунды полной видимости. 0 держит, пока что-то не уберёт.
+    # Понимает и записанную длительность: 30s, 1m30s.
+    stay: 2.5
+    fade-out: 0.6
+    # auto, seconds, tenths, hundredths, clock, full, compact или precise.
+    time-style: auto
+  # Звук для воспроизведения.
+  sound:
+    # ENTITY_PLAYER_LEVELUP или ключ вроде minecraft:entity.player.levelup.
+    name: ENTITY_EXPERIENCE_ORB_PICKUP
+    # Выше 1.0 громче не становится, звук слышен дальше.
+    volume: 0.5
+    # От 0.5 до 2.0.
+    pitch: 1.4
+    # MASTER, MUSIC, RECORDS, WEATHER, BLOCKS, HOSTILE, NEUTRAL, PLAYERS, AMBIENT или VOICE.
+    category: MASTER
+
+# Чат-строки, что отправляются игроку чуть позже после входа, по одной на строку. %player% — его ник.
+motd: []

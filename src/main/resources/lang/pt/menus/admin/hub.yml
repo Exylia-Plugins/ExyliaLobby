@@ -1,0 +1,87 @@
+menu-version: 1
+# NÃO EDITE — REGENERADO A CADA INICIALIZAÇÃO.
+#
+# /lobbyadmin: o hub de staff do ExyliaLobby.
+
+title: '{primary}&lLOBBY {letters_black}» {highlight}Admin'
+size: 27
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: NETHER_STAR
+    name: "<gradient:{primary}:{secondary_light}>ExyliaLobby</gradient>"
+    lore:
+      - "{letters_black}Administração do lobby"
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {success}{icon:on} {letters}Módulos ativos{letters_black}: {success}%modules_on%{letters_black}/{info}%modules_total%"
+
+  modules:
+    slot: 11
+    material: COMMAND_BLOCK
+    name: "{letters}Lobby {letters_black}▸ <gradient:{primary}:{secondary_light}>Módulos</gradient>"
+    lore:
+      - "{letters_black}Seção de configuração"
+      - ""
+      - "{primary}✎ Informação"
+      - " {letters}Ative ou desative cada parte"
+      - " {letters}do lobby, {highlight}ao vivo{letters}."
+      - ""
+      - "{primary}{icon:click} Clique para abrir"
+      - "{letters_black}Cada módulo com seu estado."
+    actions:
+      - 'exylialobby:admin_modules'
+
+  areas:
+    slot: 12
+    material: FILLED_MAP
+    name: "{letters}Lobby {letters_black}▸ <gradient:{primary}:{secondary_light}>Áreas</gradient>"
+    lore:
+      - "{letters_black}Seção de configuração"
+      - ""
+      - "{primary}✎ Informação"
+      - " {letters}Os mundos e caixas onde"
+      - " {letters}as regras do lobby valem."
+      - ""
+      - "{primary}{icon:click} Clique para abrir"
+      - "{letters_black}Adicione um mundo ou caixa."
+    actions:
+      - 'exylialobby:admin_areas'
+
+  settings:
+    slot: 14
+    material: COMPARATOR
+    name: "{letters}Lobby {letters_black}▸ <gradient:{primary}:{secondary_light}>&lCONFIGURAÇÕES</gradient>"
+    lore:
+      - "{letters_black}Configuração"
+      - ""
+      - "{primary}✎ Informação"
+      - " {letters}Cada configuração de cada módulo"
+      - " {letters}sem editar seus {highlight}arquivos{letters}."
+      - ""
+      - "{primary}{icon:click} Clique para abrir"
+      - "{letters_black}Configs de cada arquivo."
+    actions:
+      - 'exylialobby:admin_settings'
+
+  reload:
+    slot: 15
+    material: CLOCK
+    name: "{letters}Lobby {letters_black}▸ <gradient:{primary}:{secondary_light}>Recarregar</gradient>"
+    lore:
+      - "{letters_black}Manutenção"
+      - ""
+      - "{primary}✎ Informação"
+      - " {letters}Lê todos os arquivos de novo"
+      - " {letters}após você editá-los à mão."
+      - ""
+      - "{primary}{icon:click} Clique para recarregar"
+      - "{letters_black}Problemas são listados no chat."
+    actions:
+      - 'exylialobby:admin_reload'
