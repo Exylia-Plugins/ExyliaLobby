@@ -53,6 +53,9 @@ permissions:
   exylialobby.spawn:
     description: Use /spawn.
     default: true
+  exylialobby.parkour:
+    description: Use /parkour: play courses and endless modes, see the tops.
+    default: true
 
 libraries:
   # The same list ExyliaLib declares, in the same order and the same versions.

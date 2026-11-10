@@ -74,7 +74,9 @@ public record ParkourMessages(
         @Comment("The label over the next checkpoint's beam. %checkpoint%/%total% the checkpoint, %distance% metres away.")
         String beaconLabel,
         @Comment("The items a runner holds: back to the last checkpoint, start again, leave.")
-        RunItems items) {
+        RunItems items,
+        @Comment("Chat leaderboards and staff tools.")
+        Tools tools) {
 
     public ParkourMessages() {
         this("%prefix% {letters}Courses: %courses%{letters}. Play one with {highlight}/%command% <course>{letters}, or {highlight}/%command% endless{letters}.",
@@ -137,7 +139,8 @@ public record ParkourMessages(
                 "ENTITY_VILLAGER_NO %prefix% {error}{highlight}%course%{error} is in world {highlight}%world%{error}. Stand there to edit it.",
 
                 "{letters}Checkpoint {info}%checkpoint%{letters_black}/{info}%total% {letters_black}· {info}%distance% m",
-                new RunItems());
+                new RunItems(),
+                new Tools());
     }
 
     /** A run item's look: its material, name and lore. */
@@ -166,6 +169,49 @@ public record ParkourMessages(
                           String teleport) {
         public Reasons() {
             this("flying", "gliding", "riptide", "ender pearl", "riding", "game mode changed", "teleported away");
+        }
+    }
+
+    /** Chat boards, hologram boards and the rest of the staff tools. */
+    public record Tools(
+            @Comment("%board% is the board id.")
+            String topTitle,
+            @Comment("%place%, %name% and %value% of one row.")
+            String topLine,
+            String topEmpty,
+            String unknownBoard,
+            @Comment("Hologram board lines: a title, then one row per place (up to 10).")
+            String boardTitle,
+            String boardLine,
+            String boardEmpty,
+            String boardPlaced,
+            String killAdded,
+            String killNoBlock,
+            String medalsSet,
+            @Comment("Asks before deleting a course. %course% is the id.")
+            String confirmDelete,
+            String selectArea,
+            String noSelection,
+            @Comment("Asks for the area's name.")
+            String promptArea,
+            String areaSaved) {
+        public Tools() {
+            this("%prefix% {primary}&l%board% {letters_black}» {letters}Top",
+                    "  {highlight}#%place% {letters_black}· {letters}%name% {letters_black}· {info}%value%",
+                    "%prefix% {letters}Nobody is on that board yet.",
+                    "ENTITY_VILLAGER_NO %prefix% {error}There is no board called {highlight}%board%{error}.",
+                    "{primary}&l%board%",
+                    "{highlight}#%place% {letters}%name% {letters_black}· {info}%value%",
+                    "{letters_black}Nobody yet",
+                    "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}Board {highlight}%board%{letters} placed at your feet.",
+                    "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}{highlight}%block%{letters} now sends runners of {highlight}%course%{letters} back.",
+                    "ENTITY_VILLAGER_NO %prefix% {error}Stand on or look at a block first.",
+                    "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}Medals of {highlight}%course%{letters} set.",
+                    "Delete %course% and its settings? Saved times stay in the database.",
+                    "%prefix% {letters}Select the two corners of the area with your wand.",
+                    "ENTITY_VILLAGER_NO %prefix% {error}No area was selected.",
+                    "Name of the area",
+                    "ENTITY_EXPERIENCE_ORB_PICKUP %prefix% {letters}Endless area {highlight}%area%{letters} saved, starting where you stand.");
         }
     }
 }

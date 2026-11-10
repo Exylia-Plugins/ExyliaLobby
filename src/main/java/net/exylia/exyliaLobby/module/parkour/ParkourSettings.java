@@ -43,11 +43,14 @@ public record ParkourSettings(
         Periods periods,
 
         @Comment("Short sounds played to the runner only, as NAME|volume|pitch. Blank plays nothing.")
-        Sounds sounds) {
+        Sounds sounds,
+
+        @Comment("Leaderboard holograms by board (a course id, endless, sprint, daily, optionally -weekly/-monthly), placed by /lobbyadmin parkour board.")
+        Map<String, BoardSpot> boards) {
 
     public ParkourSettings() {
         this(List.of("parkour", "pk"), new Modes(), new Endless(), true, true, true, 8, new AntiCheat(), new Tops(),
-                new Periods(), new Sounds());
+                new Periods(), new Sounds(), Map.of());
     }
 
     public record Modes(
@@ -201,6 +204,12 @@ public record ParkourSettings(
             String weekStart) {
         public Periods() {
             this("", 0, "MONDAY");
+        }
+    }
+
+    public record BoardSpot(String world, double x, double y, double z) {
+        public BoardSpot() {
+            this("world", 0, 100, 0);
         }
     }
 

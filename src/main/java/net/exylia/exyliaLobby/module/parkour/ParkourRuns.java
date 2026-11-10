@@ -300,6 +300,7 @@ final class ParkourRuns implements Listener {
         run.timer = context.tasks().runAtEntityTimer(player, 1, 1, () -> {
             if (!run.ended) run.tick();
         });
+        context.visibility().refresh(player);
         run.begin();
     }
 
@@ -321,6 +322,7 @@ final class ParkourRuns implements Listener {
         } catch (RuntimeException failed) {
             context.debug().error("Could not end the parkour run of " + player.getName(), failed);
         }
+        context.visibility().refresh(player);
         if (end == RunEnd.LEFT) send(player, messages.get().left(), Values.of());
         else if (end.cheat()) send(player, messages.get().cheated(), Values.of("reason", reason(end)));
     }

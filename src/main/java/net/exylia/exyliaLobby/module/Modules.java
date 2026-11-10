@@ -8,6 +8,7 @@ import net.exylia.exyliaLobby.module.hud.HudModule;
 import net.exylia.exyliaLobby.module.join.JoinModule;
 import net.exylia.exyliaLobby.module.movement.MovementModule;
 import net.exylia.exyliaLobby.module.onboarding.OnboardingModule;
+import net.exylia.exyliaLobby.module.parkour.ParkourModule;
 import net.exylia.exyliaLobby.module.protection.ProtectionModule;
 import net.exylia.exyliaLobby.module.spawn.SpawnModule;
 import net.exylia.exyliaLobby.module.selector.SelectorModule;
@@ -36,6 +37,7 @@ public final class Modules {
                 new ChatModule(context),
                 new OnboardingModule(context),
                 new HotbarModule(context),
+                new ParkourModule(context),
                 new MovementModule(context),
                 new VisibilityModule(context),
                 new SelectorModule(context),

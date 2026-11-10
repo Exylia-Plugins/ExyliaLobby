@@ -9,7 +9,7 @@ Worktree: /root/Java/Exylia/ExyliaLobby-worktrees/parkour (detached, commits onl
 - [x] runs 1/3: ParkourRuns registry + CourseRun (CourseTrack detection, splits, boss bar, beacon, run items via Hotbars, rewards, medals) + RunEnd
 - [x] runs 2/3: anti-cheat (RunGuard: ends on flight/elytra/riptide/pearl/mount/gamemode/foreign teleport; refuses velocity and blocked effects; minimum time refused + Logs `parkour-too-fast`)
 - [x] runs 3/3: endless, sprint, daily (EndlessRun + EndlessMode, endless/Window; fake blocks kept for the runner only, themes, milestones, best marker, kick-for-flying cancelled)
-- [ ] module wiring, placeholders, commands, actions, visibility
+- [x] module wiring (ParkourModule, ParkourCommand, ParkourAdminCommand): placeholders, commands, visibility, rescue, hologram boards
 - [ ] player menus (list, course, top) + admin menus
 
 ## Runs: what the wiring step needs
