@@ -1,8 +1,7 @@
 added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%name%{letters} hologramı eklendi.'
 removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%name%{letters} hologramı kaldırıldı.'
 changed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%name%{letters} hologramı güncellendi.'
-moved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%name%{letters} hologramı konumuna taşındı.'
-no-target: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}8 blok içindeki bir bloğa bak.'
+moved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%name%{letters} hologramı taşındı.'
 prompt-lines: '{letters}Hologramın satırları, {highlight}<nl>{letters} ile ayrılmış.'
 confirm-remove: '{highlight}%name%{letters} hologramı kaldırılsın mı?'
 list-title: Hologramlar
@@ -12,18 +11,23 @@ label-place: Konum
 label-lines: Satırlar
 clicks:
 - '{primary}{icon:click} Sol tık {letters_black}· {letters}metni düzenle'
-- '{primary}{icon:right_click} Sağ tık {letters_black}· {letters}buraya taşı'
+- '{primary}{icon:right_click} Sağ tık {letters_black}· {letters}taşı'
 - '{error}{icon:right_click} Shift + sağ tık {letters_black}· {letters}kaldır'
 - '{letters_black}Kaldırırken onay istenir.'
-add-here-title: Ayağımın altı
-add-here-text:
-- ' {letters}Göz hizanda bir hologram'
-- ' {letters}süzülür.'
-add-here-click: Eklemek için tıkla
-add-here-next: Metnini sonra buradan düzenle.
-add-look-title: Baktığım yer
-add-look-text:
-- ' {letters}Baktığın bloğun üstünde'
-- ' {letters}bir hologram süzülür.'
-add-look-click: Eklemek için tıkla
-add-look-next: Metnini sonra buradan düzenle.
+add-spot-title: Serbest nokta
+add-spot-text:
+- ' {letters}O noktaya git ve'
+- ' {highlight}Shift + tık{letters} yap; gözlerinin'
+- ' {letters}hizasında asılı kalır.'
+add-spot-click: Başlamak için tıkla
+add-spot-next: Metnini sonra buradan düzenle.
+add-block-title: Bir bloğun üstü
+add-block-text:
+- ' {letters}Bir bloğa tıkla; hologram'
+- ' {letters}üstünde asılı kalır.'
+add-block-click: Başlamak için tıkla
+add-block-next: Metnini sonra buradan düzenle.
+
+# Kurulum sihirbazlarının ekranda adlandırdığı şeyler (düz metin, renksiz).
+wizard-spot: Hologram
+wizard-block: Hologram bloğu

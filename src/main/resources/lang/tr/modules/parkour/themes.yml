@@ -1,0 +1,15 @@
+# Türkçe varsayılan metinler. Yalnızca metin anahtarları; diğer ayarlar kayıttan gelir.
+
+themes:
+  stone-ruins:
+    name: Taş Harabeleri
+  end:
+    name: <gradient:{secondary}:{secondary_light}>End</gradient>
+  frozen-peaks:
+    name: <gradient:{info}:{info_light}>Donmuş Zirveler</gradient>
+  ocean:
+    name: <gradient:{info}:{success_light}>Okyanus</gradient>
+  sky-gardens:
+    name: <gradient:{success}:{success_light}>Gökyüzü Bahçeleri</gradient>
+  deep-dark:
+    name: <gradient:{primary}:{secondary_light}>Derin Karanlık</gradient>

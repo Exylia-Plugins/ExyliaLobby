@@ -1,5 +1,5 @@
 locked: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Sohbet kilitli.'
-slow-denied: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Tekrar konuşmadan önce {highlight}%seconds%sn{error} bekle.'
+slow-denied: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Tekrar konuşmadan önce {highlight}%time%{error} bekle.'
 lock-on: '%prefix% {highlight}%player%{letters} sohbeti kilitledi.'
 lock-off: '%prefix% {highlight}%player%{letters} sohbetin kilidini açtı.'
 slow-on: '%prefix% {letters}Yavaş mod açık: her {highlight}%seconds%sn{letters} bir mesaj.'

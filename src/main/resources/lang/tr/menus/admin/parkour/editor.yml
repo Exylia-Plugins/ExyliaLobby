@@ -1,4 +1,4 @@
-menu-version: 2
+menu-version: 3
 # DÜZENLEME — HER AÇILIŞTA YENİDEN OLUŞTURULUR.
 #
 # Tek bir parkur: nerede başlar, geçer ve biter, nasıl değerlendirilir.
@@ -31,13 +31,13 @@ items:
       - "{letters_black}Parkur ayarı"
       - ""
       - "{success}✎ Bilgi"
-      - " {letters}Koşunun başladığı yer. Konumunu"
-      - " {letters}ve bakış yönünü kullanır."
+      - " {letters}Koşunun başladığı yer:"
+      - " {letters}orada dur ve {highlight}Shift + tık{letters}."
       - ""
       - "{success}✦ Durum"
       - "  {letters_black}· {info}{icon:compass} {letters}Başlangıç{letters_black}: %start_state%"
       - ""
-      - "{success}{icon:click} Buraya ayarlamak için tıkla"
+      - "{success}{icon:click} Başlamak için tıkla"
       - "{letters_black}Başlangıcı değiştirir."
     actions:
       - 'exylialobby:parkour_edit start %course_id%'
@@ -50,13 +50,13 @@ items:
       - "{letters_black}Parkur ayarı"
       - ""
       - "{success}✎ Bilgi"
-      - " {letters}Ayağının altına kontrol noktası"
+      - " {letters}Üstüne çık ve {highlight}Shift + tık{letters}."
       - " {letters}ekler. Sırayla geçilir."
       - ""
       - "{success}✦ Durum"
       - "  {letters_black}· {info}{icon:check} {letters}Kontrol noktaları{letters_black}: {info}%checkpoints%"
       - ""
-      - "{success}{icon:click} Buraya eklemek için tıkla"
+      - "{success}{icon:click} Başlamak için tıkla"
       - "{letters_black}Sonuncudan sonra eklenir."
     actions:
       - 'exylialobby:parkour_edit checkpoint %course_id%'
@@ -69,13 +69,13 @@ items:
       - "{letters_black}Parkur ayarı"
       - ""
       - "{success}✎ Bilgi"
-      - " {letters}Koşunun bittiği yer. Konumunu"
-      - " {letters}ve bakış yönünü kullanır."
+      - " {letters}Koşunun bittiği yer:"
+      - " {letters}orada dur ve {highlight}Shift + tık{letters}."
       - ""
       - "{success}✦ Durum"
       - "  {letters_black}· {info}{icon:star} {letters}Bitiş{letters_black}: %finish_state%"
       - ""
-      - "{success}{icon:click} Buraya ayarlamak için tıkla"
+      - "{success}{icon:click} Başlamak için tıkla"
       - "{letters_black}Bitişi değiştirir."
     actions:
       - 'exylialobby:parkour_edit finish %course_id%'
@@ -88,14 +88,14 @@ items:
       - "{letters_black}Parkur ayarı"
       - ""
       - "{primary}✎ Bilgi"
-      - " {letters}Baktığın blok koşucuyu"
-      - " {letters}kontrol noktasına geri atar."
+      - " {letters}Bir bloğa tıkla: aynı türdeki"
+      - " {letters}tüm bloklar koşucuları geri yollar."
       - ""
       - "{primary}✦ Durum"
       - "  {letters_black}· {info}{icon:barrier} {letters}Bloklar{letters_black}: {info}%kills%"
       - ""
-      - "{primary}{icon:click} Blok eklemek için tıkla"
-      - "{letters_black}Önce bir bloğa bak."
+      - "{primary}{icon:click} Başlamak için tıkla"
+      - "{letters_black}Sonra bloğa tıkla."
     actions:
       - 'exylialobby:parkour_edit kill %course_id%'
 
@@ -157,15 +157,15 @@ items:
   board:
     slot: 27
     material: OAK_SIGN
-    name: "{letters}Parkur {letters_black}▸ <gradient:{info}:{info_light}>Sıralama buraya</gradient>"
+    name: "{letters}Parkur {letters_black}▸ <gradient:{info}:{info_light}>Sıralama</gradient>"
     lore:
       - "{letters_black}Hologram"
       - ""
       - "{info}✎ Bilgi"
-      - " {letters}Bu parkurun sıralama"
-      - " {letters}hologramı ayağının altına."
+      - " {letters}Bu parkurun sıralama hologramı"
+      - " {letters}bir bloğun üstünde."
       - ""
-      - "{info}{icon:click} Yerleştirmek için tıkla"
+      - "{info}{icon:click} Başlamak için tıkla"
       - "{letters_black}Mevcut sıralamayı değiştirir."
     actions:
       - 'exylialobby:parkour_edit board %course_id%'

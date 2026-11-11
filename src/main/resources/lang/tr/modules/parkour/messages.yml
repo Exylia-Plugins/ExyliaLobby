@@ -57,14 +57,27 @@ reasons:
   teleport: ışınlanma
   unconfirmed: bir zıplama doğrulanamadı
 time-reset: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%course%{letters} parkurundaki sürelerin sıfırlandı.'
-course-created: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%course%{letters} parkuru başlangıcı ayağının altında oluşturuldu. Kontrol noktaları ve bitiş ekle.'
+course-created: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%course%{letters} parkuru oluşturuldu.'
 course-exists: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}{highlight}%course%{error} adlı bir parkur zaten var.'
-start-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%course%{letters} başlangıcı ayağının altına ayarlandı.'
-checkpoint-added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%course%{letters} parkurunun {highlight}%checkpoint%{letters}. kontrol noktası ayağının altına eklendi.'
-finish-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%course%{letters} bitişi ayağının altına ayarlandı.'
+start-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%course%{letters} başlangıcı ayarlandı.'
+checkpoint-added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%course%{letters} parkurunun {highlight}%checkpoint%{letters}. kontrol noktası eklendi.'
+finish-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%course%{letters} bitişi ayarlandı.'
 course-deleted: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%course%{letters} parkuru silindi.'
-wrong-world: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}{highlight}%course%{error} parkuru {highlight}%world%{error} dünyasında. Düzenlemek için orada dur.'
+wrong-world: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}{highlight}%course%{error} parkuru {highlight}%world%{error} dünyasında. Noktalarını orada ayarla.'
 beacon-label: '{letters}Kontrol noktası {info}%checkpoint%{letters_black}/{info}%total% {letters_black}· {info}%distance% m'
+
+# Kurulum sihirbazları: ekranda adlandırdıkları ve sordukları.
+wizard:
+  course: '{primary}&lYENİ PARKUR {muted}%course%'
+  stand: '{warning}➥ {highlight}%step%{letters}: orada dur ve {highlight}Shift + tık{letters} yap.'
+  more: '%checkpoint%. kontrol noktası eklensin mi? Bitişi ayarlamak için hayır de.'
+  start: Parkur başlangıcı
+  checkpoint: Kontrol noktası
+  finish: Parkur bitişi
+  kill: Ölümcül blok
+  board: Sıralama
+  area: Sonsuz alan
+  area-start: Sonsuz başlangıç
 items:
   checkpoint:
     icon: LIGHT_WEIGHTED_PRESSURE_PLATE
@@ -98,15 +111,12 @@ tools:
   board-title: '{primary}&l%board%'
   board-line: '{highlight}#%place% {letters}%name% {letters_black}· {info}%value%'
   board-empty: '{letters_black}Henüz kimse yok'
-  board-placed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%board%{letters} sıralaması ayağının altına yerleştirildi.'
+  board-placed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%board%{letters} sıralaması yerleştirildi.'
   kill-added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%block%{letters} artık {highlight}%course%{letters} koşucularını geri gönderiyor.'
-  kill-no-block: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Önce bir bloğun üstünde dur veya ona bak.'
   medals-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%course%{letters} madalyaları ayarlandı.'
   confirm-delete: '%course% ve ayarları silinsin mi? Kayıtlı süreler veritabanında kalır.'
-  select-area: '%prefix% {letters}Alanın iki köşesini asanla seç.'
-  no-selection: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Alan seçilmedi.'
   prompt-area: Alanın adı
-  area-saved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%area%{letters} sonsuz alanı, durduğun yerden başlayacak şekilde kaydedildi.'
+  area-saved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%area%{letters} sonsuz alanı kaydedildi.'
 screens:
   'on': '{success}{icon:on} Açık'
   'off': '{error}{icon:off} Kapalı'
@@ -199,10 +209,10 @@ staff:
   create-course:
     title: Oluştur
     text:
-    - ' {letters}Başlangıcı ayağının altında'
-    - ' {letters}yeni bir parkur.'
-    click: Oluşturmak için tıkla
-    next: Sonra düzenleyicisi açılır.
+    - ' {letters}Ona ad ver, sonra başlangıcı,'
+    - ' {letters}kontrol noktalarını ve bitişi ayarla.'
+    click: Başlamak için tıkla
+    next: Bitince düzenleyicisi açılır.
   settings-courses:
     title: Ayarlar
     text:
@@ -213,10 +223,10 @@ staff:
   add-area:
     title: Ekle
     text:
-    - ' {letters}Asanla iki köşe seç,'
-    - ' {letters}durduğun yerden başlar.'
-    click: Eklemek için tıkla
-    next: Seçtikten sonra ad verirsin.
+    - ' {letters}Ad ver, kutusunu seç, sonra'
+    - ' {letters}koşuların başladığı yerde dur.'
+    click: Başlamak için tıkla
+    next: Koşular baktığın yöne gider.
   settings-areas:
     title: Ayarlar
     text:

@@ -9,6 +9,10 @@ modules:
   blocked-by: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {letters}{highlight}%module%{letters} modülü için önce {warning}%required%{letters} gerekli.'
   failed: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}{highlight}%module%{error} modülü başlatılamadı. Konsola bak.'
   dependants: '{letters_black}Bunlar da kapanır: %modules%'
+  # /lobbyadmin module on veya off olmayan bir durumla
+  usage: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {letters}Kullanım: {highlight}/lobbyadmin module {letters_black}id{highlight} on{letters} veya {highlight}off{letters}.'
+  # /lobbyadmin module hiçbir modülde olmayan bir id ile. %id% yazılan, %modules% id'lerdir.
+  unknown: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}{highlight}%id%{error} adında bir modül yok. {letters}Id''ler: {letters_black}%modules%'
 areas:
   box-saved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%area%{letters} lobi alanı kaydedildi.'
   box-removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%area%{letters} lobi alanı kaldırıldı.'

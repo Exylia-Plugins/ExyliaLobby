@@ -1,7 +1,10 @@
 no-spawn: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Doğuş ayarlı değil. Yöneticiye sor.'
-teleporting: '%prefix% {letters}{highlight}%seconds%sn{letters} içinde ışınlanıyorsun. Kıpırdama.'
+teleporting: '%prefix% {letters}{highlight}%time%{letters} içinde ışınlanıyorsun. Kıpırdama.'
 cancelled: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Işınlanma iptal edildi.'
-spawn-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%world%{letters} doğuşu konumuna ayarlandı.'
+
+# /spawn beklemesi sırasındaki boss bar. %time% kalan süredir (2.4s).
+warmup-bar: '{info}&lSPAWN {letters_black}» {letters}Kıpırdama {letters_black}({info}%time%{letters_black})'
+spawn-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%world%{letters} dünyasının doğuş noktası durduğun yere ayarlandı.'
 state-set: '{success}{icon:on} Ayarlı'
 state-unset: '{warning}{icon:warning} Ayarlı değil'
 kind-world: Lobi dünyası
@@ -11,7 +14,10 @@ state-label-box: Boyut
 world-loaded: '{success}{icon:on} Yüklü'
 world-missing: '{error}{icon:off} Yüklü değil'
 box-size: '{info}%x%×%y%×%z% blok'
-select-box: '{letters}Kutuyu altın baltayla seç: bir köşeye {highlight}sol tık{letters}, diğerine {highlight}sağ tık{letters}, sonra {highlight}shift + sol tık{letters}.'
+
+# Kurulum sihirbazlarının ekranda adlandırdığı şeyler (düz metin, renksiz): bir dünyanın doğuşu, bir lobi alanı
+wizard-spawn: Lobi doğuş noktası
+wizard-box: Lobi alanı
 prompt-name: '{letters}Bu lobi kutusuna ad ver (harf, rakam, tire).'
 name-taken: '{error}Bu ad zaten kullanılıyor.'
 confirm-world: '{highlight}%area%{letters} dünyası artık lobi sayılmasın mı?'
