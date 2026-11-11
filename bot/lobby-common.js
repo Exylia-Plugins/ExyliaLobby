@@ -58,6 +58,43 @@ async function openScreen(bot, chatCmd, wait = 1500) {
   await sleep(wait)
   return screen(bot)
 }
+const shift = (bot, on) => bot._client.write('entity_action', { entityId: bot.entity.id, actionId: on ? 0 : 1, jumpBoost: 0 })
+// Wizard gestures (ExyliaLib wizards). Clicks are made from an empty hotbar slot, so no lobby button answers them.
+/** A "stand there" step (spawn): sneak and right-click the floor under the bot. */
+async function standClick(bot, slot = 3) {
+  bot.setQuickBarSlot(slot); await sleep(200)
+  shift(bot, true); await sleep(250)
+  await bot.activateBlock(bot.blockAt(bot.entity.position.offset(0, -0.5, 0))).catch(() => { }); await sleep(400)
+  shift(bot, false); await sleep(800)
+}
+/** A "click a block" step. */
+async function blockClick(bot, block, slot = 3) {
+  bot.setQuickBarSlot(slot); await sleep(200)
+  await bot.activateBlock(block).catch(() => { }); await sleep(1000)
+}
+/** An area step: left-click one corner, right-click the other, then sneak + left-click to accept the box. */
+async function selectArea(bot, a, b) {
+  await sleep(800)
+  const wand = [...Array(9).keys()].find(i => /axe|wand/.test(bot.inventory.slots[36 + i]?.name || ''))
+  if (wand !== undefined) bot.setQuickBarSlot(wand)
+  await sleep(300)
+  // adventure mode: Paper turns the swing at a block into a left click on it
+  await bot.lookAt(a.offset(0.5, 0.5, 0.5), true); bot.swingArm(); await sleep(700)
+  await bot.activateBlock(bot.blockAt(b)).catch(() => { }); await sleep(700)
+  shift(bot, true); await sleep(250); bot.swingArm(); await sleep(400); shift(bot, false); await sleep(1000)
+}
+/** Answers a confirm window (yes or no); returns the clicked button's name, or null when none was found. */
+async function answer(bot, yes, wait = 5000) {
+  for (let i = 0; i < wait / 100 && !bot.currentWindow; i++) await sleep(100)
+  await sleep(500)
+  const s = screen(bot)
+  if (!s) { console.log('answer: no window'); return null }
+  const re = yes ? /confirm|yes|accept|✔/i : /deny|^no\b|cancel|decline|✘/i
+  const it = s.items.find(i => re.test(i.name))
+  if (!it) { console.log('answer: no button in', s.title, '|', s.items.map(i => i.slot + ':' + i.name).join(' | ')); return null }
+  await bot.clickWindow(it.slot, 0, 0).catch(() => { }); await sleep(1200)
+  return it.name
+}
 /** Starts the server fresh (plugin data wiped unless keep). */
 function boot(keep) {
   try { srv('stop') } catch { }
@@ -68,4 +105,4 @@ function boot(keep) {
   }
   console.log(srv('start').trim())
 }
-module.exports = { TS, SRV, DIR, sleep, srv, cmd, fold, flat, textOf, serverLog, connect, describe, screen, openScreen, boot, fs, path }
+module.exports = { TS, SRV, DIR, sleep, srv, cmd, fold, flat, textOf, serverLog, connect, describe, screen, openScreen, boot, standClick, blockClick, selectArea, answer, fs, path }

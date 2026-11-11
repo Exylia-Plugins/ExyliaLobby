@@ -104,6 +104,7 @@ async function main() {
 
   // ---- hotbar overlay
   await sleep(1500)
+  let i
   const want = { 0: 'compass', 1: 'nether_star', 2: 'feather', 6: 'lime_dye', 7: 'ender_chest', 8: 'comparator' }
   const got = Object.fromEntries(Object.keys(want).map(s => [s, hotbar(bot, s)?.name]))
   result('hotbar: overlay items in configured slots', Object.keys(want).every(s => got[s] === want[s]), JSON.stringify(got))
@@ -132,9 +133,32 @@ async function main() {
   if (bot.currentWindow) bot.closeWindow(bot.currentWindow)
   bot.setQuickBarSlot(0); await sleep(300)
 
+  // ---- gadgets: the grapple pulls toward a wall; casting again inside its cooldown says the wait with decimals
+  cmd(`fill ${gx - 8} ${gy} ${gz - 3} ${gx - 8} ${gy + 4} ${gz + 3} stone`); await sleep(800)
+  await tp(bot, gx + 0.5, gy, gz + 0.5)
+  const gs = await openScreen(bot, '/gadgets')
+  const card = gs && gs.items.find(it => /grappl/i.test(it.name))
+  if (card) { await bot.clickWindow(card.slot, 0, 0).catch(() => { }); await sleep(1200) }
+  if (bot.currentWindow) bot.closeWindow(bot.currentWindow)
+  const rod = hotbar(bot, 5)?.name
+  bot.setQuickBarSlot(5); await sleep(400)
+  await bot.lookAt(new Vec3(gx - 7.5, gy + 2.5, gz + 0.5), true); await sleep(200)
+  const x0 = bot.entity.position.x
+  bot.activateItem(); await sleep(1500)          // cast: the hook flies into the wall
+  bot.activateItem(); await sleep(300)           // reel in: the pull
+  i = bot.chatLog.length
+  bot.activateItem(); await sleep(400)           // cast again inside the 0.8 s cooldown: refused
+  const x1 = bot.entity.position.x
+  await sleep(800)
+  result('gadgets: grapple pulls toward the wall', rod === 'fishing_rod' && x1 < x0 - 1.5, `rod ${rod} x ${x0.toFixed(2)} -> ${x1.toFixed(2)}`)
+  result('gadgets: cooldown refusal shows decimals', /cooling down: \d+\.\d+s/.test(since(bot, i)), since(bot, i))
+  bot.setQuickBarSlot(0)
+  cmd(`fill ${gx - 8} ${gy} ${gz - 3} ${gx - 8} ${gy + 4} ${gz + 3} air`); await sleep(500)
+  await tp(bot, gx + 0.5, gy, gz + 0.5)
+
   log('inv before toggle', inv(bot))
   // ---- live module toggle: protection and parkour
-  let i = bot.chatLog.length
+  i = bot.chatLog.length
   cmd('lobbyadmin module protection off'); await sleep(1200)
   bot.chat('/lobbyadmin build'); await sleep(1200)
   result('toggle: protection off refuses /lobbyadmin build', /switched off/.test(since(bot, i)), since(bot, i))
@@ -146,7 +170,6 @@ async function main() {
   result('build mode: lobby hands the inventory back', !hotbar(bot, 0) && bot.game.gameMode !== 'adventure', `slot0 ${hotbar(bot, 0)?.name} mode ${bot.game.gameMode}`)
   bot.chat('/lobbyadmin build'); await sleep(1500)
   result('build mode off: lobby applies again', hotbar(bot, 0)?.name === 'compass' && bot.game.gameMode === 'adventure', `slot0 ${hotbar(bot, 0)?.name} mode ${bot.game.gameMode}`)
-  bot.chat('/lobbyadmin build'); await sleep(800)
   log('inv after build off', inv(bot))
   cmd('lobbyadmin module parkour off'); await sleep(1200)
   i = bot.chatLog.length
@@ -168,11 +191,24 @@ async function main() {
 
   log('inv before course', inv(bot))
   // ---- parkour course
-  bot.chat('/lobbyadmin parkour create c1'); await sleep(1000)
-  const spots = [['setstart', 3], ['addcheckpoint', 6], ['setfinish', 9]]
-  for (const [c, dx] of spots) {
-    await tp(bot, gx + dx + 0.5, gy, gz + 0.5); bot.chat(`/lobbyadmin parkour ${c} c1`); await sleep(1000)
-  }
+  // made with the create wizard: stand on the start, one checkpoint, no more, stand on the finish, confirm the review
+  i = bot.chatLog.length
+  bot.chat('/lobbyadmin parkour create c1'); await sleep(1200)
+  await tp(bot, gx + 3.5, gy, gz + 0.5); await C.standClick(bot)
+  const more = await C.answer(bot, true)
+  await tp(bot, gx + 6.5, gy, gz + 0.5); await C.standClick(bot)
+  const noMore = await C.answer(bot, false)
+  await tp(bot, gx + 9.5, gy, gz + 0.5); await C.standClick(bot)
+  const review = await C.answer(bot, true); await sleep(800)
+  const editor = bot.currentWindow ? bot.lastTitle : 'none'
+  result('parkour wizard: start, checkpoint, finish, review saves the course', /course c1 created/i.test(since(bot, i)),
+    `more ${more} | no more ${noMore} | review ${review} | then ${editor} | chat ${since(bot, i).slice(0, 300)}`)
+  if (bot.currentWindow) bot.closeWindow(bot.currentWindow)
+  // a single edit by command is a stand step too
+  i = bot.chatLog.length
+  await tp(bot, gx + 9.5, gy, gz + 0.5); bot.chat('/lobbyadmin parkour setfinish c1'); await sleep(1000); await C.standClick(bot)
+  result('parkour wizard: /lobbyadmin parkour setfinish is a stand step', /finish of c1 set/i.test(since(bot, i)), since(bot, i).slice(0, 200))
+  if (bot.currentWindow) bot.closeWindow(bot.currentWindow)
   await tp(bot, gx - 6.5, gy, gz + 0.5)
   i = bot.chatLog.length
   bot.chat('/parkour c1'); await sleep(3000)
@@ -182,7 +218,7 @@ async function main() {
   const run = since(bot, i)
   cmd('parkour top c1'); await sleep(1200)
   const top = serverLog().split('\n').slice(-12).join('\n')
-  result('parkour: course run start -> checkpoint -> finish, record saved', top.includes(NAME), `chat: ${run.slice(0, 220)} | top: ${top.slice(-200).replace(/\n/g, ' / ')}`)
+  result('parkour: course run start -> checkpoint -> finish, record saved', /finished/.test(run) && /new record/.test(run), `chat: ${run.slice(0, 220)} | top: ${top.slice(-200).replace(/\n/g, ' / ')}`)
   if (bot.currentWindow) bot.closeWindow(bot.currentWindow)
 
   log('inv after course', inv(bot))
