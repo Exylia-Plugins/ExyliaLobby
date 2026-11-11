@@ -30,6 +30,11 @@ modules:
     description:
     - Pulo duplo e
     - plataformas de impulso.
+  triggers:
+    name: 'Gatilhos'
+    description:
+    - 'Botões, placas e áreas'
+    - 'que executam ações.'
   visibility:
     name: Visibilidade
     description:

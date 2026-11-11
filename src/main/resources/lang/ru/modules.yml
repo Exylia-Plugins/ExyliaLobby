@@ -30,6 +30,11 @@ modules:
     description:
     - Двойной прыжок и
     - джамп-пады.
+  triggers:
+    name: 'Триггеры'
+    description:
+    - 'Кнопки, плиты и области,'
+    - 'которые запускают действия.'
   visibility:
     name: Видимость
     description:

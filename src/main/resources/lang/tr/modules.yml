@@ -29,6 +29,11 @@ modules:
     description:
     - Çift zıplama ve
     - fırlatma pedleri.
+  triggers:
+    name: 'Tetikleyiciler'
+    description:
+    - 'Eylem çalıştıran düğme,'
+    - 'plaka ve alanlar.'
   visibility:
     name: Görünürlük
     description:

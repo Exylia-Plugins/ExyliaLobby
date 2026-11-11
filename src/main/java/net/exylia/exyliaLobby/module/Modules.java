@@ -14,6 +14,7 @@ import net.exylia.exyliaLobby.module.pvp.PvpModule;
 import net.exylia.exyliaLobby.module.spawn.SpawnModule;
 import net.exylia.exyliaLobby.module.selector.SelectorModule;
 import net.exylia.exyliaLobby.module.state.StateModule;
+import net.exylia.exyliaLobby.module.triggers.TriggersModule;
 import net.exylia.exyliaLobby.module.visibility.VisibilityModule;
 import org.jetbrains.annotations.NotNull;
 
@@ -40,6 +41,7 @@ public final class Modules {
                 new HotbarModule(context),
                 new ParkourModule(context),
                 new MovementModule(context),
+                new TriggersModule(context),
                 new VisibilityModule(context),
                 new SelectorModule(context),
                 new GamesModule(context),

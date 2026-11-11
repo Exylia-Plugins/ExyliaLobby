@@ -35,6 +35,7 @@ public record ModuleNames(
         map.put("join", new Info("Join and leave", List.of("Messages, welcome title and", "commands on join and quit.")));
         map.put("hotbar", new Info("Hotbar", List.of("Items that open menus, send", "to servers or run commands.")));
         map.put("movement", new Info("Movement", List.of("Double jump and", "launch pads.")));
+        map.put("triggers", new Info("Triggers", List.of("Buttons, plates and areas", "that run actions.")));
         map.put("visibility", new Info("Visibility", List.of("Players choose who", "they see in the lobby.")));
         map.put("selector", new Info("Server selector", List.of("Servers and lobbies with live", "counts and portals.")));
         map.put("games", new Info("Games", List.of("Every game the Exylia", "plugins offer, on one screen.")));

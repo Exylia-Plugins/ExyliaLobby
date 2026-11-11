@@ -30,6 +30,11 @@ modules:
     description:
     - Double saut et
     - plateformes de lancement.
+  triggers:
+    name: 'Déclencheurs'
+    description:
+    - 'Boutons, plaques et zones'
+    - 'qui lancent des actions.'
   visibility:
     name: Visibilité
     description:

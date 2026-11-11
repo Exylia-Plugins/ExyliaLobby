@@ -30,6 +30,11 @@ modules:
     description:
     - 'Doble salto y'
     - 'plataformas de impulso.'
+  triggers:
+    name: 'Activadores'
+    description:
+    - 'Botones, placas y áreas'
+    - 'que ejecutan acciones.'
   visibility:
     name: Visibilidad
     description:

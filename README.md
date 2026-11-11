@@ -7,6 +7,7 @@ Every part is a module you switch on or off live from `/lobbyadmin`, and every s
 - **Spawn and protection**: spawn on join, void return, no building, damage, hunger, drops, mobs or fire inside the lobby.
 - **Hotbar**: items that open menus, send to servers or run commands, and can never leak into a real inventory.
 - **Movement**: double jump and launch pads.
+- **Triggers**: buttons, pressure plates, any block or an area run actions (commands, messages, sounds, server switch, teleport) when used or walked into.
 - **Server selector**: live player counts, lobby selector and portals. Place server NPCs with ExyliaDisplays (action `[SERVER] <name>`, label `%network_players_<server>% playing`).
 - **HUD**: sidebar, tab list, rotating boss bars and announcements.
 - **Lobby PvP**: hold the sword to fight players who opted in; your hotbar comes back exactly.

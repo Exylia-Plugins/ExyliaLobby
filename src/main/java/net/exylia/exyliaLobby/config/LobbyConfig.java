@@ -70,6 +70,8 @@ public record LobbyConfig(
             boolean hotbar,
             @Comment("Double jump and launch pads.")
             boolean movement,
+            @Comment("Buttons, pressure plates, blocks and areas that run actions when used or walked into.")
+            boolean triggers,
             @Comment("Players choose to see everyone, only friends and staff, or nobody.")
             boolean visibility,
             @Comment("Server and lobby selector and portals.")
@@ -90,7 +92,7 @@ public record LobbyConfig(
             boolean onboarding) {
 
         public Modules() {
-            this(true, true, true, true, true, true, true, true, true, true, true, true, true, false, false);
+            this(true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false);
         }
 
         /** The switch of a module by its id ({@code first-join} style), empty for an unknown id. */
