@@ -157,7 +157,7 @@ public final class HotbarModule extends LobbyModule {
     }
 
     private void rebuildIfRunning() {
-        if (isEnabled() && hotbars != null) rebuild();
+        if (isEnabled() && hotbars != null && !context.stopping()) rebuild();
     }
 
     private synchronized void rebuild() {
