@@ -1,0 +1,17 @@
+# Тексты по умолчанию на русском. Только ключи с текстом; остальные настройки берутся из реестра.
+
+themes:
+  stone-ruins:
+    name: Каменные руины
+  nether:
+    name: <gradient:{error}:{error_light}>Незер</gradient>
+  end:
+    name: <gradient:{secondary}:{secondary_light}>Энд</gradient>
+  frozen-peaks:
+    name: <gradient:{info}:{info_light}>Ледяные пики</gradient>
+  ocean:
+    name: <gradient:{info}:{success_light}>Океан</gradient>
+  sky-gardens:
+    name: <gradient:{success}:{success_light}>Небесные сады</gradient>
+  deep-dark:
+    name: <gradient:{primary}:{secondary_light}>Тёмные глубины</gradient>

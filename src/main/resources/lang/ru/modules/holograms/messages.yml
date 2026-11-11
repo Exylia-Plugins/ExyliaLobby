@@ -2,8 +2,7 @@
 added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Голограмма {highlight}%name%{letters} добавлена.'
 removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Голограмма {highlight}%name%{letters} удалена.'
 changed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Голограмма {highlight}%name%{letters} обновлена.'
-moved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Голограмма {highlight}%name%{letters} перенесена к вам.'
-no-target: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Посмотрите на блок в пределах 8 блоков.'
+moved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Голограмма {highlight}%name%{letters} перемещена.'
 
 # Запрос в редакторе текста. Строки разделяйте <nl>.
 prompt-lines: '{letters}Строки голограммы, разделённые {highlight}<nl>{letters}.'
@@ -17,18 +16,23 @@ label-place: Место
 label-lines: Строки
 clicks:
 - '{primary}{icon:click} ЛКМ {letters_black}· {letters}изменить текст'
-- '{primary}{icon:right_click} ПКМ {letters_black}· {letters}перенести сюда'
+- '{primary}{icon:right_click} ПКМ {letters_black}· {letters}перенести'
 - '{error}{icon:right_click} Shift+ПКМ {letters_black}· {letters}убрать'
 - '{letters_black}Удаление нужно подтвердить.'
-add-here-title: Под ногами
-add-here-text:
-- ' {letters}Ставит голограмму на'
-- ' {letters}уровне ваших глаз.'
-add-here-click: Нажмите, чтобы добавить
-add-here-next: Затем измените текст здесь.
-add-look-title: Куда смотрю
-add-look-text:
-- ' {letters}Ставит голограмму над'
-- ' {letters}блоком, на который смотрите.'
-add-look-click: Нажмите, чтобы добавить
-add-look-next: Затем измените текст здесь.
+add-spot-title: Свободная точка
+add-spot-text:
+- ' {letters}Подойдите к месту и нажмите'
+- ' {highlight}Shift+клик{letters}; голограмма висит'
+- ' {letters}на уровне ваших глаз.'
+add-spot-click: Нажмите, чтобы начать
+add-spot-next: Затем измените текст здесь.
+add-block-title: Над блоком
+add-block-text:
+- ' {letters}Кликните по блоку; голограмма'
+- ' {letters}повиснет над ним.'
+add-block-click: Нажмите, чтобы начать
+add-block-next: Затем измените текст здесь.
+
+# Что мастера настройки называют на экране (простой текст, без цветов).
+wizard-spot: Голограмма
+wizard-block: Блок голограммы

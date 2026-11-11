@@ -1,5 +1,5 @@
-# Чат-сообщения. %gadget% — название гаджета, %seconds% — оставшаяся перезарядка.
-cooling: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}%gadget%{warning} перезаряжается: {highlight}%seconds% с{warning}.'
+# Чат-сообщения. %gadget% — название гаджета, %time% — оставшаяся перезарядка.
+cooling: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}%gadget%{warning} перезаряжается: {highlight}%time%{warning}.'
 no-permission: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}У вас пока нет гаджета %gadget%{error}.'
 equipped: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%gadget%{letters} теперь в вашем хотбаре.'
 put-away: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Вы убрали гаджет.'

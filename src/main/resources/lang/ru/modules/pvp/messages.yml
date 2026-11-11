@@ -1,11 +1,17 @@
-# Боссбары при надевании и снятии набора. %seconds% — оставшееся время.
-equip-bar: '{success}&lЭКИПИРОВКА {letters_black}» {letters}Держите меч в руке {letters_black}({info}%seconds% с{letters_black})'
-unequip-bar: '{error}&lВЫХОД ИЗ БОЯ {letters_black}» {letters}Уберите меч {letters_black}({info}%seconds% с{letters_black})'
+# Боссбары при надевании и снятии набора. %time% — оставшееся время.
+equip-bar: '{success}&lЭКИПИРОВКА {letters_black}» {letters}Держите меч в руке {letters_black}({info}%time%{letters_black})'
+unequip-bar: '{error}&lВЫХОД ИЗ БОЯ {letters_black}» {letters}Уберите меч {letters_black}({info}%time%{letters_black})'
 
-# Чат-сообщения. %seconds% — оставшееся время боя, %victim%, %killer% и %streak% описывают схватку.
+# Заголовки: когда набор начинает надеваться и когда он надет. Пусто — не показывать.
+equip-title: '{success}&lPVP'
+equip-subtitle: '{letters}Держите меч в руке, чтобы сражаться'
+kit-on-title: '{success}&lВ БОЙ'
+kit-on-subtitle: '{letters}Ваш набор надет'
+
+# Чат-сообщения. %time% — оставшееся время боя, %victim%, %killer% и %streak% описывают схватку.
 equipped: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {success}Вы в бою.{letters} Вас могут бить только игроки с мечом в руке.'
 unequipped: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Вы вышли из боя, ваши вещи вернулись.'
-tagged: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Вы в бою ещё {highlight}%seconds% с{error}. Держите меч в руке.'
+tagged: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Вы в бою ещё {highlight}%time%{error}. Держите меч в руке.'
 no-permission: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Вы не можете драться в лобби.'
 busy-elsewhere: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Нельзя драться, пока вы заняты другим.'
 killer: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Вы убили {highlight}%victim%{letters}. Серия {accent}%streak%{letters}.'
@@ -47,17 +53,22 @@ add-zone-title: Зона
 add-zone-text:
 - ' {letters}Выделите область; набор'
 - ' {letters}надевается при входе в неё.'
-add-zone-click: Нажмите, чтобы выделить
+add-zone-click: Нажмите, чтобы начать
 add-zone-next: При выходе набор снимается.
-add-here-title: Вокруг вас
-add-here-text:
-- ' {letters}Область 13x13 блоков'
-- ' {letters}с центром там, где вы стоите.'
-add-here-click: Нажмите, чтобы добавить
-add-here-next: Размер можно изменить в конфиге.
-select-zone: '{letters}Выделите зону золотым топором: {highlight}ЛКМ{letters} — один угол, {highlight}ПКМ{letters} — другой, затем {highlight}Shift + ЛКМ{letters}.'
+add-respawn-title: Возрождение
+add-respawn-text:
+- ' {letters}Где возрождается убитый игрок:'
+- ' {letters}встаньте там, повернитесь'
+- ' {letters}куда нужно и {highlight}Shift+клик{letters}.'
+add-respawn-click: Нажмите, чтобы начать
+add-respawn-next: Заменяет точку возрождения PvP.
+
+# Что мастера настройки называют на экране (простой текст, без цветов).
+wizard-zone: Зона PvP
+wizard-respawn: Возрождение PvP
+wizard-board: Топ PvP
 added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} добавлено.'
 removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} удалено.'
 confirm-remove: Удалить {highlight}%what%{letters}?
-spawn-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Точка возрождения PvP перенесена на вашу позицию.'
-board-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Голограмма-топ поставлена на вашу позицию.'
+spawn-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Точка возрождения PvP задана там, где вы стояли.'
+board-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Голограмма-топ поставлена над блоком, по которому вы кликнули.'

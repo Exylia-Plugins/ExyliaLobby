@@ -90,16 +90,29 @@ reasons:
 time-reset: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Ваше время на трассе {highlight}%course%{letters} сброшено.'
 
 # Команды персонала в /lobbyadmin parkour. %course% — id.
-course-created: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Трасса {highlight}%course%{letters} создана, старт у ваших ног. Добавьте чекпоинты и финиш.'
+course-created: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Трасса {highlight}%course%{letters} создана.'
 course-exists: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Трасса {highlight}%course%{error} уже существует.'
-start-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Старт трассы {highlight}%course%{letters} задан у ваших ног.'
-checkpoint-added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Чекпоинт {highlight}%checkpoint%{letters} трассы {highlight}%course%{letters} добавлен у ваших ног.'
-finish-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Финиш трассы {highlight}%course%{letters} задан у ваших ног.'
+start-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Старт трассы {highlight}%course%{letters} задан.'
+checkpoint-added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Чекпоинт {highlight}%checkpoint%{letters} трассы {highlight}%course%{letters} добавлен.'
+finish-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Финиш трассы {highlight}%course%{letters} задан.'
 course-deleted: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Трасса {highlight}%course%{letters} удалена.'
-wrong-world: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Трасса {highlight}%course%{error} в мире {highlight}%world%{error}. Встаньте там, чтобы править её.'
+wrong-world: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Трасса {highlight}%course%{error} в мире {highlight}%world%{error}. Задайте её точки там.'
 
 # Подпись над лучом следующего чекпоинта. %checkpoint%/%total% — чекпоинт, %distance% — расстояние в метрах.
 beacon-label: '{letters}Чекпоинт {info}%checkpoint%{letters_black}/{info}%total% {letters_black}· {info}%distance% м'
+
+# Мастера настройки: что они называют на экране и о чём спрашивают.
+wizard:
+  course: '{primary}&lНОВАЯ ТРАССА {muted}%course%'
+  stand: '{warning}➥ {highlight}%step%{letters}: встаньте там и нажмите {highlight}Shift+клик{letters}.'
+  more: Добавить чекпоинт %checkpoint%? Ответьте «нет», чтобы задать финиш.
+  start: Старт трассы
+  checkpoint: Чекпоинт
+  finish: Финиш трассы
+  kill: Смертельный блок
+  board: Топ
+  area: Бесконечная область
+  area-start: Старт бесконечного режима
 
 # Предметы бегуна: к последнему чекпоинту, заново, выход.
 items:
@@ -140,17 +153,14 @@ tools:
   board-title: '{primary}&l%board%'
   board-line: '{highlight}#%place% {letters}%name% {letters_black}· {info}%value%'
   board-empty: '{letters_black}Пока никого'
-  board-placed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Топ {highlight}%board%{letters} поставлен у ваших ног.'
+  board-placed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Топ {highlight}%board%{letters} поставлен.'
   kill-added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Теперь {highlight}%block%{letters} возвращает бегунов трассы {highlight}%course%{letters}.'
-  kill-no-block: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Сначала встаньте на блок или посмотрите на него.'
   medals-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Медали трассы {highlight}%course%{letters} заданы.'
   # Вопрос перед удалением трассы. %course% — id.
   confirm-delete: Удалить %course% и её настройки? Сохранённое время останется в базе данных.
-  select-area: '%prefix% {letters}Выделите два угла области своим жезлом.'
-  no-selection: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Область не выделена.'
   # Запрос названия области.
   prompt-area: Название области
-  area-saved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Область бесконечного паркура {highlight}%area%{letters} сохранена, старт там, где вы стоите.'
+  area-saved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Область бесконечного паркура {highlight}%area%{letters} сохранена.'
 
 # Карточки меню: строки статов, подзаголовки, запросы и состояния. %tone% и %light% — цвета палитры карточки.
 screens:
@@ -262,10 +272,10 @@ staff:
   create-course:
     title: Создать
     text:
-    - ' {letters}Новая трасса со стартом'
-    - ' {letters}у ваших ног.'
-    click: Нажмите, чтобы создать
-    next: Затем откроется её редактор.
+    - ' {letters}Назовите её, затем задайте старт,'
+    - ' {letters}чекпоинты и финиш.'
+    click: Нажмите, чтобы начать
+    next: В конце откроется редактор.
   settings-courses:
     title: Настройки
     text:
@@ -276,10 +286,10 @@ staff:
   add-area:
     title: Добавить
     text:
-    - ' {letters}Выделите два угла жезлом,'
-    - ' {letters}начиная там, где стоите.'
-    click: Нажмите, чтобы добавить
-    next: Имя зададите после выделения.
+    - ' {letters}Назовите, выделите область,'
+    - ' {letters}затем встаньте на старт забегов.'
+    click: Нажмите, чтобы начать
+    next: Забеги идут туда, куда вы смотрите.
   settings-areas:
     title: Настройки
     text:

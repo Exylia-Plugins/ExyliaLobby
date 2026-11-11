@@ -1,12 +1,15 @@
 # /spawn, когда точка спавна не найдена
 no-spawn: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Спавн не задан. Обратитесь к админу.'
 
-# /spawn с задержкой. %seconds% — ожидание.
-teleporting: '%prefix% {letters}Телепорт через {highlight}%seconds% с{letters}. Стойте на месте.'
+# /spawn с задержкой. %time% — ожидание.
+teleporting: '%prefix% {letters}Телепорт через {highlight}%time%{letters}. Стойте на месте.'
 cancelled: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Телепорт отменён.'
 
+# Боссбар во время ожидания /spawn. %time% — оставшееся время (2.4s).
+warmup-bar: '{info}&lSPAWN {letters_black}» {letters}Не двигайтесь {letters_black}({info}%time%{letters_black})'
+
 # Админ задал спавн мира. %world% — его название.
-spawn-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Спавн мира {highlight}%world%{letters} перенесён на вашу позицию.'
+spawn-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Спавн мира {highlight}%world%{letters} задан там, где вы стояли.'
 
 # Показывается на экране «Спавн»: спавн здесь задан или нет
 state-set: '{success}{icon:on} Задан'
@@ -23,8 +26,11 @@ world-missing: '{error}{icon:off} Не загружен'
 # Размер области. %x%, %y% и %z% — её стороны в блоках.
 box-size: '{info}%x%×%y%×%z% блоков'
 
+# Что мастера настройки называют на экране (простой текст, без цветов): спавн мира, область лобби
+wizard-spawn: Спавн лобби
+wizard-box: Область лобби
+
 # Запросы редактора зон
-select-box: '{letters}Выделите область золотым топором: {highlight}ЛКМ{letters} — один угол, {highlight}ПКМ{letters} — другой, затем {highlight}Shift + ЛКМ{letters}.'
 prompt-name: '{letters}Назовите эту область лобби (буквы, цифры, дефисы).'
 name-taken: '{error}Это имя уже занято.'
 confirm-world: Перестать считать мир {highlight}%area%{letters} лобби?

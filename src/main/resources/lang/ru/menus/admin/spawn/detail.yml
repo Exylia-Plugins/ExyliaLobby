@@ -1,4 +1,4 @@
-menu-version: 1
+menu-version: 2
 # НЕ РЕДАКТИРОВАТЬ — ПЕРЕСОЗДАЁТСЯ ПРИ КАЖДОМ ЗАПУСКЕ.
 #
 # Модуль спавна: задайте точку спавна, проверьте её и правьте зоны лобби.
@@ -26,15 +26,16 @@ items:
   set:
     slot: 12
     material: LIME_BED
-    name: "{letters}Спавн {letters_black}▸ <gradient:{success}:{success_light}>Задать здесь</gradient>"
+    name: "{letters}Спавн {letters_black}▸ <gradient:{success}:{success_light}>Задать спавн</gradient>"
     lore:
       - "{letters_black}Точка спавна"
       - ""
       - "{success}✎ Информация"
-      - " {letters}Берёт вашу позицию и взгляд"
-      - " {letters}как спавн этого {highlight}мира{letters}."
+      - " {letters}Подойдите к спавну этого"
+      - " {highlight}мира{letters}, повернитесь, как должны"
+      - " {letters}смотреть игроки, и {highlight}Shift+клик{letters}."
       - ""
-      - "{success}{icon:click} Нажмите, чтобы задать"
+      - "{success}{icon:click} Нажмите, чтобы начать"
       - "{letters_black}Заменяет спавн этого мира."
     actions:
       - 'exylialobby:spawn_set'

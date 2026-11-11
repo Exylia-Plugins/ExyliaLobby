@@ -1,0 +1,22 @@
+# Тексты по умолчанию на русском. Только ключи с текстом; остальные настройки берутся из реестра.
+
+sidebar:
+  board:
+    lines:
+    - '{primary}✦ Lobby'
+    - '  {letters_black}· {info}{icon:star} {letters}Здесь{letters_black}: {info}%lobby_hud_here%'
+    - '  {letters_black}· {success}{icon:heart} {letters}Сеть{letters_black}: {success}%lobby_hud_network%'
+    - ''
+    - '{muted}{server-ip}'
+tab:
+  footer:
+  - ''
+  - '{letters}Игроков в сети{letters_black}: {success}%lobby_hud_network%'
+  - ''
+boss-bars:
+  texts:
+  - '{letters}Выберите сервер с помощью {highlight}компаса{letters}.'
+  - '{letters}Выберите, кого видеть в лобби, с помощью {highlight}красителя{letters}.'
+announcements:
+  messages:
+  - '%prefix% {letters}Отключить эти объявления можно в любой момент в {highlight}/settings{letters}.'
