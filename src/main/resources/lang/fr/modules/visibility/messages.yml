@@ -1,8 +1,8 @@
 # Le joueur a changé ce qu’il voit. %state% est le nouveau mode, coloré.
 changed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Tu vois maintenant : %state%{letters}.'
 
-# Rappuyé trop vite. %seconds% est le temps restant.
-cooling: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Attends {highlight}%seconds%s{warning} avant de changer à nouveau.'
+# Rappuyé trop vite. %time% est le temps restant.
+cooling: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Attends {highlight}%time%{warning} avant de changer à nouveau.'
 
 # Le mode sous forme de mot coloré, pour le bouton de hotbar et le chat : %lobby_visibility_state%.
 state-everyone: '{success}Tout le monde'

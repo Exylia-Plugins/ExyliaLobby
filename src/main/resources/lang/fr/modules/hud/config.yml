@@ -1,0 +1,22 @@
+# Textes par défaut en français. Seules les clés de texte ; les autres réglages viennent du registre.
+
+sidebar:
+  board:
+    lines:
+    - '{primary}✦ Lobby'
+    - '  {letters_black}· {info}{icon:star} {letters}Ici{letters_black}: {info}%lobby_hud_here%'
+    - '  {letters_black}· {success}{icon:heart} {letters}Réseau{letters_black}: {success}%lobby_hud_network%'
+    - ''
+    - '{muted}{server-ip}'
+tab:
+  footer:
+  - ''
+  - '{letters}Joueurs sur le réseau{letters_black}: {success}%lobby_hud_network%'
+  - ''
+boss-bars:
+  texts:
+  - '{letters}Choisis un serveur avec la {highlight}boussole{letters}.'
+  - '{letters}Choisis qui tu vois dans le lobby avec la {highlight}teinture{letters}.'
+announcements:
+  messages:
+  - '%prefix% {letters}Coupe ces annonces à tout moment dans {highlight}/settings{letters}.'

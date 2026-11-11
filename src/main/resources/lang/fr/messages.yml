@@ -18,6 +18,10 @@ modules:
   failed: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Le module {highlight}%module%{error} n’a pas pu démarrer. Regarde la console.'
   # Désactiver celui-ci désactive aussi ceux-ci. %modules% les liste.
   dependants: '{letters_black}Désactive aussi : %modules%'
+  # /lobbyadmin module avec un état qui n’est ni on ni off
+  usage: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {letters}Utilise {highlight}/lobbyadmin module {letters_black}id{highlight} on{letters} ou {highlight}off{letters}.'
+  # /lobbyadmin module avec un id qu’aucun module n’a. %id% est ce qui a été saisi, %modules% les ids.
+  unknown: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Aucun module ne s’appelle {highlight}%id%{error}. {letters}Ids : {letters_black}%modules%'
 areas:
   # Affiché quand un admin enregistre une zone du lobby depuis sa sélection
   box-saved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Zone du lobby {highlight}%area%{letters} enregistrée.'

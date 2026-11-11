@@ -1,0 +1,13 @@
+# Textes par défaut en français. Seules les clés de texte ; les autres réglages viennent du registre.
+
+servers:
+  survival:
+    name: '{success}Survie'
+    description:
+    - ' {letters}Construis, échange et explore.'
+    - ' {letters}Ton monde, tes règles.'
+  minigames:
+    name: '{highlight}Mini-jeux'
+    description:
+    - ' {letters}Parties rapides contre'
+    - ' {letters}d’autres joueurs.'
