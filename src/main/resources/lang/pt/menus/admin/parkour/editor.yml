@@ -1,4 +1,4 @@
-menu-version: 2
+menu-version: 3
 # NÃO EDITE — REGENERADO A CADA INICIALIZAÇÃO.
 #
 # Um percurso de parkour: onde começa, passa e termina, e como é julgado.
@@ -31,13 +31,13 @@ items:
       - "{letters_black}Config do percurso"
       - ""
       - "{success}✎ Informação"
-      - " {letters}Onde a corrida começa. Usa sua"
-      - " {letters}posição e visão."
+      - " {letters}Onde a corrida começa: fique"
+      - " {letters}lá e faça {highlight}Shift + clique{letters}."
       - ""
       - "{success}✦ Status"
       - "  {letters_black}· {info}{icon:compass} {letters}Largada{letters_black}: %start_state%"
       - ""
-      - "{success}{icon:click} Clique para definir aqui"
+      - "{success}{icon:click} Clique para começar"
       - "{letters_black}Substitui a largada."
     actions:
       - 'exylialobby:parkour_edit start %course_id%'
@@ -50,13 +50,13 @@ items:
       - "{letters_black}Config do percurso"
       - ""
       - "{success}✎ Informação"
-      - " {letters}Adiciona um checkpoint nos pés."
+      - " {letters}Fique nele e faça {highlight}Shift + clique{letters}."
       - " {letters}Os corredores os passam em ordem."
       - ""
       - "{success}✦ Status"
       - "  {letters_black}· {info}{icon:check} {letters}Checkpoints{letters_black}: {info}%checkpoints%"
       - ""
-      - "{success}{icon:click} Clique para adicionar aqui"
+      - "{success}{icon:click} Clique para começar"
       - "{letters_black}Entra depois do último."
     actions:
       - 'exylialobby:parkour_edit checkpoint %course_id%'
@@ -69,13 +69,13 @@ items:
       - "{letters_black}Config do percurso"
       - ""
       - "{success}✎ Informação"
-      - " {letters}Onde a corrida termina. Usa sua"
-      - " {letters}posição e visão."
+      - " {letters}Onde a corrida termina: fique"
+      - " {letters}lá e faça {highlight}Shift + clique{letters}."
       - ""
       - "{success}✦ Status"
       - "  {letters_black}· {info}{icon:star} {letters}Chegada{letters_black}: %finish_state%"
       - ""
-      - "{success}{icon:click} Clique para definir aqui"
+      - "{success}{icon:click} Clique para começar"
       - "{letters_black}Substitui a chegada."
     actions:
       - 'exylialobby:parkour_edit finish %course_id%'
@@ -88,14 +88,14 @@ items:
       - "{letters_black}Config do percurso"
       - ""
       - "{primary}✎ Informação"
-      - " {letters}O bloco que você olha manda"
-      - " {letters}corredores ao checkpoint."
+      - " {letters}Clique num bloco: todos do"
+      - " {letters}mesmo tipo devolvem os corredores."
       - ""
       - "{primary}✦ Status"
       - "  {letters_black}· {info}{icon:barrier} {letters}Blocos{letters_black}: {info}%kills%"
       - ""
-      - "{primary}{icon:click} Clique para adicionar bloco"
-      - "{letters_black}Olhe para um bloco antes."
+      - "{primary}{icon:click} Clique para começar"
+      - "{letters_black}Depois clique no bloco."
     actions:
       - 'exylialobby:parkour_edit kill %course_id%'
 
@@ -157,15 +157,15 @@ items:
   board:
     slot: 27
     material: OAK_SIGN
-    name: "{letters}Percurso {letters_black}▸ <gradient:{info}:{info_light}>Ranking aqui</gradient>"
+    name: "{letters}Percurso {letters_black}▸ <gradient:{info}:{info_light}>Ranking</gradient>"
     lore:
       - "{letters_black}Holograma"
       - ""
       - "{info}✎ Informação"
-      - " {letters}Um holograma de ranking"
-      - " {letters}deste percurso nos seus pés."
+      - " {letters}Um holograma do ranking deste"
+      - " {letters}percurso sobre um bloco."
       - ""
-      - "{info}{icon:click} Clique para colocar"
+      - "{info}{icon:click} Clique para começar"
       - "{letters_black}Substitui o ranking dele."
     actions:
       - 'exylialobby:parkour_edit board %course_id%'

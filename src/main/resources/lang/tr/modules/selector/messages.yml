@@ -23,7 +23,7 @@ label-size: Boyut
 server-missing: '{error}Katalogda yok'
 clicks-npc:
 - '{primary}{icon:click} Sol tık {letters_black}· {letters}sunucuyu değiştir'
-- '{primary}{icon:right_click} Sağ tık {letters_black}· {letters}buraya taşı'
+- '{primary}{icon:right_click} Sağ tık {letters_black}· {letters}taşı'
 - '{error}{icon:right_click} Shift + sağ tık {letters_black}· {letters}kaldır'
 - '{letters_black}Kaldırırken onay istenir.'
 clicks-portal:
@@ -33,21 +33,25 @@ clicks-portal:
 - '{letters_black}Kaldırırken onay istenir.'
 add-npc-title: Sunucu NPC'si
 add-npc-text:
-- ' {letters}Durduğun yere bir NPC koyar;'
-- ' {letters}tıklayan oyuncular gönderilir.'
-add-npc-click: Eklemek için tıkla
-add-npc-next: Önce sunucusunu seçersin.
+- ' {letters}Sunucusunu seç, noktaya git,'
+- ' {letters}bakacağı yöne dön,'
+- ' {letters}ve {highlight}Shift + tık{letters} yap.'
+add-npc-click: Başlamak için tıkla
+add-npc-next: Tıklayınca oyuncuları gönderir.
 add-portal-title: Portal
 add-portal-text:
 - ' {letters}Bir kutu seç; içine girmek'
 - ' {letters}oyuncuları gönderir.'
-add-portal-click: Seçmek için tıkla
+add-portal-click: Başlamak için tıkla
 add-portal-next: Sunucusunu sonra seçersin.
 prompt-server: '{letters}Oyuncuları hangi sunucuya göndersin?'
-select-portal: '{letters}Portalı altın baltayla seç: bir köşeye {highlight}sol tık{letters}, diğerine {highlight}sağ tık{letters}, sonra {highlight}shift + sol tık{letters}.'
 no-servers: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Önce kataloğa bir sunucu ekle (modules/selector/config.yml).'
 added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} eklendi.'
 removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} kaldırıldı.'
 changed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} artık oyuncuları %server%{letters} sunucusuna gönderiyor.'
-moved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} konumuna taşındı.'
+moved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} taşındı.'
 confirm-remove: '{highlight}%what%{letters} kaldırılsın mı?'
+
+# Kurulum sihirbazlarının ekranda adlandırdığı şeyler (düz metin, renksiz).
+wizard-npc: Sunucu NPC'si
+wizard-portal: Portal

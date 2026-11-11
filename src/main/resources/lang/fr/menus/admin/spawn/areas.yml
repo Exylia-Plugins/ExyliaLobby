@@ -1,4 +1,4 @@
-menu-version: 1
+menu-version: 2
 # NE PAS MODIFIER — RÉGÉNÉRÉ À CHAQUE DÉMARRAGE.
 #
 # Les zones du lobby : les mondes et zones où les règles du lobby s’appliquent.
@@ -66,11 +66,11 @@ items:
       - ""
       - "{success}✎ Information"
       - " {letters}Sélectionne deux coins avec la"
-      - " {letters}hache dorée ; les règles du lobby"
+      - " {letters}sélecteur ; les règles du lobby"
       - " {letters}s’appliquent dans cette zone."
       - ""
-      - "{success}{icon:click} Clique pour sélectionner"
-      - "{letters_black}Tu nommes ensuite la zone."
+      - "{success}{icon:click} Clique pour commencer"
+      - "{letters_black}Tu la sélectionnes, puis la nommes."
     actions:
       - 'exylialobby:spawn_area_add_box'
 

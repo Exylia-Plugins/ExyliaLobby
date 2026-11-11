@@ -1,11 +1,17 @@
-# Boss bars enquanto o kit é colocado ou tirado. %seconds% é o tempo restante.
-equip-bar: '{success}&lEQUIPANDO {letters_black}» {letters}Continue segurando a espada {letters_black}({info}%seconds%s{letters_black})'
-unequip-bar: '{error}&lSAINDO {letters_black}» {letters}Mantenha a espada guardada {letters_black}({info}%seconds%s{letters_black})'
+# Boss bars enquanto o kit é colocado ou tirado. %time% é o tempo restante.
+equip-bar: '{success}&lEQUIPANDO {letters_black}» {letters}Continue segurando a espada {letters_black}({info}%time%{letters_black})'
+unequip-bar: '{error}&lSAINDO {letters_black}» {letters}Mantenha a espada guardada {letters_black}({info}%time%{letters_black})'
 
-# Linhas de chat. %seconds% é o tempo de combate restante, %victim%, %killer% e %streak% nomeiam a luta.
+# Títulos: quando o kit começa a ser colocado e depois de colocado. Vazio não mostra nenhum.
+equip-title: '{success}&lPVP'
+equip-subtitle: '{letters}Mantenha a espada na mão para lutar'
+kit-on-title: '{success}&lLUTE'
+kit-on-subtitle: '{letters}Seu kit está equipado'
+
+# Linhas de chat. %time% é o tempo de combate restante, %victim%, %killer% e %streak% nomeiam a luta.
 equipped: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {success}Você está na luta.{letters} Só jogadores com a espada na mão podem te atingir.'
 unequipped: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Você saiu da luta e suas coisas voltaram.'
-tagged: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Você está em combate por {highlight}%seconds%s{error}. Mantenha a espada na mão.'
+tagged: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Você está em combate por {highlight}%time%{error}. Mantenha a espada na mão.'
 no-permission: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Você não pode lutar no lobby.'
 busy-elsewhere: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Você não pode lutar enquanto faz outra coisa.'
 killer: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Você matou {highlight}%victim%{letters}. Sequência {accent}%streak%{letters}.'
@@ -47,17 +53,22 @@ add-zone-title: Zona
 add-zone-text:
 - ' {letters}Selecione uma caixa; o kit entra'
 - ' {letters}quando os jogadores entram nela.'
-add-zone-click: Clique para selecionar
+add-zone-click: Clique para começar
 add-zone-next: Sair da caixa tira o kit.
-add-here-title: Ao seu redor
-add-here-text:
-- ' {letters}Uma caixa de 13x13 blocos'
-- ' {letters}centrada onde você está.'
-add-here-click: Clique para adicionar
-add-here-next: Redimensione depois na config.
-select-zone: '{letters}Selecione a zona com o machado dourado: {highlight}clique esquerdo{letters} em um canto, {highlight}clique direito{letters} no outro, depois {highlight}shift + clique esquerdo{letters}.'
+add-respawn-title: Respawn
+add-respawn-text:
+- ' {letters}Onde um jogador abatido volta:'
+- ' {letters}vá até lá, olhe na direção'
+- ' {letters}certa e faça {highlight}Shift + clique{letters}.'
+add-respawn-click: Clique para começar
+add-respawn-next: Substitui o respawn do PvP.
+
+# O que os assistentes nomeiam na tela (texto simples, sem cores).
+wizard-zone: Zona PvP
+wizard-respawn: Respawn do PvP
+wizard-board: Ranking PvP
 added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} adicionado.'
 removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} removido.'
 confirm-remove: Remover {highlight}%what%{letters}?
-spawn-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Respawn do PvP definido na sua posição.'
-board-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Holograma do top colocado na sua posição.'
+spawn-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Respawn do PvP definido onde você estava.'
+board-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Holograma do top colocado sobre o bloco que você clicou.'

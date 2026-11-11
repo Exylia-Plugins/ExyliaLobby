@@ -28,7 +28,7 @@ label-size: Размер
 server-missing: '{error}Нет в каталоге'
 clicks-npc:
 - '{primary}{icon:click} ЛКМ {letters_black}· {letters}сменить сервер'
-- '{primary}{icon:right_click} ПКМ {letters_black}· {letters}перенести сюда'
+- '{primary}{icon:right_click} ПКМ {letters_black}· {letters}перенести'
 - '{error}{icon:right_click} Shift+ПКМ {letters_black}· {letters}убрать'
 - '{letters_black}Удаление нужно подтвердить.'
 clicks-portal:
@@ -38,21 +38,25 @@ clicks-portal:
 - '{letters_black}Удаление нужно подтвердить.'
 add-npc-title: NPC сервера
 add-npc-text:
-- ' {letters}Ставит NPC там, где вы'
-- ' {letters}стоите; клик отправляет игроков.'
-add-npc-click: Нажмите, чтобы добавить
-add-npc-next: Сначала выберете его сервер.
+- ' {letters}Выберите сервер, подойдите к месту,'
+- ' {letters}повернитесь, как он будет смотреть,'
+- ' {letters}и нажмите {highlight}Shift+клик{letters}.'
+add-npc-click: Нажмите, чтобы начать
+add-npc-next: Клик по нему отправляет игроков.
 add-portal-title: Портал
 add-portal-text:
 - ' {letters}Выделите область; вход в неё'
 - ' {letters}отправляет игроков на сервер.'
-add-portal-click: Нажмите, чтобы выделить
+add-portal-click: Нажмите, чтобы начать
 add-portal-next: Сервер выберете после.
 prompt-server: '{letters}На какой сервер он отправляет игроков?'
-select-portal: '{letters}Выделите портал золотым топором: {highlight}ЛКМ{letters} — один угол, {highlight}ПКМ{letters} — другой, затем {highlight}Shift + ЛКМ{letters}.'
 no-servers: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Сначала добавьте сервер в каталог (modules/selector/config.yml).'
 added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} добавлено.'
 removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} удалено.'
 changed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} теперь отправляет игроков на %server%{letters}.'
-moved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} перенесено к вам.'
+moved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} перемещено.'
 confirm-remove: Удалить {highlight}%what%{letters}?
+
+# Что мастера настройки называют на экране (простой текст, без цветов).
+wizard-npc: NPC сервера
+wizard-portal: Портал

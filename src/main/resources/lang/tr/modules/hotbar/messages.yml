@@ -1,3 +1,3 @@
-cooling: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Bunu tekrar kullanmadan önce {highlight}%seconds%sn{warning} bekle.'
+cooling: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Bunu tekrar kullanmadan önce {highlight}%time%{warning} bekle.'
 practice-in-charge: 'ExyliaPracticeCore kurulu: lobi hotbar''ı onda kalır. Bunu göstermek için modules/hotbar/config.yml içinde ''force: true'' yap.'
 no-packets: 'PacketEvents kurulu değil: lobi hotbar''ı ona ihtiyaç duyar ve gösterilmez.'

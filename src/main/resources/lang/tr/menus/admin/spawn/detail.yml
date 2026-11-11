@@ -1,4 +1,4 @@
-menu-version: 1
+menu-version: 2
 # DÜZENLEME — HER AÇILIŞTA YENİDEN OLUŞTURULUR.
 #
 # Doğuş modülü: doğuş noktasını ayarla, test et ve lobi alanlarını düzenle.
@@ -26,15 +26,16 @@ items:
   set:
     slot: 12
     material: LIME_BED
-    name: "{letters}Doğuş {letters_black}▸ <gradient:{success}:{success_light}>Buraya ayarla</gradient>"
+    name: "{letters}Doğuş {letters_black}▸ <gradient:{success}:{success_light}>Doğuşu ayarla</gradient>"
     lore:
       - "{letters_black}Doğuş noktası"
       - ""
       - "{success}✎ Bilgi"
-      - " {letters}Konumunu ve bakış yönünü bu"
-      - " {letters}{highlight}dünyanın{letters} doğuşu yapar."
+      - " {letters}Bu dünyanın doğuşuna git,"
+      - " {highlight}Bu dünya{letters} için bakacakları yöne dön,"
+      - " {letters}ve {highlight}Shift + tık{letters} yap."
       - ""
-      - "{success}{icon:click} Ayarlamak için tıkla"
+      - "{success}{icon:click} Başlamak için tıkla"
       - "{letters_black}Bu dünyanın doğuşunu değiştirir."
     actions:
       - 'exylialobby:spawn_set'

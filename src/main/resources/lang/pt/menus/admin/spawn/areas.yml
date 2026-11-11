@@ -1,4 +1,4 @@
-menu-version: 1
+menu-version: 2
 # NÃO EDITE — REGENERADO A CADA INICIALIZAÇÃO.
 #
 # As áreas do lobby: os mundos e caixas onde as regras do lobby valem.
@@ -66,11 +66,11 @@ items:
       - ""
       - "{success}✎ Informação"
       - " {letters}Selecione dois cantos com o"
-      - " {letters}machado dourado; as regras"
+      - " {letters}seletor; as regras"
       - " {letters}do lobby valem nessa caixa."
       - ""
-      - "{success}{icon:click} Clique para selecionar"
-      - "{letters_black}Depois você dá nome à caixa."
+      - "{success}{icon:click} Clique para começar"
+      - "{letters_black}Você seleciona e depois dá o nome."
     actions:
       - 'exylialobby:spawn_area_add_box'
 

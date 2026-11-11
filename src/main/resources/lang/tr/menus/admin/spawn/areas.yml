@@ -1,4 +1,4 @@
-menu-version: 1
+menu-version: 2
 # DÜZENLEME — HER AÇILIŞTA YENİDEN OLUŞTURULUR.
 #
 # Lobi alanları: lobi kurallarının geçerli olduğu dünyalar ve kutular.
@@ -65,12 +65,12 @@ items:
       - "{letters_black}Lobi alanı"
       - ""
       - "{success}✎ Bilgi"
-      - " {letters}Altın baltayla iki köşe seç;"
+      - " {letters}Seçiciyle iki köşe seç;"
       - " {letters}lobi kuralları bu kutunun"
       - " {letters}içinde geçerli olur."
       - ""
-      - "{success}{icon:click} Seçmek için tıkla"
-      - "{letters_black}Sonra kutuya ad verirsin."
+      - "{success}{icon:click} Başlamak için tıkla"
+      - "{letters_black}Önce seçersin, sonra ad verirsin."
     actions:
       - 'exylialobby:spawn_area_add_box'
 

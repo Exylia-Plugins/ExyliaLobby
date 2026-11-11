@@ -1,4 +1,4 @@
-menu-version: 1
+menu-version: 2
 # NO EDITAR — SE REGENERA EN CADA INICIO.
 #
 # El módulo de spawn: fija el punto de spawn, pruébalo y edita las áreas del lobby.
@@ -26,15 +26,16 @@ items:
   set:
     slot: 12
     material: LIME_BED
-    name: "{letters}Spawn {letters_black}▸ <gradient:{success}:{success_light}>Fijar aquí</gradient>"
+    name: "{letters}Spawn {letters_black}▸ <gradient:{success}:{success_light}>Fijar spawn</gradient>"
     lore:
       - "{letters_black}Punto de spawn"
       - ""
       - "{success}✎ Información"
-      - " {letters}Usa tu posición y mirada"
-      - " {letters}como spawn de este {highlight}mundo{letters}."
+      - " {letters}Ve al spawn de este"
+      - " {highlight}mundo{letters}, mira hacia donde deban"
+      - " {letters}mirar y haz {highlight}Shift + clic{letters}."
       - ""
-      - "{success}{icon:click} Clic para fijar"
+      - "{success}{icon:click} Clic para empezar"
       - "{letters_black}Reemplaza el spawn del mundo."
     actions:
       - 'exylialobby:spawn_set'

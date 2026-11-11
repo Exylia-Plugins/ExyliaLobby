@@ -91,7 +91,7 @@ public final class SelectorModule extends LobbyModule {
 
     @Override
     protected void registerConfigs() {
-        settings = settings(SelectorSettings.class);
+        settings = settings(SelectorSettings.class, b -> b.localizedDefaults());
         messages = messages(SelectorMessages.class);
     }
 

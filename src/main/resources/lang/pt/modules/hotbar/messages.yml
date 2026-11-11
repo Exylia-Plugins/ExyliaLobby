@@ -1,5 +1,5 @@
-# Um botão apertado de novo cedo demais. %seconds% é o tempo restante.
-cooling: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Espere {highlight}%seconds%s{warning} antes de usar isso de novo.'
+# Um botão apertado de novo cedo demais. %time% é o tempo restante.
+cooling: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Espere {highlight}%time%{warning} antes de usar isso de novo.'
 
 # Registrado uma vez quando o ExyliaPracticeCore mantém a própria hotbar do lobby.
 practice-in-charge: 'ExyliaPracticeCore está instalado: a hotbar de lobby dele continua no comando. Defina ''force: true'' em modules/hotbar/config.yml para mostrar esta.'

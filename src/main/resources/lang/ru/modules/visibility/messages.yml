@@ -1,8 +1,8 @@
 # Игрок сменил, кого он видит. %state% — новый режим с цветом.
 changed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Теперь вы видите: %state%{letters}.'
 
-# Нажато слишком быстро. %seconds% — оставшееся время.
-cooling: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Подождите {highlight}%seconds% с{warning} перед следующим переключением.'
+# Нажато слишком быстро. %time% — оставшееся время.
+cooling: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Подождите {highlight}%time%{warning} перед следующим переключением.'
 
 # Режим цветным словом для кнопки хотбара и чата: %lobby_visibility_state%.
 state-everyone: '{success}Все'

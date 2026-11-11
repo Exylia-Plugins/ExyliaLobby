@@ -1,12 +1,15 @@
 # /spawn cuando no se encontró un punto de spawn
 no-spawn: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}No hay spawn definido. Pide ayuda a un admin.'
 
-# /spawn con espera. %seconds% es la espera.
-teleporting: '%prefix% {letters}Teletransporte en {highlight}%seconds%s{letters}. No te muevas.'
+# /spawn con espera. %time% es la espera.
+teleporting: '%prefix% {letters}Teletransporte en {highlight}%time%{letters}. No te muevas.'
 cancelled: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Teletransporte cancelado.'
 
+# Boss bar durante la espera de /spawn. %time% es el tiempo restante (2.4s).
+warmup-bar: '{info}&lSPAWN {letters_black}» {letters}Quédate quieto {letters_black}({info}%time%{letters_black})'
+
 # Un admin fijó el spawn de un mundo. %world% es su nombre.
-spawn-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Spawn de {highlight}%world%{letters} fijado en tu posición.'
+spawn-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Spawn de {highlight}%world%{letters} fijado donde estabas.'
 
 # Se muestra en la pantalla de Spawn: hay un spawn aquí, o no
 state-set: '{success}{icon:on} Fijado'
@@ -23,8 +26,11 @@ world-missing: '{error}{icon:off} No cargado'
 # Tamaño de una zona. %x%, %y% y %z% son sus lados en bloques.
 box-size: '{info}%x%×%y%×%z% bloques'
 
+# Lo que los asistentes nombran en pantalla (texto plano, sin colores): el spawn de un mundo, una caja del lobby
+wizard-spawn: Spawn del lobby
+wizard-box: Caja del lobby
+
 # Mensajes del editor de áreas
-select-box: '{letters}Selecciona la zona con el hacha dorada: {highlight}clic izquierdo{letters} en una esquina, {highlight}clic derecho{letters} en la otra y luego {highlight}shift + clic izquierdo{letters}.'
 prompt-name: '{letters}Nombra esta zona del lobby (letras, números, guiones).'
 name-taken: '{error}Ese nombre ya está en uso.'
 confirm-world: '¿Dejar de tratar el mundo {highlight}%area%{letters} como lobby?'

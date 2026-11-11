@@ -1,0 +1,7 @@
+# Тексты по умолчанию на русском. Только ключи с текстом; остальные настройки берутся из реестра.
+
+groups:
+- permission: exylialobby.join.vip
+  priority: 10
+  join: '{highlight}&l★ {letters}VIP {highlight}%player%{letters} зашёл в лобби'
+  leave: ''

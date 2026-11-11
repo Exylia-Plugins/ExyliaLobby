@@ -1,4 +1,4 @@
-menu-version: 1
+menu-version: 2
 # NE PAS MODIFIER — RÉGÉNÉRÉ À CHAQUE DÉMARRAGE.
 #
 # Le module spawn : définis le point de spawn, teste-le et modifie les zones du lobby.
@@ -26,15 +26,16 @@ items:
   set:
     slot: 12
     material: LIME_BED
-    name: "{letters}Spawn {letters_black}▸ <gradient:{success}:{success_light}>Définir ici</gradient>"
+    name: "{letters}Spawn {letters_black}▸ <gradient:{success}:{success_light}>Définir le spawn</gradient>"
     lore:
       - "{letters_black}Point de spawn"
       - ""
       - "{success}✎ Information"
-      - " {letters}Utilise ta position et ta vue"
-      - " {letters}comme spawn de ce {highlight}monde{letters}."
+      - " {letters}Va au spawn de ce"
+      - " {highlight}monde{letters}, tourne-toi comme les"
+      - " {letters}joueurs doivent voir et {highlight}Shift + clic{letters}."
       - ""
-      - "{success}{icon:click} Clique pour définir"
+      - "{success}{icon:click} Clique pour commencer"
       - "{letters_black}Remplace le spawn du monde."
     actions:
       - 'exylialobby:spawn_set'

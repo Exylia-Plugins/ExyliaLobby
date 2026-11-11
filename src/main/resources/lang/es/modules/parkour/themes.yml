@@ -1,0 +1,15 @@
+# Textos por defecto en español. Solo las claves con texto; el resto de ajustes viene del registro.
+
+themes:
+  stone-ruins:
+    name: Ruinas de piedra
+  end:
+    name: <gradient:{secondary}:{secondary_light}>El End</gradient>
+  frozen-peaks:
+    name: <gradient:{info}:{info_light}>Picos helados</gradient>
+  ocean:
+    name: <gradient:{info}:{success_light}>Océano</gradient>
+  sky-gardens:
+    name: <gradient:{success}:{success_light}>Jardines del cielo</gradient>
+  deep-dark:
+    name: <gradient:{primary}:{secondary_light}>Oscuridad profunda</gradient>

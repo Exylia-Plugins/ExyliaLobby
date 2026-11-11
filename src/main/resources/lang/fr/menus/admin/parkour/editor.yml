@@ -1,4 +1,4 @@
-menu-version: 2
+menu-version: 3
 # NE PAS MODIFIER — RÉGÉNÉRÉ À CHAQUE DÉMARRAGE.
 #
 # Un parcours de parkour : où il commence, passe et finit, et comment il est jugé.
@@ -31,13 +31,13 @@ items:
       - "{letters_black}Réglage du parcours"
       - ""
       - "{success}✎ Information"
-      - " {letters}Où une course commence. Utilise"
-      - " {letters}ta position et ta vue."
+      - " {letters}Où une course commence :"
+      - " {letters}place-toi là et {highlight}Shift + clic{letters}."
       - ""
       - "{success}✦ Statut"
       - "  {letters_black}· {info}{icon:compass} {letters}Départ{letters_black}: %start_state%"
       - ""
-      - "{success}{icon:click} Clique pour définir ici"
+      - "{success}{icon:click} Clique pour commencer"
       - "{letters_black}Remplace le départ."
     actions:
       - 'exylialobby:parkour_edit start %course_id%'
@@ -50,13 +50,13 @@ items:
       - "{letters_black}Réglage du parcours"
       - ""
       - "{success}✎ Information"
-      - " {letters}Ajoute un checkpoint à tes pieds."
+      - " {letters}Place-toi dessus et {highlight}Shift + clic{letters}."
       - " {letters}Les coureurs les passent dans l’ordre."
       - ""
       - "{success}✦ Statut"
       - "  {letters_black}· {info}{icon:check} {letters}Checkpoints{letters_black}: {info}%checkpoints%"
       - ""
-      - "{success}{icon:click} Clique pour ajouter ici"
+      - "{success}{icon:click} Clique pour commencer"
       - "{letters_black}Ajouté après le dernier."
     actions:
       - 'exylialobby:parkour_edit checkpoint %course_id%'
@@ -69,13 +69,13 @@ items:
       - "{letters_black}Réglage du parcours"
       - ""
       - "{success}✎ Information"
-      - " {letters}Où une course finit. Utilise"
-      - " {letters}ta position et ta vue."
+      - " {letters}Où une course se termine :"
+      - " {letters}place-toi là et {highlight}Shift + clic{letters}."
       - ""
       - "{success}✦ Statut"
       - "  {letters_black}· {info}{icon:star} {letters}Arrivée{letters_black}: %finish_state%"
       - ""
-      - "{success}{icon:click} Clique pour définir ici"
+      - "{success}{icon:click} Clique pour commencer"
       - "{letters_black}Remplace l’arrivée."
     actions:
       - 'exylialobby:parkour_edit finish %course_id%'
@@ -88,14 +88,14 @@ items:
       - "{letters_black}Réglage du parcours"
       - ""
       - "{primary}✎ Information"
-      - " {letters}Le bloc que tu regardes renvoie"
-      - " {letters}les coureurs à leur checkpoint."
+      - " {letters}Clique un bloc : tous ceux de"
+      - " {letters}son type renvoient les coureurs."
       - ""
       - "{primary}✦ Statut"
       - "  {letters_black}· {info}{icon:barrier} {letters}Blocs{letters_black}: {info}%kills%"
       - ""
-      - "{primary}{icon:click} Clique pour ajouter un bloc"
-      - "{letters_black}Regarde d’abord un bloc."
+      - "{primary}{icon:click} Clique pour commencer"
+      - "{letters_black}Clique ensuite le bloc."
     actions:
       - 'exylialobby:parkour_edit kill %course_id%'
 
@@ -157,15 +157,15 @@ items:
   board:
     slot: 27
     material: OAK_SIGN
-    name: "{letters}Parcours {letters_black}▸ <gradient:{info}:{info_light}>Classement ici</gradient>"
+    name: "{letters}Parcours {letters_black}▸ <gradient:{info}:{info_light}>Classement</gradient>"
     lore:
       - "{letters_black}Hologramme"
       - ""
       - "{info}✎ Information"
-      - " {letters}Un hologramme de classement de"
-      - " {letters}ce parcours à tes pieds."
+      - " {letters}Un hologramme du classement de"
+      - " {letters}ce parcours au-dessus d’un bloc."
       - ""
-      - "{info}{icon:click} Clique pour placer"
+      - "{info}{icon:click} Clique pour commencer"
       - "{letters_black}Remplace son classement."
     actions:
       - 'exylialobby:parkour_edit board %course_id%'

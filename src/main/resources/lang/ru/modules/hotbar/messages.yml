@@ -1,5 +1,5 @@
-# Кнопка нажата слишком быстро. %seconds% — оставшееся время.
-cooling: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Подождите {highlight}%seconds% с{warning} перед повторным использованием.'
+# Кнопка нажата слишком быстро. %time% — оставшееся время.
+cooling: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Подождите {highlight}%time%{warning} перед повторным использованием.'
 
 # Пишется в лог один раз, когда ExyliaPracticeCore держит свой хотбар лобби.
 practice-in-charge: 'ExyliaPracticeCore установлен: его хотбар лобби остаётся главным. Чтобы показать этот, задайте ''force: true'' в modules/hotbar/config.yml.'

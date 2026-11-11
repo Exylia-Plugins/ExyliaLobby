@@ -18,6 +18,10 @@ modules:
   failed: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Модуль {highlight}%module%{error} не запустился. Смотрите консоль.'
   # Выключение этого модуля выключит и другие. %modules% — их список.
   dependants: '{letters_black}Также выключит: %modules%'
+  # /lobbyadmin module с состоянием, которое не on и не off
+  usage: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {letters}Используйте {highlight}/lobbyadmin module {letters_black}id{highlight} on{letters} или {highlight}off{letters}.'
+  # /lobbyadmin module с id, которого нет ни у одного модуля. %id% — введённое, %modules% — id.
+  unknown: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Нет модуля с именем {highlight}%id%{error}. {letters}Id: {letters_black}%modules%'
 areas:
   # Когда админ сохраняет область лобби по выделению
   box-saved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Зона лобби {highlight}%area%{letters} сохранена.'

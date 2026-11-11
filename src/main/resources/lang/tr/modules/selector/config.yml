@@ -1,0 +1,13 @@
+# Türkçe varsayılan metinler. Yalnızca metin anahtarları; diğer ayarlar kayıttan gelir.
+
+servers:
+  survival:
+    name: '{success}Hayatta Kalma'
+    description:
+    - ' {letters}İnşa et, ticaret yap, keşfet.'
+    - ' {letters}Senin dünyan, senin kuralların.'
+  minigames:
+    name: '{highlight}Mini Oyunlar'
+    description:
+    - ' {letters}Diğer oyunculara karşı'
+    - ' {letters}hızlı maçlar.'

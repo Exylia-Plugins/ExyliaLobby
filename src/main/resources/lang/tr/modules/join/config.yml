@@ -1,0 +1,7 @@
+# Türkçe varsayılan metinler. Yalnızca metin anahtarları; diğer ayarlar kayıttan gelir.
+
+groups:
+- permission: exylialobby.join.vip
+  priority: 10
+  join: '{highlight}&l★ {letters}VIP {highlight}%player%{letters} lobiye katıldı'
+  leave: ''

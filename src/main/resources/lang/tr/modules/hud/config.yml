@@ -1,0 +1,22 @@
+# Türkçe varsayılan metinler. Yalnızca metin anahtarları; diğer ayarlar kayıttan gelir.
+
+sidebar:
+  board:
+    lines:
+    - '{primary}✦ Lobby'
+    - '  {letters_black}· {info}{icon:star} {letters}Burada{letters_black}: {info}%lobby_hud_here%'
+    - '  {letters_black}· {success}{icon:heart} {letters}Ağ{letters_black}: {success}%lobby_hud_network%'
+    - ''
+    - '{muted}{server-ip}'
+tab:
+  footer:
+  - ''
+  - '{letters}Ağdaki oyuncular{letters_black}: {success}%lobby_hud_network%'
+  - ''
+boss-bars:
+  texts:
+  - '{letters}{highlight}Pusula{letters} ile bir sunucu seç.'
+  - '{letters}Lobide kimi göreceğini {highlight}boya{letters} ile seç.'
+announcements:
+  messages:
+  - '%prefix% {letters}Bu duyuruları istediğin zaman {highlight}/settings{letters} içinden kapat.'

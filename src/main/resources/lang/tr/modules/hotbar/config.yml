@@ -1,0 +1,71 @@
+# Türkçe varsayılan metinler. Yalnızca metin anahtarları; diğer ayarlar kayıttan gelir.
+
+sets:
+  lobby:
+    items:
+      selector:
+        name: '{letters}Lobby {letters_black}▸ <gradient:{info}:{info_light}>Sunucular</gradient>'
+        lore:
+        - '{letters_black}Sunucu seçici'
+        - ''
+        - '{info}✎ Bilgi'
+        - ' {letters}Ağdaki tüm sunucular,'
+        - ' {letters}canlı oyuncu sayılarıyla.'
+        - ''
+        - '{info}{icon:click} Açmak için tıkla'
+        - '{letters_black}Katılmak için bir sunucu seç.'
+      games:
+        name: '{letters}Lobby {letters_black}▸ <gradient:{success}:{success_light}>Oyunlar</gradient>'
+        lore:
+        - '{letters_black}Oyunlar'
+        - ''
+        - '{success}✎ Bilgi'
+        - ' {letters}Ağdaki tüm oyunlar,'
+        - ' {letters}sıraya girmeye hazır.'
+        - ''
+        - '{success}{icon:click} Açmak için tıkla'
+        - '{letters_black}Oynamak için bir oyun seç.'
+      parkour:
+        name: '{letters}Lobby {letters_black}▸ <gradient:{highlight}:{warning_light}>Parkur</gradient>'
+        lore:
+        - '{letters_black}Parkur'
+        - ''
+        - '{highlight}✎ Bilgi'
+        - ' {letters}Parkurlar, en iyi sürelerin'
+        - ' {letters}ve her birinin sıralaması.'
+        - ''
+        - '{highlight}{icon:click} Açmak için tıkla'
+        - '{letters_black}Koşmak için bir parkur seç.'
+      visibility:
+        name: '{letters}Lobby {letters_black}▸ <gradient:{info}:{info_light}>Oyuncular: %lobby_visibility_state%</gradient>'
+        lore:
+        - '{letters_black}Görünürlük'
+        - ''
+        - '{info}✎ Bilgi'
+        - ' {letters}Lobide kimi göreceğini'
+        - ' {letters}seç: herkes, arkadaşlar veya kimse.'
+        - ''
+        - '{info}{icon:click} Değiştirmek için tıkla'
+        - '{letters_black}Hemen geçerli olur.'
+      gadgets:
+        name: '{letters}Lobby {letters_black}▸ <gradient:{accent}:{secondary_light}>Gadget''lar</gradient>'
+        lore:
+        - '{letters_black}Gadget''lar'
+        - ''
+        - '{accent}✎ Bilgi'
+        - ' {letters}Beklerken eğlenmen için'
+        - ' {letters}kozmetik oyuncaklar.'
+        - ''
+        - '{accent}{icon:click} Açmak için tıkla'
+        - '{letters_black}Kullanmak için bir gadget seç.'
+      profile:
+        name: '{letters}Lobby {letters_black}▸ <gradient:{primary}:{secondary_light}>Ayarlar</gradient>'
+        lore:
+        - '{letters_black}Ayarların'
+        - ''
+        - '{primary}✎ Bilgi'
+        - ' {letters}Sohbet ve duyurular gibi'
+        - ' {letters}tercihlerin.'
+        - ''
+        - '{primary}{icon:click} Açmak için tıkla'
+        - '{letters_black}Değişiklikler senin için kaydedilir.'

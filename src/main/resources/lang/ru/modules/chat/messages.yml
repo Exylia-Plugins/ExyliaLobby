@@ -1,8 +1,8 @@
 # Игрок попытался писать при заблокированном чате
 locked: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Чат заблокирован.'
 
-# Игрок написал слишком быстро. %seconds% — оставшееся ожидание.
-slow-denied: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Подождите {highlight}%seconds% с{error} перед следующим сообщением.'
+# Игрок написал слишком быстро. %time% — оставшееся ожидание.
+slow-denied: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Подождите {highlight}%time%{error} перед следующим сообщением.'
 
 # Отправляется в лобби при блокировке или разблокировке чата. %player% — кто это сделал.
 lock-on: '%prefix% {highlight}%player%{letters} заблокировал чат.'

@@ -2,7 +2,6 @@
 pad-added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Plataforma de impulso {highlight}%pad%{letters} adicionada.'
 pad-removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Plataforma de impulso {highlight}%pad%{letters} removida.'
 pad-changed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Plataforma de impulso {highlight}%pad%{letters} atualizada.'
-no-target: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Olhe para um bloco a até 8 blocos.'
 same-place: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Já existe uma plataforma nesse bloco.'
 
 # Prompts do editor de plataformas.
@@ -25,19 +24,26 @@ direction-fixed: '{info}Fixa em %yaw%°'
 clicks:
 - '{primary}{icon:click} Clique esquerdo {letters_black}· {letters}editar força'
 - '{primary}{icon:right_click} Clique direito {letters_black}· {letters}editar altura'
-- '{primary}{icon:click} Shift + clique esquerdo {letters_black}· {letters}alternar direção'
+- '{primary}{icon:click} Shift + clique esquerdo {letters_black}· {letters}direcionar ou liberar'
 - '{error}{icon:right_click} Shift + clique direito {letters_black}· {letters}remover'
 - '{letters_black}Remover pede confirmação.'
-add-here-title: Nos meus pés
-add-here-text:
-- ' {letters}Transforma o bloco em que'
-- ' {letters}você está em uma plataforma.'
-add-here-click: Clique para adicionar
-add-here-next: Depois edite a força aqui.
-add-look-title: Onde eu olho
-add-look-text:
-- ' {letters}Transforma o bloco que você'
-- ' {letters}olha em uma plataforma.'
-add-look-click: Clique para adicionar
-add-look-next: Depois edite a força aqui.
+add-pad-title: Plataforma de impulso
+add-pad-text:
+- ' {letters}Clique no bloco que virará uma'
+- ' {letters}plataforma; ela lança os jogadores'
+- ' {letters}para onde olham.'
+add-pad-click: Clique para começar
+add-pad-next: Depois edite a força aqui.
+add-aimed-title: Plataforma direcionada
+add-aimed-text:
+- ' {letters}Fique no bloco, olhe para onde'
+- ' {letters}ele deve lançar e faça'
+- ' {highlight}Shift + clique{letters}.'
+add-aimed-click: Clique para começar
+add-aimed-next: Sempre lança nessa direção.
 back-name: Movimento
+
+# O que os assistentes nomeiam na tela (texto simples, sem cores).
+wizard-pad: Plataforma de impulso
+wizard-aimed: Plataforma direcionada
+wizard-aim: Direção da plataforma

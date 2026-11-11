@@ -1,8 +1,8 @@
 # Un joueur a essayé de parler alors que le chat est verrouillé
 locked: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Le chat est verrouillé.'
 
-# Un joueur a parlé trop tôt. %seconds% est l’attente restante.
-slow-denied: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Attends {highlight}%seconds%s{error} avant de reparler.'
+# Un joueur a parlé trop tôt. %time% est l’attente restante.
+slow-denied: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Attends {highlight}%time%{error} avant de reparler.'
 
 # Envoyé au lobby quand le chat est verrouillé ou déverrouillé. %player% est l’auteur.
 lock-on: '%prefix% {highlight}%player%{letters} a verrouillé le chat.'

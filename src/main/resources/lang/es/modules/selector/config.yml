@@ -1,0 +1,13 @@
+# Textos por defecto en español. Solo las claves con texto; el resto de ajustes viene del registro.
+
+servers:
+  survival:
+    name: '{success}Supervivencia'
+    description:
+    - ' {letters}Construye, comercia y explora.'
+    - ' {letters}Tu mundo, tus reglas.'
+  minigames:
+    name: '{highlight}Minijuegos'
+    description:
+    - ' {letters}Partidas rápidas contra'
+    - ' {letters}otros jugadores.'

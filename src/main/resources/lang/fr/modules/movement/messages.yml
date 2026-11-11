@@ -2,7 +2,6 @@
 pad-added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Plateforme de lancement {highlight}%pad%{letters} ajoutée.'
 pad-removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Plateforme de lancement {highlight}%pad%{letters} supprimée.'
 pad-changed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Plateforme de lancement {highlight}%pad%{letters} mise à jour.'
-no-target: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Regarde un bloc à moins de 8 blocs.'
 same-place: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Il y a déjà une plateforme sur ce bloc.'
 
 # Invites de l’éditeur de plateformes.
@@ -25,19 +24,26 @@ direction-fixed: '{info}Fixe à %yaw%°'
 clicks:
 - '{primary}{icon:click} Clic gauche {letters_black}· {letters}modifier la puissance'
 - '{primary}{icon:right_click} Clic droit {letters_black}· {letters}modifier la hauteur'
-- '{primary}{icon:click} Shift + clic gauche {letters_black}· {letters}changer la direction'
+- '{primary}{icon:click} Shift + clic gauche {letters_black}· {letters}l’orienter ou le libérer'
 - '{error}{icon:right_click} Shift + clic droit {letters_black}· {letters}supprimer'
 - '{letters_black}La suppression demande confirmation.'
-add-here-title: À mes pieds
-add-here-text:
-- ' {letters}Transforme le bloc où tu es'
-- ' {letters}en plateforme de lancement.'
-add-here-click: Clique pour ajouter
-add-here-next: Modifie ensuite sa puissance ici.
-add-look-title: Là où je regarde
-add-look-text:
-- ' {letters}Transforme le bloc visé'
-- ' {letters}en plateforme de lancement.'
-add-look-click: Clique pour ajouter
-add-look-next: Modifie ensuite sa puissance ici.
+add-pad-title: Plateforme de lancement
+add-pad-text:
+- ' {letters}Clique le bloc à transformer en'
+- ' {letters}plateforme ; elle lance les joueurs'
+- ' {letters}dans leur direction.'
+add-pad-click: Clique pour commencer
+add-pad-next: Modifie ensuite sa puissance ici.
+add-aimed-title: Plateforme orientée
+add-aimed-text:
+- ' {letters}Place-toi sur le bloc, regarde où'
+- ' {letters}il doit lancer et fais'
+- ' {highlight}Shift + clic{letters}.'
+add-aimed-click: Clique pour commencer
+add-aimed-next: Lance toujours dans ce sens.
 back-name: Mouvement
+
+# Ce que les assistants nomment à l’écran (texte brut, sans couleurs).
+wizard-pad: Plateforme de lancement
+wizard-aimed: Plateforme orientée
+wizard-aim: Direction de la plateforme

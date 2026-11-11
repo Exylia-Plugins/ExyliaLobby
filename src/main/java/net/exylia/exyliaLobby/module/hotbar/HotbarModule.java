@@ -56,7 +56,7 @@ public final class HotbarModule extends LobbyModule {
 
     @Override
     protected void registerConfigs() {
-        settings = settings(HotbarSettings.class);
+        settings = settings(HotbarSettings.class, b -> b.localizedDefaults());
         messages = messages(HotbarMessages.class);
     }
 

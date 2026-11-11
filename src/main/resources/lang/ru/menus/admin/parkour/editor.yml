@@ -1,4 +1,4 @@
-menu-version: 2
+menu-version: 3
 # НЕ РЕДАКТИРОВАТЬ — ПЕРЕСОЗДАЁТСЯ ПРИ КАЖДОМ ЗАПУСКЕ.
 #
 # Одна трасса паркура: где она начинается, проходит и заканчивается, и как оценивается.
@@ -31,13 +31,13 @@ items:
       - "{letters_black}Настройка трассы"
       - ""
       - "{success}✎ Информация"
-      - " {letters}Где начинается забег. Берёт вашу"
-      - " {letters}позицию и взгляд."
+      - " {letters}Откуда начинается забег:"
+      - " {letters}встаньте и {highlight}Shift+клик{letters}."
       - ""
       - "{success}✦ Статус"
       - "  {letters_black}· {info}{icon:compass} {letters}Старт{letters_black}: %start_state%"
       - ""
-      - "{success}{icon:click} Нажмите, чтобы задать здесь"
+      - "{success}{icon:click} Нажмите, чтобы начать"
       - "{letters_black}Заменяет старт."
     actions:
       - 'exylialobby:parkour_edit start %course_id%'
@@ -50,13 +50,13 @@ items:
       - "{letters_black}Настройка трассы"
       - ""
       - "{success}✎ Информация"
-      - " {letters}Добавляет чекпоинт под вами."
+      - " {letters}Встаньте на него: {highlight}Shift+клик{letters}."
       - " {letters}Бегуны проходят их по порядку."
       - ""
       - "{success}✦ Статус"
       - "  {letters_black}· {info}{icon:check} {letters}Чекпоинты{letters_black}: {info}%checkpoints%"
       - ""
-      - "{success}{icon:click} Нажмите, чтобы добавить здесь"
+      - "{success}{icon:click} Нажмите, чтобы начать"
       - "{letters_black}Идёт после последнего."
     actions:
       - 'exylialobby:parkour_edit checkpoint %course_id%'
@@ -69,13 +69,13 @@ items:
       - "{letters_black}Настройка трассы"
       - ""
       - "{success}✎ Информация"
-      - " {letters}Где забег заканчивается. Берёт вашу"
-      - " {letters}позицию и взгляд."
+      - " {letters}Где забег заканчивается:"
+      - " {letters}встаньте и {highlight}Shift+клик{letters}."
       - ""
       - "{success}✦ Статус"
       - "  {letters_black}· {info}{icon:star} {letters}Финиш{letters_black}: %finish_state%"
       - ""
-      - "{success}{icon:click} Нажмите, чтобы задать здесь"
+      - "{success}{icon:click} Нажмите, чтобы начать"
       - "{letters_black}Заменяет финиш."
     actions:
       - 'exylialobby:parkour_edit finish %course_id%'
@@ -88,14 +88,14 @@ items:
       - "{letters_black}Настройка трассы"
       - ""
       - "{primary}✎ Информация"
-      - " {letters}Блок, на который вы смотрите,"
-      - " {letters}вернёт бегунов к чекпоинту."
+      - " {letters}Кликните по блоку: все блоки"
+      - " {letters}его типа возвращают бегунов."
       - ""
       - "{primary}✦ Статус"
       - "  {letters_black}· {info}{icon:barrier} {letters}Блоки{letters_black}: {info}%kills%"
       - ""
-      - "{primary}{icon:click} Нажмите, чтобы добавить блок"
-      - "{letters_black}Сначала посмотрите на блок."
+      - "{primary}{icon:click} Нажмите, чтобы начать"
+      - "{letters_black}Затем кликните по блоку."
     actions:
       - 'exylialobby:parkour_edit kill %course_id%'
 
@@ -157,15 +157,15 @@ items:
   board:
     slot: 27
     material: OAK_SIGN
-    name: "{letters}Трасса {letters_black}▸ <gradient:{info}:{info_light}>Топ здесь</gradient>"
+    name: "{letters}Трасса {letters_black}▸ <gradient:{info}:{info_light}>Топ</gradient>"
     lore:
       - "{letters_black}Голограмма"
       - ""
       - "{info}✎ Информация"
-      - " {letters}Голограмма с топом этой"
-      - " {letters}трассы у ваших ног."
+      - " {letters}Голограмма-топ этой трассы"
+      - " {letters}над блоком."
       - ""
-      - "{info}{icon:click} Нажмите, чтобы поставить"
+      - "{info}{icon:click} Нажмите, чтобы начать"
       - "{letters_black}Заменяет её топ."
     actions:
       - 'exylialobby:parkour_edit board %course_id%'

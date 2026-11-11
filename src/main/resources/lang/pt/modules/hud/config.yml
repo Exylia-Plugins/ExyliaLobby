@@ -1,0 +1,22 @@
+# Textos padrão em português. Apenas as chaves de texto; as demais configurações vêm do registro.
+
+sidebar:
+  board:
+    lines:
+    - '{primary}✦ Lobby'
+    - '  {letters_black}· {info}{icon:star} {letters}Aqui{letters_black}: {info}%lobby_hud_here%'
+    - '  {letters_black}· {success}{icon:heart} {letters}Rede{letters_black}: {success}%lobby_hud_network%'
+    - ''
+    - '{muted}{server-ip}'
+tab:
+  footer:
+  - ''
+  - '{letters}Jogadores na rede{letters_black}: {success}%lobby_hud_network%'
+  - ''
+boss-bars:
+  texts:
+  - '{letters}Escolha um servidor com a {highlight}bússola{letters}.'
+  - '{letters}Escolha quem você vê no lobby com o {highlight}corante{letters}.'
+announcements:
+  messages:
+  - '%prefix% {letters}Silencie estes anúncios quando quiser em {highlight}/settings{letters}.'
