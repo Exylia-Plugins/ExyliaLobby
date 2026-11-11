@@ -201,7 +201,7 @@ final class ParkourRuns implements Listener {
         List<ParkourThemes.Theme> chosen = palette;
         int offset = (int) Math.floorMod(seed, (long) palette.size());
         Location at = new Location(world, start.x() + 0.5, start.y() + 1, start.z() + 0.5, Math.floorMod(area.heading(), 4) * 90f - 90f, 0);
-        PathGenerator generator = new PathGenerator(seed, new Bounds(min.x(), min.y(), min.z(), max.x(), max.y(), max.z()),
+        PathGenerator generator = new PathGenerator(seed, new Bounds(min.x(), min.y(), min.z(), max.x(), max.y(), max.z()).fitting(start),
                 start, area.heading(), rules.endless().tuning().tuning());
         onPlayer(player, () -> {
             Run old = runs.get(player.getUniqueId());

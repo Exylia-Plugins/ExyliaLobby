@@ -137,4 +137,11 @@ class PathGeneratorTest {
         for (Jump.Piece piece : jump.pieces()) cells.add(piece.at());
         return cells;
     }
+
+    @Test
+    void aFlatBoxStillGetsAPath() {
+        Bounds flat = new Bounds(-20, 75, -20, 20, 75, 20).fitting(START);
+        PathGenerator generator = new PathGenerator(7, flat, START, 0, Tuning.defaults());
+        assertFalse(generator.next(0).isEmpty(), "corners picked on the ground must still leave room for jumps");
+    }
 }
