@@ -49,7 +49,7 @@ public final class JoinModule extends LobbyModule implements Listener {
 
     @Override
     protected void registerConfigs() {
-        settings = settings(JoinSettings.class);
+        settings = settings(JoinSettings.class, b -> b.localizedDefaults());
         messages = messages(JoinMessages.class);
     }
 

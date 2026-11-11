@@ -67,7 +67,7 @@ public final class HudModule extends LobbyModule {
 
     @Override
     protected void registerConfigs() {
-        settings = settings(HudSettings.class);
+        settings = settings(HudSettings.class, b -> b.localizedDefaults());
         messages = messages(HudMessages.class);
     }
 

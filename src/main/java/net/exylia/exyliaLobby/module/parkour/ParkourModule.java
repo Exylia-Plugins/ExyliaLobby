@@ -75,7 +75,7 @@ public final class ParkourModule extends LobbyModule implements Busy {
         settings = settings(ParkourSettings.class);
         messages = messages(ParkourMessages.class);
         courses = config("modules/parkour/courses", ParkourCourses.class).load();
-        themes = config("modules/parkour/themes", ParkourThemes.class).load();
+        themes = config("modules/parkour/themes", ParkourThemes.class).localizedDefaults().load();
     }
 
     @Override
