@@ -1,5 +1,6 @@
 package net.exylia.exyliaLobby.module.parkour;
 
+import net.exylia.exyliaLobby.Permissions;
 import net.exylia.exyliaLobby.area.AreaCause;
 import net.exylia.exyliaLobby.module.Busy;
 import net.exylia.exyliaLobby.module.LobbyContext;
@@ -8,6 +9,7 @@ import net.exylia.exyliaLobby.module.holograms.HologramsModule;
 import net.exylia.exyliaLobby.module.spawn.SpawnModule;
 import net.exylia.lib.config.ConfigFile;
 import net.exylia.lib.input.Inputs;
+import net.exylia.lib.web.WebEditor;
 import net.exylia.lib.region.SelectionResult;
 import net.exylia.lib.text.LibraryMessages;
 import net.exylia.lib.util.wizard.Wizard;
@@ -85,6 +87,11 @@ public final class ParkourModule extends LobbyModule implements Busy {
         data.register(context.plugin());
         screens.register();
         adminScreens.register();
+        // The record binder is the real loader: an edit it would drop is refused. Applied edits reach the runs live.
+        WebEditor.of(context.plugin()).subject("parkour-courses", courses).title("Parkour courses")
+                .permission(Permissions.ADMIN).onApplied(() -> data.refreshAll(courses.get().courses().keySet()));
+        WebEditor.of(context.plugin()).subject("parkour-themes", themes).title("Parkour themes")
+                .permission(Permissions.ADMIN);
         runs = new ParkourRuns(context, settings, courses, themes, messages, data, () -> clock);
         listen(runs);
         listen(runs.guard());
@@ -111,6 +118,8 @@ public final class ParkourModule extends LobbyModule implements Busy {
         context.visibility().remove(RULE);
         screens.clear();
         adminScreens.clear();
+        WebEditor.of(context.plugin()).remove("parkour-courses");
+        WebEditor.of(context.plugin()).remove("parkour-themes");
         clearBoards();
         if (runs != null) runs.close();
         runs = null;

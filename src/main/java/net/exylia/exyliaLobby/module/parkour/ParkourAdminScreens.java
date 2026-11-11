@@ -5,6 +5,7 @@ import net.exylia.exyliaLobby.module.shared.AdminScreens;
 import net.exylia.lib.action.ActionResult;
 import net.exylia.lib.action.PluginActions;
 import net.exylia.lib.input.Inputs;
+import net.exylia.lib.web.WebEditor;
 import net.exylia.lib.text.Values;
 import net.exylia.lib.ui.Menus;
 import net.exylia.lib.ui.UiEntry;
@@ -206,6 +207,11 @@ final class ParkourAdminScreens {
                 openCourses(admin);
                 return;
             }
+            case "rewards" -> {
+                admin.closeInventory();
+                WebEditor.open(admin, module.ctx().plugin());
+                return;
+            }
             case "difficulty" -> {
                 difficulty(admin, id, reopen);
                 return;
@@ -295,6 +301,10 @@ final class ParkourAdminScreens {
     void openThemes(Player admin) {
         ParkourMessages.Staff t = module.text().staff();
         themes.open(admin, () -> hub(admin), t.back(), t.titleThemes(), t.kindTheme(), List.of(
+                button("PAINTING", t.editThemes(), player -> {
+                    player.closeInventory();
+                    WebEditor.open(player, module.ctx().plugin());
+                }),
                 button("LIME_DYE", t.enableThemes(), player -> {
                     module.enableAllThemes();
                     themes.update(player);
