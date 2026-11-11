@@ -4,12 +4,7 @@ import net.exylia.exyliaLobby.area.AreaCause;
 import net.exylia.exyliaLobby.module.LobbyContext;
 import net.exylia.exyliaLobby.module.LobbyModule;
 import net.exylia.lib.config.ConfigFile;
-import net.exylia.lib.effect.Display;
-import net.exylia.lib.effect.Effects;
 import net.exylia.lib.placeholder.Placeholders;
-import net.exylia.lib.scoreboard.Board;
-import net.exylia.lib.scoreboard.SidebarConfig;
-import net.exylia.lib.scoreboard.Scoreboards;
 import net.exylia.lib.settings.Broadcasts;
 import net.exylia.lib.settings.Settings;
 import net.exylia.lib.task.TaskHandle;
@@ -29,7 +24,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Sidebar, player-list header and footer, rotating boss bars and timed announcements, shown only inside the lobby:
+ * Player-list header and footer and timed announcements, shown only inside the lobby:
  * {@link #enter} draws them and {@link #leave} takes every one off. Each part has its own switch in the settings.
  */
 public final class HudModule extends LobbyModule {
@@ -46,13 +41,10 @@ public final class HudModule extends LobbyModule {
 
     /** What one player has on screen now. */
     private static final class Session {
-        Board board;
-        Display bar;
         TaskHandle ticker;
         /** Whether this session drew the player-list header, so turning the tab off by a reload still clears it. */
         boolean tab;
         int seconds;
-        int text;
     }
 
     public HudModule(@NotNull LobbyContext context) {
@@ -108,16 +100,11 @@ public final class HudModule extends LobbyModule {
     protected void enter(@NotNull Player player, @NotNull AreaCause cause) {
         HudSettings config = settings.get();
         Session session = new Session();
-        if (config.sidebar().enabled()) {
-            SidebarConfig board = config.sidebar().board();
-            session.board = Scoreboards.show(plugin(), player, new SidebarConfig(true, board.title(), board.lines(), board.update()));
-        }
         Session old = sessions.put(player.getUniqueId(), session);
         if (old != null) clear(player, old);
         session.tab = config.tab().enabled();
         tab(player, config.tab());
-        bar(player, session, config.bossBars());
-        if (config.tab().enabled() || config.bossBars().enabled()) {
+        if (config.tab().enabled()) {
             session.ticker = context.tasks().runAtEntityTimer(player, 20L, 20L, () -> tick(player, session));
         }
     }
@@ -130,8 +117,6 @@ public final class HudModule extends LobbyModule {
 
     private void clear(Player player, Session session) {
         if (session.ticker != null) session.ticker.cancel();
-        if (session.board != null) session.board.stop();
-        if (session.bar != null) session.bar.stop();
         if (session.tab && player.isOnline()) {
             player.sendPlayerListHeaderAndFooter(Component.empty(), Component.empty());
         }
@@ -141,7 +126,6 @@ public final class HudModule extends LobbyModule {
         HudSettings config = settings.get();
         session.seconds++;
         if (config.tab().enabled() && session.seconds % seconds(config.tab().interval().toMillis()) == 0) tab(player, config.tab());
-        rotate(player, session, config.bossBars());
     }
 
     private static int seconds(long millis) {
@@ -159,20 +143,6 @@ public final class HudModule extends LobbyModule {
         List<Component> parts = new ArrayList<>();
         for (String line : lines) parts.add(Text.of(line).forPlayer(player).build());
         return Component.join(JoinConfiguration.newlines(), parts);
-    }
-
-    private void bar(Player player, Session session, HudSettings.BossBars config) {
-        if (!config.enabled() || config.texts().isEmpty()) return;
-        session.bar = Effects.of(plugin()).bossBar(config.texts().get(0)).colour(config.colour()).overlay(config.overlay())
-                .progress(1f).show(player);
-    }
-
-    /** Moves a player's boss bar on to the next text when its time is up. */
-    private void rotate(Player player, Session session, HudSettings.BossBars config) {
-        if (!config.enabled() || config.texts().size() < 2 || session.bar == null) return;
-        if (session.seconds % seconds(config.interval().toMillis()) != 0) return;
-        session.text = (session.text + 1) % config.texts().size();
-        session.bar.text(config.texts().get(session.text));
     }
 
     private void announce() {

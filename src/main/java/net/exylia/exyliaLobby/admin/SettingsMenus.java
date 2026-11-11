@@ -55,7 +55,7 @@ final class SettingsMenus {
         PAGES.put("pvp", List.of("equip-seconds", "tag-seconds"));
         PAGES.put(GADGETS, List.of("view-radius", "gadgets.grapple.cooldown"));
         PAGES.put("parkour", List.of("modes.endless", "modes.sprint-seconds"));
-        PAGES.put("hud", List.of("sidebar.enabled", "boss-bars.enabled"));
+        PAGES.put("hud", List.of("tab.enabled", "announcements.enabled"));
     }
 
     private final ExyliaLobby lobby;

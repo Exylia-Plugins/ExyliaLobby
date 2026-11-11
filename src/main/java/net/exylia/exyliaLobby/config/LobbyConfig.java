@@ -78,7 +78,7 @@ public record LobbyConfig(
             boolean selector,
             @Comment("Opens the screen of every game the Exylia plugins offer.")
             boolean games,
-            @Comment("Sidebar, tab header and footer, rotating boss bars and announcements.")
+            @Comment("Tab header and footer and announcements (sidebars and boss bars: ExyliaScreens).")
             boolean hud,
             @Comment("Lobby PvP: hold the sword to fight other players who opted in.")
             boolean pvp,

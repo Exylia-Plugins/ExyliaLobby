@@ -53,8 +53,8 @@ modules:
   hud:
     name: HUD
     description:
-    - 'Sidebar, lista de jugadores,'
-    - 'boss bars y anuncios.'
+    - 'Cabecera y pie de la lista,'
+    - 'y anuncios.'
   pvp:
     name: PvP del lobby
     description:

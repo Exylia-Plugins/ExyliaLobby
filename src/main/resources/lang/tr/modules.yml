@@ -52,8 +52,8 @@ modules:
   hud:
     name: HUD
     description:
-    - Kenar çubuğu, sekme listesi,
-    - boss barlar ve duyurular.
+    - 'Oyuncu listesi başlığı ve altlığı,'
+    - 've duyurular.'
   pvp:
     name: Lobi PvP
     description:

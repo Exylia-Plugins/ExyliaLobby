@@ -53,8 +53,8 @@ modules:
   hud:
     name: HUD
     description:
-    - Scoreboard, liste des joueurs,
-    - boss bars et annonces.
+    - 'En-tête et pied de la liste,'
+    - 'et annonces.'
   pvp:
     name: PvP du lobby
     description:

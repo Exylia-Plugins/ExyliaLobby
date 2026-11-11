@@ -34,24 +34,6 @@ items:
       - "{primary}✦ Durum"
       - "  {letters_black}· {info}{icon:redstone} {letters}Modül{letters_black}: %hud_state%"
 
-  sidebar-enabled:
-    slot: 11
-    material: OAK_SIGN
-    name: "{letters}HUD {letters_black}▸ <gradient:{primary}:{secondary_light}>Yan panel</gradient>"
-    lore:
-      - "{letters_black}HUD ayarı"
-      - ""
-      - "{primary}✎ Bilgi"
-      - " {letters}Lobide yan paneli gösterir."
-      - ""
-      - "{primary}✦ Durum"
-      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %hud_sidebar_enabled%"
-      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %hud_sidebar_enabled_default%"
-      - ""
-      - "%hud_sidebar_enabled_click%"
-    actions:
-      - "exylialobby:setting hud sidebar.enabled"
-
   tab-enabled:
     slot: 12
     material: PAPER
@@ -71,27 +53,8 @@ items:
     actions:
       - "exylialobby:setting hud tab.enabled"
 
-  boss-bars-enabled:
-    slot: 13
-    material: DRAGON_HEAD
-    name: "{letters}HUD {letters_black}▸ <gradient:{primary}:{secondary_light}>Boss çubukları</gradient>"
-    lore:
-      - "{letters_black}HUD ayarı"
-      - ""
-      - "{primary}✎ Bilgi"
-      - " {letters}Ekranın üstünde sırayla dönen"
-      - " {letters}boss çubukları gösterir."
-      - ""
-      - "{primary}✦ Durum"
-      - "  {letters_black}· {info}{icon:redstone} {letters}Açık{letters_black}: %hud_boss_bars_enabled%"
-      - "  {letters_black}· {info}{icon:book} {letters}Varsayılan{letters_black}: %hud_boss_bars_enabled_default%"
-      - ""
-      - "%hud_boss_bars_enabled_click%"
-    actions:
-      - "exylialobby:setting hud boss-bars.enabled"
-
   announcements-enabled:
-    slot: 14
+    slot: 13
     material: BELL
     name: "{letters}HUD {letters_black}▸ <gradient:{primary}:{secondary_light}>Duyurular</gradient>"
     lore:
@@ -110,7 +73,7 @@ items:
       - "exylialobby:setting hud announcements.enabled"
 
   announcements-interval:
-    slot: 15
+    slot: 14
     material: CLOCK
     name: "{letters}HUD {letters_black}▸ <gradient:{primary}:{secondary_light}>Duyuru aralığı</gradient>"
     lore:

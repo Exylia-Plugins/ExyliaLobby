@@ -34,24 +34,6 @@ items:
       - "{primary}✦ Status"
       - "  {letters_black}· {info}{icon:redstone} {letters}Módulo{letters_black}: %hud_state%"
 
-  sidebar-enabled:
-    slot: 11
-    material: OAK_SIGN
-    name: "{letters}HUD {letters_black}▸ <gradient:{primary}:{secondary_light}>Barra lateral</gradient>"
-    lore:
-      - "{letters_black}Ajuste de HUD"
-      - ""
-      - "{primary}✎ Informação"
-      - " {letters}Mostra a barra lateral no lobby."
-      - ""
-      - "{primary}✦ Status"
-      - "  {letters_black}· {info}{icon:redstone} {letters}Ativado{letters_black}: %hud_sidebar_enabled%"
-      - "  {letters_black}· {info}{icon:book} {letters}Padrão{letters_black}: %hud_sidebar_enabled_default%"
-      - ""
-      - "%hud_sidebar_enabled_click%"
-    actions:
-      - "exylialobby:setting hud sidebar.enabled"
-
   tab-enabled:
     slot: 12
     material: PAPER
@@ -71,27 +53,8 @@ items:
     actions:
       - "exylialobby:setting hud tab.enabled"
 
-  boss-bars-enabled:
-    slot: 13
-    material: DRAGON_HEAD
-    name: "{letters}HUD {letters_black}▸ <gradient:{primary}:{secondary_light}>Barras de chefe</gradient>"
-    lore:
-      - "{letters_black}Ajuste de HUD"
-      - ""
-      - "{primary}✎ Informação"
-      - " {letters}Mostra barras de chefe que se"
-      - " {letters}alternam no topo do ecrã."
-      - ""
-      - "{primary}✦ Status"
-      - "  {letters_black}· {info}{icon:redstone} {letters}Ativado{letters_black}: %hud_boss_bars_enabled%"
-      - "  {letters_black}· {info}{icon:book} {letters}Padrão{letters_black}: %hud_boss_bars_enabled_default%"
-      - ""
-      - "%hud_boss_bars_enabled_click%"
-    actions:
-      - "exylialobby:setting hud boss-bars.enabled"
-
   announcements-enabled:
-    slot: 14
+    slot: 13
     material: BELL
     name: "{letters}HUD {letters_black}▸ <gradient:{primary}:{secondary_light}>Anúncios</gradient>"
     lore:
@@ -110,7 +73,7 @@ items:
       - "exylialobby:setting hud announcements.enabled"
 
   announcements-interval:
-    slot: 15
+    slot: 14
     material: CLOCK
     name: "{letters}HUD {letters_black}▸ <gradient:{primary}:{secondary_light}>Intervalo dos anúncios</gradient>"
     lore:

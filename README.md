@@ -9,7 +9,8 @@ Every part is a module you switch on or off live from `/lobbyadmin`, and every s
 - **Movement**: double jump and launch pads.
 - **Triggers**: buttons, pressure plates, any block or an area run actions (commands, messages, sounds, server switch, teleport) when used or walked into.
 - **Server selector**: live player counts, lobby selector and portals. Place server NPCs with ExyliaDisplays (action `[SERVER] <name>`, label `%network_players_<server>% playing`).
-- **HUD**: sidebar, tab list, rotating boss bars and announcements.
+- **HUD**: tab list header and footer, and announcements. Sidebars and boss bars are ExyliaScreens' `scoreboards.yml`
+  and `bossbars.yml` (drawn on the HUD where the client shows it, vanilla elsewhere).
 - **Lobby PvP**: hold the sword to fight players who opted in; your hotbar comes back exactly.
 - **Parkour**: courses with checkpoints, splits and medals, endless parkour that never repeats itself, and leaderboards shared across lobbies.
 - **Gadgets**: grappling hook, ender ride, paint blaster and more harmless toys.

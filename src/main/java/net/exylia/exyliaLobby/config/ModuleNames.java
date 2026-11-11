@@ -39,7 +39,7 @@ public record ModuleNames(
         map.put("visibility", new Info("Visibility", List.of("Players choose who", "they see in the lobby.")));
         map.put("selector", new Info("Server selector", List.of("Servers and lobbies with live", "counts and portals.")));
         map.put("games", new Info("Games", List.of("Every game the Exylia", "plugins offer, on one screen.")));
-        map.put("hud", new Info("HUD", List.of("Sidebar, tab list, boss", "bars and announcements.")));
+        map.put("hud", new Info("HUD", List.of("Tab list header and", "footer, and announcements.")));
         map.put("pvp", new Info("Lobby PvP", List.of("Hold the sword to fight", "players who opted in.")));
         map.put("parkour", new Info("Parkour", List.of("Courses, endless parkour", "and leaderboards.")));
         map.put("gadgets", new Info("Gadgets", List.of("Grappling hook, ender ride,", "paint blaster and more.")));

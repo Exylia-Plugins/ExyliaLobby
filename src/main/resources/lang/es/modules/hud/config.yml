@@ -1,31 +1,10 @@
 # Textos por defecto en español. Solo las claves con texto; el resto de ajustes viene del registro.
 
-sidebar:
-  board:
-    lines:
-    - '<center>{letters_black}%server_time_dd/MM/yyyy|Hub%'
-    - ''
-    - '{primary}&l▸▸ TÚ'
-    - '{info}{icon:tag} {letters}Nombre{letters_black}: {info}%player_name%'
-    - '{highlight}{icon:star} {letters}Rango{letters_black}: %luckperms_prefix|{letters_black}—%'
-    - '{accent}{icon:eye} {letters}Jugadores{letters_black}: %lobby_visibility_state%'
-    - ''
-    - '{primary}&l▸▸ SERVIDORES'
-    - '{success}{icon:pickaxe} {letters}Survival{letters_black}: {success}%network_players_survival%'
-    - '{highlight}{icon:star} {letters}Minijuegos{letters_black}: {success}%network_players_minigames%'
-    - ''
-    - '{info}{icon:compass} {letters}En línea{letters_black}: {success}%network_online% {letters_black}· {info}{icon:ping} %player_ping%ms'
-    - ''
-    - '<center>{primary}{server-ip}'
 tab:
   footer:
   - ''
   - '{letters}Jugadores en la red{letters_black}: {success}%network_online%'
   - ''
-boss-bars:
-  texts:
-  - '{letters}Elige un servidor con la {highlight}brújula{letters}.'
-  - '{letters}Elige a quién ves en el lobby con el {highlight}tinte{letters}.'
 announcements:
   messages:
   - '%prefix% {letters}Silencia estos anuncios cuando quieras en {highlight}/settings{letters}.'

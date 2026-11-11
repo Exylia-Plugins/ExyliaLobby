@@ -1,31 +1,10 @@
 # Тексты по умолчанию на русском. Только ключи с текстом; остальные настройки берутся из реестра.
 
-sidebar:
-  board:
-    lines:
-    - '<center>{letters_black}%server_time_dd/MM/yyyy|Hub%'
-    - ''
-    - '{primary}&l▸▸ ТЫ'
-    - '{info}{icon:tag} {letters}Ник{letters_black}: {info}%player_name%'
-    - '{highlight}{icon:star} {letters}Ранг{letters_black}: %luckperms_prefix|{letters_black}—%'
-    - '{accent}{icon:eye} {letters}Игроки{letters_black}: %lobby_visibility_state%'
-    - ''
-    - '{primary}&l▸▸ СЕРВЕРЫ'
-    - '{success}{icon:pickaxe} {letters}Survival{letters_black}: {success}%network_players_survival%'
-    - '{highlight}{icon:star} {letters}Мини-игры{letters_black}: {success}%network_players_minigames%'
-    - ''
-    - '{info}{icon:compass} {letters}Онлайн{letters_black}: {success}%network_online% {letters_black}· {info}{icon:ping} %player_ping%ms'
-    - ''
-    - '<center>{primary}{server-ip}'
 tab:
   footer:
   - ''
   - '{letters}Игроков в сети{letters_black}: {success}%network_online%'
   - ''
-boss-bars:
-  texts:
-  - '{letters}Выберите сервер с помощью {highlight}компаса{letters}.'
-  - '{letters}Выберите, кого видеть в лобби, с помощью {highlight}красителя{letters}.'
 announcements:
   messages:
   - '%prefix% {letters}Отключить эти объявления можно в любой момент в {highlight}/settings{letters}.'

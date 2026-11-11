@@ -1109,27 +1109,17 @@
     "stats": [
      [
       "redstone",
-      "Sidebar",
-      "sidebar.enabled"
+      "Player list",
+      "tab.enabled"
      ],
      [
       "redstone",
-      "Boss bars",
-      "boss-bars.enabled"
+      "Announcements",
+      "announcements.enabled"
      ]
     ]
    },
    "cards": [
-    [
-     "sidebar.enabled",
-     "Sidebar",
-     "OAK_SIGN",
-     "redstone",
-     "Enabled",
-     [
-      "Show the sidebar in the lobby."
-     ]
-    ],
     [
      "tab.enabled",
      "Player list",
@@ -1139,17 +1129,6 @@
      [
       "Show a header and footer on",
       "the player list."
-     ]
-    ],
-    [
-     "boss-bars.enabled",
-     "Boss bars",
-     "DRAGON_HEAD",
-     "redstone",
-     "Enabled",
-     [
-      "Show boss bars that take turns",
-      "at the top of the screen."
      ]
     ],
     [
