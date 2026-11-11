@@ -3,7 +3,7 @@
 sidebar:
   board:
     lines:
-    - '{letters_black}%server_time_dd/MM/yyyy|Hub%'
+    - '<center>{letters_black}%server_time_dd/MM/yyyy|Hub%'
     - ''
     - '{primary}&l▸▸ ТЫ'
     - '{info}{icon:tag} {letters}Ник{letters_black}: {info}%player_name%'
@@ -16,7 +16,7 @@ sidebar:
     - ''
     - '{info}{icon:compass} {letters}Онлайн{letters_black}: {success}%network_online% {letters_black}· {info}{icon:ping} %player_ping%ms'
     - ''
-    - '{primary}{server-ip}'
+    - '<center>{primary}{server-ip}'
 tab:
   footer:
   - ''

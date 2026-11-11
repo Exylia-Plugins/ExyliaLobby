@@ -36,7 +36,7 @@ public record HudSettings(
         public Sidebar() {
             this(true, new SidebarConfig(true,
                     List.of("<flow><gradient:{primary}:{secondary_light}>&l✦ LOBBY ✦</gradient>"), List.of(
-                    "{letters_black}%server_time_dd/MM/yyyy|Hub%",
+                    "<center>{letters_black}%server_time_dd/MM/yyyy|Hub%",
                     "",
                     "{primary}&l▸▸ YOU",
                     "{info}{icon:tag} {letters}Name{letters_black}: {info}%player_name%",
@@ -50,7 +50,7 @@ public record HudSettings(
                     "{info}{icon:compass} {letters}Online{letters_black}: {success}%network_online% "
                             + "{letters_black}· {info}{icon:ping} %player_ping%ms",
                     "",
-                    "{primary}{server-ip}"), new SidebarConfig.Update(2, true, true)));
+                    "<center>{primary}{server-ip}"), new SidebarConfig.Update(2, true, true)));
         }
     }
 
