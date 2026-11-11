@@ -3,15 +3,24 @@
 sidebar:
   board:
     lines:
-    - '{primary}✦ Lobby'
-    - '  {letters_black}· {info}{icon:star} {letters}Burada{letters_black}: {info}%lobby_hud_here%'
-    - '  {letters_black}· {success}{icon:heart} {letters}Ağ{letters_black}: {success}%lobby_hud_network%'
+    - '{letters_black}%server_time_dd/MM/yyyy|Hub%'
     - ''
-    - '{muted}{server-ip}'
+    - '{primary}&l▸▸ SEN'
+    - '{info}{icon:tag} {letters}İsim{letters_black}: {info}%player_name%'
+    - '{highlight}{icon:star} {letters}Rütbe{letters_black}: %luckperms_prefix|{letters_black}—%'
+    - '{accent}{icon:eye} {letters}Oyuncular{letters_black}: %lobby_visibility_state%'
+    - ''
+    - '{primary}&l▸▸ SUNUCULAR'
+    - '{success}{icon:pickaxe} {letters}Survival{letters_black}: {success}%network_players_survival%'
+    - '{highlight}{icon:star} {letters}Mini oyunlar{letters_black}: {success}%network_players_minigames%'
+    - ''
+    - '{info}{icon:compass} {letters}Çevrimiçi{letters_black}: {success}%network_online% {letters_black}· {info}{icon:ping} %player_ping%ms'
+    - ''
+    - '{primary}{server-ip}'
 tab:
   footer:
   - ''
-  - '{letters}Ağdaki oyuncular{letters_black}: {success}%lobby_hud_network%'
+  - '{letters}Ağdaki oyuncular{letters_black}: {success}%network_online%'
   - ''
 boss-bars:
   texts:

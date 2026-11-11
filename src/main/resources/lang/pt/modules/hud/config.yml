@@ -3,15 +3,24 @@
 sidebar:
   board:
     lines:
-    - '{primary}✦ Lobby'
-    - '  {letters_black}· {info}{icon:star} {letters}Aqui{letters_black}: {info}%lobby_hud_here%'
-    - '  {letters_black}· {success}{icon:heart} {letters}Rede{letters_black}: {success}%lobby_hud_network%'
+    - '{letters_black}%server_time_dd/MM/yyyy|Hub%'
     - ''
-    - '{muted}{server-ip}'
+    - '{primary}&l▸▸ VOCÊ'
+    - '{info}{icon:tag} {letters}Nome{letters_black}: {info}%player_name%'
+    - '{highlight}{icon:star} {letters}Cargo{letters_black}: %luckperms_prefix|{letters_black}—%'
+    - '{accent}{icon:eye} {letters}Jogadores{letters_black}: %lobby_visibility_state%'
+    - ''
+    - '{primary}&l▸▸ SERVIDORES'
+    - '{success}{icon:pickaxe} {letters}Survival{letters_black}: {success}%network_players_survival%'
+    - '{highlight}{icon:star} {letters}Minijogos{letters_black}: {success}%network_players_minigames%'
+    - ''
+    - '{info}{icon:compass} {letters}Online{letters_black}: {success}%network_online% {letters_black}· {info}{icon:ping} %player_ping%ms'
+    - ''
+    - '{primary}{server-ip}'
 tab:
   footer:
   - ''
-  - '{letters}Jogadores na rede{letters_black}: {success}%lobby_hud_network%'
+  - '{letters}Jogadores na rede{letters_black}: {success}%network_online%'
   - ''
 boss-bars:
   texts:

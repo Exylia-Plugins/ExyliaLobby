@@ -8,8 +8,10 @@ import java.util.List;
 
 /** {@code modules/hud/config.yml}: what players see on screen inside the lobby. Every part switches on its own. */
 public record HudSettings(
-        @Comment("The sidebar. %lobby_hud_here% (players in this lobby) is ours, %network_online% is ExyliaLib's;")
-        @Comment("every other placeholder works too. Title and lines use the palette tokens.")
+        @Comment("The sidebar. Network counts: %network_online%, %network_players_<server>%, %network_state_<server>%")
+        @Comment("(server names as the proxy knows them; list the ones in your selector). %lobby_hud_here% counts this lobby.")
+        @Comment("PlaceholderAPI works too: %server_time_dd/MM/yyyy% needs its Server expansion, %luckperms_prefix% LuckPerms;")
+        @Comment("the text after | shows when one is missing. A leading <flow> animates the title: keep interval at 1-2.")
         Sidebar sidebar,
 
         @Comment("The header and footer of the player list (Tab).")
@@ -32,12 +34,23 @@ public record HudSettings(
             SidebarConfig board) {
 
         public Sidebar() {
-            this(true, new SidebarConfig(true, List.of("{primary}&lLOBBY"), List.of(
-                    "{primary}✦ Lobby",
-                    "  {letters_black}· {info}{icon:star} {letters}Here{letters_black}: {info}%lobby_hud_here%",
-                    "  {letters_black}· {success}{icon:heart} {letters}Network{letters_black}: {success}%network_online%",
+            this(true, new SidebarConfig(true,
+                    List.of("<flow><gradient:{primary}:{secondary_light}>&l✦ LOBBY ✦</gradient>"), List.of(
+                    "{letters_black}%server_time_dd/MM/yyyy|Hub%",
                     "",
-                    "{muted}{server-ip}"), new SidebarConfig.Update(20, true, true)));
+                    "{primary}&l▸▸ YOU",
+                    "{info}{icon:tag} {letters}Name{letters_black}: {info}%player_name%",
+                    "{highlight}{icon:star} {letters}Rank{letters_black}: %luckperms_prefix|{letters_black}—%",
+                    "{accent}{icon:eye} {letters}Players{letters_black}: %lobby_visibility_state%",
+                    "",
+                    "{primary}&l▸▸ SERVERS",
+                    "{success}{icon:pickaxe} {letters}Survival{letters_black}: {success}%network_players_survival%",
+                    "{highlight}{icon:star} {letters}Minigames{letters_black}: {success}%network_players_minigames%",
+                    "",
+                    "{info}{icon:compass} {letters}Online{letters_black}: {success}%network_online% "
+                            + "{letters_black}· {info}{icon:ping} %player_ping%ms",
+                    "",
+                    "{primary}{server-ip}"), new SidebarConfig.Update(2, true, true)));
         }
     }
 
