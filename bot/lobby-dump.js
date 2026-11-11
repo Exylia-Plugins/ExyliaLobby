@@ -1,5 +1,6 @@
 // Dumps every ExyliaLobby screen as rendered (title, slot, name, lore) and flags raw tokens, unresolved placeholders and long lines.
 // Usage: (cd bot && node lobby-dump.js <paper|folia> > /tmp/dump.txt)   Owns the server like lobby-test.js and always stops it.
+const { Vec3 } = require('/root/Java/test-servers/bot/node_modules/vec3')
 const C = require('./lobby-common')
 const { sleep, cmd, connect, openScreen, screen, textOf, fs, path } = C
 const NAME = 'ExyBot'
@@ -66,26 +67,38 @@ async function main() {
   fs.writeFileSync(sel, fs.readFileSync(sel, 'utf8').replace(/^lobbies: \[\]/m, 'lobbies:\n- survival\n- minigames')
     .replace(/^npcs: \{\}/m, "npcs:\n  guide: {server: survival, skin: '', world: world, x: 3.5, y: -60, z: 3.5, yaw: 0, pitch: 0, hologram: [], hologram-height: 2.4}")
     .replace(/^portals: \{\}/m, "portals:\n  gate: {server: minigames, world: world, x1: 10, y1: -60, z1: 10, x2: 11, y2: -58, z2: 11}"))
+  // a course with no places yet, so the editor shows its "setup needed" state (the create wizard always places both)
+  const cs = path.join(C.DIR, 'plugins/ExyliaLobby/modules/parkour/courses.yml')
+  fs.writeFileSync(cs, fs.readFileSync(cs, 'utf8').replace(/^courses: \{\}/m, 'courses:\n  c2: {name: c2}'))
   console.log(C.srv('start').trim())
   bot = await connect(NAME); await sleep(4000)
   cmd(`op ${NAME}`); await sleep(800)
   cmd('fill -15 -61 -15 15 -61 15 stone'); await sleep(800)
   cmd(`tp ${NAME} 0.5 -60 0.5`); await sleep(800)
-  for (const c of ['create c1', 'setstart c1', 'addcheckpoint c1', 'setfinish c1']) {
-    if (c.startsWith('addcheck')) cmd(`tp ${NAME} 4.5 -60 0.5`); if (c.startsWith('setfinish')) cmd(`tp ${NAME} 8.5 -60 0.5`)
-    await sleep(600); bot.chat(`/lobbyadmin parkour ${c}`); await sleep(800)
-  }
+  // the create wizard: stand on the start, one checkpoint, no more, stand on the finish, confirm the review
+  bot.chat('/lobbyadmin parkour create c1'); await sleep(1200)
+  await C.standClick(bot)
+  console.log('more?', await C.answer(bot, true))
+  cmd(`tp ${NAME} 4.5 -60 0.5`); await sleep(1200); await C.standClick(bot)
+  console.log('no more', await C.answer(bot, false))
+  cmd(`tp ${NAME} 8.5 -60 0.5`); await sleep(1200); await C.standClick(bot)
+  const review = screen(bot) || (await sleep(1500), screen(bot))
+  dump('parkour create review', review)
+  console.log('review', await C.answer(bot, true), '| chat:', bot.chatLog.slice(-2).join(' | '))
+  if (bot.currentWindow) bot.closeWindow(bot.currentWindow)
   cmd(`tp ${NAME} 0.5 -60 0.5`); await sleep(800)
   bot.chat('/parkour c1'); await sleep(1500); bot.chat('/parkour leave'); await sleep(600)
 
-  bot.chat('/lobbyadmin parkour create c2'); await sleep(900)
-  // data for the admin lists: one pad, one hologram, one zone, made with the add buttons
-  for (const [mod, slot] of [[/movement/, 45], [/holograms/, 45], [/pvp/, 46]]) {
+  // data for the admin lists: one pad (click a block), one hologram (stand), one zone (select an area), made with the add buttons
+  for (const [mod, slot, gesture] of [[/movement/, 45, 'block'], [/holograms/, 45, 'stand'], [/pvp/, 45, 'area']]) {
     await openScreen(bot, '/lobbyadmin modules', 700)
     const it = bot.currentWindow.slots.find(x => x && mod.test(textOf(x.customName)) && x.slot < 36)
     await click(it.slot, 1); await sleep(800)
     await click(slot); await sleep(800)
-    console.log('created via', mod, bot.chatLog.slice(-1)[0] || '')
+    if (gesture === 'block') await C.blockClick(bot, bot.blockAt(new Vec3(2, -61, 2)))
+    else if (gesture === 'stand') await C.standClick(bot)
+    else await C.selectArea(bot, new Vec3(-6, -61, -6), new Vec3(-3, -61, -3))
+    console.log('created via', mod, bot.chatLog.slice(-2).join(' | '))
   }
   // player screens
   for (const [label, c] of [['servers', '/servers'], ['lobbies', '/lobbies'], ['gadgets', '/gadgets'], ['parkour', '/parkour'], ['parkour top', '/parkour top c1'], ['pvp top', '/pvptop'], ['games', '/games']]) {
