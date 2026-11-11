@@ -90,16 +90,29 @@ reasons:
 time-reset: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Tus tiempos en {highlight}%course%{letters} se reiniciaron.'
 
 # Comandos de staff bajo /lobbyadmin parkour. %course% es el id.
-course-created: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Recorrido {highlight}%course%{letters} creado con su inicio a tus pies. Añade checkpoints y una meta.'
+course-created: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Recorrido {highlight}%course%{letters} creado.'
 course-exists: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Ya existe un recorrido llamado {highlight}%course%{error}.'
-start-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Inicio de {highlight}%course%{letters} fijado a tus pies.'
-checkpoint-added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Checkpoint {highlight}%checkpoint%{letters} de {highlight}%course%{letters} añadido a tus pies.'
-finish-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Meta de {highlight}%course%{letters} fijada a tus pies.'
+start-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Inicio de {highlight}%course%{letters} fijado.'
+checkpoint-added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Checkpoint {highlight}%checkpoint%{letters} de {highlight}%course%{letters} añadido.'
+finish-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Meta de {highlight}%course%{letters} fijada.'
 course-deleted: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Recorrido {highlight}%course%{letters} eliminado.'
-wrong-world: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}{highlight}%course%{error} está en el mundo {highlight}%world%{error}. Ve allí para editarlo.'
+wrong-world: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}{highlight}%course%{error} está en el mundo {highlight}%world%{error}. Fija sus lugares allí.'
 
 # La etiqueta sobre el rayo del siguiente checkpoint. %checkpoint%/%total% el checkpoint, %distance% metros de distancia.
 beacon-label: '{letters}Checkpoint {info}%checkpoint%{letters_black}/{info}%total% {letters_black}· {info}%distance% m'
+
+# Los asistentes: lo que nombran en pantalla y lo que preguntan.
+wizard:
+  course: '{primary}&lNUEVO RECORRIDO {muted}%course%'
+  stand: '{warning}➥ {highlight}%step%{letters}: ponte ahí y {highlight}Shift + clic{letters}.'
+  more: ¿Añadir el checkpoint %checkpoint%? Responde no para fijar la meta.
+  start: Inicio del recorrido
+  checkpoint: Checkpoint
+  finish: Meta del recorrido
+  kill: Bloque mortal
+  board: Ranking
+  area: Área infinita
+  area-start: Inicio infinito
 
 # Los ítems que lleva un corredor: volver al último checkpoint, reiniciar, salir.
 items:
@@ -140,17 +153,14 @@ tools:
   board-title: '{primary}&l%board%'
   board-line: '{highlight}#%place% {letters}%name% {letters_black}· {info}%value%'
   board-empty: '{letters_black}Nadie aún'
-  board-placed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Ranking {highlight}%board%{letters} colocado a tus pies.'
+  board-placed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Ranking {highlight}%board%{letters} colocado.'
   kill-added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}{highlight}%block%{letters} ahora devuelve al inicio a los corredores de {highlight}%course%{letters}.'
-  kill-no-block: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Párate sobre un bloque o míralo primero.'
   medals-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Medallas de {highlight}%course%{letters} fijadas.'
   # Pregunta antes de eliminar un recorrido. %course% es el id.
   confirm-delete: '¿Eliminar %course% y sus ajustes? Los tiempos guardados se quedan en la base de datos.'
-  select-area: '%prefix% {letters}Selecciona las dos esquinas del área con tu varita.'
-  no-selection: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}No se seleccionó ningún área.'
   # Pide el nombre del área.
   prompt-area: Nombre del área
-  area-saved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Área infinita {highlight}%area%{letters} guardada, empezando donde estás.'
+  area-saved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Área infinita {highlight}%area%{letters} guardada.'
 
 # Tarjetas del menú: líneas de datos, subtítulos, mensajes y estados. %tone% y %light% son los colores de la tarjeta.
 screens:
@@ -262,10 +272,10 @@ staff:
   create-course:
     title: Crear
     text:
-    - ' {letters}Un recorrido nuevo con su inicio'
-    - ' {letters}a tus pies.'
-    click: Clic para crear
-    next: Abre su editor después.
+    - ' {letters}Ponle nombre y fija su inicio,'
+    - ' {letters}checkpoints y meta.'
+    click: Clic para empezar
+    next: Abre su editor al terminar.
   settings-courses:
     title: Ajustes
     text:
@@ -276,10 +286,10 @@ staff:
   add-area:
     title: Añadir
     text:
-    - ' {letters}Selecciona dos esquinas con tu'
-    - ' {letters}varita, desde donde estás.'
-    click: Clic para añadir
-    next: Lo nombras tras seleccionar.
+    - ' {letters}Ponle nombre, selecciona su caja'
+    - ' {letters}y colócate donde empiezan.'
+    click: Clic para empezar
+    next: Las carreras van hacia donde mires.
   settings-areas:
     title: Ajustes
     text:

@@ -28,7 +28,7 @@ label-size: Tamaño
 server-missing: '{error}No está en el catálogo'
 clicks-npc:
 - '{primary}{icon:click} Clic izquierdo {letters_black}· {letters}cambiar servidor'
-- '{primary}{icon:right_click} Clic derecho {letters_black}· {letters}mover aquí'
+- '{primary}{icon:right_click} Clic derecho {letters_black}· {letters}moverlo'
 - '{error}{icon:right_click} Shift + clic derecho {letters_black}· {letters}eliminar'
 - '{letters_black}Eliminar pide confirmación.'
 clicks-portal:
@@ -38,21 +38,25 @@ clicks-portal:
 - '{letters_black}Eliminar pide confirmación.'
 add-npc-title: NPC de servidor
 add-npc-text:
-- ' {letters}Coloca un NPC donde estás;'
-- ' {letters}un clic envía a los jugadores.'
-add-npc-click: Clic para añadir
-add-npc-next: Primero eliges su servidor.
+- ' {letters}Elige su servidor, ve al lugar,'
+- ' {letters}mira hacia donde mirará y'
+- ' {letters}haz {highlight}Shift + clic{letters}.'
+add-npc-click: Clic para empezar
+add-npc-next: Pulsarlo envía a los jugadores.
 add-portal-title: Portal
 add-portal-text:
 - ' {letters}Selecciona una zona; entrar'
 - ' {letters}en ella envía a los jugadores.'
-add-portal-click: Clic para seleccionar
+add-portal-click: Clic para empezar
 add-portal-next: Luego eliges su servidor.
 prompt-server: '{letters}¿A qué servidor envía a los jugadores?'
-select-portal: '{letters}Selecciona el portal con el hacha dorada: {highlight}clic izquierdo{letters} en una esquina, {highlight}clic derecho{letters} en la otra y luego {highlight}shift + clic izquierdo{letters}.'
 no-servers: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Añade primero un servidor al catálogo (modules/selector/config.yml).'
 added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} añadido.'
 removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} eliminado.'
 changed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} ahora envía a los jugadores a %server%{letters}.'
-moved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} movido a tu posición.'
+moved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} movido.'
 confirm-remove: '¿Eliminar {highlight}%what%{letters}?'
+
+# Lo que los asistentes nombran en pantalla (texto plano, sin colores).
+wizard-npc: NPC de servidor
+wizard-portal: Portal

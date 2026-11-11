@@ -1,5 +1,5 @@
-# Líneas de chat. %gadget% es el nombre del gadget, %seconds% la recarga restante.
-cooling: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}%gadget%{warning} se está recargando: {highlight}%seconds%s{warning}.'
+# Líneas de chat. %gadget% es el nombre del gadget, %time% la recarga restante.
+cooling: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}%gadget%{warning} se está recargando: {highlight}%time%{warning}.'
 no-permission: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Aún no tienes %gadget%{error}.'
 equipped: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%gadget%{letters} está en tu hotbar.'
 put-away: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Guardaste tu gadget.'

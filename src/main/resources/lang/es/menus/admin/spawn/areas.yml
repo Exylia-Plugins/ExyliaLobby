@@ -1,4 +1,4 @@
-menu-version: 1
+menu-version: 2
 # NO EDITAR — SE REGENERA EN CADA INICIO.
 #
 # Las áreas del lobby: los mundos y zonas donde rigen las reglas del lobby.
@@ -66,11 +66,11 @@ items:
       - ""
       - "{success}✎ Información"
       - " {letters}Marca dos esquinas con el"
-      - " {letters}hacha dorada; las reglas"
+      - " {letters}selector; las reglas"
       - " {letters}rigen dentro de esa zona."
       - ""
-      - "{success}{icon:click} Clic para seleccionar"
-      - "{letters_black}Luego nombras la zona."
+      - "{success}{icon:click} Clic para empezar"
+      - "{letters_black}Primero la marcas, luego la nombras."
     actions:
       - 'exylialobby:spawn_area_add_box'
 

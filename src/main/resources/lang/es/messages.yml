@@ -18,6 +18,10 @@ modules:
   failed: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}El módulo {highlight}%module%{error} no pudo iniciar. Revisa la consola.'
   # Apagar este también apaga estos. %modules% los lista.
   dependants: '{letters_black}También apaga: %modules%'
+  # /lobbyadmin module con un estado que no es on ni off
+  usage: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {letters}Usa {highlight}/lobbyadmin module {letters_black}id{highlight} on{letters} o {highlight}off{letters}.'
+  # /lobbyadmin module con un id que ningún módulo tiene. %id% es lo escrito, %modules% los ids.
+  unknown: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Ningún módulo se llama {highlight}%id%{error}. {letters}Ids: {letters_black}%modules%'
 areas:
   # Se muestra cuando un admin guarda una zona del lobby desde su selección
   box-saved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Área del lobby {highlight}%area%{letters} guardada.'
