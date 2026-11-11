@@ -1,7 +1,7 @@
 menu-version: 1
 # NE PAS MODIFIER — RÉGÉNÉRÉ À CHAQUE DÉMARRAGE.
 #
-# La liste partagée par l’écran d’admin de chaque module du hub : plateformes, PNJ, portails, hologrammes.
+# La liste partagée par l’écran d’admin de chaque module du hub : plateformes, portails, zones.
 
 title: '{primary}&lHUB {letters_black}» {highlight}%list_title% {muted}%current_page%/%total_pages%'
 size: 54

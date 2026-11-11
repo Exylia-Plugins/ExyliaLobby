@@ -1,7 +1,7 @@
 menu-version: 1
 # DO NOT EDIT — REGENERATED ON EVERY STARTUP.
 #
-# The list every hub module's admin screen shares: launch pads, NPCs, portals, holograms.
+# The list every hub module's admin screen shares: launch pads, portals, zones.
 
 title: '{primary}&lHUB {letters_black}» {highlight}%list_title% {muted}%current_page%/%total_pages%'
 size: 54

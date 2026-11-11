@@ -3,7 +3,6 @@ package net.exylia.exyliaLobby.module;
 import net.exylia.exyliaLobby.module.chat.ChatModule;
 import net.exylia.exyliaLobby.module.gadgets.GadgetsModule;
 import net.exylia.exyliaLobby.module.games.GamesModule;
-import net.exylia.exyliaLobby.module.holograms.HologramsModule;
 import net.exylia.exyliaLobby.module.hotbar.HotbarModule;
 import net.exylia.exyliaLobby.module.hud.HudModule;
 import net.exylia.exyliaLobby.module.join.JoinModule;
@@ -39,7 +38,6 @@ public final class Modules {
                 new ChatModule(context),
                 new OnboardingModule(context),
                 new HotbarModule(context),
-                new HologramsModule(context),
                 new ParkourModule(context),
                 new MovementModule(context),
                 new VisibilityModule(context),

@@ -5,19 +5,11 @@ import net.exylia.exyliaLobby.module.Busy;
 import net.exylia.exyliaLobby.module.LobbyContext;
 import net.exylia.exyliaLobby.module.LobbyModule;
 import net.exylia.exyliaLobby.module.shared.AdminScreens;
-import net.exylia.exyliaLobby.module.shared.HologramLook;
 import net.exylia.lib.action.ActionResult;
 import net.exylia.lib.action.PluginActions;
 import net.exylia.lib.config.ConfigFile;
 import net.exylia.lib.config.Languages;
-import net.exylia.lib.hologram.Holograms;
 import net.exylia.lib.network.Network;
-import net.exylia.lib.npc.NpcLook;
-import net.exylia.lib.npc.NpcPose;
-import net.exylia.lib.npc.NpcSkin;
-import net.exylia.lib.npc.NpcSpec;
-import net.exylia.lib.npc.Npcs;
-import net.exylia.lib.npc.PlacedNpc;
 import net.exylia.lib.proxy.NetworkServer;
 import net.exylia.lib.proxy.Proxy;
 import net.exylia.lib.region.Cuboid;
@@ -52,12 +44,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
-import java.util.function.UnaryOperator;
 
 /**
- * The server and lobby selectors, the server NPCs and the portals. Counts and status are read live from
+ * The server and lobby selectors and the portals. Counts and status are read live from
  * {@link Proxy#servers()}; a click hands the player to the proxy through ExyliaLib's teleport module.
  *
  * <p>Other modules use {@link #join(Player, String)}, {@link #openServers(Player)} and {@link #openLobbies(Player)}.
@@ -75,8 +65,6 @@ public final class SelectorModule extends LobbyModule {
     private ConfigFile<SelectorMessages> messages;
     private AdminScreens screens;
     private PluginRegions regions;
-    private final Set<String> npcIds = ConcurrentHashMap.newKeySet();
-    private final Set<String> hologramIds = ConcurrentHashMap.newKeySet();
     private volatile Runnable back = () -> {
     };
 
@@ -119,7 +107,6 @@ public final class SelectorModule extends LobbyModule {
 
     @Override
     protected void stop() {
-        clearPlaced();
         if (regions != null) regions.replaceAll(List.of());
         screens.clear();
     }
@@ -283,21 +270,8 @@ public final class SelectorModule extends LobbyModule {
 
     // ======================== placing ========================
 
-    private void clearPlaced() {
-        for (String id : npcIds) Npcs.of(plugin()).unplace(id);
-        for (String id : hologramIds) Holograms.remove(plugin(), id);
-        npcIds.clear();
-        hologramIds.clear();
-    }
-
     private void build() {
-        clearPlaced();
         SelectorSettings config = settings.get();
-        if (Npcs.isSupported()) {
-            for (Map.Entry<String, SelectorSettings.Npc> entry : config.npcs().entrySet()) placeNpc(entry.getKey(), entry.getValue());
-        } else if (!config.npcs().isEmpty()) {
-            context.debug().warn("Server NPCs need PacketEvents; they are not drawn.");
-        }
         List<RegionSnapshot> boxes = new ArrayList<>();
         for (Map.Entry<String, SelectorSettings.Portal> entry : config.portals().entrySet()) {
             SelectorSettings.Portal portal = entry.getValue();
@@ -309,25 +283,6 @@ public final class SelectorModule extends LobbyModule {
                     0, PolicySet.empty()));
         }
         regions.replaceAll(boxes);
-    }
-
-    private void placeNpc(String key, SelectorSettings.Npc npc) {
-        World world = Bukkit.getWorld(npc.world());
-        SelectorSettings.Server server = settings.get().servers().get(npc.server());
-        if (world == null || server == null) return;
-        Location at = new Location(world, npc.x(), npc.y(), npc.z(), (float) npc.yaw(), (float) npc.pitch());
-        NpcSkin skin = npc.skin().isBlank() ? NpcSkin.none()
-                : npc.skin().equalsIgnoreCase("mirror") ? NpcSkin.mirror() : NpcSkin.player(npc.skin());
-        String id = "selector-" + key;
-        PlacedNpc placed = Npcs.of(plugin()).place(id, NpcSpec.builder().skin(skin).pose(NpcPose.STANDING)
-                .look(NpcLook.EACH_VIEWER).build(), at);
-        placed.onClick((player, click) -> join(player, npc.server()));
-        npcIds.add(id);
-        if (npc.hologram().isEmpty() || !Holograms.isSupported()) return;
-        Holograms.show(plugin(), id, at, HologramLook.text(npc.hologram(), 32, npc.hologramHeight()), Map.of(
-                "server_name", server.name(),
-                "server_players", (Supplier<Object>) () -> players(server.server())));
-        hologramIds.add(id);
     }
 
     // ======================== admin ========================
@@ -342,8 +297,6 @@ public final class SelectorModule extends LobbyModule {
         this.back = back;
         SelectorMessages text = messages.get();
         screens.open(viewer, back, "Modules", text.listTitle(), text.listKind(), List.of(
-                new AdminScreens.Add("PLAYER_HEAD", text.addNpcTitle(), text.addNpcText(), text.addNpcClick(), text.addNpcNext(),
-                        admin -> addNpc(admin)),
                 new AdminScreens.Add("END_PORTAL_FRAME", text.addPortalTitle(), text.addPortalText(), text.addPortalClick(),
                         text.addPortalNext(), admin -> addPortal(admin))),
                 this::rows);
@@ -352,13 +305,6 @@ public final class SelectorModule extends LobbyModule {
     private List<UiEntry> rows() {
         SelectorMessages text = messages.get();
         List<UiEntry> rows = new ArrayList<>();
-        for (Map.Entry<String, SelectorSettings.Npc> entry : settings.get().npcs().entrySet()) {
-            SelectorSettings.Npc npc = entry.getValue();
-            rows.add(AdminScreens.row("npc:" + entry.getKey(), "PLAYER_HEAD", entry.getKey(), text.subtitleNpc(), List.of(
-                    AdminScreens.stat("compass", text.labelServer(), serverName(npc.server())),
-                    AdminScreens.stat("map", text.labelPlace(), "{info}" + npc.world() + " " + Math.round(npc.x()) + " "
-                            + Math.round(npc.y()) + " " + Math.round(npc.z()))), text.clicksNpc(), false));
-        }
         for (Map.Entry<String, SelectorSettings.Portal> entry : settings.get().portals().entrySet()) {
             SelectorSettings.Portal portal = entry.getValue();
             rows.add(AdminScreens.row("portal:" + entry.getKey(), "END_PORTAL_FRAME", entry.getKey(), text.subtitlePortal(), List.of(
@@ -377,42 +323,32 @@ public final class SelectorModule extends LobbyModule {
     }
 
     private void click(Player viewer, String click, String id) {
-        boolean npc = id.startsWith("npc:");
         String key = id.substring(id.indexOf(':') + 1);
-        if (npc ? !settings.get().npcs().containsKey(key) : !settings.get().portals().containsKey(key)) return;
+        if (!settings.get().portals().containsKey(key)) return;
         SelectorMessages text = messages.get();
         Runnable reopen = () -> openAdmin(viewer, back);
-        String what = (npc ? text.subtitleNpc() : text.subtitlePortal()) + " " + key;
+        String what = text.subtitlePortal() + " " + key;
         switch (click) {
             case "left" -> askServer(viewer, server -> {
-                edit(npc, key, current -> new SelectorSettings.Npc(server, current.skin(), current.world(), current.x(), current.y(),
-                        current.z(), current.yaw(), current.pitch(), current.hologram(), current.hologramHeight()),
-                        current -> new SelectorSettings.Portal(server, current.world(), current.x1(), current.y1(), current.z1(),
-                                current.x2(), current.y2(), current.z2()));
+                settings.update(current -> {
+                    Map<String, SelectorSettings.Portal> portals = new LinkedHashMap<>(current.portals());
+                    portals.computeIfPresent(key, (k, old) -> new SelectorSettings.Portal(server, old.world(), old.x1(), old.y1(),
+                            old.z1(), old.x2(), old.y2(), old.z2()));
+                    return with(current, current.servers(), portals);
+                });
+                build();
                 send(viewer, text.changed(), Values.of("what", what).put("server", serverName(server)));
                 reopen.run();
             }, reopen);
             case "right" -> {
-                if (npc) {
-                    viewer.closeInventory();
-                    setup(viewer, reopen).spawn(text.wizardNpc(), key, at -> {
-                        edit(true, key, current -> new SelectorSettings.Npc(current.server(), current.skin(), at.getWorld().getName(),
-                                at.getX(), at.getY(), at.getZ(), at.getYaw(), at.getPitch(), current.hologram(), current.hologramHeight()), null);
-                        send(viewer, text.moved(), Values.of("what", what));
-                        reopen.run();
-                    });
-                } else {
-                    viewer.closeInventory();
-                    regions.visualize(viewer, "portal-" + key);
-                }
+                viewer.closeInventory();
+                regions.visualize(viewer, "portal-" + key);
             }
             case "shift" -> screens.confirm(viewer, Values.of("what", what).apply(text.confirmRemove()), () -> {
                 settings.update(current -> {
-                    Map<String, SelectorSettings.Npc> npcs = new LinkedHashMap<>(current.npcs());
                     Map<String, SelectorSettings.Portal> portals = new LinkedHashMap<>(current.portals());
-                    if (npc) npcs.remove(key);
-                    else portals.remove(key);
-                    return with(current, current.servers(), npcs, portals);
+                    portals.remove(key);
+                    return with(current, current.servers(), portals);
                 });
                 build();
                 send(viewer, text.removed(), Values.of("what", what));
@@ -423,19 +359,8 @@ public final class SelectorModule extends LobbyModule {
     }
 
     private static SelectorSettings with(SelectorSettings current, Map<String, SelectorSettings.Server> servers,
-                                         Map<String, SelectorSettings.Npc> npcs, Map<String, SelectorSettings.Portal> portals) {
-        return new SelectorSettings(current.command(), current.lobbyCommand(), current.lobbies(), servers, npcs, portals);
-    }
-
-    private void edit(boolean npc, String key, UnaryOperator<SelectorSettings.Npc> npcChange, UnaryOperator<SelectorSettings.Portal> portalChange) {
-        settings.update(current -> {
-            Map<String, SelectorSettings.Npc> npcs = new LinkedHashMap<>(current.npcs());
-            Map<String, SelectorSettings.Portal> portals = new LinkedHashMap<>(current.portals());
-            if (npc) npcs.computeIfPresent(key, (k, old) -> npcChange.apply(old));
-            else portals.computeIfPresent(key, (k, old) -> portalChange.apply(old));
-            return with(current, current.servers(), npcs, portals);
-        });
-        build();
+                                         Map<String, SelectorSettings.Portal> portals) {
+        return new SelectorSettings(current.command(), current.lobbyCommand(), current.lobbies(), servers, portals);
     }
 
     /** Asks which catalogue entry; closes the screen first and calls {@code reopen} on cancel. */
@@ -457,23 +382,6 @@ public final class SelectorModule extends LobbyModule {
         return prefix + number;
     }
 
-    private void addNpc(Player admin) {
-        Runnable reopen = () -> openAdmin(admin, back);
-        askServer(admin, server -> setup(admin, reopen).spawn(messages.get().wizardNpc(), at -> {
-            String key = nextId(settings.get().npcs().keySet(), "npc-");
-            SelectorSettings.Npc base = new SelectorSettings.Npc();
-            settings.update(current -> {
-                Map<String, SelectorSettings.Npc> npcs = new LinkedHashMap<>(current.npcs());
-                npcs.put(key, new SelectorSettings.Npc(server, "mirror", at.getWorld().getName(), at.getX(), at.getY(), at.getZ(),
-                        at.getYaw(), at.getPitch(), base.hologram(), base.hologramHeight()));
-                return with(current, current.servers(), npcs, current.portals());
-            });
-            build();
-            send(admin, messages.get().added(), Values.of("what", messages.get().subtitleNpc() + " " + key));
-            reopen.run();
-        }), reopen);
-    }
-
     private void addPortal(Player admin) {
         Runnable reopen = () -> openAdmin(admin, back);
         if (settings.get().servers().isEmpty()) {
@@ -492,7 +400,7 @@ public final class SelectorModule extends LobbyModule {
         settings.update(current -> {
             Map<String, SelectorSettings.Portal> portals = new LinkedHashMap<>(current.portals());
             portals.put(key, new SelectorSettings.Portal(server, result.world().fallbackName(), a.x(), a.y(), a.z(), b.x(), b.y(), b.z()));
-            return with(current, current.servers(), current.npcs(), portals);
+            return with(current, current.servers(), portals);
         });
         build();
         send(admin, messages.get().added(), Values.of("what", messages.get().subtitlePortal() + " " + key));

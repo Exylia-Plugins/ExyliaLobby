@@ -50,7 +50,7 @@ public record PvpSettings(
         @Comment("Rows of the hologram board of the top.")
         int boardRows,
 
-        @Comment("Where the top hologram stands (needs the holograms module). Leave the world empty for none.")
+        @Comment("Where the top hologram stands. Leave the world empty for none.")
         Point board,
 
         @Comment("Rewards for reaching a kill streak, by streak. Each line is a console command (%player_name% works) or")

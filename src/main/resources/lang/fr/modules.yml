@@ -39,7 +39,7 @@ modules:
     name: Sélecteur de serveur
     description:
     - Serveurs et lobbies avec
-    - effectifs, PNJ et portails.
+    - effectifs et portails.
   games:
     name: Jeux
     description:
@@ -65,11 +65,6 @@ modules:
     description:
     - Grappin, balade en ender,
     - pistolet à peinture et plus.
-  holograms:
-    name: Hologrammes
-    description:
-    - Textes et classements
-    - holographiques du lobby.
   chat:
     name: Chat
     description:

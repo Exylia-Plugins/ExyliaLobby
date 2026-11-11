@@ -19,30 +19,17 @@ lobbies-next: '{info}{icon:click} Clique pour ouvrir<nl>{letters_black}Choisis l
 
 # Écran d’admin : PNJ et portails.
 list-title: Sélecteur
-list-kind: PNJ ou portail de serveur
-subtitle-npc: PNJ de serveur
+list-kind: Portail de serveur
 subtitle-portal: Portail de serveur
 label-server: Serveur
 label-place: Position
 label-size: Taille
 server-missing: '{error}Absent du catalogue'
-clicks-npc:
-- '{primary}{icon:click} Clic gauche {letters_black}· {letters}changer de serveur'
-- '{primary}{icon:right_click} Clic droit {letters_black}· {letters}le déplacer'
-- '{error}{icon:right_click} Shift + clic droit {letters_black}· {letters}supprimer'
-- '{letters_black}La suppression demande confirmation.'
 clicks-portal:
 - '{primary}{icon:click} Clic gauche {letters_black}· {letters}changer de serveur'
 - '{primary}{icon:right_click} Clic droit {letters_black}· {letters}voir son contour'
 - '{error}{icon:right_click} Shift + clic droit {letters_black}· {letters}supprimer'
 - '{letters_black}La suppression demande confirmation.'
-add-npc-title: PNJ de serveur
-add-npc-text:
-- ' {letters}Choisis son serveur, va sur place,'
-- ' {letters}tourne-toi comme il doit regarder'
-- ' {letters}et fais {highlight}Shift + clic{letters}.'
-add-npc-click: Clique pour commencer
-add-npc-next: Un clic dessus envoie les joueurs.
 add-portal-title: Portail
 add-portal-text:
 - ' {letters}Sélectionne une zone ; la'
@@ -54,9 +41,7 @@ no-servers: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Ajoute d’abord 
 added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} ajouté.'
 removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} supprimé.'
 changed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} envoie maintenant les joueurs vers %server%{letters}.'
-moved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} déplacé.'
 confirm-remove: Supprimer {highlight}%what%{letters} ?
 
 # Ce que les assistants nomment à l’écran (texte brut, sans couleurs).
-wizard-npc: PNJ de serveur
 wizard-portal: Portail

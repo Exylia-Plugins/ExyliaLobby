@@ -38,7 +38,7 @@ modules:
     name: Sunucu seçici
     description:
     - Canlı sayılı sunucular ve lobiler,
-    - NPC'ler ve portallar.
+    - portallar.
   games:
     name: Oyunlar
     description:
@@ -64,11 +64,6 @@ modules:
     description:
     - Kanca, ender yolculuğu,
     - boya tabancası ve dahası.
-  holograms:
-    name: Hologramlar
-    description:
-    - Lobide metin ve
-    - sıralama panoları.
   chat:
     name: Sohbet
     description:

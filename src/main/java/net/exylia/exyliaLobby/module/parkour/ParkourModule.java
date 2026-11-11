@@ -5,7 +5,7 @@ import net.exylia.exyliaLobby.area.AreaCause;
 import net.exylia.exyliaLobby.module.Busy;
 import net.exylia.exyliaLobby.module.LobbyContext;
 import net.exylia.exyliaLobby.module.LobbyModule;
-import net.exylia.exyliaLobby.module.holograms.HologramsModule;
+import net.exylia.exyliaLobby.module.shared.Boards;
 import net.exylia.exyliaLobby.module.spawn.SpawnModule;
 import net.exylia.lib.config.ConfigFile;
 import net.exylia.lib.input.Inputs;
@@ -32,8 +32,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.UnaryOperator;
 
 /**
@@ -61,10 +59,11 @@ public final class ParkourModule extends LobbyModule implements Busy {
     private volatile PeriodClock clock;
     private Runnable rescueHandle;
     private TaskHandle refresher;
-    private final Set<String> boards = ConcurrentHashMap.newKeySet();
+    private final Boards boardHolograms;
 
     public ParkourModule(@NotNull LobbyContext context) {
         super(ID, context);
+        boardHolograms = new Boards(context);
     }
 
     @Override
@@ -573,20 +572,16 @@ public final class ParkourModule extends LobbyModule implements Busy {
 
     private void placeBoards() {
         clearBoards();
-        context.registered(HologramsModule.ID, HologramsModule.class).ifPresent(holograms ->
-                settings.get().boards().forEach((id, spot) -> {
-                    org.bukkit.World world = org.bukkit.Bukkit.getWorld(spot.world());
-                    if (world == null) return;
-                    Board board = Board.parse(id);
-                    holograms.place(BOARD_PREFIX + id, new Location(world, spot.x(), spot.y(), spot.z()), () -> lines(board));
-                    boards.add(id);
-                }));
+        settings.get().boards().forEach((id, spot) -> {
+            org.bukkit.World world = org.bukkit.Bukkit.getWorld(spot.world());
+            if (world == null) return;
+            Board board = Board.parse(id);
+            boardHolograms.place(BOARD_PREFIX + id, new Location(world, spot.x(), spot.y(), spot.z()), () -> lines(board));
+        });
     }
 
     private void clearBoards() {
-        context.registered(HologramsModule.ID, HologramsModule.class).ifPresent(holograms ->
-                boards.forEach(id -> holograms.remove(BOARD_PREFIX + id)));
-        boards.clear();
+        boardHolograms.clear();
     }
 
     private List<String> lines(Board board) {

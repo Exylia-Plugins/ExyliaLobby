@@ -7,7 +7,6 @@ import net.exylia.lib.config.ConfigFile;
 import net.exylia.lib.effect.Display;
 import net.exylia.lib.effect.Effects;
 import net.exylia.lib.placeholder.Placeholders;
-import net.exylia.lib.proxy.Proxy;
 import net.exylia.lib.scoreboard.Board;
 import net.exylia.lib.scoreboard.SidebarConfig;
 import net.exylia.lib.scoreboard.Scoreboards;
@@ -76,7 +75,6 @@ public final class HudModule extends LobbyModule {
         Placeholders.group(plugin(), "lobby")
                 .async()
                 .add("hud_here", request -> context.areas().players().size())
-                .add("hud_network", request -> Math.max(Proxy.players().size(), Bukkit.getOnlinePlayers().size()))
                 .register();
         HudMessages text = messages.get();
         channel = Broadcasts.channel(plugin(), CHANNEL, "BELL", text.channelName(), text.channelDescription(), null, null);

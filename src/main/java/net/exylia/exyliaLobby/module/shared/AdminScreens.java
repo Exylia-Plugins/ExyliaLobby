@@ -21,7 +21,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 /**
- * The one admin list screen (Admin list layout, 54 slots) the hub modules share: pads, NPCs, portals, holograms.
+ * The one admin list screen (Admin list layout, 54 slots) the hub modules share: pads, portals, zones.
  *
  * <p>Each module owns one instance. It says what the rows are and what a click on one does; the screen, its
  * back button and its two add buttons are drawn from {@code menus/admin/list.yml}. The three actions it needs

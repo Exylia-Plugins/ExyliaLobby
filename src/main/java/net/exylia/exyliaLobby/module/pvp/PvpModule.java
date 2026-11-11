@@ -5,7 +5,7 @@ import net.exylia.exyliaLobby.area.AreaCause;
 import net.exylia.exyliaLobby.module.Busy;
 import net.exylia.exyliaLobby.module.LobbyContext;
 import net.exylia.exyliaLobby.module.LobbyModule;
-import net.exylia.exyliaLobby.module.holograms.HologramsModule;
+import net.exylia.exyliaLobby.module.shared.Boards;
 import net.exylia.exyliaLobby.module.hotbar.HotbarModule;
 import net.exylia.exyliaLobby.module.protection.ProtectionModule;
 import net.exylia.exyliaLobby.module.state.StateModule;
@@ -118,9 +118,11 @@ public final class PvpModule extends LobbyModule implements Busy {
     private static final String TAG = "pvp_combat";
     /** A killer's cooldown per victim ({@code pvp_kill:<victim>}), for the repeat-kill window. */
     private static final String KILL = "pvp_kill:";
+    private final Boards boardHolograms;
 
     public PvpModule(@NotNull LobbyContext context) {
         super(ID, context);
+        boardHolograms = new Boards(context);
     }
 
     @Override
@@ -191,7 +193,7 @@ public final class PvpModule extends LobbyModule implements Busy {
         if (afterHook != null) afterHook.cancel();
         if (damageHook != null) damageHook.run();
         damageHook = null;
-        context.registered(HologramsModule.ID, HologramsModule.class).ifPresent(holograms -> holograms.remove(BOARD));
+        boardHolograms.clear();
         if (regions != null) regions.replaceAll(List.of());
         screens.clear();
         countdowns.values().forEach(Countdown::stop);
@@ -755,13 +757,11 @@ public final class PvpModule extends LobbyModule implements Busy {
     }
 
     private void buildBoard() {
-        context.registered(HologramsModule.ID, HologramsModule.class).ifPresent(holograms -> {
-            holograms.remove(BOARD);
-            PvpSettings.Point point = settings.get().board();
-            World world = point.set() ? Bukkit.getWorld(point.world()) : null;
-            if (world == null) return;
-            holograms.place(BOARD, new Location(world, point.x(), point.y(), point.z()), this::boardLines);
-        });
+        boardHolograms.remove(BOARD);
+        PvpSettings.Point point = settings.get().board();
+        World world = point.set() ? Bukkit.getWorld(point.world()) : null;
+        if (world == null) return;
+        boardHolograms.place(BOARD, new Location(world, point.x(), point.y(), point.z()), this::boardLines);
     }
 
     private List<String> boardLines() {

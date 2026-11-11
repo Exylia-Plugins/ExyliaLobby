@@ -72,7 +72,7 @@ public record LobbyConfig(
             boolean movement,
             @Comment("Players choose to see everyone, only friends and staff, or nobody.")
             boolean visibility,
-            @Comment("Server and lobby selector, server NPCs and portals.")
+            @Comment("Server and lobby selector and portals.")
             boolean selector,
             @Comment("Opens the screen of every game the Exylia plugins offer.")
             boolean games,
@@ -84,15 +84,13 @@ public record LobbyConfig(
             boolean parkour,
             @Comment("Harmless toys: grappling hook, ender ride, paint blaster and more.")
             boolean gadgets,
-            @Comment("Holograms and leaderboard boards placed in the lobby.")
-            boolean holograms,
             @Comment("Chat lock, slow mode and clear chat. No chat formatting: keep your chat plugin for that.")
             boolean chat,
             @Comment("Hands players on their first join to ExyliaJourney, when it is installed.")
             boolean onboarding) {
 
         public Modules() {
-            this(true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false);
+            this(true, true, true, true, true, true, true, true, true, true, true, true, true, false, false);
         }
 
         /** The switch of a module by its id ({@code first-join} style), empty for an unknown id. */

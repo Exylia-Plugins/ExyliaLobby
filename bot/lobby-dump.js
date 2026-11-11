@@ -65,7 +65,6 @@ async function main() {
   fs.writeFileSync(pk, fs.readFileSync(pk, 'utf8').replace(/^  areas: \{\}/m, "  areas:\n    sky: {world: world, min: '40 -40 -30', max: '100 0 30', start: '50 -20 0', heading: 0}"))
   const sel = path.join(C.DIR, 'plugins/ExyliaLobby/modules/selector/config.yml')
   fs.writeFileSync(sel, fs.readFileSync(sel, 'utf8').replace(/^lobbies: \[\]/m, 'lobbies:\n- survival\n- minigames')
-    .replace(/^npcs: \{\}/m, "npcs:\n  guide: {server: survival, skin: '', world: world, x: 3.5, y: -60, z: 3.5, yaw: 0, pitch: 0, hologram: [], hologram-height: 2.4}")
     .replace(/^portals: \{\}/m, "portals:\n  gate: {server: minigames, world: world, x1: 10, y1: -60, z1: 10, x2: 11, y2: -58, z2: 11}"))
   // a course with no places yet, so the editor shows its "setup needed" state (the create wizard always places both)
   const cs = path.join(C.DIR, 'plugins/ExyliaLobby/modules/parkour/courses.yml')
@@ -89,8 +88,8 @@ async function main() {
   cmd(`tp ${NAME} 0.5 -60 0.5`); await sleep(800)
   bot.chat('/parkour c1'); await sleep(1500); bot.chat('/parkour leave'); await sleep(600)
 
-  // data for the admin lists: one pad (click a block), one hologram (stand), one zone (select an area), made with the add buttons
-  for (const [mod, slot, gesture] of [[/movement/, 45, 'block'], [/holograms/, 45, 'stand'], [/pvp/, 45, 'area']]) {
+  // data for the admin lists: one pad (click a block), one zone (select an area), made with the add buttons
+  for (const [mod, slot, gesture] of [[/movement/, 45, 'block'], [/pvp/, 45, 'area']]) {
     await openScreen(bot, '/lobbyadmin modules', 700)
     const it = bot.currentWindow.slots.find(x => x && mod.test(textOf(x.customName)) && x.slot < 36)
     await click(it.slot, 1); await sleep(800)

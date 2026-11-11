@@ -6,7 +6,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/** {@code modules/selector/config.yml}: the servers players can pick, and the NPCs and portals that send them there. */
+/** {@code modules/selector/config.yml}: the servers players can pick and the portals that send them there.
+ *
+ * <p>Server NPCs are placed with ExyliaDisplays: an NPC with the action {@code [SERVER] <name>} and the label
+ * {@code %network_players_<server>% playing}. */
 public record SelectorSettings(
         @Comment("Labels of the player command that opens the server selector. Empty removes the command.")
         List<String> command,
@@ -21,14 +24,13 @@ public record SelectorSettings(
         @Comment("The server catalogue, in the order of 'order'. The key is only a name for the entry.")
         Map<String, Server> servers,
 
-        @Comment("Server NPCs placed in game from /lobbyadmin → Server selector. A click sends the player to the server.")
-        Map<String, Npc> npcs,
-
         @Comment("Portals placed in game from /lobbyadmin → Server selector. Walking in sends the player to the server.")
+        @Comment("Server NPCs are placed with ExyliaDisplays: an NPC with the action [SERVER] <name> and the label")
+        @Comment("%network_players_<server>% playing.")
         Map<String, Portal> portals) {
 
     public SelectorSettings() {
-        this(List.of("servers"), List.of("lobbies"), List.of(), defaults(), new LinkedHashMap<>(), new LinkedHashMap<>());
+        this(List.of("servers"), List.of("lobbies"), List.of(), defaults(), new LinkedHashMap<>());
     }
 
     /**
@@ -44,14 +46,6 @@ public record SelectorSettings(
     public record Server(String name, String icon, int order, List<String> description, String server, String permission) {
         public Server() {
             this("Server", "GRASS_BLOCK", 0, List.of(), "server", "");
-        }
-    }
-
-    /** A server NPC. {@code skin} is a player name, {@code mirror} (each viewer's own skin) or empty for the default one. */
-    public record Npc(String server, String skin, String world, double x, double y, double z, double yaw, double pitch,
-                      List<String> hologram, double hologramHeight) {
-        public Npc() {
-            this("", "", "world", 0, 64, 0, 0, 0, List.of("{letters}%server_name%", "{info}%server_players% {letters_black}playing"), 2.4);
         }
     }
 

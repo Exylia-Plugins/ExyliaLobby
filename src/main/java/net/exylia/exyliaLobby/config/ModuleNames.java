@@ -36,13 +36,12 @@ public record ModuleNames(
         map.put("hotbar", new Info("Hotbar", List.of("Items that open menus, send", "to servers or run commands.")));
         map.put("movement", new Info("Movement", List.of("Double jump and", "launch pads.")));
         map.put("visibility", new Info("Visibility", List.of("Players choose who", "they see in the lobby.")));
-        map.put("selector", new Info("Server selector", List.of("Servers and lobbies with live", "counts, NPCs and portals.")));
+        map.put("selector", new Info("Server selector", List.of("Servers and lobbies with live", "counts and portals.")));
         map.put("games", new Info("Games", List.of("Every game the Exylia", "plugins offer, on one screen.")));
         map.put("hud", new Info("HUD", List.of("Sidebar, tab list, boss", "bars and announcements.")));
         map.put("pvp", new Info("Lobby PvP", List.of("Hold the sword to fight", "players who opted in.")));
         map.put("parkour", new Info("Parkour", List.of("Courses, endless parkour", "and leaderboards.")));
         map.put("gadgets", new Info("Gadgets", List.of("Grappling hook, ender ride,", "paint blaster and more.")));
-        map.put("holograms", new Info("Holograms", List.of("Text and leaderboard", "boards in the lobby.")));
         map.put("chat", new Info("Chat", List.of("Chat lock, slow mode", "and clear chat.")));
         map.put("onboarding", new Info("Onboarding", List.of("Hands new players", "to ExyliaJourney.")));
         return map;

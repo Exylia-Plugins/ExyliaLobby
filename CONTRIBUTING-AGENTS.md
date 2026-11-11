@@ -5,7 +5,7 @@ Read `/root/Java/CLAUDE.md` (style, menus, item cards, ExyliaLib first, Folia, t
 ## Architecture
 
 - `ExyliaLobby` boots: `config.yml` (`LobbyConfig`), `messages.yml`, `modules.yml` (card names), `Areas`, `LobbyVisibility`, `AdminHub`, then every module listed in `module/Modules.all` (order = start order; leave runs in reverse).
-- Every feature is a `LobbyModule` (extends ExyliaLib `PluginModule`) in its own package `module/<id>/`. Its switch is a boolean in `LobbyConfig.Modules` (component name = module id). Module ids: `spawn state protection join hotbar movement visibility selector games hud pvp parkour gadgets holograms chat onboarding`.
+- Every feature is a `LobbyModule` (extends ExyliaLib `PluginModule`) in its own package `module/<id>/`. Its switch is a boolean in `LobbyConfig.Modules` (component name = module id). Module ids: `spawn state protection join hotbar movement visibility selector games hud pvp parkour gadgets chat onboarding`.
 - A module that is off registers nothing. Never reach into another module's classes except through `context.module(id, Type.class)` (empty when off) and degrade gracefully.
 
 ## LobbyModule contract
@@ -20,7 +20,7 @@ Read `/root/Java/CLAUDE.md` (style, menus, item cards, ExyliaLib first, Folia, t
 - Actions: register in `actions(PluginActions)` with ids prefixed by the module id (`parkour_join`), permission-gated for staff (`registerSync(id, permission, handler)`).
 - Placeholders: `Placeholders.group(plugin, "lobby")` keys prefixed by the module id (`%lobby_parkour_best_<course>%`).
 - Data: ExyliaLib Databases; every `@Table(value = "lobby_<module>_<what>", data = DataKind.X)` with `@Owner` on the player column; indexes for every top. Player preferences go to ExyliaLib Settings (`net.exylia.lib.settings`), not our own tables. Never query the database from a menu lambda; keep caches warm.
-- Places set in game (spawn, pads, checkpoints, NPCs, holograms, zones) are stored in the module's YAML (a `Map<String, Record>` in its settings or its own catalogue file), written by the in-game tools.
+- Places set in game (spawn, pads, checkpoints, portals, zones) are stored in the module's YAML (a `Map<String, Record>` in its settings or its own catalogue file), written by the in-game tools.
 
 ## ExyliaLib pieces made for this plugin (1.559.0+)
 

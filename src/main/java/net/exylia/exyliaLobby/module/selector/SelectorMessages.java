@@ -23,21 +23,15 @@ public record SelectorMessages(
         String clickHere,
         String noLobbies,
         String lobbiesNext,
-        @Comment("Admin screen: NPCs and portals.")
+        @Comment("Admin screen: portals.")
         String listTitle,
         String listKind,
-        String subtitleNpc,
         String subtitlePortal,
         String labelServer,
         String labelPlace,
         String labelSize,
         String serverMissing,
-        List<String> clicksNpc,
         List<String> clicksPortal,
-        String addNpcTitle,
-        List<String> addNpcText,
-        String addNpcClick,
-        String addNpcNext,
         String addPortalTitle,
         List<String> addPortalText,
         String addPortalClick,
@@ -47,10 +41,8 @@ public record SelectorMessages(
         String added,
         String removed,
         String changed,
-        String moved,
         String confirmRemove,
-        @Comment("What the setup wizards name on screen (plain text, no colours).")
-        String wizardNpc,
+        @Comment("What the setup wizard names on screen (plain text, no colours).")
         String wizardPortal) {
 
     public SelectorMessages() {
@@ -70,25 +62,16 @@ public record SelectorMessages(
                 "{warning}{icon:warning} No lobbies set<nl>{letters_black}Ask an admin to list them.",
                 "{info}{icon:click} Click to open<nl>{letters_black}Pick the lobby to play on.",
                 "Selector",
-                "Server NPC or portal",
-                "Server NPC",
+                "Server portal",
                 "Server portal",
                 "Server",
                 "Place",
                 "Size",
                 "{error}Not in the catalogue",
                 List.of("{primary}{icon:click} Left-click {letters_black}· {letters}change server",
-                        "{primary}{icon:right_click} Right-click {letters_black}· {letters}move it",
-                        "{error}{icon:right_click} Shift-right-click {letters_black}· {letters}remove",
-                        "{letters_black}Removing asks you to confirm."),
-                List.of("{primary}{icon:click} Left-click {letters_black}· {letters}change server",
                         "{primary}{icon:right_click} Right-click {letters_black}· {letters}show its outline",
                         "{error}{icon:right_click} Shift-right-click {letters_black}· {letters}remove",
                         "{letters_black}Removing asks you to confirm."),
-                "Server NPC",
-                List.of(" {letters}Pick its server, walk to the", " {letters}spot, face the way it looks", " {letters}and {highlight}sneak-click{letters}."),
-                "Click to start",
-                "A click on it sends players.",
                 "Portal",
                 List.of(" {letters}Select a box; walking into", " {letters}it sends players away."),
                 "Click to start",
@@ -98,9 +81,7 @@ public record SelectorMessages(
                 "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} added.",
                 "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} removed.",
                 "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} now sends players to %server%{letters}.",
-                "[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} moved.",
                 "Remove {highlight}%what%{letters}?",
-                "Server NPC",
                 "Portal");
     }
 }

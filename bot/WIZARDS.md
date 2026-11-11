@@ -15,8 +15,7 @@ Wizards, en only:
   (hologram at block + 0.5/2/0.5). `/lobbyadmin pvp setspawn|setboard` start the same wizards.
 - Movement: "Launch pad" -> `block()`; "Aimed pad" -> `spawn()` (feet block, or the one under it, + yaw, fixed);
   shift-left on a pad: fixed -> free, free -> `spawn()` to aim it.
-- Holograms: "Free spot" -> `spawn()` (+1.6), "Over a block" -> `block()` (+0.5/2/0.5); right-click move -> `spawn()`.
-- Selector: NPC add = server choice then `spawn()`; NPC move -> `spawn()`; portal = `area()` then server.
+- Selector: portal = `area()` then server.
 - Parkour: `create(admin, id, back)` is one `define`d wizard built per start (captures id and current messages):
   stand start -> confirm "Add checkpoint n?" nested `when` up to 20 -> stand finish -> summary; progress bar off
   (its upper bound would read 2/43). Afterwards opens the course editor if saved, else `back`.
@@ -27,8 +26,7 @@ Wizards, en only:
 - Messages records changed (keys renamed/added/removed; translations must follow):
   SpawnMessages (+wizardSpawn, wizardBox; -selectBox; spawnSet text), PvpMessages (addHere* -> addRespawn*,
   -selectZone, +wizardZone/wizardRespawn/wizardBoard, texts), MovementMessages (-noTarget, addHere* -> addPad*,
-  addLook* -> addAimed*, +wizardPad/wizardAimed/wizardAim, clicks text), HologramsMessages (-noTarget,
-  addHere* -> addSpot*, addLook* -> addBlock*, +wizardSpot/wizardBlock), SelectorMessages (-selectPortal,
+  addLook* -> addAimed*, +wizardPad/wizardAimed/wizardAim, clicks text), SelectorMessages (-selectPortal,
   +wizardNpc/wizardPortal, texts), ParkourMessages (+Wizard record after beaconLabel; Tools -killNoBlock,
   -selectArea, -noSelection; Staff createCourse/addArea buttons; chat texts).
 - en admin menus edited and menu-version raised to 2: admin/spawn/detail.yml, admin/spawn/areas.yml,
@@ -81,7 +79,7 @@ Wizards, en only:
    add-button loop ~83): commands now start wizards, so the bot must sneak + click (stand) after each command, and
    answer the checkpoint confirm and the summary for `create`. Not done.
 2. Translated player text in *Settings (HotbarSettings buttons ~78, HudSettings lines ~75, selector server cards,
-   holograms defaults, join messages, gadget names, pvp kit names, parkour themes/course text): no lib mechanism
+   join messages, gadget names, pvp kit names, parkour themes/course text): no lib mechanism
    yet. Findings: `Configs.define(...).translated()` moves the file under lang/<code>/ (would orphan existing
    modules/<id>/config.yml into lang/custom and hides it from ConfigMenus); `ConfigFileImpl#defaults()` reads
    packaged `lang/<code>/<name>.yml` defaults only for translated files; `Phrases` is library-only. Proposed lib

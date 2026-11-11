@@ -17,32 +17,19 @@ click-here: '{success}{icon:on} Вы здесь<nl>{letters_black}Выберит
 no-lobbies: '{warning}{icon:warning} Лобби не заданы<nl>{letters_black}Попросите админа добавить.'
 lobbies-next: '{info}{icon:click} Нажмите, чтобы открыть<nl>{letters_black}Выберите лобби для игры.'
 
-# Админ-экран: NPC и порталы.
+# Админ-экран: порталы.
 list-title: Выбор сервера
-list-kind: NPC или портал сервера
-subtitle-npc: NPC сервера
+list-kind: Портал сервера
 subtitle-portal: Портал сервера
 label-server: Сервер
 label-place: Место
 label-size: Размер
 server-missing: '{error}Нет в каталоге'
-clicks-npc:
-- '{primary}{icon:click} ЛКМ {letters_black}· {letters}сменить сервер'
-- '{primary}{icon:right_click} ПКМ {letters_black}· {letters}перенести'
-- '{error}{icon:right_click} Shift+ПКМ {letters_black}· {letters}убрать'
-- '{letters_black}Удаление нужно подтвердить.'
 clicks-portal:
 - '{primary}{icon:click} ЛКМ {letters_black}· {letters}сменить сервер'
 - '{primary}{icon:right_click} ПКМ {letters_black}· {letters}показать контур'
 - '{error}{icon:right_click} Shift+ПКМ {letters_black}· {letters}убрать'
 - '{letters_black}Удаление нужно подтвердить.'
-add-npc-title: NPC сервера
-add-npc-text:
-- ' {letters}Выберите сервер, подойдите к месту,'
-- ' {letters}повернитесь, как он будет смотреть,'
-- ' {letters}и нажмите {highlight}Shift+клик{letters}.'
-add-npc-click: Нажмите, чтобы начать
-add-npc-next: Клик по нему отправляет игроков.
 add-portal-title: Портал
 add-portal-text:
 - ' {letters}Выделите область; вход в неё'
@@ -54,9 +41,7 @@ no-servers: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Сначала д
 added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} добавлено.'
 removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} удалено.'
 changed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} теперь отправляет игроков на %server%{letters}.'
-moved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} перемещено.'
 confirm-remove: Удалить {highlight}%what%{letters}?
 
 # Что мастера настройки называют на экране (простой текст, без цветов).
-wizard-npc: NPC сервера
 wizard-portal: Портал

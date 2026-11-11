@@ -1,7 +1,7 @@
 menu-version: 1
 # NO EDITAR — SE REGENERA EN CADA INICIO.
 #
-# La lista que comparten las pantallas de admin de los módulos del hub: plataformas, NPC, portales, hologramas.
+# La lista que comparten las pantallas de admin de los módulos del hub: plataformas, portales, zonas.
 
 title: '{primary}&lHUB {letters_black}» {highlight}%list_title% {muted}%current_page%/%total_pages%'
 size: 54

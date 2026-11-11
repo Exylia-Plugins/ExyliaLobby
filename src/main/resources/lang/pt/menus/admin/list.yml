@@ -1,7 +1,7 @@
 menu-version: 1
 # NÃO EDITE — REGENERADO A CADA INICIALIZAÇÃO.
 #
-# A lista que a tela de admin de cada módulo do hub compartilha: plataformas de impulso, NPCs, portais, hologramas.
+# A lista que a tela de admin de cada módulo do hub compartilha: plataformas de impulso, portais, zonas.
 
 title: '{primary}&lHUB {letters_black}» {highlight}%list_title% {muted}%current_page%/%total_pages%'
 size: 54

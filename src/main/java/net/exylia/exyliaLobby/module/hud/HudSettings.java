@@ -8,7 +8,7 @@ import java.util.List;
 
 /** {@code modules/hud/config.yml}: what players see on screen inside the lobby. Every part switches on its own. */
 public record HudSettings(
-        @Comment("The sidebar. %lobby_hud_here% (players in this lobby) and %lobby_hud_network% (players on the network) are ours;")
+        @Comment("The sidebar. %lobby_hud_here% (players in this lobby) is ours, %network_online% is ExyliaLib's;")
         @Comment("every other placeholder works too. Title and lines use the palette tokens.")
         Sidebar sidebar,
 
@@ -35,7 +35,7 @@ public record HudSettings(
             this(true, new SidebarConfig(true, List.of("{primary}&lLOBBY"), List.of(
                     "{primary}✦ Lobby",
                     "  {letters_black}· {info}{icon:star} {letters}Here{letters_black}: {info}%lobby_hud_here%",
-                    "  {letters_black}· {success}{icon:heart} {letters}Network{letters_black}: {success}%lobby_hud_network%",
+                    "  {letters_black}· {success}{icon:heart} {letters}Network{letters_black}: {success}%network_online%",
                     "",
                     "{muted}{server-ip}"), new SidebarConfig.Update(20, true, true)));
         }
@@ -53,7 +53,7 @@ public record HudSettings(
 
         public Tab() {
             this(true, List.of("", "{primary}&lLOBBY", "{letters_black}{server-ip}", ""),
-                    List.of("", "{letters}Players on the network{letters_black}: {success}%lobby_hud_network%", ""),
+                    List.of("", "{letters}Players on the network{letters_black}: {success}%network_online%", ""),
                     Duration.ofSeconds(5));
         }
     }

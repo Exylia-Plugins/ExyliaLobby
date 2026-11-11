@@ -39,7 +39,7 @@ modules:
     name: Seletor de servidores
     description:
     - Servidores e lobbies com
-    - contagem ao vivo, NPCs e portais.
+    - contagem ao vivo e portais.
   games:
     name: Jogos
     description:
@@ -65,11 +65,6 @@ modules:
     description:
     - Gancho, passeio no ender,
     - canhão de tinta e mais.
-  holograms:
-    name: Hologramas
-    description:
-    - Quadros de texto e
-    - de ranking no lobby.
   chat:
     name: Chat
     description:
