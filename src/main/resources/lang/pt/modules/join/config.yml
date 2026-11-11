@@ -1,0 +1,7 @@
+# Textos padrão em português. Apenas as chaves de texto; as demais configurações vêm do registro.
+
+groups:
+- permission: exylialobby.join.vip
+  priority: 10
+  join: '{highlight}&l★ {letters}VIP {highlight}%player%{letters} entrou no lobby'
+  leave: ''

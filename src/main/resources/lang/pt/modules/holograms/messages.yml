@@ -2,8 +2,7 @@
 added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Holograma {highlight}%name%{letters} adicionado.'
 removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Holograma {highlight}%name%{letters} removido.'
 changed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Holograma {highlight}%name%{letters} atualizado.'
-moved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Holograma {highlight}%name%{letters} movido para a sua posição.'
-no-target: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Olhe para um bloco a até 8 blocos.'
+moved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Holograma {highlight}%name%{letters} movido.'
 
 # O prompt do editor de texto. Separe as linhas com <nl>.
 prompt-lines: '{letters}As linhas do holograma, separadas por {highlight}<nl>{letters}.'
@@ -17,18 +16,23 @@ label-place: Local
 label-lines: Linhas
 clicks:
 - '{primary}{icon:click} Clique esquerdo {letters_black}· {letters}editar o texto'
-- '{primary}{icon:right_click} Clique direito {letters_black}· {letters}mover para cá'
+- '{primary}{icon:right_click} Clique direito {letters_black}· {letters}mover'
 - '{error}{icon:right_click} Shift + clique direito {letters_black}· {letters}remover'
 - '{letters_black}Remover pede confirmação.'
-add-here-title: Nos meus pés
-add-here-text:
-- ' {letters}Põe um holograma flutuando'
-- ' {letters}na altura dos seus olhos.'
-add-here-click: Clique para adicionar
-add-here-next: Depois edite o texto aqui.
-add-look-title: Onde eu olho
-add-look-text:
-- ' {letters}Põe um holograma flutuando'
-- ' {letters}sobre o bloco que você olha.'
-add-look-click: Clique para adicionar
-add-look-next: Depois edite o texto aqui.
+add-spot-title: Local livre
+add-spot-text:
+- ' {letters}Vá até o local e faça'
+- ' {highlight}Shift + clique{letters}; ele flutua na'
+- ' {letters}altura dos seus olhos.'
+add-spot-click: Clique para começar
+add-spot-next: Depois edite o texto aqui.
+add-block-title: Sobre um bloco
+add-block-text:
+- ' {letters}Clique em um bloco; o holograma'
+- ' {letters}flutua sobre ele.'
+add-block-click: Clique para começar
+add-block-next: Depois edite o texto aqui.
+
+# O que os assistentes nomeiam na tela (texto simples, sem cores).
+wizard-spot: Holograma
+wizard-block: Bloco do holograma

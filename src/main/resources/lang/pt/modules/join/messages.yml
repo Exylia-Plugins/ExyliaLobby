@@ -32,6 +32,28 @@ welcome:
     pitch: 1.4
     # MASTER, MUSIC, RECORDS, WEATHER, BLOCKS, HOSTILE, NEUTRAL, PLAYERS, AMBIENT ou VOICE.
     category: MASTER
+  action-bar:
+    text: ''
+    duration: 3.0
+    time-style: auto
+  boss-bar:
+    text: ''
+    colour: PURPLE
+    overlay: PROGRESS
+    count-up: 0.0
+    progress: 1.0
+    time-style: auto
+  particle:
+    name: ''
+    count: 1
+    spread: 0.0
+    speed: 0.0
+  firework:
+    colours: []
+    fades: []
+    shape: BALL
+    flicker: false
+    trail: false
 
 # Linhas de chat enviadas ao jogador logo após entrar, uma por linha. %player% é o nome dele.
 motd: []

@@ -1,0 +1,71 @@
+# Textos padrão em português. Apenas as chaves de texto; as demais configurações vêm do registro.
+
+sets:
+  lobby:
+    items:
+      selector:
+        name: '{letters}Lobby {letters_black}▸ <gradient:{info}:{info_light}>Servidores</gradient>'
+        lore:
+        - '{letters_black}Seletor de servidores'
+        - ''
+        - '{info}✎ Informação'
+        - ' {letters}Todos os servidores da rede,'
+        - ' {letters}com os jogadores ao vivo.'
+        - ''
+        - '{info}{icon:click} Clique para abrir'
+        - '{letters_black}Escolha um servidor para entrar.'
+      games:
+        name: '{letters}Lobby {letters_black}▸ <gradient:{success}:{success_light}>Jogos</gradient>'
+        lore:
+        - '{letters_black}Jogos'
+        - ''
+        - '{success}✎ Informação'
+        - ' {letters}Todos os jogos da rede,'
+        - ' {letters}prontos para entrar na fila.'
+        - ''
+        - '{success}{icon:click} Clique para abrir'
+        - '{letters_black}Escolha um jogo para jogar.'
+      parkour:
+        name: '{letters}Lobby {letters_black}▸ <gradient:{highlight}:{warning_light}>Parkour</gradient>'
+        lore:
+        - '{letters_black}Parkour'
+        - ''
+        - '{highlight}✎ Informação'
+        - ' {letters}Percursos, seus melhores tempos'
+        - ' {letters}e o top de cada um.'
+        - ''
+        - '{highlight}{icon:click} Clique para abrir'
+        - '{letters_black}Escolha um percurso para correr.'
+      visibility:
+        name: '{letters}Lobby {letters_black}▸ <gradient:{info}:{info_light}>Jogadores: %lobby_visibility_state%</gradient>'
+        lore:
+        - '{letters_black}Visibilidade'
+        - ''
+        - '{info}✎ Informação'
+        - ' {letters}Escolha quem você vê no'
+        - ' {letters}lobby: todos, amigos ou ninguém.'
+        - ''
+        - '{info}{icon:click} Clique para alternar'
+        - '{letters_black}Vale na hora.'
+      gadgets:
+        name: '{letters}Lobby {letters_black}▸ <gradient:{accent}:{secondary_light}>Gadgets</gradient>'
+        lore:
+        - '{letters_black}Gadgets'
+        - ''
+        - '{accent}✎ Informação'
+        - ' {letters}Brinquedos cosméticos para'
+        - ' {letters}se divertir enquanto espera.'
+        - ''
+        - '{accent}{icon:click} Clique para abrir'
+        - '{letters_black}Escolha um gadget para usar.'
+      profile:
+        name: '{letters}Lobby {letters_black}▸ <gradient:{primary}:{secondary_light}>Ajustes</gradient>'
+        lore:
+        - '{letters_black}Seus ajustes'
+        - ''
+        - '{primary}✎ Informação'
+        - ' {letters}Suas preferências, como o'
+        - ' {letters}chat e os anúncios.'
+        - ''
+        - '{primary}{icon:click} Clique para abrir'
+        - '{letters_black}As mudanças ficam salvas para você.'

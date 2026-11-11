@@ -1,0 +1,13 @@
+# Textos padrão em português. Apenas as chaves de texto; as demais configurações vêm do registro.
+
+servers:
+  survival:
+    name: '{success}Sobrevivência'
+    description:
+    - ' {letters}Construa, negocie e explore.'
+    - ' {letters}Seu mundo, suas regras.'
+  minigames:
+    name: '{highlight}Minijogos'
+    description:
+    - ' {letters}Partidas rápidas contra'
+    - ' {letters}outros jogadores.'
