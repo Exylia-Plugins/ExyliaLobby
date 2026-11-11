@@ -111,7 +111,7 @@ Wizards, en only:
 
 ## Gotchas
 
-- `AdminScreens.open` needs exactly two add buttons.
+- `AdminScreens.open` takes one or two add buttons (add2 hidden by a condition).
 - Wizard `afterwards` (3rd arg of `start`) runs on every ending, finish included; `Setup`'s back runs only on cancel.
 - `Setup` names must be plain text (no `{}`, `<>`, `&`): the wizard names come from messages, keep them plain in
   translations.

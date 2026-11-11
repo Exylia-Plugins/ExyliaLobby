@@ -96,14 +96,14 @@ public final class AdminScreens {
      * Opens the list.
      *
      * @param backName the name of the screen {@code back} reopens, shown on the Back button
-     * @param adds     exactly two add buttons (slots 45 and 46)
+     * @param adds     one or two add buttons (slots 45 and 46); with one, slot 46 is frame
      */
     public void open(@NotNull Player viewer, @NotNull Runnable back, @NotNull String backName, @NotNull String title,
                      @NotNull String kind, @NotNull List<Add> adds, @NotNull Supplier<List<UiEntry>> rows) {
         backs.put(viewer.getUniqueId(), back);
         this.adds.put(viewer.getUniqueId(), adds);
         Add first = adds.get(0);
-        Add second = adds.get(1);
+        Add second = adds.size() > 1 ? adds.get(1) : first;
         ui().open(viewer, MENU, Map.ofEntries(
                 Map.entry("screen_id", id),
                 Map.entry("list_title", title),
@@ -114,6 +114,7 @@ public final class AdminScreens {
                 Map.entry("add1_text", String.join("<nl>", first.text())),
                 Map.entry("add1_click", first.click()),
                 Map.entry("add1_next", first.next()),
+                Map.entry("add2_shown", String.valueOf(adds.size() > 1)),
                 Map.entry("add2_icon", second.icon()),
                 Map.entry("add2_title", second.title()),
                 Map.entry("add2_text", String.join("<nl>", second.text())),

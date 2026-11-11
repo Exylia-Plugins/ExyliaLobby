@@ -76,6 +76,7 @@ items:
 
   add2:
     slot: 46
+    condition: '%add2_shown% == true'
     material: '%add2_icon%'
     name: "{letters}%list_kind% {letters_black}▸ <gradient:{success}:{success_light}>%add2_title%</gradient>"
     lore:
