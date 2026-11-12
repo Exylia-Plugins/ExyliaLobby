@@ -11,6 +11,7 @@ import net.exylia.lib.text.PluginMessages;
 import net.exylia.lib.text.Values;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,6 +38,8 @@ public final class ProtectionModule extends LobbyModule {
     private ConfigFile<ProtectionMessages> messages;
     private final Set<UUID> building = ConcurrentHashMap.newKeySet();
     private final Map<UUID, Display> bars = new ConcurrentHashMap<>();
+    // ponytail: kept in memory only, so a crash mid-build keeps the build items; persist it if that ever matters
+    private final Map<UUID, ItemStack[]> inventories = new ConcurrentHashMap<>();
     private final List<BiPredicate<Player, Player>> pvp = new CopyOnWriteArrayList<>();
     private volatile List<String> causeNames = List.of();
     private volatile Set<DamageCause> causes = Set.of();
@@ -63,9 +66,14 @@ public final class ProtectionModule extends LobbyModule {
 
     @Override
     protected void stop() {
-        for (UUID id : context.stopping() ? java.util.Set.<UUID>of() : building) {
+        for (UUID id : building) {
             Player player = org.bukkit.Bukkit.getPlayer(id);
-            if (player != null) context.tasks().runAtEntity(player, () -> context.areas().pause(player, false));
+            if (player == null) continue;
+            if (context.stopping()) giveBack(player);
+            else context.tasks().runAtEntity(player, () -> {
+                giveBack(player);
+                context.areas().pause(player, false);
+            });
         }
         building.clear();
         bars.values().forEach(Display::stop);
@@ -99,6 +107,7 @@ public final class ProtectionModule extends LobbyModule {
         ProtectionMessages text = messages.get();
         if (building.remove(player.getUniqueId())) {
             hideBar(player);
+            giveBack(player);
             context.areas().pause(player, false);
             send(player, text.buildOff());
             return;
@@ -109,6 +118,10 @@ public final class ProtectionModule extends LobbyModule {
         }
         building.add(player.getUniqueId());
         context.areas().pause(player, true);
+        // what they build with is theirs only while building: the lobby inventory comes back untouched
+        inventories.put(player.getUniqueId(), java.util.Arrays.stream(player.getInventory().getContents())
+                .map(item -> item == null ? null : item.clone()).toArray(ItemStack[]::new));
+        player.getInventory().clear();
         hideBar(player);
         bars.put(player.getUniqueId(), Effects.of(plugin()).bossBar(text.buildBar()).colour("YELLOW").progress(1f).show(player));
         send(player, text.buildOn());
@@ -122,7 +135,18 @@ public final class ProtectionModule extends LobbyModule {
     @Override
     protected void leave(@NotNull Player player, @NotNull AreaCause cause) {
         if (cause == AreaCause.BUILD) return;
-        if (building.remove(player.getUniqueId())) hideBar(player);
+        if (building.remove(player.getUniqueId())) {
+            hideBar(player);
+            giveBack(player);
+        }
+    }
+
+    /** Puts back the inventory the player had before build mode, dropping whatever they built with. */
+    private void giveBack(Player player) {
+        ItemStack[] before = inventories.remove(player.getUniqueId());
+        if (before == null) return;
+        player.getInventory().setContents(before);
+        player.setItemOnCursor(null);
     }
 
     @Override
