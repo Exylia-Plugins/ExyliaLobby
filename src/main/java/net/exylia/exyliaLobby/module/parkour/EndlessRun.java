@@ -41,6 +41,11 @@ final class EndlessRun extends Run {
      */
     private static final double JUMPS_PER_SECOND = 4.0;
     private static final int HEAD_START = 6;
+    /**
+     * Two real jumps never take less than this: a landing two jumps on from the last one seen after at least this
+     * long counts, since the server can miss the one move that had the feet on the block between.
+     */
+    static final long TWO_JUMPS_MILLIS = 800;
     /** How long a crumbling block holds after it is landed on, in ticks. */
     private static final int CRUMBLE_TICKS = 16;
     private static final BlockFace[] FACES = {BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.NORTH};
@@ -65,6 +70,8 @@ final class EndlessRun extends Run {
     int current;
     /** The furthest jump the feet were on top of without the client reporting the ground; see {@link #moved}. */
     private int touched;
+    /** When the last landing was scored, wall clock. */
+    private long landed;
     int score;
     /** Crumbling jumps landed on, by index, and the tick each one vanishes at. */
     private final Map<Integer, Long> crumbling = new HashMap<>();
@@ -103,6 +110,7 @@ final class EndlessRun extends Run {
     @Override
     void begin() {
         began = System.currentTimeMillis();
+        landed = began;
         path.add(generator.start());
         window = Window.around(0, rules().ahead(), rules().behind());
         fill(window.last());
@@ -163,11 +171,17 @@ final class EndlessRun extends Run {
     /** Whether {@code standing} is reached from the jump stood on, or from one the feet touched since. */
     private boolean reaches(Jump under, Jump standing, Cell on) {
         if (under != null && JumpPhysics.canLand(under, standing, on)) return true;
+        if (missedOne(current, standing.index(), System.currentTimeMillis() - landed)) return true;
         if (touched <= current || touched >= standing.index()) return false;
         for (Jump jump : path) {
             if (jump.index() == touched) return JumpPhysics.canLand(jump, standing, on);
         }
         return false;
+    }
+
+    /** Whether landing on {@code to} after standing on {@code from} is one unseen jump in a real jump's time. */
+    static boolean missedOne(int from, int to, long millis) {
+        return to == from + 2 && millis >= TWO_JUMPS_MILLIS;
     }
 
     private boolean tooFast(Jump next) {
@@ -187,6 +201,7 @@ final class EndlessRun extends Run {
             if (passed.index() > current && passed.index() <= jump.index()) score += passed.points();
         }
         current = jump.index();
+        landed = System.currentTimeMillis();
         advance();
         if (jump.surface() == Role.CRUMBLE && crumbling.putIfAbsent(jump.index(), ticks + CRUMBLE_TICKS) == null) {
             runs.sound(player, "BLOCK_POINTED_DRIPSTONE_LAND|0.8|0.6");
