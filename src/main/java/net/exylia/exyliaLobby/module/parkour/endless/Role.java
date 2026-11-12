@@ -22,6 +22,8 @@ public enum Role {
     LADDER,
     /** The wall a ladder climbs or a neo jump goes around. */
     WALL,
+    /** A jump block that vanishes a moment after it is landed on, so the runner has to keep going. */
+    CRUMBLE,
     /** The column under a pillar jump. */
     PILLAR;
 

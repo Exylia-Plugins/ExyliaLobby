@@ -41,6 +41,8 @@ final class EndlessRun extends Run {
      */
     private static final double JUMPS_PER_SECOND = 4.0;
     private static final int HEAD_START = 6;
+    /** How long a crumbling block holds after it is landed on, in ticks. */
+    private static final int CRUMBLE_TICKS = 16;
     private static final BlockFace[] FACES = {BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.NORTH};
 
     final EndlessMode mode;
@@ -64,6 +66,8 @@ final class EndlessRun extends Run {
     /** The furthest jump the feet were on top of without the client reporting the ground; see {@link #moved}. */
     private int touched;
     int score;
+    /** Crumbling jumps landed on, by index, and the tick each one vanishes at. */
+    private final Map<Integer, Long> crumbling = new HashMap<>();
 
     EndlessRun(ParkourRuns runs, Player player, EndlessMode mode, World world, Location origin, Location start,
                PathGenerator generator, List<ParkourThemes.Theme> themes, int themeOffset, long best) {
@@ -113,6 +117,7 @@ final class EndlessRun extends Run {
             runs.close(this, RunEnd.TIME_UP);
             return;
         }
+        if (!crumbling.isEmpty()) crumble();
         if (ticks % 2 != 0) return;
         ParkourMessages text = runs.messages();
         runs.bar(this, mode == EndlessMode.SPRINT ? text.sprintBossBar() : text.endlessBossBar(), values(),
@@ -183,6 +188,9 @@ final class EndlessRun extends Run {
         }
         current = jump.index();
         advance();
+        if (jump.surface() == Role.CRUMBLE && crumbling.putIfAbsent(jump.index(), ticks + CRUMBLE_TICKS) == null) {
+            runs.sound(player, "BLOCK_POINTED_DRIPSTONE_LAND|0.8|0.6");
+        }
         ParkourMessages text = runs.messages();
         boolean milestone = false;
         for (int at : rules().milestones()) {
@@ -225,6 +233,24 @@ final class EndlessRun extends Run {
             fakeBlocks().clear(player, at);
         }
         draw(coming);
+    }
+
+    /** Takes away the crumbling blocks whose moment is up; a runner still on one falls. */
+    private void crumble() {
+        List<Location> at = new ArrayList<>();
+        crumbling.entrySet().removeIf(entry -> {
+            if (entry.getValue() > ticks) return false;
+            for (Jump jump : path) {
+                if (jump.index() != entry.getKey()) continue;
+                for (Jump.Piece piece : jump.pieces()) {
+                    if (piece.role() == Role.CRUMBLE && drawn.remove(piece.at())) at.add(location(piece.at()));
+                }
+            }
+            return true;
+        });
+        if (at.isEmpty()) return;
+        fakeBlocks().clear(player, at);
+        runs.sound(player, "BLOCK_GRAVEL_BREAK|1.0|0.7");
     }
 
     /** Generates the path up to {@code last}. */

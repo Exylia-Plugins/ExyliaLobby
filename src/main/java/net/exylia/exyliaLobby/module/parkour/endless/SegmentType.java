@@ -44,6 +44,11 @@ public enum SegmentType {
             Move.single(2, draw.random.nextInt(3) - 1, 0, Role.FLOOR),
             Move.single(2 + draw.random.nextInt(2), 0, 0, Role.HONEY),
             Move.straight(2, draw.random.nextBoolean() ? 0 : -1))),
+    /** Blocks that fall away a moment after the landing: no stopping to line up the next jump. */
+    CRUMBLE(3, 25, 5, draw -> repeat(draw, 3, 5, () -> {
+        int up = draw.vertical();
+        return Move.single((up > 0 ? Math.min(draw.gap(), 3) : draw.gap()) + 1, 0, up, Role.CRUMBLE);
+    })),
     POSTS(3, 30, 6, draw -> {
         List<Move> moves = repeat(draw, 3, 5, () -> Move.single(2 + draw.random.nextInt(2), 0, 0, Role.POST));
         moves.add(Move.straight(2 + draw.random.nextInt(2), 0));

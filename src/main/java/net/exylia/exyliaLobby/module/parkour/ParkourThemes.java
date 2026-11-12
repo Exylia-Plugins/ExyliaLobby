@@ -52,6 +52,7 @@ public record ParkourThemes(
                 case SLIME -> "SLIME_BLOCK";
                 case SOUL_SAND -> "SOUL_SAND";
                 case HONEY -> "HONEY_BLOCK";
+                case CRUMBLE -> "ORANGE_TERRACOTTA";
             };
         }
     }

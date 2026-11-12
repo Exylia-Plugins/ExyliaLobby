@@ -118,7 +118,7 @@ class PathGeneratorTest {
         }
         assertEquals(EnumSet.allOf(Jump.Shape.class), shapes);
         assertTrue(surfaces.containsAll(EnumSet.of(Role.ICE, Role.SLIME, Role.SOUL_SAND, Role.HONEY, Role.POST,
-                Role.BONUS, Role.REST, Role.CEILING)), surfaces.toString());
+                Role.BONUS, Role.REST, Role.CEILING, Role.CRUMBLE)), surfaces.toString());
         assertTrue(headings.size() >= 8, "paths should go every way: " + headings);
     }
 
