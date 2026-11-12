@@ -50,7 +50,7 @@ public final class MovementModule extends LobbyModule {
 
     @Override
     protected void registerConfigs() {
-        settings = settings(MovementSettings.class);
+        settings = settings(MovementSettings.class, b -> b.version(2).migration(1, MovementSettings::oneBlockPerPad));
         messages = messages(MovementMessages.class);
     }
 
@@ -103,9 +103,22 @@ public final class MovementModule extends LobbyModule {
         List<JumpPad> list = new ArrayList<>();
         for (Map.Entry<String, MovementSettings.Pad> entry : config.list().entrySet()) {
             MovementSettings.Pad pad = entry.getValue();
-            JumpPad built = JumpPad.of(entry.getKey(), new PadTrigger.At(pad.world(), pad.x(), pad.y(), pad.z()),
-                    pad.power(), pad.vertical()).withEffect(config.effect());
-            list.add(pad.fixed() ? built.towards((float) pad.yaw()) : built);
+            for (int i = 0; i < pad.blocks().size(); i++) {
+                String[] at = pad.blocks().get(i).trim().split("\\s+");
+                if (at.length != 4) {
+                    plugin().getLogger().warning("Launch pad " + entry.getKey() + ": '" + pad.blocks().get(i) + "' is not 'world x y z', skipped.");
+                    continue;
+                }
+                JumpPad built;
+                try {
+                    built = JumpPad.of(entry.getKey() + "#" + i, new PadTrigger.At(at[0], Integer.parseInt(at[1]),
+                            Integer.parseInt(at[2]), Integer.parseInt(at[3])), pad.power(), pad.vertical()).withEffect(config.effect());
+                } catch (NumberFormatException e) {
+                    plugin().getLogger().warning("Launch pad " + entry.getKey() + ": '" + pad.blocks().get(i) + "' is not 'world x y z', skipped.");
+                    continue;
+                }
+                list.add(pad.fixed() ? built.towards((float) pad.yaw()) : built);
+            }
         }
         return list;
     }
@@ -147,13 +160,15 @@ public final class MovementModule extends LobbyModule {
         List<UiEntry> rows = new ArrayList<>();
         for (Map.Entry<String, MovementSettings.Pad> entry : settings.get().pads().list().entrySet()) {
             MovementSettings.Pad pad = entry.getValue();
+            List<String> clicks = new ArrayList<>(text.clicks());
+            clicks.add(text.clickBlocks());
             rows.add(AdminScreens.row(entry.getKey(), "SLIME_BLOCK", entry.getKey(), text.rowSubtitle(), List.of(
-                    AdminScreens.stat("map", text.labelPlace(), "{info}" + pad.world() + " " + pad.x() + " " + pad.y() + " " + pad.z()),
+                    AdminScreens.stat("map", text.labelBlocks(), "{info}" + pad.blocks().size()),
                     AdminScreens.stat("blaze", text.labelPower(), "{info}" + pad.power()),
                     AdminScreens.stat("arrow", text.labelVertical(), "{info}" + pad.vertical()),
                     AdminScreens.stat("compass", text.labelDirection(), pad.fixed()
                             ? Values.of("yaw", Math.round(pad.yaw())).apply(text.directionFixed()) : text.directionLook())),
-                    text.clicks(), false));
+                    clicks, false));
         }
         return rows;
     }
@@ -164,26 +179,24 @@ public final class MovementModule extends LobbyModule {
         MovementMessages text = messages.get();
         Runnable reopen = () -> openAdmin(viewer, back);
         switch (click) {
-            case "left" -> ask(viewer, text.promptPower(), pad.power(), 0.1, 8, value -> change(viewer, id,
-                    current -> new MovementSettings.Pad(current.world(), current.x(), current.y(), current.z(), value,
-                            current.vertical(), current.fixed(), current.yaw())));
-            case "right" -> ask(viewer, text.promptVertical(), pad.vertical(), 0.1, 4, value -> change(viewer, id,
-                    current -> new MovementSettings.Pad(current.world(), current.x(), current.y(), current.z(), current.power(),
-                            value, current.fixed(), current.yaw())));
+            case "left" -> ask(viewer, text.promptPower(), pad.power(), 0.1, 8, value -> change(viewer, id, current -> current.withPower(value)));
+            case "right" -> ask(viewer, text.promptVertical(), pad.vertical(), 0.1, 4, value -> change(viewer, id, current -> current.withVertical(value)));
             case "turn" -> {
                 if (pad.fixed()) {
-                    change(viewer, id, current -> new MovementSettings.Pad(current.world(), current.x(), current.y(), current.z(),
-                            current.power(), current.vertical(), false, current.yaw()));
+                    change(viewer, id, current -> current.aimed(false, current.yaw()));
                     screens.update(viewer);
                     return;
                 }
                 // The aim is a facing, so it is asked the way a spawn is: stand on the pad looking where it throws.
                 viewer.closeInventory();
                 setup(viewer, reopen).spawn(text.wizardAim(), id, where -> {
-                    change(viewer, id, current -> new MovementSettings.Pad(current.world(), current.x(), current.y(), current.z(),
-                            current.power(), current.vertical(), true, where.getYaw()));
+                    change(viewer, id, current -> current.aimed(true, where.getYaw()));
                     reopen.run();
                 });
+            }
+            case "drop" -> {
+                viewer.closeInventory();
+                editBlocks(viewer, id, reopen);
             }
             case "shift" -> screens.confirm(viewer, Values.of("pad", id).apply(text.confirmRemove()), () -> {
                 savePads(list -> {
@@ -197,11 +210,50 @@ public final class MovementModule extends LobbyModule {
         }
     }
 
+    /**
+     * Click a block to add it to the pad, or one of its blocks to take it off; the wizard comes back after each click
+     * until cancelled, which reopens the list.
+     */
+    private void editBlocks(Player viewer, String id, Runnable reopen) {
+        MovementMessages text = messages.get();
+        setup(viewer, reopen).block(text.wizardBlocks(), id, at -> {
+            MovementSettings.Pad pad = settings.get().pads().list().get(id);
+            if (pad == null) {
+                reopen.run();
+                return;
+            }
+            String block = MovementSettings.block(at.getWorld().getName(), at.getBlockX(), at.getBlockY(), at.getBlockZ());
+            if (!pad.blocks().contains(block) && owner(block) != null) {
+                send(viewer, text.samePlace(), Values.of());
+            } else {
+                List<String> blocks = new ArrayList<>(pad.blocks());
+                boolean added = !blocks.remove(block);
+                if (added) blocks.add(block);
+                savePads(list -> {
+                    list.computeIfPresent(id, (key, old) -> old.withBlocks(blocks));
+                    return list;
+                });
+                send(viewer, added ? text.blockAdded() : text.blockRemoved(), Values.of("pad", id).put("count", blocks.size()));
+            }
+            plugin().getServer().getScheduler().runTask(plugin(), () -> {
+                if (viewer.isOnline()) editBlocks(viewer, id, reopen);
+            });
+        });
+    }
+
+    /** The pad that throws from a block, or {@code null}. */
+    private String owner(String block) {
+        for (Map.Entry<String, MovementSettings.Pad> entry : settings.get().pads().list().entrySet()) {
+            if (entry.getValue().blocks().contains(block)) return entry.getKey();
+        }
+        return null;
+    }
+
     private void ask(Player viewer, String prompt, double current, double min, double max, java.util.function.DoubleConsumer apply) {
         viewer.closeInventory();
         Runnable reopen = () -> openAdmin(viewer, back);
         screens.inputs().answered(viewer, screens.inputs().decimal(viewer, prompt)
-                        .range(BigDecimal.valueOf(min), BigDecimal.valueOf(max)).defaultValue(BigDecimal.valueOf(current)).open(),
+                        .range(BigDecimal.valueOf(min), BigDecimal.valueOf(max)).defaultValue(BigDecimal.valueOf(current)).transports(AdminScreens.NO_SCREEN).open(),
                 value -> {
                     apply.accept(value.doubleValue());
                     reopen.run();
@@ -234,19 +286,17 @@ public final class MovementModule extends LobbyModule {
 
     private void save(Player admin, Block block, boolean fixed, float yaw, Runnable reopen) {
         MovementMessages text = messages.get();
-        String world = block.getWorld().getName();
-        for (MovementSettings.Pad pad : settings.get().pads().list().values()) {
-            if (pad.world().equals(world) && pad.x() == block.getX() && pad.y() == block.getY() && pad.z() == block.getZ()) {
-                send(admin, text.samePlace(), Values.of());
-                reopen.run();
-                return;
-            }
+        String at = MovementSettings.block(block.getWorld().getName(), block.getX(), block.getY(), block.getZ());
+        if (owner(at) != null) {
+            send(admin, text.samePlace(), Values.of());
+            reopen.run();
+            return;
         }
         int number = settings.get().pads().list().size() + 1;
         while (settings.get().pads().list().containsKey("pad-" + number)) number++;
         String id = "pad-" + number;
         savePads(list -> {
-            list.put(id, new MovementSettings.Pad(world, block.getX(), block.getY(), block.getZ(), 1.6, 0.9, fixed, yaw));
+            list.put(id, new MovementSettings.Pad(new ArrayList<>(List.of(at)), 1.6, 0.9, fixed, yaw));
             return list;
         });
         send(admin, text.padAdded(), Values.of("pad", id));
@@ -257,7 +307,7 @@ public final class MovementModule extends LobbyModule {
 
     /** The launch pad on a block, if any. */
     public java.util.Optional<String> padAt(@NotNull Location location) {
-        return pads == null ? java.util.Optional.empty() : pads.padAt(location).map(JumpPad::id);
+        return pads == null ? java.util.Optional.empty() : pads.padAt(location).map(pad -> pad.id().replaceFirst("#\\d+$", ""));
     }
 
     private void send(Player to, String line, Values values) {

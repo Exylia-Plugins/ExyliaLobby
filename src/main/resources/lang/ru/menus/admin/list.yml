@@ -37,6 +37,7 @@ pagination:
       - 'right: exylialobby:screen_row %screen_id% right %row_id%'
       - 'shift_left: exylialobby:screen_row %screen_id% turn %row_id%'
       - 'shift_right: exylialobby:screen_row %screen_id% shift %row_id%'
+      - 'drop: exylialobby:screen_row %screen_id% drop %row_id%'
 
   navigation:
     previous:

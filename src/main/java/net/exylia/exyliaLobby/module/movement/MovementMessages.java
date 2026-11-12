@@ -39,7 +39,13 @@ public record MovementMessages(
         @Comment("What the setup wizards name on screen (plain text, no colours).")
         String wizardPad,
         String wizardAimed,
-        String wizardAim) {
+        String wizardAim,
+        @Comment("A pad throws from every block it lists: the card line, its click, the wizard and its chat lines.")
+        String labelBlocks,
+        String clickBlocks,
+        String wizardBlocks,
+        String blockAdded,
+        String blockRemoved) {
 
     public MovementMessages() {
         this("[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Launch pad {highlight}%pad%{letters} added.",
@@ -74,6 +80,11 @@ public record MovementMessages(
                 "Movement",
                 "Launch pad",
                 "Aimed pad",
-                "Pad direction");
+                "Pad direction",
+                "Blocks",
+                "{primary}{icon:click} Q {letters_black}· {letters}add or remove blocks",
+                "Pad blocks",
+                "[sound:BLOCK_NOTE_BLOCK_PLING|0.6|1.6]%prefix% {letters}Block added to {highlight}%pad%{letters} ({highlight}%count%{letters}). Click another, or cancel to finish.",
+                "[sound:BLOCK_NOTE_BLOCK_BASS|0.6|1.0]%prefix% {letters}Block removed from {highlight}%pad%{letters} ({highlight}%count%{letters}). Click another, or cancel to finish.");
     }
 }

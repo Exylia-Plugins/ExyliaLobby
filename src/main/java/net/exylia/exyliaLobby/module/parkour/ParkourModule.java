@@ -1,5 +1,6 @@
 package net.exylia.exyliaLobby.module.parkour;
 
+import net.exylia.exyliaLobby.module.shared.AdminScreens;
 import net.exylia.exyliaLobby.Permissions;
 import net.exylia.exyliaLobby.area.AreaCause;
 import net.exylia.exyliaLobby.module.Busy;
@@ -439,7 +440,7 @@ public final class ParkourModule extends LobbyModule implements Busy {
         }
         var inputs = Inputs.of(plugin());
         inputs.answered(admin, inputs.confirm(admin, Values.of("course", id).apply(messages.get().tools().confirmDelete()))
-                .dangerous().open(), yes -> {
+                .dangerous().transports(AdminScreens.NO_SCREEN).open(), yes -> {
             if (!yes) {
                 done.accept(false);
                 return;
@@ -492,7 +493,7 @@ public final class ParkourModule extends LobbyModule implements Busy {
     void deleteArea(Player admin, String name, Runnable reopen) {
         var inputs = Inputs.of(plugin());
         inputs.answered(admin, inputs.confirm(admin, Values.of("area", name).apply(messages.get().screens().confirmDeleteArea()))
-                .dangerous().open(), yes -> {
+                .dangerous().transports(AdminScreens.NO_SCREEN).open(), yes -> {
             if (yes) {
                 settings.update(current -> {
                     Map<String, ParkourSettings.Area> map = new LinkedHashMap<>(current.endless().areas());

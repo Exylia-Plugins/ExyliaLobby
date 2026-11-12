@@ -144,7 +144,7 @@ final class ParkourAdminScreens {
         inputs.answered(admin, inputs.slug(admin, module.text().screens().promptCourse())
                 .validate(name -> !module.catalogue().courses().containsKey(ParkourCourses.id(name)),
                         Values.of("course", "").apply(module.text().courseExists()))
-                .open(), name -> module.create(admin, name, reopen), reopen);
+                .transports(AdminScreens.NO_SCREEN).open(), name -> module.create(admin, name, reopen), reopen);
     }
 
     // ======================== editor ========================
@@ -239,7 +239,7 @@ final class ParkourAdminScreens {
         admin.closeInventory();
         var inputs = Inputs.of(module.ctx().plugin());
         inputs.answered(admin, inputs.text(admin, module.text().screens().promptDifficulty()).maxLength(16)
-                .defaultValue(module.catalogue().courses().get(id).difficulty()).open(), value -> {
+                .defaultValue(module.catalogue().courses().get(id).difficulty()).transports(AdminScreens.NO_SCREEN).open(), value -> {
             module.setDifficulty(admin, id, value.trim());
             reopen.run();
         }, reopen);
@@ -260,7 +260,7 @@ final class ParkourAdminScreens {
     private void number(Player admin, String prompt, double current, Runnable cancel, java.util.function.DoubleConsumer next) {
         var inputs = Inputs.of(module.ctx().plugin());
         inputs.answered(admin, inputs.decimal(admin, prompt).range(BigDecimal.ZERO, BigDecimal.valueOf(36000))
-                .defaultValue(BigDecimal.valueOf(current)).open(), value -> next.accept(value.doubleValue()), cancel);
+                .defaultValue(BigDecimal.valueOf(current)).transports(AdminScreens.NO_SCREEN).open(), value -> next.accept(value.doubleValue()), cancel);
     }
 
     // ======================== endless areas ========================
@@ -292,7 +292,7 @@ final class ParkourAdminScreens {
     private void addArea(Player admin) {
         admin.closeInventory();
         var inputs = Inputs.of(module.ctx().plugin());
-        inputs.answered(admin, inputs.slug(admin, module.text().screens().promptArea()).open(), name -> module.endlessArea(admin, name, () -> openAreas(admin)),
+        inputs.answered(admin, inputs.slug(admin, module.text().screens().promptArea()).transports(AdminScreens.NO_SCREEN).open(), name -> module.endlessArea(admin, name, () -> openAreas(admin)),
                 () -> openAreas(admin));
     }
 

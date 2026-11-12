@@ -1,5 +1,6 @@
 package net.exylia.exyliaLobby.admin;
 
+import net.exylia.exyliaLobby.module.shared.AdminScreens;
 import net.exylia.exyliaLobby.ExyliaLobby;
 import net.exylia.exyliaLobby.module.LobbyModule;
 import net.exylia.exyliaLobby.module.gadgets.GadgetsSettings;
@@ -204,7 +205,7 @@ final class SettingsMenus {
         PluginInputs inputs = Inputs.of(lobby.getPlugin());
         inputs.answered(admin, inputs.decimal(admin, Phrases.tr("Type the new value."))
                         .range(BigDecimal.ZERO, BigDecimal.valueOf(3600))
-                        .defaultValue(BigDecimal.valueOf(current(gadget))).open(),
+                        .defaultValue(BigDecimal.valueOf(current(gadget))).transports(AdminScreens.NO_SCREEN).open(),
                 value -> write(file, admin, gadget, value.doubleValue()), () -> openPage(admin, GADGETS));
     }
 

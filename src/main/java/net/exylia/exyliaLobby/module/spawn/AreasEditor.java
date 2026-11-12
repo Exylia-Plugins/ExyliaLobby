@@ -1,5 +1,6 @@
 package net.exylia.exyliaLobby.module.spawn;
 
+import net.exylia.exyliaLobby.module.shared.AdminScreens;
 import net.exylia.exyliaLobby.config.LobbyConfig;
 import net.exylia.lib.region.SelectionResult;
 import net.exylia.lib.text.Values;
@@ -103,7 +104,7 @@ final class AreasEditor {
                         .defaultValue("box-" + number)
                         .validate(name -> !module.context().config().get().areas().boxes().containsKey(name),
                                 module.messages().get().nameTaken())
-                        .open(),
+                        .transports(AdminScreens.NO_SCREEN).open(),
                 name -> {
                     save(name, result);
                     module.send(admin, module.context().messages().get().areas().boxSaved(), Values.of("area", name));
@@ -131,7 +132,7 @@ final class AreasEditor {
         boolean world = kind.equals("world");
         String prompt = Values.of("area", id).apply(world ? module.messages().get().confirmWorld() : module.messages().get().confirmBox());
         admin.closeInventory();
-        module.inputs().answered(admin, module.inputs().confirm(admin, prompt).dangerous().open(),
+        module.inputs().answered(admin, module.inputs().confirm(admin, prompt).dangerous().transports(AdminScreens.NO_SCREEN).open(),
                 yes -> {
                     if (yes) delete(admin, world, id);
                     open(admin);

@@ -40,3 +40,10 @@ back-name: Hareket
 wizard-pad: Fırlatma pedi
 wizard-aimed: Yönlü ped
 wizard-aim: Ped yönü
+
+# A pad throws from every block it lists (Q on its card edits them).
+label-blocks: Bloklar
+click-blocks: '{primary}{icon:click} Q {letters_black}· {letters}blok ekle veya kaldır'
+wizard-blocks: Platform blokları
+block-added: '[sound:BLOCK_NOTE_BLOCK_PLING|0.6|1.6]%prefix% {letters}Blok eklendi: {highlight}%pad%{letters} ({highlight}%count%{letters}). Başka birine tıkla ya da bitirmek için iptal et.'
+block-removed: '[sound:BLOCK_NOTE_BLOCK_BASS|0.6|1.0]%prefix% {letters}Blok kaldırıldı: {highlight}%pad%{letters} ({highlight}%count%{letters}). Başka birine tıkla ya da bitirmek için iptal et.'

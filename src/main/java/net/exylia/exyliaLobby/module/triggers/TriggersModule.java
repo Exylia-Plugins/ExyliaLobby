@@ -221,7 +221,7 @@ public final class TriggersModule extends LobbyModule implements Listener {
         switch (click) {
             case "left" -> {
                 viewer.closeInventory();
-                screens.inputs().answered(viewer, screens.inputs().text(viewer, text.promptAction()).maxLength(256).open(),
+                screens.inputs().answered(viewer, screens.inputs().text(viewer, text.promptAction()).maxLength(256).transports(AdminScreens.NO_SCREEN).open(),
                         line -> {
                             if (!line.isBlank()) {
                                 List<String> lines = new ArrayList<>(trigger.actions());
@@ -234,7 +234,7 @@ public final class TriggersModule extends LobbyModule implements Listener {
             case "right" -> {
                 viewer.closeInventory();
                 screens.inputs().answered(viewer, screens.inputs().duration(viewer, text.promptCooldown())
-                                .atLeast(Duration.ZERO).defaultValue(trigger.cooldown()).open(),
+                                .atLeast(Duration.ZERO).defaultValue(trigger.cooldown()).transports(AdminScreens.NO_SCREEN).open(),
                         time -> {
                             change(viewer, id, current -> current.withCooldown(time));
                             reopen.run();

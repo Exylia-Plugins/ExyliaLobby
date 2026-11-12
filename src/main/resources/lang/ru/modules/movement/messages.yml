@@ -47,3 +47,10 @@ back-name: Движение
 wizard-pad: Джамп-пад
 wizard-aimed: Направленный джамп-пад
 wizard-aim: Направление пада
+
+# A pad throws from every block it lists (Q on its card edits them).
+label-blocks: Блоки
+click-blocks: '{primary}{icon:click} Q {letters_black}· {letters}добавить или убрать блоки'
+wizard-blocks: Блоки платформы
+block-added: '[sound:BLOCK_NOTE_BLOCK_PLING|0.6|1.6]%prefix% {letters}Блок добавлен в {highlight}%pad%{letters} ({highlight}%count%{letters}). Нажми на другой или отмени, чтобы закончить.'
+block-removed: '[sound:BLOCK_NOTE_BLOCK_BASS|0.6|1.0]%prefix% {letters}Блок убран из {highlight}%pad%{letters} ({highlight}%count%{letters}). Нажми на другой или отмени, чтобы закончить.'

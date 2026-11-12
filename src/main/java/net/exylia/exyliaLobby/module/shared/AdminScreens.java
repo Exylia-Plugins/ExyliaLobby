@@ -7,6 +7,7 @@ import net.exylia.lib.action.Actions;
 import net.exylia.lib.action.PluginActions;
 import net.exylia.lib.input.Inputs;
 import net.exylia.lib.input.PluginInputs;
+import net.exylia.lib.input.internal.TransportKind;
 import net.exylia.lib.ui.Menus;
 import net.exylia.lib.ui.PluginMenus;
 import net.exylia.lib.ui.UiEntry;
@@ -31,6 +32,12 @@ import java.util.function.Supplier;
 public final class AdminScreens {
 
     public static final String MENU = "admin/list";
+
+    /**
+     * Where admin questions are asked: never a screen. Admin menus stay chests (ExyliaLib {@code admin-style}), but inputs
+     * follow {@code default-style}, so a SCREEN lobby would answer a chest click with a screen.
+     */
+    public static final TransportKind[] NO_SCREEN = {TransportKind.DIALOG, TransportKind.BEDROCK, TransportKind.MENU, TransportKind.CHAT};
 
     private static final Map<String, AdminScreens> BY_ID = new ConcurrentHashMap<>();
     private static final java.util.concurrent.atomic.AtomicBoolean REGISTERED = new java.util.concurrent.atomic.AtomicBoolean();
@@ -149,7 +156,7 @@ public final class AdminScreens {
     /** Closes the screen, asks the question and runs {@code yes} on a yes; {@code reopen} on no or cancel. */
     public void confirm(@NotNull Player viewer, @NotNull String question, @NotNull Runnable yes, @NotNull Runnable reopen) {
         viewer.closeInventory();
-        inputs().answered(viewer, inputs().confirm(viewer, question).dangerous().open(), answer -> {
+        inputs().answered(viewer, inputs().confirm(viewer, question).dangerous().transports(AdminScreens.NO_SCREEN).open(), answer -> {
             if (answer) yes.run();
             reopen.run();
         }, reopen);

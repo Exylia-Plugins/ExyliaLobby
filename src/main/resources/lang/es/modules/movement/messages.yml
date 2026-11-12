@@ -47,3 +47,10 @@ back-name: Movimiento
 wizard-pad: Plataforma de impulso
 wizard-aimed: Plataforma dirigida
 wizard-aim: Dirección de la plataforma
+
+# Una plataforma lanza desde cada bloque de su lista (Q en su tarjeta para editarla).
+label-blocks: Bloques
+click-blocks: '{primary}{icon:click} Q {letters_black}· {letters}añadir o quitar bloques'
+wizard-blocks: Bloques de la plataforma
+block-added: '[sound:BLOCK_NOTE_BLOCK_PLING|0.6|1.6]%prefix% {letters}Bloque añadido a {highlight}%pad%{letters} ({highlight}%count%{letters}). Pulsa otro o cancela para terminar.'
+block-removed: '[sound:BLOCK_NOTE_BLOCK_BASS|0.6|1.0]%prefix% {letters}Bloque quitado de {highlight}%pad%{letters} ({highlight}%count%{letters}). Pulsa otro o cancela para terminar.'

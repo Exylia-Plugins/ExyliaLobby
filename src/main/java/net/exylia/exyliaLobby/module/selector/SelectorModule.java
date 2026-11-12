@@ -373,7 +373,7 @@ public final class SelectorModule extends LobbyModule {
         }
         viewer.closeInventory();
         screens.inputs().answered(viewer, screens.inputs().choice(viewer, messages.get().promptServer(), new ArrayList<>(servers.keySet()))
-                .label(key -> servers.get(key).name()).key(key -> key).open(), chosen, reopen);
+                .label(key -> servers.get(key).name()).key(key -> key).transports(AdminScreens.NO_SCREEN).open(), chosen, reopen);
     }
 
     private String nextId(Set<String> taken, String prefix) {
