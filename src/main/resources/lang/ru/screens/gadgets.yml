@@ -1,0 +1,20 @@
+# Words of the gadgets screen (screens/gadgets.html), one per t="key". Colours like {info} work here; keep the %placeholders%. Tooltip lines are split by <nl>.
+title: '{primary}Гаджеты'
+subtitle: 'Выбери игрушку: она попадёт в хотбар'
+equipped: 'надет'
+tooltip: '{info}%row_title%<nl>{letters}%row_text%<nl><nl>{letters_black}Перезарядка {info}%row_cooldown%'
+state:
+  equipped: '● Надет'
+  locked: '● Закрыт'
+  owned: '● Доступен'
+cooldown: 'Перезарядка'
+cta:
+  put: 'Убрать'
+  locked: 'Закрыт'
+  equip: 'Взять'
+empty:
+  title: 'Нет гаджетов'
+  hint: 'Попроси персонал включить их'
+'off': 'Убрать'
+hint: 'Наведи на карточку, чтобы узнать, что она делает'
+close: 'Закрыть'

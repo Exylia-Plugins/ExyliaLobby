@@ -1,0 +1,19 @@
+# Words of the parkour screen (screens/parkour.html), one per t="key". Colours like {info} work here; keep the %placeholders%.
+title: '{info}Паркур'
+subtitle: 'Трассы и бесконечные режимы · нажми, чтобы играть'
+done: 'трасс пройдено'
+medals: 'медалей'
+kind:
+  course: 'Трасса'
+  mode: 'Бесконечный режим'
+best: 'Рекорд'
+medal: 'Медаль'
+difficulty: 'Сложность'
+length: 'Длительность'
+runs: 'Забеги'
+cta: 'Играть'
+empty:
+  title: 'Паркура пока нет'
+  hint: 'Админ добавляет трассы через /lobbyadmin'
+keys: 'ЛКМ · играть   ПКМ · детали и топ'
+close: 'Закрыть'

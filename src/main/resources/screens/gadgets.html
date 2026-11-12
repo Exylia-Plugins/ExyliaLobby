@@ -1,0 +1,62 @@
+<!--
+  The lobby's gadgets in the SCREEN menu style: one card per gadget with its state and cooldown, its description in
+  the tooltip. It stands for the chest menu lang/<code>/menus/gadgets/list.yml and reads that menu's values and rows,
+  so the chest's actions work unchanged; clients that cannot draw screens get that chest.
+
+  One file for every language: the words come from lang/<code>/screens/gadgets.yml (t="key"). The look is in
+  theme.css; put your own rules in custom.css next to it and this file keeps updating with the plugin.
+  /exylialib screens check lists anything wrong with file:line:col; edits show on open screens within seconds.
+
+  Values: equipped_name.
+  Rows (source="main"): row_id, row_icon, row_title, row_text (lines split by <nl>), row_cooldown,
+  row_state (equipped, owned or locked).
+  Actions: exylialobby:gadgets_equip <gadget> (equips it, or puts it away when it is yours), exylialobby:gadgets_off.
+-->
+<screen version="2" routes="gadgets/list" keys="navigate"
+        backdrop="linear-gradient(to bottom, var(--primary)1c, var(--info)06)">
+  <panel class="page">
+    <row class="top">
+      <item material="ender_chest" class="top-icon"/>
+      <column class="title tight">
+        <h1 t="title">{primary}Gadgets</h1>
+        <small t="subtitle">Pick a toy: it goes to your hotbar</small>
+      </column>
+      <box class="spacer"/>
+      <column class="stat">
+        <b>%equipped_name%</b>
+        <small t="equipped">equipped</small>
+      </column>
+    </row>
+
+    <grid source="main" columns="4" rows="2" track="%row_id%">
+      <card class="card ${row_state}" action="sound ui.button.click 0.4 1.2; exylialobby:gadgets_equip %row_id%"
+            t-tooltip="tooltip">
+        <row class="head">
+          <item row material="%row_icon%" class="card-icon"/>
+          <column class="tight grow">
+            <b class="card-name">%row_title%</b>
+            <small if="row_state == 'equipped'" class="badge" t="state.equipped">● Equipped</small>
+            <small else if="row_state == 'locked'" class="badge" t="state.locked">● Locked</small>
+            <small else class="badge" t="state.owned">● Available</small>
+          </column>
+        </row>
+        <box class="spacer"/>
+        <column class="facts">
+          <row class="fact"><small t="cooldown">Cooldown</small><box class="spacer"/><small class="value">%row_cooldown%</small></row>
+        </column>
+        <box if="row_state == 'equipped'" class="cta"><text t="cta.put">Put away</text><text class="arrow">›</text></box>
+        <box else if="row_state == 'locked'" class="cta"><text t="cta.locked">Locked</text></box>
+        <box else class="cta"><text t="cta.equip">Equip</text><text class="arrow">›</text></box>
+      </card>
+      <empty><text t="empty.title">No gadgets</text><small t="empty.hint">Ask the staff to switch some on</small></empty>
+    </grid>
+
+    <row class="foot">
+      <button class="link" action="exylialobby:gadgets_off" t="off">Put away</button>
+      <small class="keys" t="hint">Hover a card to read what it does</small>
+      <box class="spacer"/>
+      <pager for="main" keys="a d"/>
+      <key-hint key="Shift"><text t="close">Close</text></key-hint>
+    </row>
+  </panel>
+</screen>

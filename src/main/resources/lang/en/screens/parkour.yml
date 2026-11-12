@@ -1,0 +1,19 @@
+# Words of the parkour screen (screens/parkour.html), one per t="key". Colours like {info} work here; keep the %placeholders%.
+title: '{info}Parkour'
+subtitle: 'Courses and endless modes · click to play'
+done: 'courses done'
+medals: 'medals'
+kind:
+  course: 'Course'
+  mode: 'Endless mode'
+best: 'Best'
+medal: 'Medal'
+difficulty: 'Difficulty'
+length: 'Length'
+runs: 'Runs'
+cta: 'Play'
+empty:
+  title: 'No parkour yet'
+  hint: 'An admin adds courses with /lobbyadmin'
+keys: 'Click · play   Right-click · details and top'
+close: 'Close'

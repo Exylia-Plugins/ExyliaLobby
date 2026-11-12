@@ -61,6 +61,8 @@ final class EndlessRun extends Run {
     /** When the run began, wall clock: movement comes from the client, so lag does not slow it. */
     private long began;
     int current;
+    /** The furthest jump the feet were on top of without the client reporting the ground; see {@link #moved}. */
+    private int touched;
     int score;
 
     EndlessRun(ParkourRuns runs, Player player, EndlessMode mode, World world, Location origin, Location start,
@@ -132,10 +134,16 @@ final class EndlessRun extends Run {
                 }
             }
         }
+        // A runner who bounces straight off a block may never be seen standing on it: the one move that had the
+        // feet on its top came without the ground flag. That jump is remembered, so the next landing counts from it.
+        if (standing != null && !player.isOnGround()) {
+            if (standing.index() > touched) touched = standing.index();
+            return;
+        }
         // The blocks are only on the client, so the server checks every landing it scores: feet on a drawn
         // block, the client saying it stands, a jump that reaches from the last one, and a human pace.
-        if (standing != null && player.isOnGround()) {
-            if (under == null || !JumpPhysics.canLand(under, standing, on) || tooFast(standing)) {
+        if (standing != null) {
+            if (!reaches(under, standing, on) || tooFast(standing)) {
                 runs.context().debug().warn("Ended the " + mode.id() + " run of " + player.getName() + ": the landing on jump "
                         + standing.index() + " from jump " + current + " could not be confirmed");
                 runs.close(this, RunEnd.UNCONFIRMED);
@@ -145,6 +153,16 @@ final class EndlessRun extends Run {
             return;
         }
         if (under != null && to.getY() < under.lowestY() + 1 - rules().fallDepth()) runs.close(this, RunEnd.FELL);
+    }
+
+    /** Whether {@code standing} is reached from the jump stood on, or from one the feet touched since. */
+    private boolean reaches(Jump under, Jump standing, Cell on) {
+        if (under != null && JumpPhysics.canLand(under, standing, on)) return true;
+        if (touched <= current || touched >= standing.index()) return false;
+        for (Jump jump : path) {
+            if (jump.index() == touched) return JumpPhysics.canLand(jump, standing, on);
+        }
+        return false;
     }
 
     private boolean tooFast(Jump next) {

@@ -1,0 +1,20 @@
+# Words of the gadgets screen (screens/gadgets.html), one per t="key". Colours like {info} work here; keep the %placeholders%. Tooltip lines are split by <nl>.
+title: '{primary}Gadgets'
+subtitle: 'Escolha um brinquedo: vai para sua hotbar'
+equipped: 'equipado'
+tooltip: '{info}%row_title%<nl>{letters}%row_text%<nl><nl>{letters_black}Recarga {info}%row_cooldown%'
+state:
+  equipped: '● Equipado'
+  locked: '● Bloqueado'
+  owned: '● Disponível'
+cooldown: 'Recarga'
+cta:
+  put: 'Guardar'
+  locked: 'Bloqueado'
+  equip: 'Equipar'
+empty:
+  title: 'Nenhum gadget'
+  hint: 'Peça à staff para ativar algum'
+'off': 'Guardar'
+hint: 'Passe o cursor num cartão para ver o que faz'
+close: 'Fechar'

@@ -236,6 +236,11 @@ public final class GadgetsModule extends LobbyModule {
                     .withFormatted("row_name", Lore.name(tone, text.kind(), card.name()))
                     .withFormatted("row_lore", String.join("<nl>", lore.lines()))
                     .with("row_glow", String.valueOf(on))
+                    // raw values for the screen, which lays the card out itself
+                    .with("row_state", on ? "equipped" : owned ? "owned" : "locked")
+                    .withFormatted("row_title", card.name())
+                    .withFormatted("row_text", String.join("<nl>", card.text()))
+                    .with("row_cooldown", TimeFormats.render(gadget.cooldown(), TimeFormats.Style.PRECISE))
                     .build());
         }
         return rows;

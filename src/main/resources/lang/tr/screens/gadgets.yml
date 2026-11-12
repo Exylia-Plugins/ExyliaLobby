@@ -1,0 +1,20 @@
+# Words of the gadgets screen (screens/gadgets.html), one per t="key". Colours like {info} work here; keep the %placeholders%. Tooltip lines are split by <nl>.
+title: '{primary}Gadget''lar'
+subtitle: 'Bir oyuncak seç: hotbar''ına gelir'
+equipped: 'kuşanıldı'
+tooltip: '{info}%row_title%<nl>{letters}%row_text%<nl><nl>{letters_black}Bekleme {info}%row_cooldown%'
+state:
+  equipped: '● Kuşanıldı'
+  locked: '● Kilitli'
+  owned: '● Kullanılabilir'
+cooldown: 'Bekleme'
+cta:
+  put: 'Kaldır'
+  locked: 'Kilitli'
+  equip: 'Kuşan'
+empty:
+  title: 'Gadget yok'
+  hint: 'Yetkililerden açmalarını iste'
+'off': 'Kaldır'
+hint: 'Ne yaptığını görmek için karta gel'
+close: 'Kapat'

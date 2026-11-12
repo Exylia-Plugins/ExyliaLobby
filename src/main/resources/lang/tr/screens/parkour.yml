@@ -1,0 +1,19 @@
+# Words of the parkour screen (screens/parkour.html), one per t="key". Colours like {info} work here; keep the %placeholders%.
+title: '{info}Parkur'
+subtitle: 'Parkurlar ve sonsuz modlar · oynamak için tıkla'
+done: 'parkur bitti'
+medals: 'madalya'
+kind:
+  course: 'Parkur'
+  mode: 'Sonsuz mod'
+best: 'En iyi'
+medal: 'Madalya'
+difficulty: 'Zorluk'
+length: 'Süre'
+runs: 'Koşular'
+cta: 'Oyna'
+empty:
+  title: 'Henüz parkur yok'
+  hint: 'Bir admin /lobbyadmin ile parkur ekler'
+keys: 'Tıkla · oyna   Sağ tık · detaylar ve sıralama'
+close: 'Kapat'

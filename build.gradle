@@ -69,6 +69,8 @@ dependencies {
     compileOnly 'io.github.revxrsal:lamp.bukkit:4.0.0-rc.17'
     compileOnly 'com.github.ben-manes.caffeine:caffeine:3.2.4'
 
+    testImplementation 'io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT'
+    testImplementation 'com.github.ben-manes.caffeine:caffeine:3.2.4'
     testImplementation "net.exylia:ExyliaLib:${exyliaLibVersion}"
     testImplementation platform('org.junit:junit-bom:5.11.4')
     testImplementation 'org.junit.jupiter:junit-jupiter'

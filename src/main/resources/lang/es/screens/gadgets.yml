@@ -1,0 +1,20 @@
+# Textos de la pantalla de gadgets (screens/gadgets.html), uno por cada t="clave". Los colores como {info} funcionan aquí; conserva los %placeholders%. Las líneas de un tooltip se separan con <nl>.
+title: '{primary}Gadgets'
+subtitle: 'Elige un juguete: va a tu hotbar'
+equipped: 'equipado'
+tooltip: '{info}%row_title%<nl>{letters}%row_text%<nl><nl>{letters_black}Enfriamiento {info}%row_cooldown%'
+state:
+  equipped: '● Equipado'
+  locked: '● Bloqueado'
+  owned: '● Disponible'
+cooldown: 'Enfriamiento'
+cta:
+  put: 'Guardar'
+  locked: 'Bloqueado'
+  equip: 'Equipar'
+empty:
+  title: 'No hay gadgets'
+  hint: 'Pide al staff que active alguno'
+'off': 'Guardar'
+hint: 'Pasa el cursor por una tarjeta para ver qué hace'
+close: 'Cerrar'

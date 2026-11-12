@@ -1,0 +1,61 @@
+/* The look of ExyliaLobby's screens. ExyliaLib's base theme is read before this file, so anything here overrides it;
+   put your own rules in custom.css next to it. Sizes are screen pixels of a 400 by 225 screen; colours are palette
+   tokens. Every card takes its colour from --tone, set by its state class, so a new state is one line.
+   Motion is the client's own (enter, transition): no looping animations. */
+
+small, b, h1, h2, text, button, label { flex-direction: row; gap: 3px; align-items: center; }
+small { font-size: 7px; }
+.spacer { flex-grow: 1; }
+.grow { flex-grow: 1; }
+.tight { gap: 1px; }
+
+.page { width: 400px; height: 225px; padding: 10px 11px 7px 11px; gap: 7px;
+  background: linear-gradient(to bottom, var(--primary)22, var(--primary)0a); }
+.top { flex-direction: row; align-items: center; gap: 6px; }
+.top-icon { width: 18px; height: 18px; }
+.title h1 { font-size: 13px; }
+.title small { color: var(--letters-black); }
+.stat { align-items: end; gap: 1px; }
+.stat b { font-size: 11px; color: var(--success); }
+.stat small { font-size: 6px; color: var(--letters-black); }
+
+grid { gap: 6px; stagger: 2t; flex-grow: 1; }
+
+.card { --tone: var(--info); padding: 6px; gap: 3px; align-items: stretch;
+  background: var(--letters-black)0c; outline: 1px var(--letters-black)1c;
+  enter: translateY(10px) 6t ease-out; transition: transform 3t ease-out; }
+.card:hover { background: var(--tone)14; outline: 1px var(--tone); transform: translateY(-2px); }
+.card.equipped, .card.done { --tone: var(--success); background: var(--success)10; outline: 1px var(--success)60; }
+.card.locked { --tone: var(--warning); }
+.card.locked .card-name { color: var(--letters-black); }
+
+.head { flex-direction: row; align-items: center; gap: 4px; }
+.card-icon { width: 16px; height: 16px; }
+.card-name { color: var(--tone); font-size: 8px; }
+.badge { font-size: 6px; color: var(--tone); }
+.desc { white-space: normal; font-size: 6px; color: var(--letters-black); }
+
+.facts { gap: 2px; padding: 3px 4px; background: var(--letters-black)0e; }
+.fact { flex-direction: row; align-items: center; }
+.fact small { font-size: 6px; }
+.value { color: var(--letters); }
+.soft { color: var(--letters-black); }
+
+.cta { flex-direction: row; justify-content: space-between; align-items: center; padding: 3px 5px;
+  background: var(--tone)30; outline: 1px var(--tone)60; color: var(--letters); font-size: 7px; }
+.cta .arrow { transition: transform 3t ease-out; }
+.card:hover .cta { background: var(--tone)50; }
+.card:hover .cta .arrow { transform: translateX(2px); }
+.card.locked .cta { background: var(--letters-black)12; outline: 1px var(--letters-black)20; color: var(--letters-black); }
+
+.foot { flex-direction: row; align-items: center; gap: 5px; }
+.keys { font-size: 6px; color: var(--letters-black); }
+.link { padding: 3px 9px; font-size: 7px; background: var(--letters-black)14; }
+.link:hover { background: var(--error)50; }
+
+/* Parkour: few, big cards, like the server selector */
+.mode-card { padding: 7px; gap: 4px; }
+.mode-card .card-icon { width: 20px; height: 20px; }
+.mode-card .card-name { font-size: 10px; }
+.mode-card .desc { font-size: 7px; }
+.mode-card .fact small { font-size: 7px; }

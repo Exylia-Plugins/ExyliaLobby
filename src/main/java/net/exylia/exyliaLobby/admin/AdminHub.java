@@ -11,6 +11,8 @@ import net.exylia.lib.action.Actions;
 import net.exylia.lib.action.PluginActions;
 import net.exylia.lib.config.Languages;
 import net.exylia.lib.text.Text;
+import net.exylia.lib.screen.ScreenSet;
+import net.exylia.lib.screen.Screens;
 import net.exylia.lib.ui.Menus;
 import net.exylia.lib.ui.PluginMenus;
 import net.exylia.lib.ui.UiEntry;
@@ -68,7 +70,24 @@ public final class AdminHub {
         for (String id : MENUS) load(id);
         for (String id : SettingsMenus.menuIds()) load(id);
         for (String id : extra) load(id);
+        loadScreens();
         ready = true;
+    }
+
+    /** Players' screens shipped in the jar (screens/*.html): each routes its menu id, so opening the menu opens it. */
+    private static final List<String> SCREENS = List.of("gadgets", "parkour");
+
+    /** Writes the packaged screens out and compiles them; a file the owner broke keeps its chest menu, and says why. */
+    private void loadScreens() {
+        ScreenSet screens = Screens.of(lobby.getPlugin()).files(AdminHub.class, "screens");
+        screens.reload();
+        for (String id : SCREENS) {
+            try {
+                screens.markup(id).problems().forEach(problem -> lobby.getDebug().warn("Screen " + problem));
+            } catch (IllegalArgumentException broken) {
+                lobby.getDebug().warn("Screen " + id + " could not be read, its chest menu opens instead: " + broken.getMessage());
+            }
+        }
     }
 
     private void load(String id) {

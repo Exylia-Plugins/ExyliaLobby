@@ -1,0 +1,68 @@
+<!--
+  Parkour in the SCREEN menu style: every course and mode (endless, sprint, daily) as a card with your best, your
+  medal and your runs. It stands for the chest menu lang/<code>/menus/parkour/courses.yml and reads that menu's
+  values and rows, so the chest's actions work unchanged; clients that cannot draw screens get that chest.
+
+  One file for every language: the words come from lang/<code>/screens/parkour.yml (t="key"). The look is in
+  theme.css; put your own rules in custom.css next to it and this file keeps updating with the plugin.
+  /exylialib screens check lists anything wrong with file:line:col; edits show on open screens within seconds.
+
+  Values: done, total, medals.
+  Rows (source="main"): row_id, row_icon, row_kind (course or mode), row_title, row_about, row_detail (a course's
+  difficulty, the sprint's length), row_best ('' before the first run), row_medal, row_runs, row_state (done or new).
+  Actions: exylialobby:parkour_play <id>, exylialobby:parkour_details <id> (the course card and its top).
+-->
+<screen version="2" routes="parkour/courses" keys="navigate"
+        backdrop="linear-gradient(to bottom, var(--info)1c, var(--primary)06)">
+  <panel class="page">
+    <row class="top">
+      <item material="feather" class="top-icon"/>
+      <column class="title tight">
+        <h1 t="title">{info}Parkour</h1>
+        <small t="subtitle">Courses and endless modes · click to play</small>
+      </column>
+      <box class="spacer"/>
+      <column class="stat">
+        <b>%done%/%total%</b>
+        <small t="done">courses done</small>
+      </column>
+      <column class="stat">
+        <b>{highlight}%medals%</b>
+        <small t="medals">medals</small>
+      </column>
+    </row>
+
+    <grid source="main" columns="3" rows="1" track="%row_id%">
+      <card class="card mode-card ${row_state}" action="sound ui.button.click 0.4 1.2; exylialobby:parkour_play %row_id%"
+            action-right="exylialobby:parkour_details %row_id%">
+        <row class="head">
+          <item row material="%row_icon%" class="card-icon"/>
+          <column class="tight grow">
+            <b class="card-name">%row_title%</b>
+            <small if="row_kind == 'course'" class="badge" t="kind.course">Course</small>
+            <small else class="badge" t="kind.mode">Endless mode</small>
+          </column>
+        </row>
+        <small class="desc">%row_about%</small>
+        <box class="spacer"/>
+        <column class="facts">
+          <row class="fact"><small t="best">Best</small><box class="spacer"/>
+            <small if="row_best != ''" class="value">%row_best%</small><small else class="soft">—</small></row>
+          <row if="row_medal != ''" class="fact"><small t="medal">Medal</small><box class="spacer"/><small>%row_medal%</small></row>
+          <row if="row_detail != ''" class="fact"><small if="row_kind == 'course'" t="difficulty">Difficulty</small>
+            <small else t="length">Length</small><box class="spacer"/><small class="value">%row_detail%</small></row>
+          <row class="fact"><small t="runs">Runs</small><box class="spacer"/><small class="value">%row_runs%</small></row>
+        </column>
+        <box class="cta"><text t="cta">Play</text><text class="arrow">›</text></box>
+      </card>
+      <empty><text t="empty.title">No parkour yet</text><small t="empty.hint">An admin adds courses with /lobbyadmin</small></empty>
+    </grid>
+
+    <row class="foot">
+      <small class="keys" t="keys">Click · play   Right-click · details and top</small>
+      <box class="spacer"/>
+      <pager for="main" keys="a d"/>
+      <key-hint key="Shift"><text t="close">Close</text></key-hint>
+    </row>
+  </panel>
+</screen>

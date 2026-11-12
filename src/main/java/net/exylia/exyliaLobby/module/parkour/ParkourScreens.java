@@ -156,7 +156,11 @@ final class ParkourScreens {
             stats.add(stat(t.statMedal(), best.map(record -> medal(text, course.medals().of(record.value()))).orElse(t.none())));
             stats.add(stat(t.statFinishes(), String.valueOf(module.data().completions(id, name))));
             rows.add(row(name, course.icon(), t.nameCourse(), subject(t, course.name(), colours), done ? t.subtitleCourseDone() : t.subtitleCourse(),
-                    t.aboutCourse(), stats, tone.apply(t.clickCourse()), done, tone));
+                    t.aboutCourse(), stats, tone.apply(t.clickCourse()), done, tone)
+                    .with("row_kind", "course").withFormatted("row_title", course.name()).with("row_detail", course.difficulty())
+                    .with("row_best", best.map(record -> Times.format(record.value())).orElse(""))
+                    .withFormatted("row_medal", best.map(record -> medal(text, course.medals().of(record.value()))).orElse(""))
+                    .with("row_runs", String.valueOf(module.data().completions(id, name))).build());
         }
         ParkourSettings.Modes modes = module.rules().modes();
         for (EndlessMode mode : EndlessMode.values()) {
@@ -181,7 +185,12 @@ final class ParkourScreens {
                 case ENDLESS -> t.aboutEndless();
                 case SPRINT -> t.aboutSprint();
                 case DAILY -> t.aboutDaily();
-            }), stats, tone.apply(t.clickMode()), done, tone));
+            }), stats, tone.apply(t.clickMode()), done, tone)
+                    .with("row_kind", "mode").withFormatted("row_title", mode.name(text))
+                    .with("row_detail", mode == EndlessMode.SPRINT ? modes.sprintSeconds() + "s" : "")
+                    .with("row_best", best.map(record -> String.valueOf(record.value())).orElse(""))
+                    .withFormatted("row_medal", "")
+                    .with("row_runs", String.valueOf(module.data().completions(id, mode.id()))).build());
         }
         return rows;
     }
@@ -194,10 +203,12 @@ final class ParkourScreens {
         };
     }
 
-    private UiEntry row(String id, String icon, String nameTemplate, String subject, String subtitle, String about,
-                        List<String> stats, String clicks, boolean glow, Values tone) {
+    /** The chest's card for a row, plus {@code row_state}; the caller adds the raw values a screen draws on its own. */
+    private UiEntry.Builder row(String id, String icon, String nameTemplate, String subject, String subtitle, String about,
+                                List<String> stats, String clicks, boolean glow, Values tone) {
         ParkourMessages.Screens t = module.text().screens();
         return UiEntry.of(id)
+                .with("row_state", glow ? "done" : "new")
                 .with("row_id", id)
                 .with("row_icon", icon)
                 .withFormatted("row_name", Values.of("subject", subject).apply(nameTemplate))
@@ -207,8 +218,7 @@ final class ParkourScreens {
                 .withFormatted("row_label_status", tone.apply(t.labelStatus()))
                 .withFormatted("row_stats", String.join("<nl>", stats))
                 .withFormatted("row_clicks", clicks)
-                .with("row_glow", String.valueOf(glow))
-                .build();
+                .with("row_glow", String.valueOf(glow));
     }
 
     // ======================== course detail ========================

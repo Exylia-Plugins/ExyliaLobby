@@ -1,0 +1,19 @@
+# Textos de la pantalla de parkour (screens/parkour.html), uno por cada t="clave". Los colores como {info} funcionan aquí; conserva los %placeholders%.
+title: '{info}Parkour'
+subtitle: 'Recorridos y modos infinitos · clic para jugar'
+done: 'recorridos hechos'
+medals: 'medallas'
+kind:
+  course: 'Recorrido'
+  mode: 'Modo infinito'
+best: 'Mejor'
+medal: 'Medalla'
+difficulty: 'Dificultad'
+length: 'Duración'
+runs: 'Partidas'
+cta: 'Jugar'
+empty:
+  title: 'Aún no hay parkour'
+  hint: 'Un admin añade recorridos con /lobbyadmin'
+keys: 'Clic · jugar   Clic derecho · detalles y top'
+close: 'Cerrar'

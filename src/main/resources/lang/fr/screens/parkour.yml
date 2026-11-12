@@ -1,0 +1,19 @@
+# Words of the parkour screen (screens/parkour.html), one per t="key". Colours like {info} work here; keep the %placeholders%.
+title: '{info}Parkour'
+subtitle: 'Parcours et modes infinis · clique pour jouer'
+done: 'parcours finis'
+medals: 'médailles'
+kind:
+  course: 'Parcours'
+  mode: 'Mode infini'
+best: 'Record'
+medal: 'Médaille'
+difficulty: 'Difficulté'
+length: 'Durée'
+runs: 'Parties'
+cta: 'Jouer'
+empty:
+  title: 'Pas encore de parkour'
+  hint: 'Un admin ajoute des parcours avec /lobbyadmin'
+keys: 'Clic · jouer   Clic droit · détails et top'
+close: 'Fermer'
