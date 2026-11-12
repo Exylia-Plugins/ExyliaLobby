@@ -53,7 +53,8 @@ grid { gap: 6px; stagger: 2t; flex-grow: 1; }
 .link { padding: 3px 9px; font-size: 7px; background: var(--letters-black)14; }
 .link:hover { background: var(--error)50; }
 
-/* Parkour: few, big cards, like the server selector */
+/* Parkour: few, big cards, like the server selector. One line laid out along a row, so it grows down to the foot. */
+.modes { flex-direction: row; }
 .mode-card { padding: 7px; gap: 4px; }
 .mode-card .card-icon { width: 20px; height: 20px; }
 .mode-card .card-name { font-size: 10px; }
