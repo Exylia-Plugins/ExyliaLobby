@@ -8,9 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class MissedJumpTest {
 
     @Test
-    void oneUnseenJumpCountsOnlyInARealJumpsTime() {
-        assertTrue(EndlessRun.missedOne(3, 5, EndlessRun.TWO_JUMPS_MILLIS));
-        assertFalse(EndlessRun.missedOne(3, 5, EndlessRun.TWO_JUMPS_MILLIS - 1));
-        assertFalse(EndlessRun.missedOne(3, 6, 10_000));
+    void quickChainsCountAndLongLeapsNeedReach() {
+        assertTrue(EndlessRun.counts(3, 3 + EndlessRun.MAX_SKIP, false));
+        assertFalse(EndlessRun.counts(3, 4 + EndlessRun.MAX_SKIP, false));
+        assertTrue(EndlessRun.counts(3, 10, true));
     }
 }
