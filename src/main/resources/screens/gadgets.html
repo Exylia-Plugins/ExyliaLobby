@@ -18,7 +18,7 @@
     <row class="top">
       <item material="ender_chest" class="top-icon"/>
       <column class="title tight">
-        <h1 t="title">{primary}Gadgets</h1>
+        <h1 class="lib-shimmer" t="title">{primary}Gadgets</h1>
         <small t="subtitle">Pick a toy: it goes to your hotbar</small>
       </column>
       <box class="spacer"/>
@@ -28,7 +28,7 @@
       </column>
     </row>
 
-    <grid source="main" columns="4" rows="2" track="%row_id%">
+    <grid class="lib-wave" source="main" columns="4" rows="2" track="%row_id%">
       <card class="card ${row_state}" action="sound ui.button.click 0.4 1.2; exylialobby:gadgets_equip %row_id%"
             t-tooltip="tooltip">
         <row class="head">
@@ -44,9 +44,9 @@
         <column class="facts">
           <row class="fact"><small t="cooldown">Cooldown</small><box class="spacer"/><small class="value">%row_cooldown%</small></row>
         </column>
-        <box if="row_state == 'equipped'" class="cta"><text t="cta.put">Put away</text><text class="arrow">›</text></box>
+        <box if="row_state == 'equipped'" class="cta"><text t="cta.put">Put away</text><text class="arrow">»</text></box>
         <box else if="row_state == 'locked'" class="cta"><text t="cta.locked">Locked</text></box>
-        <box else class="cta"><text t="cta.equip">Equip</text><text class="arrow">›</text></box>
+        <box else class="cta"><text t="cta.equip">Equip</text><text class="arrow">»</text></box>
       </card>
       <empty><text t="empty.title">No gadgets</text><small t="empty.hint">Ask the staff to switch some on</small></empty>
     </grid>

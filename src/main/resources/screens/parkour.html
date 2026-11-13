@@ -18,7 +18,7 @@
     <row class="top">
       <item material="feather" class="top-icon"/>
       <column class="title tight">
-        <h1 t="title">{info}Parkour</h1>
+        <h1 class="lib-shimmer" t="title">{info}Parkour</h1>
         <small t="subtitle">Courses and endless modes · click to play</small>
       </column>
       <box class="spacer"/>
@@ -32,7 +32,7 @@
       </column>
     </row>
 
-    <grid class="modes" source="main" columns="3" rows="1" track="%row_id%">
+    <grid class="lib-wave modes" source="main" columns="3" rows="1" track="%row_id%">
       <card class="card mode-card ${row_state}" action="sound ui.button.click 0.4 1.2; exylialobby:parkour_play %row_id%"
             action-right="exylialobby:parkour_details %row_id%">
         <row class="head">
@@ -53,7 +53,7 @@
             <small else t="length">Length</small><box class="spacer"/><small class="value">%row_detail%</small></row>
           <row class="fact"><small t="runs">Runs</small><box class="spacer"/><small class="value">%row_runs%</small></row>
         </column>
-        <box class="cta"><text t="cta">Play</text><text class="arrow">›</text></box>
+        <box class="cta"><text t="cta">Play</text><text class="arrow">»</text></box>
       </card>
       <empty><text t="empty.title">No parkour yet</text><small t="empty.hint">An admin adds courses with /lobbyadmin</small></empty>
     </grid>
