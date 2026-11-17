@@ -193,7 +193,10 @@ final class EndlessRun extends Run {
         }
         if (milestone) {
             runs.sound(player, runs.settings().sounds().milestone());
-        } else if (theme(current) != themeBefore) {
+        } else if (score > before) {
+            runs.sound(player, runs.settings().sounds().point());
+        }
+        if (!milestone && theme(current) != themeBefore) {
             runs.title(player, text.themeTitle(), "", values().put("theme", themes.get(theme(current)).name()));
         }
     }

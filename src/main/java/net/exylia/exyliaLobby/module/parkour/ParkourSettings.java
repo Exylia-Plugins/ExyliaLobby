@@ -234,11 +234,13 @@ public record ParkourSettings(
         }
     }
 
-    public record Sounds(String start, String checkpoint, String finish, String record, String milestone, String fail) {
+    public record Sounds(String start, String checkpoint, String finish, String record, String milestone, String fail,
+                         @Comment("Endless parkour: every jump landed that scores a point.") String point) {
         public Sounds() {
             this("BLOCK_NOTE_BLOCK_HAT|0.7|1.4", "ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.4",
                     "BLOCK_NOTE_BLOCK_CHIME|0.7|1.2", "ENTITY_PLAYER_LEVELUP|0.5|1.6",
-                    "BLOCK_NOTE_BLOCK_BELL|0.6|1.5", "ENTITY_VILLAGER_NO|0.6|1.0");
+                    "BLOCK_NOTE_BLOCK_BELL|0.6|1.5", "ENTITY_VILLAGER_NO|0.6|1.0",
+                    "ENTITY_EXPERIENCE_ORB_PICKUP|0.4|1.6");
         }
     }
 }
