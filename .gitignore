@@ -42,3 +42,9 @@ Thumbs.db
 .atl/
 .codegraph/
 .claude/
+
+# Local tooling and build output
+.orca/
+.playwright-mcp/
+.claude/settings.local.json
+*.class
