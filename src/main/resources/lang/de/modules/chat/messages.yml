@@ -1,0 +1,16 @@
+# Ein Spieler hat versucht zu schreiben, obwohl der Chat gesperrt ist
+locked: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Der Chat ist gesperrt.'
+
+# Ein Spieler hat zu früh geschrieben. %time% ist die verbleibende Wartezeit.
+slow-denied: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Warte {highlight}%time%{error}, bevor du wieder schreibst.'
+
+# Wird an die Lobby gesendet, wenn der Chat gesperrt oder entsperrt wird. %player% ist die ausführende Person.
+lock-on: '%prefix% {highlight}%player%{letters} hat den Chat gesperrt.'
+lock-off: '%prefix% {highlight}%player%{letters} hat den Chat entsperrt.'
+
+# Wird an die Lobby gesendet, wenn sich der Slowmode ändert. %seconds% ist die neue Verzögerung.
+slow-on: '%prefix% {letters}Slowmode aktiviert: eine Nachricht alle {highlight}%seconds%s{letters}.'
+slow-off: '%prefix% {letters}Slowmode deaktiviert.'
+
+# Wird an die Lobby gesendet, nachdem der Chat geleert wurde
+cleared: '%prefix% {letters}Der Chat wurde geleert.'

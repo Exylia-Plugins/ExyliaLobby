@@ -1,0 +1,31 @@
+# Wird als %prefix% vor die Chatzeilen dieses Plugins gesetzt
+prefix: '{primary}&lLOBBY {letters_black}•<reset>'
+
+# Ein Befehl oder Button eines ausgeschalteten Moduls. %module% ist sein Name.
+module-off: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {letters}Das Modul {highlight}%module%{letters} ist ausgeschaltet.'
+modules:
+  # Der Status, der auf der Karte eines Moduls angezeigt wird
+  'on': '{success}{icon:on} Aktiv'
+  'off': '{error}{icon:off} Ausgeschaltet'
+  # Das Modul wartet auf ein anderes, das ausgeschaltet ist. %required% nennt es.
+  blocked: '{warning}{icon:warning} Benötigt %required%'
+  # Wird gesendet, nachdem ein Modul im Module-Bildschirm umgeschaltet wurde
+  switched-on: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Das Modul {highlight}%module%{letters} ist jetzt {success}aktiv{letters}.'
+  switched-off: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Das Modul {highlight}%module%{letters} ist jetzt {error}ausgeschaltet{letters}.'
+  # Wird gesendet, wenn ein Modul nicht starten kann, weil %required% ausgeschaltet ist oder fehlt
+  blocked-by: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {letters}Das Modul {highlight}%module%{letters} braucht zuerst {warning}%required%{letters}.'
+  # Das Modul konnte nicht starten; die Konsole sagt warum
+  failed: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Das Modul {highlight}%module%{error} konnte nicht starten. Sieh in der Konsole nach.'
+  # Wenn du dieses ausschaltest, werden diese auch ausgeschaltet. %modules% listet sie auf.
+  dependants: '{letters_black}Schaltet auch aus: %modules%'
+  # /lobbyadmin module mit einem Status, der weder on noch off ist
+  usage: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {letters}Nutze {highlight}/lobbyadmin module {letters_black}id{highlight} on{letters} oder {highlight}off{letters}.'
+  # /lobbyadmin module mit einer ID, die kein Modul hat. %id% ist die Eingabe, %modules% die IDs.
+  unknown: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Kein Modul heißt {highlight}%id%{error}. {letters}IDs: {letters_black}%modules%'
+areas:
+  # Wird angezeigt, wenn ein Admin einen Lobby-Bereich aus seiner Auswahl speichert
+  box-saved: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Lobby-Bereich {highlight}%area%{letters} gespeichert.'
+  box-removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Lobby-Bereich {highlight}%area%{letters} entfernt.'
+  no-selection: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Wähle zuerst zwei Ecken aus.'
+  world-added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Die Welt {highlight}%world%{letters} ist jetzt eine Lobby.'
+  world-removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Die Welt {highlight}%world%{letters} ist keine Lobby mehr.'

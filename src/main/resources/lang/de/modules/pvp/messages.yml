@@ -1,0 +1,74 @@
+# Boss bars, während das Kit angelegt oder abgelegt wird. %time% ist die verbleibende Zeit.
+equip-bar: '{success}&lAUSRÜSTEN {letters_black}» {letters}Behalte das Schwert in der Hand {letters_black}({info}%time%{letters_black})'
+unequip-bar: '{error}&lVERLASSEN {letters_black}» {letters}Lass das Schwert eingesteckt {letters_black}({info}%time%{letters_black})'
+
+# Titel: wenn das Kit angelegt wird und sobald es angelegt ist. Leer zeigt keinen an.
+equip-title: '{success}&lPVP'
+equip-subtitle: '{letters}Halte das Schwert in der Hand, um zu kämpfen'
+kit-on-title: '{success}&lAUF ZUM KAMPF'
+kit-on-subtitle: '{letters}Dein Kit ist angelegt'
+
+# Chat-Zeilen. %time% ist die verbleibende Kampfzeit; %victim%, %killer% und %streak% benennen den Kampf.
+equipped: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {success}Du bist im Kampf.{letters} Nur wer das Schwert in der Hand hat, kann dich treffen.'
+unequipped: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Du hast den Kampf verlassen und deine Sachen zurück.'
+tagged: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Du bist noch {highlight}%time%{error} im Kampf. Behalte das Schwert in der Hand.'
+no-permission: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Du darfst in der Lobby nicht kämpfen.'
+busy-elsewhere: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Du kannst nicht kämpfen, solange du etwas anderes machst.'
+killer: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Du hast {highlight}%victim%{letters} besiegt. Serie {accent}%streak%{letters}.'
+victim: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {letters}{highlight}%killer%{letters} hat dich besiegt.'
+quit-killer: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%victim%{letters} hat im Kampf den Server verlassen. Serie {accent}%streak%{letters}.'
+streak-reward: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {success}Serienbelohnung{letters} für {accent}%streak%{letters} Kills.'
+
+# Das Schwert, das alle in der Lobby tragen: sein Name und der Lore der Karte.
+sword-name: '{letters}PvP {letters_black}▸ <gradient:{error}:{error_light}>Schwert</gradient>'
+sword-lore:
+- '{letters_black}Lobby-PvP'
+- ''
+- '{error}✎ Information'
+- ' {letters}Halte es, um gegen alle zu'
+- ' {letters}kämpfen, die dasselbe tun.'
+- ''
+- '{error}{icon:click} Halten zum Kämpfen'
+- '{letters_black}Dein Kit wird nach kurzer Wartezeit angelegt.'
+
+# Das Top-Hologramm. %rank%, %name% und %kills% füllen jede Zeile.
+board-title: '{primary}&lTOP KILLS'
+board-row: '{highlight}%rank%. {letters}%name% {letters_black}· {info}%kills%'
+board-empty: '{muted}Noch niemand hat einen Kampf gewonnen.'
+
+# Was ein Top-Placeholder für einen Platz zurückgibt, den noch niemand belegt.
+top-empty: '-'
+
+# Admin-Bildschirm: die Zonen.
+list-title: Lobby-PvP
+list-kind: PvP-Zone
+subtitle-zone: PvP-Zone
+label-place: Ort
+label-size: Größe
+clicks-zone:
+- '{primary}{icon:click} Linksklick {letters_black}· {letters}Umriss ansehen'
+- '{error}{icon:right_click} Shift + Rechtsklick {letters_black}· {letters}löschen'
+- '{letters_black}Löschen verlangt eine Bestätigung.'
+add-zone-title: Zone
+add-zone-text:
+- ' {letters}Wähle eine Zone aus; das Kit wird'
+- ' {letters}beim Betreten angelegt.'
+add-zone-click: Klicke zum Starten
+add-zone-next: Beim Verlassen wird das Kit abgelegt.
+add-respawn-title: Respawn
+add-respawn-text:
+- ' {letters}Wo ein besiegter Spieler respawnt:'
+- ' {letters}geh dorthin, schau in die'
+- ' {letters}gewünschte Richtung und {highlight}Shift + Klick{letters}.'
+add-respawn-click: Klicke zum Starten
+add-respawn-next: Ersetzt den PvP-Respawn.
+
+# Was die Assistenten auf dem Bildschirm nennen (Klartext, ohne Farben).
+wizard-zone: PvP-Zone
+wizard-respawn: PvP-Respawn
+wizard-board: PvP-Ranking
+added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} hinzugefügt.'
+removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} gelöscht.'
+confirm-remove: '{highlight}%what%{letters} löschen?'
+spawn-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}PvP-Respawn dort gesetzt, wo du standest.'
+board-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Top-Hologramm auf dem angeklickten Block platziert.'

@@ -1,0 +1,10 @@
+# Standardtexte auf Deutsch. Nur die Schlüssel mit Text; die restlichen Einstellungen kommen aus der Registry.
+
+tab:
+  footer:
+  - ''
+  - '{letters}Spieler im Netzwerk{letters_black}: {success}%network_online%'
+  - ''
+announcements:
+  messages:
+  - '%prefix% {letters}Stell diese Ankündigungen jederzeit in {highlight}/settings{letters} stumm.'

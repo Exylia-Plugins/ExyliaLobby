@@ -1,0 +1,37 @@
+# /spawn, wenn kein Spawn-Punkt gefunden wurde
+no-spawn: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Es ist kein Spawn gesetzt. Frag einen Admin um Hilfe.'
+
+# /spawn mit Wartezeit. %time% ist die Wartezeit.
+teleporting: '%prefix% {letters}Teleport in {highlight}%time%{letters}. Beweg dich nicht.'
+cancelled: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Teleport abgebrochen.'
+
+# Bossbar während der Wartezeit von /spawn. %time% ist die verbleibende Zeit (2.4s).
+warmup-bar: '{info}&lSPAWN {letters_black}» {letters}Bleib stehen {letters_black}({info}%time%{letters_black})'
+
+# Ein Admin hat den Spawn einer Welt gesetzt. %world% ist ihr Name.
+spawn-set: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Spawn von {highlight}%world%{letters} an deiner Position gesetzt.'
+
+# Wird im Spawn-Menü angezeigt: Hier gibt es einen Spawn oder nicht
+state-set: '{success}{icon:on} Gesetzt'
+state-unset: '{warning}{icon:warning} Nicht gesetzt'
+
+# Lobby-Bereichseditor: Typen und Status jeder Karte
+kind-world: Lobby-Welt
+kind-box: Lobby-Zone
+state-label-world: Status
+state-label-box: Größe
+world-loaded: '{success}{icon:on} Geladen'
+world-missing: '{error}{icon:off} Nicht geladen'
+
+# Größe einer Zone. %x%, %y% und %z% sind ihre Seiten in Blöcken.
+box-size: '{info}%x%×%y%×%z% Blöcke'
+
+# Was die Assistenten auf dem Bildschirm nennen (Klartext, ohne Farben): der Spawn einer Welt, eine Lobby-Box
+wizard-spawn: Lobby-Spawn
+wizard-box: Lobby-Box
+
+# Nachrichten des Bereichseditors
+prompt-name: '{letters}Gib dieser Lobby-Zone einen Namen (Buchstaben, Zahlen, Bindestriche).'
+name-taken: '{error}Dieser Name wird bereits verwendet.'
+confirm-world: 'Die Welt {highlight}%area%{letters} nicht mehr als Lobby behandeln?'
+confirm-box: 'Die Lobby-Zone {highlight}%area%{letters} löschen?'

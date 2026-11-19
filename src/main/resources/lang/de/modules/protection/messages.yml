@@ -1,0 +1,9 @@
+# /lobbyadmin build aktiviert oder deaktiviert
+build-on: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Baumodus {success}aktiviert{letters}. Der Lobby-Schutz ignoriert dich.'
+build-off: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Baumodus {error}deaktiviert{letters}. Der Lobby-Schutz gilt wieder für dich.'
+
+# Bossbar, solange der Baumodus aktiv ist
+build-bar: '{warning}&lBAUMODUS {letters_black}• {letters}Der Schutz ist für dich ausgeschaltet'
+
+# /lobbyadmin build außerhalb der Lobby benutzt
+not-in-lobby: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Du musst in der Lobby sein, um den Baumodus zu benutzen.'

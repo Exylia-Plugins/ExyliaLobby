@@ -1,0 +1,82 @@
+# Una entrada por id de módulo: su nombre y una descripción corta (dos o tres líneas de unos 30 caracteres).
+modules:
+  spawn:
+    name: Spawn
+    description:
+    - 'Spawn-Punkt, /spawn, Rückkehr'
+    - 'aus dem Void und Respawn.'
+  state:
+    name: Spielerstatus
+    description:
+    - 'Spielmodus, Leben, Hunger,'
+    - 'Effekte, Uhrzeit und Wetter.'
+  protection:
+    name: Schutz
+    description:
+    - 'Kein Bauen, Schaden, Drops,'
+    - 'Mobs, Feuer oder Explosionen.'
+  join:
+    name: Beitritt und Verlassen
+    description:
+    - 'Nachrichten, Willkommenstitel'
+    - 'und Befehle beim Betreten/Verlassen.'
+  hotbar:
+    name: Hotbar
+    description:
+    - 'Items, die Menüs öffnen, dich'
+    - 'zu Servern senden oder Befehle ausführen.'
+  movement:
+    name: Bewegung
+    description:
+    - 'Doppelsprung und'
+    - 'Boost-Plattformen.'
+  triggers:
+    name: 'Auslöser'
+    description:
+    - 'Buttons, Druckplatten und Bereiche,'
+    - 'die Aktionen ausführen.'
+  visibility:
+    name: Sichtbarkeit
+    description:
+    - 'Spieler wählen, wen sie'
+    - 'in der Lobby sehen.'
+  selector:
+    name: Serverauswahl
+    description:
+    - 'Server und Lobbys mit Live-'
+    - 'Anzahl und Portalen.'
+  games:
+    name: Spiele
+    description:
+    - 'Alle Spiele der Exylia-Plugins'
+    - 'auf einem einzigen Bildschirm.'
+  hud:
+    name: HUD
+    description:
+    - 'Header und Footer der Liste'
+    - 'sowie Ankündigungen.'
+  pvp:
+    name: Lobby-PvP
+    description:
+    - 'Zück das Schwert und kämpfe'
+    - 'mit jedem, der auch will.'
+  parkour:
+    name: Parkour
+    description:
+    - 'Strecken, Endlos-Parkour'
+    - 'und Ranglisten.'
+  gadgets:
+    name: Gadgets
+    description:
+    - 'Enterhaken, Enderperle, Farbpistole'
+    - 'und mehr.'
+  chat:
+    name: Chat
+    description:
+    - 'Chat sperren, Slowmode'
+    - 'und Chat leeren.'
+  onboarding:
+    name: Einführung
+    description:
+    - 'Schickt neue Spieler'
+    - 'zu ExyliaJourney.'

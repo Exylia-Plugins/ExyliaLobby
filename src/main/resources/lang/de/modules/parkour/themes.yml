@@ -1,0 +1,15 @@
+# Standardtexte auf Deutsch. Nur die Schlüssel mit Text; die übrigen Einstellungen kommen aus der Registry.
+
+themes:
+  stone-ruins:
+    name: Steinruinen
+  end:
+    name: <gradient:{secondary}:{secondary_light}>Das End</gradient>
+  frozen-peaks:
+    name: <gradient:{info}:{info_light}>Gefrorene Gipfel</gradient>
+  ocean:
+    name: <gradient:{info}:{success_light}>Ozean</gradient>
+  sky-gardens:
+    name: <gradient:{success}:{success_light}>Himmelsgärten</gradient>
+  deep-dark:
+    name: <gradient:{primary}:{secondary_light}>Tiefe Dunkelheit</gradient>

@@ -1,0 +1,311 @@
+# DO NOT EDIT — REGENERATED ON EVERY STARTUP.
+#
+# Die Schutzeinstellungen, die ein Admin anpasst. Alles andere steht in
+# modules/protection/config.yml.
+
+title: "{primary}&lEINSTELLUNGEN {letters_black}» {highlight}Schutz"
+size: 36
+type: SIMPLE
+
+open_sounds:
+  - "minecraft:block.ender_chest.open|1.0|1.4"
+click_sounds:
+  - "minecraft:block.note_block.hat|1.0|1.0"
+close_sounds:
+  - "minecraft:block.barrel.close|1.0|0.7"
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: SHIELD
+    name: "<gradient:{primary}:{secondary_light}>Schutz</gradient>"
+    lore:
+      - "{letters_black}Schutzeinstellungen"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Die Regeln, die die Lobby"
+      - " {letters}sicher halten. Team im Build-"
+      - " {letters}Modus ignoriert sie."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Modul{letters_black}: %protection_state%"
+
+  block-break:
+    slot: 10
+    material: IRON_PICKAXE
+    name: "{letters}Schutz {letters_black}▸ <gradient:{primary}:{secondary_light}>Blöcke abbauen</gradient>"
+    lore:
+      - "{letters_black}Schutzeinstellung"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Verhindere das Abbauen von"
+      - " {letters}Blöcken und Aufnehmen von Flüssigkeiten."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Aktiviert{letters_black}: %protection_block_break%"
+      - "  {letters_black}· {info}{icon:book} {letters}Standard{letters_black}: %protection_block_break_default%"
+      - ""
+      - "%protection_block_break_click%"
+    actions:
+      - "exylialobby:setting protection block-break"
+
+  block-place:
+    slot: 11
+    material: GRASS_BLOCK
+    name: "{letters}Schutz {letters_black}▸ <gradient:{primary}:{secondary_light}>Blöcke platzieren</gradient>"
+    lore:
+      - "{letters_black}Schutzeinstellung"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Verhindere das Platzieren von"
+      - " {letters}Blöcken, Eimern und Gemälden."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Aktiviert{letters_black}: %protection_block_place%"
+      - "  {letters_black}· {info}{icon:book} {letters}Standard{letters_black}: %protection_block_place_default%"
+      - ""
+      - "%protection_block_place_click%"
+    actions:
+      - "exylialobby:setting protection block-place"
+
+  containers:
+    slot: 12
+    material: CHEST
+    name: "{letters}Schutz {letters_black}▸ <gradient:{primary}:{secondary_light}>Behälter</gradient>"
+    lore:
+      - "{letters_black}Schutzeinstellung"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Verhindere das Öffnen von Kisten,"
+      - " {letters}Öfen, Ambossen und Ähnlichem."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Aktiviert{letters_black}: %protection_containers%"
+      - "  {letters_black}· {info}{icon:book} {letters}Standard{letters_black}: %protection_containers_default%"
+      - ""
+      - "%protection_containers_click%"
+    actions:
+      - "exylialobby:setting protection containers"
+
+  doors:
+    slot: 13
+    material: OAK_DOOR
+    name: "{letters}Schutz {letters_black}▸ <gradient:{primary}:{secondary_light}>Türen</gradient>"
+    lore:
+      - "{letters_black}Schutzeinstellung"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Verhindere das Benutzen von Türen,"
+      - " {letters}Falltüren und Zauntoren."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Aktiviert{letters_black}: %protection_doors%"
+      - "  {letters_black}· {info}{icon:book} {letters}Standard{letters_black}: %protection_doors_default%"
+      - ""
+      - "%protection_doors_click%"
+    actions:
+      - "exylialobby:setting protection doors"
+
+  buttons-and-levers:
+    slot: 14
+    material: STONE_BUTTON
+    name: "{letters}Schutz {letters_black}▸ <gradient:{primary}:{secondary_light}>Knöpfe und Hebel</gradient>"
+    lore:
+      - "{letters_black}Schutzeinstellung"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Verhindere das Drücken von Knöpfen"
+      - " {letters}und Umlegen von Hebeln."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Aktiviert{letters_black}: %protection_buttons_and_levers%"
+      - "  {letters_black}· {info}{icon:book} {letters}Standard{letters_black}: %protection_buttons_and_levers_default%"
+      - ""
+      - "%protection_buttons_and_levers_click%"
+    actions:
+      - "exylialobby:setting protection buttons-and-levers"
+
+  pressure-plates:
+    slot: 15
+    material: STONE_PRESSURE_PLATE
+    name: "{letters}Schutz {letters_black}▸ <gradient:{primary}:{secondary_light}>Druckplatten</gradient>"
+    lore:
+      - "{letters_black}Schutzeinstellung"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Verhindere das Betreten von"
+      - " {letters}Druckplatten und Stolperdrähten."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Aktiviert{letters_black}: %protection_pressure_plates%"
+      - "  {letters_black}· {info}{icon:book} {letters}Standard{letters_black}: %protection_pressure_plates_default%"
+      - ""
+      - "%protection_pressure_plates_click%"
+    actions:
+      - "exylialobby:setting protection pressure-plates"
+
+  frames:
+    slot: 16
+    material: ITEM_FRAME
+    name: "{letters}Schutz {letters_black}▸ <gradient:{primary}:{secondary_light}>Rahmen</gradient>"
+    lore:
+      - "{letters_black}Schutzeinstellung"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Verhindere das Drehen, Leeren und"
+      - " {letters}Zerstören von Rahmen und Gemälden."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Aktiviert{letters_black}: %protection_frames%"
+      - "  {letters_black}· {info}{icon:book} {letters}Standard{letters_black}: %protection_frames_default%"
+      - ""
+      - "%protection_frames_click%"
+    actions:
+      - "exylialobby:setting protection frames"
+
+  armor-stands:
+    slot: 19
+    material: ARMOR_STAND
+    name: "{letters}Schutz {letters_black}▸ <gradient:{primary}:{secondary_light}>Rüstungsständer</gradient>"
+    lore:
+      - "{letters_black}Schutzeinstellung"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Verhindere das Bewegen, Ausrüsten"
+      - " {letters}und Posen von Rüstungsständern."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Aktiviert{letters_black}: %protection_armor_stands%"
+      - "  {letters_black}· {info}{icon:book} {letters}Standard{letters_black}: %protection_armor_stands_default%"
+      - ""
+      - "%protection_armor_stands_click%"
+    actions:
+      - "exylialobby:setting protection armor-stands"
+
+  drop-items:
+    slot: 20
+    material: DROPPER
+    name: "{letters}Schutz {letters_black}▸ <gradient:{primary}:{secondary_light}>Items droppen</gradient>"
+    lore:
+      - "{letters_black}Schutzeinstellung"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Verhindere das Droppen von Items."
+      - " {letters}Beim Tod bleibt das Inventar."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Aktiviert{letters_black}: %protection_drop_items%"
+      - "  {letters_black}· {info}{icon:book} {letters}Standard{letters_black}: %protection_drop_items_default%"
+      - ""
+      - "%protection_drop_items_click%"
+    actions:
+      - "exylialobby:setting protection drop-items"
+
+  pickup-items:
+    slot: 21
+    material: HOPPER
+    name: "{letters}Schutz {letters_black}▸ <gradient:{primary}:{secondary_light}>Items aufheben</gradient>"
+    lore:
+      - "{letters_black}Schutzeinstellung"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Verhindere das Aufheben von Items."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Aktiviert{letters_black}: %protection_pickup_items%"
+      - "  {letters_black}· {info}{icon:book} {letters}Standard{letters_black}: %protection_pickup_items_default%"
+      - ""
+      - "%protection_pickup_items_click%"
+    actions:
+      - "exylialobby:setting protection pickup-items"
+
+  protect-entities:
+    slot: 22
+    material: SADDLE
+    name: "{letters}Schutz {letters_black}▸ <gradient:{primary}:{secondary_light}>Entities</gradient>"
+    lore:
+      - "{letters_black}Schutzeinstellung"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Verhindere Schläge auf Rüstungs-"
+      - " {letters}ständer, Tiere und andere Mobs."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Aktiviert{letters_black}: %protection_protect_entities%"
+      - "  {letters_black}· {info}{icon:book} {letters}Standard{letters_black}: %protection_protect_entities_default%"
+      - ""
+      - "%protection_protect_entities_click%"
+    actions:
+      - "exylialobby:setting protection protect-entities"
+
+  mob-spawning:
+    slot: 23
+    material: ZOMBIE_HEAD
+    name: "{letters}Schutz {letters_black}▸ <gradient:{primary}:{secondary_light}>Mob-Spawning</gradient>"
+    lore:
+      - "{letters_black}Schutzeinstellung"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Verhindere Monster und Tiere,"
+      - " {letters}die von selbst spawnen."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Aktiviert{letters_black}: %protection_mob_spawning%"
+      - "  {letters_black}· {info}{icon:book} {letters}Standard{letters_black}: %protection_mob_spawning_default%"
+      - ""
+      - "%protection_mob_spawning_click%"
+    actions:
+      - "exylialobby:setting protection mob-spawning"
+
+  explosions:
+    slot: 24
+    material: TNT
+    name: "{letters}Schutz {letters_black}▸ <gradient:{primary}:{secondary_light}>Explosionen</gradient>"
+    lore:
+      - "{letters_black}Schutzeinstellung"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Verhindere Explosionen: keine"
+      - " {letters}zerstörten Blöcke, kein Schaden."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Aktiviert{letters_black}: %protection_explosions%"
+      - "  {letters_black}· {info}{icon:book} {letters}Standard{letters_black}: %protection_explosions_default%"
+      - ""
+      - "%protection_explosions_click%"
+    actions:
+      - "exylialobby:setting protection explosions"
+
+  hide-death-messages:
+    slot: 25
+    material: SKELETON_SKULL
+    name: "{letters}Schutz {letters_black}▸ <gradient:{primary}:{secondary_light}>Todesnachrichten verstecken</gradient>"
+    lore:
+      - "{letters_black}Schutzeinstellung"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Verstecke die Vanilla-Todes-"
+      - " {letters}nachricht von hier gestorbenen Spielern."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Aktiviert{letters_black}: %protection_hide_death_messages%"
+      - "  {letters_black}· {info}{icon:book} {letters}Standard{letters_black}: %protection_hide_death_messages_default%"
+      - ""
+      - "%protection_hide_death_messages_click%"
+    actions:
+      - "exylialobby:setting protection hide-death-messages"
+
+  back:
+    slot: 31
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Zurück {letters_black}▸ <gradient:{error}:{error_light}>Einstellungen</gradient>"
+    lore:
+      - "{error}{icon:click} Klicke, um zurückzugehen"
+    actions:
+      - "exylialobby:settings_hub"

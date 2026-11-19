@@ -1,0 +1,272 @@
+title: '{primary}&lLOBBY {letters_black}» {highlight}Einstellungen'
+size: 36
+type: SIMPLE
+open_sounds:
+- minecraft:block.ender_chest.open|1.0|1.4
+click_sounds:
+- minecraft:block.note_block.hat|1.0|1.0
+close_sounds:
+- minecraft:block.barrel.close|1.0|0.7
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+items:
+  header:
+    slot: 4
+    material: COMPARATOR
+    name: <gradient:{primary}:{secondary_light}>Einstellungen</gradient>
+    lore:
+    - '{letters_black}Lobby-Einstellungen'
+    - ''
+    - '{primary}✎ Information'
+    - ' {letters}Die Einstellungen, die sich im'
+    - ' {letters}Spiel lohnen, nach Modul sortiert.'
+    - ' {letters}Der Rest bleibt in den Dateien.'
+  spawn:
+    slot: 10
+    material: RESPAWN_ANCHOR
+    name: '{letters}Einstellungen {letters_black}▸ <gradient:{primary}:{secondary_light}>Spawn</gradient>'
+    lore:
+    - '{letters_black}Einstellungsseite'
+    - ''
+    - '{primary}✎ Information'
+    - ' {letters}Wer beim Beitritt zum Spawn kommt'
+    - ' {letters}und der /spawn-Countdown.'
+    - ''
+    - '{primary}✦ Status'
+    - '  {letters_black}· {info}{icon:redstone} {letters}Modul{letters_black}: %spawn_state%'
+    - '  {letters_black}· {info}{icon:redstone} {letters}Beim Beitritt{letters_black}: %spawn_on_join%'
+    - '  {letters_black}· {info}{icon:clock} {letters}Verzögerung{letters_black}: %spawn_warmup%'
+    - ''
+    - '{primary}{icon:click} Zum Öffnen klicken'
+    - '{letters_black}Jede Einstellung erklärt.'
+    actions:
+    - exylialobby:settings_page spawn
+  state:
+    slot: 11
+    material: ARMOR_STAND
+    name: '{letters}Einstellungen {letters_black}▸ <gradient:{primary}:{secondary_light}>Zustand</gradient>'
+    lore:
+    - '{letters_black}Einstellungsseite'
+    - ''
+    - '{primary}✎ Information'
+    - ' {letters}Spielmodus, Leben, Fliegen, Zeit'
+    - ' {letters}und Wetter in der Lobby.'
+    - ''
+    - '{primary}✦ Status'
+    - '  {letters_black}· {info}{icon:redstone} {letters}Modul{letters_black}: %state_state%'
+    - '  {letters_black}· {info}{icon:redstone} {letters}Spielmodus{letters_black}: %state_game_mode%'
+    - '  {letters_black}· {info}{icon:clock} {letters}Zeit{letters_black}: %state_time%'
+    - ''
+    - '{primary}{icon:click} Zum Öffnen klicken'
+    - '{letters_black}Jede Einstellung erklärt.'
+    actions:
+    - exylialobby:settings_page state
+  protection:
+    slot: 12
+    material: SHIELD
+    name: '{letters}Einstellungen {letters_black}▸ <gradient:{primary}:{secondary_light}>Schutz</gradient>'
+    lore:
+    - '{letters_black}Einstellungsseite'
+    - ''
+    - '{primary}✎ Information'
+    - ' {letters}Welche Aktionen die Lobby für'
+    - ' {letters}alle außer Builder abbricht.'
+    - ''
+    - '{primary}✦ Status'
+    - '  {letters_black}· {info}{icon:redstone} {letters}Modul{letters_black}: %protection_state%'
+    - '  {letters_black}· {info}{icon:redstone} {letters}Blöcke abbauen{letters_black}: %protection_block_break%'
+    - '  {letters_black}· {info}{icon:redstone} {letters}Blöcke platzieren{letters_black}: %protection_block_place%'
+    - ''
+    - '{primary}{icon:click} Zum Öffnen klicken'
+    - '{letters_black}Jede Einstellung erklärt.'
+    actions:
+    - exylialobby:settings_page protection
+  join:
+    slot: 14
+    material: OAK_SIGN
+    name: '{letters}Einstellungen {letters_black}▸ <gradient:{primary}:{secondary_light}>Beitrittsnachrichten</gradient>'
+    lore:
+    - '{letters_black}Einstellungsseite'
+    - ''
+    - '{primary}✎ Information'
+    - ' {letters}Wer erfasst wird und wie lange'
+    - ' {letters}die Begrüßung wartet.'
+    - ''
+    - '{primary}✦ Status'
+    - '  {letters_black}· {info}{icon:redstone} {letters}Modul{letters_black}: %join_state%'
+    - '  {letters_black}· {info}{icon:redstone} {letters}Nur in der Lobby{letters_black}: %join_only_in_lobby%'
+    - '  {letters_black}· {info}{icon:clock} {letters}Begrüßungsverzögerung{letters_black}: %join_welcome_delay%'
+    - ''
+    - '{primary}{icon:click} Zum Öffnen klicken'
+    - '{letters_black}Jede Einstellung erklärt.'
+    actions:
+    - exylialobby:settings_page join
+  chat:
+    slot: 15
+    material: WRITABLE_BOOK
+    name: '{letters}Einstellungen {letters_black}▸ <gradient:{primary}:{secondary_light}>Chat</gradient>'
+    lore:
+    - '{letters_black}Einstellungsseite'
+    - ''
+    - '{primary}✎ Information'
+    - ' {letters}Die Chat-Sperre beim Start und'
+    - ' {letters}der Slowmode.'
+    - ''
+    - '{primary}✦ Status'
+    - '  {letters_black}· {info}{icon:redstone} {letters}Modul{letters_black}: %chat_state%'
+    - '  {letters_black}· {info}{icon:redstone} {letters}Beim Start gesperrt{letters_black}: %chat_locked_at_start%'
+    - '  {letters_black}· {info}{icon:clock} {letters}Slowmode{letters_black}: %chat_slow_mode_seconds%'
+    - ''
+    - '{primary}{icon:click} Zum Öffnen klicken'
+    - '{letters_black}Jede Einstellung erklärt.'
+    actions:
+    - exylialobby:settings_page chat
+  onboarding:
+    slot: 16
+    material: FILLED_MAP
+    name: '{letters}Einstellungen {letters_black}▸ <gradient:{primary}:{secondary_light}>Onboarding</gradient>'
+    lore:
+    - '{letters_black}Einstellungsseite'
+    - ''
+    - '{primary}✎ Information'
+    - ' {letters}Die Journey und für wen sie startet.'
+    - ''
+    - '{primary}✦ Status'
+    - '  {letters_black}· {info}{icon:redstone} {letters}Modul{letters_black}: %onboarding_state%'
+    - '  {letters_black}· {info}{icon:book} {letters}Journey{letters_black}: %onboarding_journey%'
+    - '  {letters_black}· {info}{icon:clock} {letters}Verzögerung{letters_black}: %onboarding_delay%'
+    - ''
+    - '{primary}{icon:click} Zum Öffnen klicken'
+    - '{letters_black}Jede Einstellung erklärt.'
+    actions:
+    - exylialobby:settings_page onboarding
+  movement:
+    slot: 19
+    material: RABBIT_FOOT
+    name: '{letters}Einstellungen {letters_black}▸ <gradient:{primary}:{secondary_light}>Bewegung</gradient>'
+    lore:
+    - '{letters_black}Einstellungsseite'
+    - ''
+    - '{primary}✎ Information'
+    - ' {letters}Der Doppelsprung-Schalter und'
+    - ' {letters}seine Abklingzeit.'
+    - ''
+    - '{primary}✦ Status'
+    - '  {letters_black}· {info}{icon:redstone} {letters}Modul{letters_black}: %movement_state%'
+    - '  {letters_black}· {info}{icon:redstone} {letters}Doppelsprung{letters_black}: %movement_double_jump_enabled%'
+    - '  {letters_black}· {info}{icon:clock} {letters}Abklingzeit{letters_black}: %movement_double_jump_cooldown%'
+    - ''
+    - '{primary}{icon:click} Zum Öffnen klicken'
+    - '{letters_black}Jede Einstellung erklärt.'
+    actions:
+    - exylialobby:settings_page movement
+  visibility:
+    slot: 20
+    material: ENDER_EYE
+    name: '{letters}Einstellungen {letters_black}▸ <gradient:{primary}:{secondary_light}>Sichtbarkeit</gradient>'
+    lore:
+    - '{letters_black}Einstellungsseite'
+    - ''
+    - '{primary}✎ Information'
+    - ' {letters}Was neue Spieler sehen und wie'
+    - ' {letters}schnell sie wechseln können.'
+    - ''
+    - '{primary}✦ Status'
+    - '  {letters_black}· {info}{icon:redstone} {letters}Modul{letters_black}: %visibility_state%'
+    - '  {letters_black}· {info}{icon:redstone} {letters}Standard{letters_black}: %visibility_default_mode%'
+    - '  {letters_black}· {info}{icon:clock} {letters}Abklingzeit{letters_black}: %visibility_cooldown%'
+    - ''
+    - '{primary}{icon:click} Zum Öffnen klicken'
+    - '{letters_black}Jede Einstellung erklärt.'
+    actions:
+    - exylialobby:settings_page visibility
+  pvp:
+    slot: 21
+    material: DIAMOND_SWORD
+    name: '{letters}Einstellungen {letters_black}▸ <gradient:{primary}:{secondary_light}>Lobby-PvP</gradient>'
+    lore:
+    - '{letters_black}Einstellungsseite'
+    - ''
+    - '{primary}✎ Information'
+    - ' {letters}Die Ausrüstzeit und der Kampf-'
+    - ' {letters}Tag nach einem Treffer.'
+    - ''
+    - '{primary}✦ Status'
+    - '  {letters_black}· {info}{icon:redstone} {letters}Modul{letters_black}: %pvp_state%'
+    - '  {letters_black}· {info}{icon:clock} {letters}Ausrüsten{letters_black}: %pvp_equip_seconds%'
+    - '  {letters_black}· {info}{icon:clock} {letters}Kampf-Tag{letters_black}: %pvp_tag_seconds%'
+    - ''
+    - '{primary}{icon:click} Zum Öffnen klicken'
+    - '{letters_black}Jede Einstellung erklärt.'
+    actions:
+    - exylialobby:settings_page pvp
+  gadgets:
+    slot: 23
+    material: FISHING_ROD
+    name: '{letters}Einstellungen {letters_black}▸ <gradient:{primary}:{secondary_light}>Gadgets</gradient>'
+    lore:
+    - '{letters_black}Einstellungsseite'
+    - ''
+    - '{primary}✎ Information'
+    - ' {letters}Wie weit Gadgets sichtbar sind und'
+    - ' {letters}die Abklingzeit des Enterhakens.'
+    - ''
+    - '{primary}✦ Status'
+    - '  {letters_black}· {info}{icon:redstone} {letters}Modul{letters_black}: %gadgets_state%'
+    - '  {letters_black}· {info}{icon:hopper} {letters}Sichtradius{letters_black}: %gadgets_view_radius%'
+    - '  {letters_black}· {info}{icon:clock} {letters}Enterhaken{letters_black}: %gadgets_gadgets_grapple_cooldown%'
+    - ''
+    - '{primary}{icon:click} Zum Öffnen klicken'
+    - '{letters_black}Jede Einstellung erklärt.'
+    actions:
+    - exylialobby:settings_page gadgets
+  parkour:
+    slot: 24
+    material: LEATHER_BOOTS
+    name: '{letters}Einstellungen {letters_black}▸ <gradient:{primary}:{secondary_light}>Parkour</gradient>'
+    lore:
+    - '{letters_black}Einstellungsseite'
+    - ''
+    - '{primary}✎ Information'
+    - ' {letters}Die Endlos-Modi und der Sprint'
+    - ' {letters}Länge.'
+    - ''
+    - '{primary}✦ Status'
+    - '  {letters_black}· {info}{icon:redstone} {letters}Modul{letters_black}: %parkour_state%'
+    - '  {letters_black}· {info}{icon:redstone} {letters}Endlos{letters_black}: %parkour_modes_endless%'
+    - '  {letters_black}· {info}{icon:clock} {letters}Sprint{letters_black}: %parkour_modes_sprint_seconds%'
+    - ''
+    - '{primary}{icon:click} Klicken zum Öffnen'
+    - '{letters_black}Jede Einstellung erklärt.'
+    actions:
+    - exylialobby:settings_page parkour
+  hud:
+    slot: 25
+    material: NAME_TAG
+    name: '{letters}Einstellungen {letters_black}▸ <gradient:{primary}:{secondary_light}>HUD</gradient>'
+    lore:
+    - '{letters_black}Einstellungsseite'
+    - ''
+    - '{primary}✎ Information'
+    - ' {letters}Welche Bildschirmteile angezeigt werden.'
+    - ''
+    - '{primary}✦ Status'
+    - '  {letters_black}· {info}{icon:redstone} {letters}Modul{letters_black}: %hud_state%'
+    - '  {letters_black}· {info}{icon:redstone} {letters}Spielerliste{letters_black}: %hud_tab_enabled%'
+    - '  {letters_black}· {info}{icon:redstone} {letters}Ankündigungen{letters_black}: %hud_announcements_enabled%'
+    - ''
+    - '{primary}{icon:click} Klicken zum Öffnen'
+    - '{letters_black}Jede Einstellung erklärt.'
+    actions:
+    - exylialobby:settings_page hud
+  back:
+    slot: 31
+    sound: minecraft:item.bundle.remove_one|1.0|0.5
+    material: basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0=
+    name: '{letters}Zurück {letters_black}▸ <gradient:{error}:{error_light}>Lobby-Admin</gradient>'
+    lore:
+    - '{error}{icon:click} Klicken, um zurückzugehen'
+    actions:
+    - exylialobby:admin_hub

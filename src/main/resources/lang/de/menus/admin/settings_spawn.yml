@@ -1,0 +1,140 @@
+# DO NOT EDIT — REGENERATED ON EVERY STARTUP.
+#
+# Die Spawn-Einstellungen, die ein Admin anpasst. Alles andere steht in
+# modules/spawn/config.yml.
+
+title: "{primary}&lEINSTELLUNGEN {letters_black}» {highlight}Spawn"
+size: 27
+type: SIMPLE
+
+open_sounds:
+  - "minecraft:block.ender_chest.open|1.0|1.4"
+click_sounds:
+  - "minecraft:block.note_block.hat|1.0|1.0"
+close_sounds:
+  - "minecraft:block.barrel.close|1.0|0.7"
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: RESPAWN_ANCHOR
+    name: "<gradient:{primary}:{secondary_light}>Spawn</gradient>"
+    lore:
+      - "{letters_black}Spawn-Einstellungen"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Wo Spieler erscheinen und wann"
+      - " {letters}sie zum Spawn zurückgeschickt werden."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Modul{letters_black}: %spawn_state%"
+
+  on-join:
+    slot: 11
+    material: OAK_DOOR
+    name: "{letters}Spawn {letters_black}▸ <gradient:{primary}:{secondary_light}>Beim Beitritt</gradient>"
+    lore:
+      - "{letters_black}Spawn-Einstellung"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Wer beim Betreten der Lobby"
+      - " {letters}zum Spawn geschickt wird."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Modus{letters_black}: %spawn_on_join%"
+      - "  {letters_black}· {info}{icon:book} {letters}Standard{letters_black}: %spawn_on_join_default%"
+      - ""
+      - "%spawn_on_join_click%"
+    actions:
+      - "exylialobby:setting spawn on-join"
+
+  warmup:
+    slot: 12
+    material: CLOCK
+    name: "{letters}Spawn {letters_black}▸ <gradient:{primary}:{secondary_light}>Aufwärmzeit</gradient>"
+    lore:
+      - "{letters_black}Spawn-Einstellung"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Sekunden, die du stillstehen musst,"
+      - " {letters}bis /spawn klappt. {highlight}0 {letters}ist sofort."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:clock} {letters}Wartezeit{letters_black}: %spawn_warmup%"
+      - "  {letters_black}· {info}{icon:book} {letters}Standard{letters_black}: %spawn_warmup_default%"
+      - ""
+      - "%spawn_warmup_click%"
+    actions:
+      - "exylialobby:setting spawn warmup"
+
+  respawn:
+    slot: 13
+    material: RED_BED
+    name: "{letters}Spawn {letters_black}▸ <gradient:{primary}:{secondary_light}>Respawn am Spawn</gradient>"
+    lore:
+      - "{letters_black}Spawn-Einstellung"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Spieler, die in der Lobby sterben,"
+      - " {letters}respawnen am Spawn."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Aktiviert{letters_black}: %spawn_respawn%"
+      - "  {letters_black}· {info}{icon:book} {letters}Standard{letters_black}: %spawn_respawn_default%"
+      - ""
+      - "%spawn_respawn_click%"
+    actions:
+      - "exylialobby:setting spawn respawn"
+
+  void-return:
+    slot: 14
+    material: ENDER_PEARL
+    name: "{letters}Spawn {letters_black}▸ <gradient:{primary}:{secondary_light}>Void-Rückkehr</gradient>"
+    lore:
+      - "{letters_black}Spawn-Einstellung"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Schickt Spieler zum Spawn zurück,"
+      - " {letters}wenn sie unter die Höhe fallen."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Aktiviert{letters_black}: %spawn_void_return%"
+      - "  {letters_black}· {info}{icon:book} {letters}Standard{letters_black}: %spawn_void_return_default%"
+      - ""
+      - "%spawn_void_return_click%"
+    actions:
+      - "exylialobby:setting spawn void-return"
+
+  void-y:
+    slot: 15
+    material: BEDROCK
+    name: "{letters}Spawn {letters_black}▸ <gradient:{primary}:{secondary_light}>Void-Höhe</gradient>"
+    lore:
+      - "{letters_black}Spawn-Einstellung"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Die Y-Höhe, unter der ein Spieler"
+      - " {letters}zum Spawn zurückgeschickt wird."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:hopper} {letters}Höhe{letters_black}: %spawn_void_y%"
+      - "  {letters_black}· {info}{icon:book} {letters}Standard{letters_black}: %spawn_void_y_default%"
+      - ""
+      - "%spawn_void_y_click%"
+    actions:
+      - "exylialobby:setting spawn void-y"
+
+  back:
+    slot: 22
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Zurück {letters_black}▸ <gradient:{error}:{error_light}>Einstellungen</gradient>"
+    lore:
+      - "{error}{icon:click} Klicke zum Zurückgehen"
+    actions:
+      - "exylialobby:settings_hub"

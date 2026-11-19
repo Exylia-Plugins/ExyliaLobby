@@ -1,0 +1,5 @@
+# Der Ankündigungskanal, wie ihn /settings auflistet.
+channel-name: Lobby-Ankündigungen
+channel-description:
+- 'Tipps und Neuigkeiten, die die Lobby'
+- 'hin und wieder anzeigt.'

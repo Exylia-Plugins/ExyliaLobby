@@ -1,0 +1,89 @@
+menu-version: 1
+# DO NOT EDIT — REGENERATED ON EVERY STARTUP.
+#
+# Das Parkour-Modul: Kurse, Endlos-Areas und Themes.
+
+title: '{primary}&lPARKOUR {letters_black}» {highlight}Setup'
+size: 27
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: FEATHER
+    name: "<gradient:{primary}:{secondary_light}>Parkour</gradient>"
+    lore:
+      - "{letters_black}Parkour-Modul"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Kurse, die Spieler laufen, und"
+      - " {letters}die Endlos-Modi."
+
+  courses:
+    slot: 12
+    material: FILLED_MAP
+    name: "{letters}Parkour {letters_black}▸ <gradient:{primary}:{secondary_light}>Kurse</gradient>"
+    lore:
+      - "{letters_black}Setup-Bereich"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Setze einen Start, Checkpoints"
+      - " {letters}und ein Ziel."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:check} {letters}Bereit{letters_black}: {info}%courses_ready%{letters_black}/{info}%courses_total%"
+      - ""
+      - "{primary}{icon:click} Klicke zum Öffnen"
+      - "{letters_black}Kurse erstellen und bearbeiten."
+    actions:
+      - 'exylialobby:parkour_admin_open courses'
+
+  endless_areas:
+    slot: 13
+    material: GRASS_BLOCK
+    name: "{letters}Parkour {letters_black}▸ <gradient:{primary}:{secondary_light}>Endlos-Areas</gradient>"
+    lore:
+      - "{letters_black}Setup-Bereich"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Wo Endlos-Pfade erzeugt werden."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:map} {letters}Areas{letters_black}: {info}%areas_total%"
+      - ""
+      - "{primary}{icon:click} Klicke zum Öffnen"
+      - "{letters_black}Areas hinzufügen oder löschen."
+    actions:
+      - 'exylialobby:parkour_admin_open areas'
+
+  themes:
+    slot: 14
+    material: PAINTING
+    name: "{letters}Parkour {letters_black}▸ <gradient:{primary}:{secondary_light}>Themes</gradient>"
+    lore:
+      - "{letters_black}Setup-Bereich"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Die Blockpaletten der Pfade."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}An{letters_black}: {info}%themes_on%"
+      - ""
+      - "{primary}{icon:click} Klicke zum Öffnen"
+      - "{letters_black}Themes an- oder ausschalten."
+    actions:
+      - 'exylialobby:parkour_admin_open themes'
+
+  back:
+    slot: 22
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Zurück {letters_black}▸ <gradient:{error}:{error_light}>Module</gradient>"
+    lore:
+      - "{error}{icon:click} Klicke zum Zurückgehen"
+    actions:
+      - 'exylialobby:parkour_admin_back'

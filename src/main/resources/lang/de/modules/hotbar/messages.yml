@@ -1,0 +1,8 @@
+# Ein Button wurde zu schnell erneut gedrückt. %time% ist die verbleibende Zeit.
+cooling: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Warte {highlight}%time%{warning}, bevor du es erneut benutzt.'
+
+# Wird einmal geloggt, wenn ExyliaPracticeCore seine eigene Lobby-Hotbar verwaltet.
+practice-in-charge: 'ExyliaPracticeCore ist installiert: Seine Lobby-Hotbar hat Vorrang. Setze ''force: true'' in modules/hotbar/config.yml, um diese hier anzuzeigen.'
+
+# Wird einmal geloggt, wenn PacketEvents fehlt, daher kann keine Hotbar angezeigt werden.
+no-packets: 'PacketEvents ist nicht installiert: Die Lobby-Hotbar braucht es und wird nicht angezeigt.'

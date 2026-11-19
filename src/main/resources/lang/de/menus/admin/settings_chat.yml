@@ -1,0 +1,102 @@
+# DO NOT EDIT — WIRD BEI JEDEM START NEU GENERIERT.
+#
+# Die Chat-Einstellungen, die ein Admin anpasst. Alles andere steht in
+# modules/chat/config.yml.
+
+title: "{primary}&lEINSTELLUNGEN {letters_black}» {highlight}Chat"
+size: 27
+type: SIMPLE
+
+open_sounds:
+  - "minecraft:block.ender_chest.open|1.0|1.4"
+click_sounds:
+  - "minecraft:block.note_block.hat|1.0|1.0"
+close_sounds:
+  - "minecraft:block.barrel.close|1.0|0.7"
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: WRITABLE_BOOK
+    name: "<gradient:{primary}:{secondary_light}>Chat</gradient>"
+    lore:
+      - "{letters_black}Chat-Einstellungen"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Chat-Kontrolle in der Lobby:"
+      - " {letters}Sperren, Slow Mode und Leeren."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Modul{letters_black}: %chat_state%"
+
+  locked-at-start:
+    slot: 12
+    material: IRON_DOOR
+    name: "{letters}Chat {letters_black}▸ <gradient:{primary}:{secondary_light}>Beim Start gesperrt</gradient>"
+    lore:
+      - "{letters_black}Chat-Einstellung"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Mit gesperrtem Chat starten."
+      - " {letters}Ein Neustart setzt darauf zurück."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Aktiv{letters_black}: %chat_locked_at_start%"
+      - "  {letters_black}· {info}{icon:book} {letters}Standard{letters_black}: %chat_locked_at_start_default%"
+      - ""
+      - "%chat_locked_at_start_click%"
+    actions:
+      - "exylialobby:setting chat locked-at-start"
+
+  slow-mode-seconds:
+    slot: 13
+    material: COBWEB
+    name: "{letters}Chat {letters_black}▸ <gradient:{primary}:{secondary_light}>Slow Mode</gradient>"
+    lore:
+      - "{letters_black}Chat-Einstellung"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Sekunden zwischen zwei Nachrichten"
+      - " {letters}eines Spielers. {highlight}0 {letters}ist aus."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:clock} {letters}Verzögerung{letters_black}: %chat_slow_mode_seconds%"
+      - "  {letters_black}· {info}{icon:book} {letters}Standard{letters_black}: %chat_slow_mode_seconds_default%"
+      - ""
+      - "%chat_slow_mode_seconds_click%"
+    actions:
+      - "exylialobby:setting chat slow-mode-seconds"
+
+  clear-lines:
+    slot: 14
+    material: PAPER
+    name: "{letters}Chat {letters_black}▸ <gradient:{primary}:{secondary_light}>Leerzeilen</gradient>"
+    lore:
+      - "{letters_black}Chat-Einstellung"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Wie viele Leerzeilen der Befehl"
+      - " {letters}zum Chat-Leeren sendet."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:book} {letters}Zeilen{letters_black}: %chat_clear_lines%"
+      - "  {letters_black}· {info}{icon:book} {letters}Standard{letters_black}: %chat_clear_lines_default%"
+      - ""
+      - "%chat_clear_lines_click%"
+    actions:
+      - "exylialobby:setting chat clear-lines"
+
+  back:
+    slot: 22
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Zurück {letters_black}▸ <gradient:{error}:{error_light}>Einstellungen</gradient>"
+    lore:
+      - "{error}{icon:click} Klicke zum Zurückgehen"
+    actions:
+      - "exylialobby:settings_hub"

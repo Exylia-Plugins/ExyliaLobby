@@ -1,0 +1,7 @@
+# Standardtexte auf Deutsch. Nur die Schlüssel mit Text; die restlichen Einstellungen kommen aus der Registry.
+
+groups:
+- permission: exylialobby.join.vip
+  priority: 10
+  join: '{highlight}&l★ {letters}VIP {highlight}%player%{letters} ist der Lobby beigetreten'
+  leave: ''

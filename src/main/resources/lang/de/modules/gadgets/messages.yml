@@ -1,0 +1,80 @@
+# Deutsche Chat-Zeilen. %gadget% ist der Name des Gadgets, %time% die verbleibende Abklingzeit.
+cooling: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}%gadget%{warning} lädt noch auf: {highlight}%time%{warning}.'
+no-permission: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Du hast %gadget%{error} noch nicht.'
+equipped: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%gadget%{letters} ist in deiner Hotbar.'
+put-away: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Du hast dein Gadget weggepackt.'
+unavailable: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Dieses Gadget kann auf diesem Server nicht genutzt werden.'
+not-now: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Du kannst gerade kein Gadget benutzen.'
+
+# Die Einstellung im Einstellungsbildschirm des Spielers.
+setting-category: Gadgets
+setting-category-text:
+- 'Spielzeuge für die Lobby.'
+setting-name: Gadgets wirken auf mich
+setting-description:
+- 'Ob Gadgets anderer Spieler dich'
+- 'wegstoßen oder deinen Boden anmalen können.'
+
+# Wörter auf den Karten im Gadget-Menü.
+kind: Gadget
+kind-equipped: Gadget · Ausgerüstet
+kind-locked: Gadget · Gesperrt
+label-cooldown: Abklingzeit
+label-needs: Benötigt
+locked-note: Frag das Team, wie du es freischaltest.
+click-equip: Klicken zum Ausrüsten
+click-equip-next: Kommt in deine Hotbar.
+click-put: Klicken zum Wegpacken
+click-put-next: Dein Hotbar-Slot wird frei.
+
+# Jedes Gadget: sein Name, eine Beschreibung (bis zu drei Zeilen), der genutzte Klick und was es tut.
+cards:
+  grapple:
+    name: Enterhaken
+    text:
+    - 'Wirf ihn auf eine Wand oder den'
+    - 'Boden und er zieht dich hin.'
+    click: Rechtsklick
+    use: werfen und einholen
+  ender:
+    name: Enderreise
+    text:
+    - 'Reite auf deiner eigenen Perle'
+    - 'durch die Luft und lande sicher.'
+    click: Rechtsklick
+    use: werfen und aufsteigen
+  paint:
+    name: Farbpistole
+    text:
+    - 'Die Schüsse färben den Boden'
+    - 'kurz ein. Zerstört nichts.'
+    click: Rechtsklick
+    use: Farbe schießen
+  knockback:
+    name: Stoßstab
+    text:
+    - 'Stößt alle weg, die es erlauben.'
+    - 'Verursacht nie Schaden.'
+    click: Spieler schlagen
+    use: wegstoßen
+  leap:
+    name: Sprungfeder
+    text:
+    - 'Schleudere dich in Blickrichtung'
+    - 'und lande sanft.'
+    click: Rechtsklick
+    use: nach vorn springen
+  snowball:
+    name: Schneekanone
+    text:
+    - 'Eine Salve Schneebälle, die alle'
+    - 'wegstoßen, die es erlauben.'
+    click: Rechtsklick
+    use: eine Salve abfeuern
+  trampoline:
+    name: Trampolin
+    text:
+    - 'Eine federnde Plattform unter'
+    - 'deinen Füßen für ein paar Sekunden.'
+    click: Rechtsklick
+    use: Plattform platzieren

@@ -1,0 +1,47 @@
+# Chat-Zeilen. %server% ist der Servername aus dem Katalog (oder seine ID).
+connecting: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Verbinde mit %server%{letters}...'
+offline: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}%server%{error} ist gerade offline.'
+no-permission: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Du darfst %server%{error} nicht betreten.'
+here: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {warning}Du bist schon auf %server%{warning}.'
+unreachable: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Das Netzwerk ist nicht erreichbar. Versuch es gleich nochmal.'
+unknown-server: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Dieser Server ist nicht konfiguriert.'
+
+# Zeilen der Server-Karte. Die Status und der Klick-Hinweis (zwei Zeilen, verbunden durch <nl>).
+status-online: '{success}Online'
+status-offline: '{error}Offline'
+status-unknown: '{muted}Keine Daten'
+click-join: '{info}{icon:click} Klicken zum Betreten<nl>{letters_black}Du wirst sofort verschoben.'
+click-locked: '{warning}{icon:locked} Gesperrt<nl>{letters_black}Du brauchst einen Rang zum Betreten.'
+click-offline: '{error}{icon:off} Offline<nl>{letters_black}Versuch es gleich nochmal.'
+click-here: '{success}{icon:on} Du bist hier<nl>{letters_black}Wähl eine andere Lobby zum Wechseln.'
+no-lobbies: '{warning}{icon:warning} Keine Lobbys<nl>{letters_black}Bitte einen Admin, welche hinzuzufügen.'
+lobbies-next: '{info}{icon:click} Klicken zum Öffnen<nl>{letters_black}Wähl die Lobby, in der du spielst.'
+
+# Admin-Ansicht
+list-title: Selector
+list-kind: Server-Portal
+subtitle-portal: Server-Portal
+label-server: Server
+label-place: Ort
+label-size: Größe
+server-missing: '{error}Nicht im Katalog vorhanden'
+clicks-portal:
+- '{primary}{icon:click} Linksklick {letters_black}· {letters}Server ändern'
+- '{primary}{icon:right_click} Rechtsklick {letters_black}· {letters}Umriss anzeigen'
+- '{error}{icon:right_click} Shift + Rechtsklick {letters_black}· {letters}löschen'
+- '{letters_black}Löschen muss bestätigt werden.'
+add-portal-title: Portal
+add-portal-text:
+- ' {letters}Wähl einen Bereich aus; wer ihn'
+- ' {letters}betritt, wird weitergeschickt.'
+add-portal-click: Klicken zum Starten
+add-portal-next: Danach wählst du den Server.
+prompt-server: '{letters}Zu welchem Server werden die Spieler geschickt?'
+no-servers: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Füge zuerst einen Server zum Katalog hinzu (modules/selector/config.yml).'
+added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} hinzugefügt.'
+removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} gelöscht.'
+changed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {highlight}%what%{letters} schickt die Spieler jetzt zu %server%{letters}.'
+confirm-remove: '%what% wirklich {highlight}löschen{letters}?'
+
+# Was die Assistenten auf dem Bildschirm benennen (Klartext, ohne Farben).
+wizard-portal: Portal

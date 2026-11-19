@@ -1,0 +1,216 @@
+menu-version: 4
+# DO NOT EDIT — REGENERATED ON EVERY STARTUP.
+#
+# Ein Parkour-Kurs: wo er startet, durchläuft und endet und wie er bewertet wird.
+
+title: '{primary}&lPARKOUR {letters_black}» {highlight}%course_id%'
+size: 36
+
+filler:
+  global:
+    material: GRAY_STAINED_GLASS_PANE
+    hide_tooltip: true
+
+items:
+  header:
+    slot: 4
+    material: FEATHER
+    name: "{letters}Kurs {letters_black}▸ <gradient:{primary}:{secondary_light}>%course_name%</gradient>"
+    lore:
+      - "{letters_black}Kurs"
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:check} {letters}Zustand{letters_black}: %course_state%"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Aktiviert{letters_black}: %enabled%"
+
+  start:
+    slot: 11
+    material: LIME_BED
+    name: "{letters}Kurs {letters_black}▸ <gradient:{success}:{success_light}>Start</gradient>"
+    lore:
+      - "{letters_black}Kurs-Einstellung"
+      - ""
+      - "{success}✎ Information"
+      - " {letters}Wo ein Run beginnt: Stell"
+      - " {letters}dich hin und {highlight}sneak-klicke{letters}."
+      - ""
+      - "{success}✦ Status"
+      - "  {letters_black}· {info}{icon:compass} {letters}Start{letters_black}: %start_state%"
+      - ""
+      - "{success}{icon:click} Klicke zum Starten"
+      - "{letters_black}Ersetzt den Start."
+    actions:
+      - 'exylialobby:parkour_edit start %course_id%'
+
+  checkpoint:
+    slot: 12
+    material: LIGHT_WEIGHTED_PRESSURE_PLATE
+    name: "{letters}Kurs {letters_black}▸ <gradient:{success}:{success_light}>Checkpoint hinzufügen</gradient>"
+    lore:
+      - "{letters_black}Kurs-Einstellung"
+      - ""
+      - "{success}✎ Information"
+      - " {letters}Stell dich drauf und {highlight}sneak-klicke{letters}."
+      - " {letters}Spieler erreichen sie der Reihe nach."
+      - ""
+      - "{success}✦ Status"
+      - "  {letters_black}· {info}{icon:check} {letters}Checkpoints{letters_black}: {info}%checkpoints%"
+      - ""
+      - "{success}{icon:click} Klicke zum Starten"
+      - "{letters_black}Kommt nach dem letzten dazu."
+    actions:
+      - 'exylialobby:parkour_edit checkpoint %course_id%'
+
+  finish:
+    slot: 14
+    material: WHITE_BANNER
+    name: "{letters}Kurs {letters_black}▸ <gradient:{success}:{success_light}>Ziel</gradient>"
+    lore:
+      - "{letters_black}Kurs-Einstellung"
+      - ""
+      - "{success}✎ Information"
+      - " {letters}Wo ein Run endet: Stell"
+      - " {letters}dich hin und {highlight}sneak-klicke{letters}."
+      - ""
+      - "{success}✦ Status"
+      - "  {letters_black}· {info}{icon:star} {letters}Ziel{letters_black}: %finish_state%"
+      - ""
+      - "{success}{icon:click} Klicke zum Starten"
+      - "{letters_black}Ersetzt das Ziel."
+    actions:
+      - 'exylialobby:parkour_edit finish %course_id%'
+
+  kill:
+    slot: 15
+    material: MAGMA_BLOCK
+    name: "{letters}Kurs {letters_black}▸ <gradient:{primary}:{secondary_light}>Kill-Blöcke</gradient>"
+    lore:
+      - "{letters_black}Kurs-Einstellung"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Klicke einen Block: Jeder Block"
+      - " {letters}dieses Typs setzt Läufer zurück."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:barrier} {letters}Blöcke{letters_black}: {info}%kills%"
+      - ""
+      - "{primary}{icon:click} Klicke zum Starten"
+      - "{letters_black}Klicke dann den Block."
+    actions:
+      - 'exylialobby:parkour_edit kill %course_id%'
+
+  medals:
+    slot: 20
+    material: GOLD_INGOT
+    name: "{letters}Kurs {letters_black}▸ <gradient:{primary}:{secondary_light}>Medaillen</gradient>"
+    lore:
+      - "{letters_black}Kurs-Einstellung"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Zielzeiten in Sekunden für"
+      - " {letters}Gold, Silber und Bronze."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:gold} {letters}Zielzeiten{letters_black}: {info}%medals%"
+      - ""
+      - "{primary}{icon:click} Klicke zum Bearbeiten"
+      - "{letters_black}Fragt drei Zahlen ab."
+    actions:
+      - 'exylialobby:parkour_edit medals %course_id%'
+
+  difficulty:
+    slot: 21
+    material: NETHER_STAR
+    name: "{letters}Kurs {letters_black}▸ <gradient:{primary}:{secondary_light}>Schwierigkeit</gradient>"
+    lore:
+      - "{letters_black}Kurs-Einstellung"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Das Label auf der Kurskarte."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:crit} {letters}Schwierigkeit{letters_black}: {info}%difficulty%"
+      - ""
+      - "{primary}{icon:click} Klicke zum Bearbeiten"
+      - "{letters_black}Freitext, z. B. Schwer."
+    actions:
+      - 'exylialobby:parkour_edit difficulty %course_id%'
+
+  rewards:
+    slot: 23
+    material: CHEST
+    name: "{letters}Kurs {letters_black}▸ <gradient:{primary}:{secondary_light}>Belohnungen</gradient>"
+    lore:
+      - "{letters_black}Kurs-Einstellung"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Belohnungen für Erst- und Wieder-"
+      - " {letters}holungsabschluss, Mindestzeit, Limits."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:book} {letters}Wird in der Kursdatei bearbeitet"
+      - ""
+      - "{primary}{icon:click} Klicke zum Öffnen"
+      - "{letters_black}Wähle dort diesen Kurs."
+    actions:
+      - 'exylialobby:parkour_edit rewards %course_id%'
+
+  enabled:
+    slot: 24
+    material: LEVER
+    name: "{letters}Kurs {letters_black}▸ <gradient:{primary}:{secondary_light}>Aktiviert</gradient>"
+    lore:
+      - "{letters_black}Kurs-Einstellung"
+      - ""
+      - "{primary}✎ Information"
+      - " {letters}Solange er aus ist, kann niemand starten."
+      - ""
+      - "{primary}✦ Status"
+      - "  {letters_black}· {info}{icon:redstone} {letters}Aktiviert{letters_black}: %enabled%"
+      - ""
+      - "{primary}{icon:click} Klicke zum An- oder Ausschalten"
+      - "{letters_black}Gilt sofort."
+    actions:
+      - 'exylialobby:parkour_edit enabled %course_id%'
+
+  board:
+    slot: 27
+    material: OAK_SIGN
+    name: "{letters}Kurs {letters_black}▸ <gradient:{info}:{info_light}>Bestenliste</gradient>"
+    lore:
+      - "{letters_black}Hologramm"
+      - ""
+      - "{info}✎ Information"
+      - " {letters}Ein Bestenlisten-Hologramm"
+      - " {letters}dieses Kurses über einem Block."
+      - ""
+      - "{info}{icon:click} Klicke zum Starten"
+      - "{letters_black}Ersetzt die Bestenliste."
+    actions:
+      - 'exylialobby:parkour_edit board %course_id%'
+
+  back:
+    slot: 31
+    sound: "minecraft:item.bundle.remove_one|1.0|0.5"
+    material: 'basehead-eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIzZmI2NzQyOTcxNmIyMWJjNmU4ZTdkNjY5Y2VkZGY2NWIxM2UwNzkwYTVjZTU1YjJlMDc3YjgyZDE5ZTEyNCJ9fX0='
+    name: "{letters}Zurück {letters_black}▸ <gradient:{error}:{error_light}>Kurse</gradient>"
+    lore:
+      - "{error}{icon:click} Klicke zum Zurückgehen"
+    actions:
+      - 'exylialobby:parkour_edit back %course_id%'
+
+  delete:
+    slot: 35
+    material: TNT
+    name: "{letters}Kurs {letters_black}▸ <gradient:{error}:{error_light}>Löschen</gradient>"
+    lore:
+      - "{letters_black}Gefahrenzone"
+      - ""
+      - "{error}✎ Information"
+      - " {letters}Entfernt den Kurs und seine"
+      - " {letters}Einstellungen. Zeiten bleiben."
+      - ""
+      - "{error}{icon:click} Klicke zum Löschen"
+      - "{letters_black}Du musst es bestätigen."
+    actions:
+      - 'exylialobby:parkour_edit delete %course_id%'

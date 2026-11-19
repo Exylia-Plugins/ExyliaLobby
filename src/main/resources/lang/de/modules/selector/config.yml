@@ -1,0 +1,13 @@
+# Standardtexte auf Deutsch. Nur die Schlüssel mit Text; die restlichen Einstellungen kommen aus der Registry.
+
+servers:
+  survival:
+    name: '{success}Survival'
+    description:
+    - ' {letters}Baue, handle und erkunde.'
+    - ' {letters}Deine Welt, deine Regeln.'
+  minigames:
+    name: '{highlight}Minispiele'
+    description:
+    - ' {letters}Schnelle Runden gegen'
+    - ' {letters}andere Spieler.'

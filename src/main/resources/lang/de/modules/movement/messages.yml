@@ -1,0 +1,56 @@
+# Editor für Plattformen: Chatzeilen. %pad% ist die ID der Plattform.
+pad-added: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Boost-Plattform {highlight}%pad%{letters} hinzugefügt.'
+pad-removed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Boost-Plattform {highlight}%pad%{letters} entfernt.'
+pad-changed: '[sound:ENTITY_EXPERIENCE_ORB_PICKUP|0.6|1.2]%prefix% {letters}Boost-Plattform {highlight}%pad%{letters} aktualisiert.'
+same-place: '[sound:ENTITY_VILLAGER_NO|0.7|1.0]%prefix% {error}Auf diesem Block gibt es schon eine Plattform.'
+
+# Nachrichten des Plattform-Editors.
+prompt-power: '{letters}Horizontale Geschwindigkeit dieser Plattform (0.1 bis 8).'
+prompt-vertical: '{letters}Geschwindigkeit nach oben dieser Plattform (0.1 bis 4).'
+confirm-remove: 'Boost-Plattform {highlight}%pad%{letters} entfernen?'
+
+# Editor für Plattformen: Texte der Karten.
+list-title: Bewegung
+list-kind: Boost-Plattform
+row-subtitle: Schleudert jeden, der draufsteht
+label-place: Block
+label-power: Stärke
+label-vertical: Höhe
+label-direction: Richtung
+direction-look: '{info}Dorthin, wohin du schaust'
+
+# Die Richtung einer festen Plattform. %yaw% ist der Winkel in Grad.
+direction-fixed: '{info}Fest bei %yaw%°'
+clicks:
+- '{primary}{icon:click} Linksklick {letters_black}· {letters}Stärke bearbeiten'
+- '{primary}{icon:right_click} Rechtsklick {letters_black}· {letters}Höhe bearbeiten'
+- '{primary}{icon:click} Shift + Linksklick {letters_black}· {letters}ausrichten oder lösen'
+- '{error}{icon:right_click} Shift + Rechtsklick {letters_black}· {letters}entfernen'
+- '{letters_black}Entfernen muss bestätigt werden.'
+add-pad-title: Boost-Plattform
+add-pad-text:
+- ' {letters}Klicke den Block, der eine'
+- ' {letters}Plattform wird; sie schleudert dahin,'
+- ' {letters}wohin der Spieler schaut.'
+add-pad-click: Klicken zum Starten
+add-pad-next: Danach bearbeitest du hier die Stärke.
+add-aimed-title: Ausgerichtete Plattform
+add-aimed-text:
+- ' {letters}Stell dich auf den Block, schau dorthin,'
+- ' {letters}wohin sie schleudern soll, und drücke'
+- ' {highlight}Shift + Klick{letters}.'
+add-aimed-click: Klicken zum Starten
+add-aimed-next: Schleudert immer in diese Richtung.
+back-name: Bewegung
+
+# Das, was die Assistenten auf dem Bildschirm benennen (Klartext, ohne Farben).
+wizard-pad: Boost-Plattform
+wizard-aimed: Ausgerichtete Plattform
+wizard-aim: Richtung der Plattform
+
+# Eine Plattform schleudert von jedem Block ihrer Liste (Q auf ihrer Karte zum Bearbeiten).
+label-blocks: Blöcke
+click-blocks: '{primary}{icon:click} Q {letters_black}· {letters}Blöcke hinzufügen oder entfernen'
+wizard-blocks: Blöcke der Plattform
+block-added: '[sound:BLOCK_NOTE_BLOCK_PLING|0.6|1.6]%prefix% {letters}Block zu {highlight}%pad%{letters} hinzugefügt ({highlight}%count%{letters}). Klicke einen weiteren oder brich ab, um fertig zu sein.'
+block-removed: '[sound:BLOCK_NOTE_BLOCK_BASS|0.6|1.0]%prefix% {letters}Block von {highlight}%pad%{letters} entfernt ({highlight}%count%{letters}). Klicke einen weiteren oder brich ab, um fertig zu sein.'

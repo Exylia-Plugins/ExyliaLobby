@@ -1,0 +1,59 @@
+# Die Zeile, die alle sehen, wenn ein Spieler beitritt. %player% ist sein Name. Leer zeigt nichts an.
+join: '{letters_black}[{success}+{letters_black}] {letters}%player%'
+
+# Die Zeile, die alle sehen, wenn ein Spieler den Server verlässt.
+leave: '{letters_black}[{error}-{letters_black}] {letters}%player%'
+
+# Ersetzt die Beitrittszeile, wenn ein Spieler zum ersten Mal beitritt. Leer nutzt die normale.
+first-join: '{letters_black}[{success}+{letters_black}] {highlight}%player%{letters} ist zum ersten Mal beigetreten.'
+
+# Wird dem Spieler selbst kurz nach dem Beitritt angezeigt: ein Titel und ein kurzer Sound.
+welcome:
+  # Großer Text in der Bildschirmmitte. Entfernen, um nichts anzuzeigen.
+  title:
+    # Unterstützt Farben wie {primary} und Placeholder wie %player_name%.
+    text: '{primary}&lWILLKOMMEN'
+    subtitle: '{letters}%player%'
+    # Liest auch eine geschriebene Dauer: 30s, 1m30s.
+    fade-in: 0.3
+    # Sekunden, in denen er voll sichtbar ist. 0 hält ihn, bis etwas ihn stoppt.
+    # Liest auch eine geschriebene Dauer: 30s, 1m30s.
+    stay: 2.5
+    fade-out: 0.6
+    # auto, seconds, tenths, hundredths, clock, full, compact oder precise.
+    time-style: auto
+  # Ein Sound, der abgespielt wird.
+  sound:
+    # ENTITY_PLAYER_LEVELUP oder ein Key wie minecraft:entity.player.levelup.
+    name: ENTITY_EXPERIENCE_ORB_PICKUP
+    # Über 1.0 wird er nicht lauter, sondern reicht weiter.
+    volume: 0.5
+    # Von 0.5 bis 2.0.
+    pitch: 1.4
+    # MASTER, MUSIC, RECORDS, WEATHER, BLOCKS, HOSTILE, NEUTRAL, PLAYERS, AMBIENT oder VOICE.
+    category: MASTER
+  action-bar:
+    text: ''
+    duration: 3.0
+    time-style: auto
+  boss-bar:
+    text: ''
+    colour: PURPLE
+    overlay: PROGRESS
+    count-up: 0.0
+    progress: 1.0
+    time-style: auto
+  particle:
+    name: ''
+    count: 1
+    spread: 0.0
+    speed: 0.0
+  firework:
+    colours: []
+    fades: []
+    shape: BALL
+    flicker: false
+    trail: false
+
+# Chatzeilen, die dem Spieler kurz nach dem Beitritt geschickt werden, eine pro Zeile. %player% ist sein Name.
+motd: []
