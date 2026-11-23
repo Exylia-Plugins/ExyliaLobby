@@ -80,7 +80,13 @@ public final class HotbarModule extends LobbyModule {
 
     @Override
     protected void stop() {
-        if (hotbars != null) Hotbars.release(plugin());
+        // Only this module's set comes off: the plugin's Hotbars is shared (parkour runs draw theirs on it), and
+        // releasing it left its press action registered, so the next Hotbars.of failed and the module stayed off.
+        if (hotbars != null) {
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                if (hotbars.showing(player).filter(SET::equals).isPresent()) hotbars.hide(player);
+            }
+        }
         hotbars = null;
         // Reserved slots stay: the modules that reserved them may outlive this switch-off.
         signature = "";
