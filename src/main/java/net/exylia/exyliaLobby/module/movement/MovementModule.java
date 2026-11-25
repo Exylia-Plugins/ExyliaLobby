@@ -4,6 +4,7 @@ import net.exylia.exyliaLobby.module.Busy;
 import net.exylia.exyliaLobby.module.LobbyContext;
 import net.exylia.exyliaLobby.module.LobbyModule;
 import net.exylia.exyliaLobby.module.shared.AdminScreens;
+import net.exylia.lib.task.Tasks;
 import net.exylia.lib.config.ConfigFile;
 import net.exylia.lib.movement.DoubleJump;
 import net.exylia.lib.movement.JumpPad;
@@ -235,7 +236,7 @@ public final class MovementModule extends LobbyModule {
                 });
                 send(viewer, added ? text.blockAdded() : text.blockRemoved(), Values.of("pad", id).put("count", blocks.size()));
             }
-            plugin().getServer().getScheduler().runTask(plugin(), () -> {
+            Tasks.of(plugin()).runAtEntity(viewer, () -> {
                 if (viewer.isOnline()) editBlocks(viewer, id, reopen);
             });
         });
